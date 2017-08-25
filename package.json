@@ -4,7 +4,7 @@
   "description": "Backend project for CEM",
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "cross-env NODE_PATH=/ nodemon --exec babel-node src/index.js"
   },
   "repository": {
     "type": "git",
@@ -34,6 +34,8 @@
     "jsonwebtoken": "^7.4.3",
     "knex": "^0.13.0",
     "merge-graphql-schemas": "^1.1.2",
+    "objection": "^0.8.8",
+    "objection-unique": "^0.2.0",
     "optics-agent": "^1.1.6",
     "pg": "^7.2.0",
     "subscriptions-transport-ws": "^0.8.2",
@@ -45,6 +47,7 @@
     "babel-core": "^6.26.0",
     "babel-eslint": "^7.2.3",
     "babel-plugin-istanbul": "^4.1.4",
+    "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.0",
     "babel-register": "^6.26.0",
