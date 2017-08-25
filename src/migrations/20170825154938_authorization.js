@@ -18,6 +18,7 @@ exports.up = function(knex, Promise) {
   ]);
 };
 
+// eslint-disable-next-line func-names
 exports.down = function(knex, Promise) {
   return Promise.all([knex.schema.dropTable('users')]);
 };

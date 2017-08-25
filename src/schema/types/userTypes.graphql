@@ -1,0 +1,29 @@
+type User {
+  id: ID!
+  firstname: String!
+  lastname: String!
+  email: String!
+  dob: Date
+  gender: Gender!
+  created_at: Date!
+  updated_at: Date!
+}
+
+enum Gender {
+  male
+  female
+  unknown
+}
+
+type Query {
+  getAllUsers: [User!]!
+}
+
+type Mutation {
+  register(
+    firstname: String!
+    lastname: String!
+    email: String!
+    password: String!
+  ): User!
+}

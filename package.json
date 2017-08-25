@@ -4,7 +4,9 @@
   "description": "Backend project for CEM",
   "main": "src/index.js",
   "scripts": {
-    "dev": "cross-env NODE_PATH=/ nodemon --exec babel-node src/index.js"
+    "dev": "cross-env NODE_PATH=/ nodemon -e js,graphql --exec babel-node src/index.js",
+    "migrate:latest": "knex migrate:latest --knexfile src/knexfile.js",
+    "migrate:rollback": "knex migrate:rollback --knexfile src/knexfile.js"
   },
   "repository": {
     "type": "git",
@@ -19,7 +21,6 @@
   "dependencies": {
     "apollo-server-express": "^1.1.0",
     "bcryptjs": "^2.4.3",
-    "bluebird": "^3.5.0",
     "body-parser": "^1.17.2",
     "casual": "^1.5.17",
     "cors": "^2.8.4",
