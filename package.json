@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "cross-env NODE_PATH=/ nodemon -e js,graphql --exec babel-node src/index.js",
     "migrate:latest": "knex migrate:latest --knexfile src/knexfile.js",
-    "migrate:rollback": "knex migrate:rollback --knexfile src/knexfile.js"
+    "migrate:rollback": "knex migrate:rollback --knexfile src/knexfile.js",
+    "doc": "graphdoc -f"
   },
   "repository": {
     "type": "git",
@@ -18,7 +19,12 @@
     "url": "https://github.com/sunway-team/cem-server/issues"
   },
   "homepage": "https://github.com/sunway-team/cem-server#readme",
+  "graphdoc": {
+    "endpoint": "http://localhost:5000/graphql",
+    "output": "./doc/schema"
+  },
   "dependencies": {
+    "@2fd/graphdoc": "^2.4.0",
     "apollo-server-express": "^1.1.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.17.2",
