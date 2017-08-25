@@ -8,8 +8,8 @@ exports.up = function(knex, Promise) {
       table.string('password').notNullable();
       table.string('email').notNullable().unique();
       table
-        .enu('gender', ['male', 'female', 'secret', 'not-set'])
-        .defaultTo('not-set')
+        .enu('gender', ['male', 'female', 'unknown'])
+        .defaultTo('unknown')
         .notNullable();
       table.date('dob').nullable();
       table.string('version_key').notNullable();

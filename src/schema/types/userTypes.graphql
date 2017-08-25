@@ -17,6 +17,7 @@ enum Gender {
 
 type Query {
   getAllUsers: [User!]!
+  me: User!
 }
 
 type Mutation {
@@ -26,4 +27,10 @@ type Mutation {
     email: String!
     password: String!
   ): User!
+  login(email: String!, password: String!): LoginResponse
+}
+
+type LoginResponse {
+  token: String!
+  refreshToken: String!
 }
