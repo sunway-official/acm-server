@@ -7,7 +7,11 @@
     "dev": "cross-env NODE_PATH=/ nodemon -e js,graphql --exec babel-node src/index.js",
     "migrate:latest": "knex migrate:latest --knexfile src/knexfile.js",
     "migrate:rollback": "knex migrate:rollback --knexfile src/knexfile.js",
-    "doc": "graphdoc -f"
+    "doc": "graphdoc -f",
+    "lint": "esw *.js src config --color",
+    "lint-staged": "lint-staged",
+    "pretty": "prettier --single-quote --trailing-comma all --write '{src,tests}/**/*.js'",
+    "precommit": "run-s lint-staged lint"
   },
   "repository": {
     "type": "git",
@@ -19,6 +23,12 @@
     "url": "https://github.com/sunway-team/cem-server/issues"
   },
   "homepage": "https://github.com/sunway-team/cem-server#readme",
+  "lint-staged": {
+    "{src,tests}/**/*.js": [
+      "prettier --single-quote --trailing-comma all --write",
+      "git add"
+    ]
+  },
   "graphdoc": {
     "endpoint": "http://localhost:5000/graphql",
     "output": "./doc/schema"
