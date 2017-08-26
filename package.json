@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Backend project for CEM",
   "main": "src/index.js",
+  "engines": {
+    "node": "8.x"
+  },
   "scripts": {
     "dev": "cross-env NODE_PATH=/ nodemon -e js,graphql --exec babel-node src/index.js",
     "migrate:latest": "knex migrate:latest --knexfile src/knexfile.js",
