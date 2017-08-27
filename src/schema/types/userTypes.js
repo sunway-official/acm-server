@@ -1,4 +1,4 @@
-type User {
+export default `type User {
   # The ID of user
   id: ID!
   # User firstname
@@ -55,3 +55,4 @@ type LoginResponse {
   token: String!
   refreshToken: String!
 }
+`;

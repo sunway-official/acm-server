@@ -7,6 +7,9 @@
     "node": "8.x"
   },
   "scripts": {
+    "start": "node build/index.js",
+    "build": "babel -d ./build ./src -s",
+    "deploy": "gcloud app deploy",
     "dev": "cross-env NODE_PATH=/ nodemon -e js,graphql --exec babel-node src/index.js",
     "migrate:latest": "knex migrate:latest --knexfile src/knexfile.js",
     "migrate:rollback": "knex migrate:rollback --knexfile src/knexfile.js",
