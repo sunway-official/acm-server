@@ -1,2 +1,7 @@
 runtime: nodejs
 env: flex
+env_variables:
+  SQLALCHEMY_DATABASE_URI: >-
+    postgresql+psycopg2://postgres:sunway123@/cem?host=/cloudsql/cem-server-production:asia-northeast1:cem-server-production
+beta_settings:
+    cloud_sql_instances: cem-server-production:asia-northeast1:cem-server-production

@@ -1,9 +1,5 @@
 module.exports = {
   client: 'pg',
-  connection: {
-    host: '35.189.142.87',
-    user: 'postgres',
-    password: 'sunway123',
-    database: 'cem',
-  },
+  connection:
+    'pg://postgres:sunway123@/cem?host=/cloudsql/cem-server-production:asia-northeast1:cem-server-production',
 };
