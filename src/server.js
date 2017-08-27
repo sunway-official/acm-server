@@ -69,7 +69,7 @@ const start = () => {
   app.use(helmet());
   app.use(cors('*'));
 
-  const Knex = knex(knexConfig.production);
+  const Knex = knex(knexConfig);
   Model.knex(Knex);
 
   app.use(authenticate);
