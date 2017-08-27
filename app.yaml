@@ -1,7 +1,7 @@
 runtime: nodejs
 env: flex
 env_variables:
-  PG_USER: sunway
+  PG_USER: postgres
   PG_PASSWORD: sunway123
   PG_DATABASE: cem
   PG_INSTANCE_NAME: cem-server-production:asia-northeast1:cem-server-production
