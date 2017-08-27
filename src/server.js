@@ -64,7 +64,7 @@ const authenticate = async (req, res, next) => {
   }
 };
 
-const start = () => {
+const start = async () => {
   const app = express();
   app.use(helmet());
   app.use(cors('*'));

@@ -1,7 +1,9 @@
 runtime: nodejs
 env: flex
 env_variables:
-  SQLALCHEMY_DATABASE_URI: >-
-    pg://postgres:sunway123@/cem?host=/cloudsql/cem-server-production:asia-northeast1:cem-server-production
+  PG_USER: sunway
+  PG_PASSWORD: sunway123
+  PG_DATABASE: cem
+  PG_INSTANCE_NAME: cem-server-production:asia-northeast1:cem-server-production
 beta_settings:
-    cloud_sql_instances: cem-server-production:asia-northeast1:cem-server-production
+  cloud_sql_instances: cem-server-production:asia-northeast1:cem-server-production

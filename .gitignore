@@ -4,4 +4,5 @@ coverage/
 .nyc_output/
 yarn-error.log
 doc/
-build
+build/
+/src/knexfile.js
