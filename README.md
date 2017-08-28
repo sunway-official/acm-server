@@ -6,7 +6,9 @@ Backend project for CEM
 
 - Clone this project: `git clone https://github.com/sunway-team/cem-server.git`
 - `cp .env.development .env`
-- `cp src/knexfile.example.js src/knexfile.js`
+- `cp src/knexfile.example.js src/knexfile.js`, review and update your pg config
+- `npm i` to install dependencies
+- `npm run migrate:rollback` or/and `npm run migrate:latest` to migrate the server
 - `npm run dev` to start the server
 - Open the browser and use `GRAPHIQL` to test the apis
 - `npm run test` for `mocha` test
