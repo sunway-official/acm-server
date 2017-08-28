@@ -6,3 +6,4 @@ yarn-error.log
 doc/
 build/
 .vscode/
+src/knexfile.js

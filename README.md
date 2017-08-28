@@ -21,10 +21,7 @@ Backend project for CEM
 
 - Open [Gcloud Console](https://console.cloud.google.com/home/dashboard?project=cem-server-production)
 - Activate Google Cloud Shell
-- `rm -rf cem-server`
-- `git clone https://github.com/sunway-team/cem-server && cd cem-server && git checkout production && npm i`
-- `cp .env.production .env`
-- `npm run build` to generate built code with `babel`
-- `gcloud app deploy`
+- `rm -rf cem-server && git clone https://github.com/sunway-team/cem-server && cd cem-server && git checkout production && cp .env.production .env && npm i && npm run build && gcloud app deploy`
+- Review and accept or change the services
 - `gcloud app browse`
 - Production app will be serve at [cem-server-production.appspot.com](cem-server-production.appspot.com)
