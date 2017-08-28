@@ -1,4 +1,5 @@
-export default `type User {
+export default `
+type User {
   # The ID of user
   id: ID!
   # User firstname

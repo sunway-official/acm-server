@@ -5,4 +5,4 @@ coverage/
 yarn-error.log
 doc/
 build/
-/src/knexfile.js
+.vscode/

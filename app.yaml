@@ -5,5 +5,7 @@ env_variables:
   PG_PASSWORD: sunway123
   PG_DATABASE: cem
   PG_INSTANCE_NAME: cem-server-production:asia-northeast1:cem-server-production
+  JWT_SECRET: aksdjqopwieopqiw;dalskdl;askdas
+  JWT_REFRESH_SECRET: alksdjoiouqwedASDASDA1231232
 beta_settings:
   cloud_sql_instances: cem-server-production:asia-northeast1:cem-server-production
