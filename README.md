@@ -6,6 +6,7 @@ Backend project for CEM
 
 - Clone this project: `git clone https://github.com/sunway-team/cem-server.git`
 - `cp .env.development .env`
+- `cp src/knexfile.example.js src/knexfile.js`
 - `npm run dev` to start the server
 - Open the browser and use `GRAPHIQL` to test the apis
 - `npm run test` for `mocha` test
@@ -21,7 +22,8 @@ Backend project for CEM
 
 - Open [Gcloud Console](https://console.cloud.google.com/home/dashboard?project=cem-server-production)
 - Activate Google Cloud Shell
-- `rm -rf cem-server && git clone https://github.com/sunway-team/cem-server && cd cem-server && git checkout production && cp .env.production .env && npm i && npm run build && gcloud app deploy`
+- `rm -rf cem-server && git clone https://github.com/sunway-team/cem-server && cd cem-server && git checkout production && cp .env.production .env && cp src/knexfile.example.js src/knexfile.js && npm i && npm run build`
+- `gcloud app deploy`
 - Review and accept or change the services
 - `gcloud app browse`
 - Production app will be serve at [cem-server-production.appspot.com](cem-server-production.appspot.com)
