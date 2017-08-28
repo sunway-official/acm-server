@@ -70,9 +70,9 @@ const start = async () => {
   app.use(cors('*'));
 
   const Knex =
-    process.env.node_env === 'production'
-      ? knex(knexConfig.production)
-      : knex(knexConfig.development);
+    process.env.NODE_ENV === 'development'
+      ? knex(knexConfig.development)
+      : knex(knexConfig.production);
   Model.knex(Knex);
 
   app.use(authenticate);
