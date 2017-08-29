@@ -4,8 +4,10 @@ const https = require('https');
 
 const callback = (err, ip) => {
   if (err) {
-    return console.log(err);
+    // eslint-disable-next-line no-console
+    return console.error(err);
   }
+  // eslint-disable-next-line no-console
   console.log('Our public IP is', ip);
   return ip;
 };
