@@ -9,7 +9,6 @@ import { graphqlExpress, graphiqlExpress } from 'apollo-server-express';
 import { execute, subscribe } from 'graphql';
 import { createServer } from 'http';
 import { SubscriptionServer } from 'subscriptions-transport-ws';
-import url from 'url';
 import schema from './schema';
 import config from './config';
 import knexConfig from './knexfile';
@@ -96,15 +95,10 @@ const start = async () => {
   const PORT = config.port;
   app.use(
     '/graphiql',
-    graphiqlExpress(req => ({
+    graphiqlExpress({
       endpointURL: '/graphql',
-      subscriptionsEndpoint: url.format({
-        host: req.get('host'),
-        port: config.port,
-        protocol: 'ws',
-        pathname: '/subscriptions',
-      }),
-    })),
+      subscriptionsEndpoint: '/subscriptions',
+    }),
   );
 
   const server = createServer(app);
