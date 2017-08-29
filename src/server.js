@@ -98,7 +98,7 @@ const start = async () => {
     '/graphiql',
     graphiqlExpress({
       endpointURL: '/graphql',
-      subscriptionsEndpoint: `ws://localhost:${WS_PORT}/subscriptions`,
+      subscriptionsEndpoint: `ws://127.0.0.1:65080/subscriptions`,
     }),
   );
 
@@ -118,7 +118,10 @@ const start = async () => {
           models,
         }),
       },
-      { server: websocketServer, path: '/subscriptions' },
+      {
+        server: websocketServer,
+        path: '/subscriptions',
+      },
     );
     // eslint-disable-next-line no-console
     console.log(
@@ -129,7 +132,7 @@ const start = async () => {
   const server = createServer(app);
   return server.listen(PORT, () => {
     // eslint-disable-next-line no-console
-    console.log(`App is listening on port ${PORT}`);
+    console.log(`App is listening on port ${server.address().port}`);
   });
 };
 
