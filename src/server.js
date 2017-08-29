@@ -93,27 +93,41 @@ const start = async () => {
   );
 
   const PORT = config.port;
+  const WS_PORT = config.wsPort;
   app.use(
     '/graphiql',
     graphiqlExpress({
       endpointURL: '/graphql',
-      subscriptionsEndpoint: '/subscriptions',
+      subscriptionsEndpoint: `ws://localhost:${WS_PORT}/subscriptions`,
     }),
   );
 
-  const server = createServer(app);
-  return server.listen(PORT, async () => {
+  // Create WebSocket listener server
+  const websocketServer = createServer((_request, response) => {
+    response.writeHead(404);
+    response.end();
+  });
+  // Bind it to port and start listening
+  websocketServer.listen(WS_PORT, () => {
     SubscriptionServer.create(
       {
         execute,
         subscribe,
         schema,
-        onConnect: async () => ({
+        onConnect: () => ({
           models,
         }),
       },
-      { server, path: '/subscriptions' },
+      { server: websocketServer, path: '/subscriptions' },
     );
+    // eslint-disable-next-line no-console
+    console.log(
+      `App's websocket is listening on port ${websocketServer.address().port}`,
+    );
+  });
+
+  const server = createServer(app);
+  return server.listen(PORT, () => {
     // eslint-disable-next-line no-console
     console.log(`App is listening on port ${PORT}`);
   });
