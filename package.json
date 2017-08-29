@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "Backend project for CEM",
   "main": "src/index.js",
-  "homepage": "http://cem-server-production.appspot.com",
   "engines": {
     "node": "8.x"
   },
@@ -37,7 +36,7 @@
     ]
   },
   "graphdoc": {
-    "endpoint": "http://localhost:65080/graphql",
+    "endpoint": "http://localhost:8080/graphql",
     "output": "./doc/schema"
   },
   "dependencies": {
@@ -72,6 +71,7 @@
     "babel-eslint": "^7.2.3",
     "babel-plugin-istanbul": "^4.1.4",
     "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.0",
     "babel-register": "^6.26.0",

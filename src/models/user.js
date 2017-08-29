@@ -31,20 +31,23 @@ export default class User extends unique(Model) {
         enum: ['male', 'female', 'unknown'],
         default: 'not-set',
       },
-      dob: { type: 'string' },
+      dob: { type: ['string', 'null'] },
       version_key: { type: 'string' },
     },
   };
   async $beforeInsert() {
+    this.created_at = new Date().toISOString();
+    this.updated_at = new Date().toISOString();
+
     this.password = await bcrypt.hash(this.password, config.saltFactor);
     this.version_key = await bcrypt.hash(
       commonUtils.randomStr(),
       config.saltFactor,
     );
   }
-  async $beforeUpdate(opt) {
-    const isPasswordMatch = bcrypt.compare(this.password, opt.old.password);
-    if (!isPasswordMatch) {
+  async $beforeUpdate() {
+    this.updated_at = new Date().toISOString();
+    if (this.password) {
       this.password = await bcrypt.hash(this.password, config.saltFactor);
       this.version_key = await bcrypt.hash(
         commonUtils.randomStr(),
@@ -53,6 +56,7 @@ export default class User extends unique(Model) {
     }
   }
   async checkPassword(password) {
-    return bcrypt.compare(password, this.password);
+    const passwordMatch = await bcrypt.compare(password, this.password);
+    return passwordMatch;
   }
 }

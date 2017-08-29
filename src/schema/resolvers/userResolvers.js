@@ -2,9 +2,35 @@ import jwt from 'jsonwebtoken';
 
 export default {
   Query: {
-    getAllUsers: async (root, data, { models: { User } }) => {
-      const users = await User.query();
-      return users;
+    getAllUsers: async (root, data, { models: { User }, ValidationError }) => {
+      try {
+        const users = await User.query();
+        return users;
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error(e);
+        throw new ValidationError('bad-request');
+      }
+    },
+    getUserByID: async (
+      root,
+      { userId },
+      { models: { User }, ValidationError },
+    ) => {
+      try {
+        const user = await User.query().findById(userId);
+        if (!user) {
+          throw new ValidationError('user-not-found');
+        }
+        return user;
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error(e);
+        if (e.message === 'user-not-found') {
+          throw new ValidationError('user-not-found');
+        }
+        throw new ValidationError('bad-request');
+      }
     },
     me: (root, data, { ValidationError, user }) => {
       if (!user) {
@@ -29,6 +55,8 @@ export default {
         const newUser = await User.query().insert(data);
         return newUser;
       } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error(e);
         if (e.code === '23505') {
           throw new ValidationError('email-existed', 'email');
         }
@@ -60,13 +88,58 @@ export default {
       const token = jwt.sign(tokenPayload, config.jwtSecret, {
         expiresIn: '15m',
       });
-      const refreshToken = jwt.sign(tokenPayload, config.jwtSecret, {
+      const refreshToken = jwt.sign(tokenPayload, config.jwtRefreshSecret, {
         expiresIn: '7d',
       });
       return {
         token,
         refreshToken,
       };
+    },
+    updateMe: async (root, data, { ValidationError, user }) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
+      try {
+        const updatedUser = await user
+          .$query()
+          .findById(user.id)
+          .patchAndFetch(data);
+        return updatedUser;
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error(e);
+        throw new ValidationError('bad-request');
+      }
+    },
+    updatePassword: async (
+      root,
+      { oldPassword, newPassword },
+      { ValidationError, user },
+    ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
+
+      const oldPasswordMatch = await user.checkPassword(oldPassword);
+      if (!oldPasswordMatch) {
+        throw new ValidationError('wrong-password');
+      }
+
+      const newPasswordSameOldPassword = await user.checkPassword(newPassword);
+      if (newPasswordSameOldPassword) {
+        throw new ValidationError('input-old-password');
+      }
+      try {
+        const updatedUser = await user
+          .$query()
+          .patchAndFetch({ password: newPassword });
+        return updatedUser;
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error(e);
+        throw new ValidationError('bad-request', 'password');
+      }
     },
   },
 };

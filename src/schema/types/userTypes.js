@@ -27,6 +27,8 @@ enum Gender {
 type Query {
   # Get information about all users
   getAllUsers: [User!]!
+  # Get user by ID
+  getUserByID(userId: ID!): User!
   # Get information about current logged in user, need Authorization and RefreshToken headers
   me: User!
 }
@@ -50,6 +52,10 @@ type Mutation {
     # User password
     password: String!
   ): LoginResponse
+  # Update user info, need auth headers
+  updateMe(firstname: String!, lastname: String!, dob: Date, gender: Gender!): User!
+  # Update user password, need auth headers
+  updatePassword(oldPassword: String, newPassword: String!): User!
 }
 
 type LoginResponse {
