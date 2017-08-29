@@ -93,7 +93,7 @@ const start = async () => {
   );
 
   const PORT = config.port || 8080;
-  const WS_PORT = config.wsPort;
+  const WS_PORT = config.wsPort || 65080;
   app.use(
     '/graphiql',
     graphiqlExpress({

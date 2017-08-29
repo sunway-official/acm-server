@@ -10,7 +10,6 @@ network:
   instance_tag: websocket
 # [END network]
 env_variables:
-  PORT: 8080
   WS_PORT: 65080
   PG_USER: postgres
   PG_PASSWORD: sunway123
