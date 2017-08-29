@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Backend project for CEM",
   "main": "src/index.js",
+  "homepage": "http://cem-server-production.appspot.com",
   "engines": {
     "node": "8.x"
   },

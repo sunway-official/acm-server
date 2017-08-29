@@ -1,5 +1,13 @@
 runtime: nodejs
 env: flex
+# [START network]
+# This ensures clients will be able to connect via websockets to any instance of
+# this app using websockets
+network:
+  forwarded_ports:
+  - 8080
+  instance_tag: websocket
+# [END network]
 env_variables:
   PG_USER: postgres
   PG_PASSWORD: sunway123
@@ -9,3 +17,4 @@ env_variables:
   JWT_REFRESH_SECRET: alksdjoiouqwedASDASDA1231232
 beta_settings:
   cloud_sql_instances: cem-server-production:asia-northeast1:cem-server-production
+# [END app_yaml]

@@ -100,7 +100,8 @@ const start = async () => {
       endpointURL: '/graphql',
       subscriptionsEndpoint: url.format({
         host: req.get('host'),
-        protocol: req.protocol === 'https' ? 'wss' : 'ws',
+        port: 8080,
+        protocol: 'ws',
         pathname: '/subscriptions',
       }),
     })),
