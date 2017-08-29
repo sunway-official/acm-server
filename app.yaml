@@ -5,7 +5,7 @@ env: flex
 # this app using websockets
 network:
   forwarded_ports:
-  - 8080
+  - 65080
   instance_tag: websocket
 # [END network]
 env_variables:
