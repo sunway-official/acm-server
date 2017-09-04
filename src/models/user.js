@@ -59,4 +59,7 @@ export default class User extends unique(Model) {
     const passwordMatch = await bcrypt.compare(password, this.password);
     return passwordMatch;
   }
+  async hashPassword() {
+    this.password = await bcrypt.hash(this.password, config.saltFactor);
+  }
 }
