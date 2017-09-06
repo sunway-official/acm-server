@@ -72,8 +72,15 @@ export default {
         throw new ValidationError('bad-request');
       }
     },
-    deleteRole: async (root, { id }, { models: { Role }, ValidationError }) => {
+    deleteRole: async (
+      root,
+      { id },
+      { models: { Role, DefaultPermission }, ValidationError },
+    ) => {
       try {
+        await DefaultPermission.query()
+          .delete()
+          .where('role_id', id);
         const role = await Role.query().findById(id);
         await Role.query().deleteById(id);
         return role;

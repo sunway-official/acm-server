@@ -64,16 +64,13 @@ export default {
     },
     updateDefaultPermission: async (
       root,
-      { id, role_id, feature_id },
+      data,
       { models: { DefaultPermission }, ValidationError },
     ) => {
       try {
         const updateDefaultPermission = await DefaultPermission.query().updateAndFetchById(
-          id,
-          {
-            role_id,
-            feature_id,
-          },
+          data.id,
+          data,
         );
         return updateDefaultPermission;
       } catch (e) {
