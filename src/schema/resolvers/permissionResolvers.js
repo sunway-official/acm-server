@@ -5,12 +5,14 @@ export default {
       const role = Role.query().findById(role_id);
       return role;
     },
+
     // type user of permission
     user: async ({ user_id }, data, { models: { User } }) => {
       const user = User.query().findById(user_id);
       return user;
     },
 
+    // type feature of permission
     feature: async ({ feature_id }, data, { models: { Feature } }) => {
       const feature = Feature.query().findById(feature_id);
       return feature;
@@ -30,7 +32,7 @@ export default {
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);
-        throw new ValidationError('bad-request');
+        throw new ValidationError(e);
       }
     },
 
@@ -45,7 +47,7 @@ export default {
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);
-        throw new ValidationError('permission not found');
+        throw new ValidationError(e);
       }
     },
   },
@@ -63,11 +65,27 @@ export default {
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);
-        throw new ValidationError('Cant insert permission');
+        throw new ValidationError(e);
       }
     },
 
-    // updatePermission: async (root, data, { models: { Permission } }) => {},
+    updatePermission: async (
+      root,
+      data,
+      { models: { Permission }, ValidationError },
+    ) => {
+      try {
+        const updatePermission = await Permission.query().updateAndFetchById(
+          data.id,
+          data,
+        );
+        return updatePermission;
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error(e);
+        throw new ValidationError(e);
+      }
+    },
 
     deletePermission: async (
       root,
@@ -82,7 +100,7 @@ export default {
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);
-        throw new ValidationError('Cant insert permission');
+        throw new ValidationError(e);
       }
     },
   },

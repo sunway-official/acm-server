@@ -1,4 +1,5 @@
 import { mergeTypes } from 'merge-graphql-schemas';
+
 import userTypes from './userTypes';
 import globalTypes from './globalTypes';
 import permissionTypes from './permissionTypes';
