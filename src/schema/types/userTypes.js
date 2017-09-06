@@ -31,7 +31,9 @@ extend type Query {
   # Get information about all users
   getAllUsers: [User!]!
   # Get user by ID
-  getUserByID(userId: ID!): User!
+  getUserByID(
+    # User ID
+    userId: ID!): User!
   # Get information about current logged in user, need Authorization and RefreshToken headers
   me: User!
 }

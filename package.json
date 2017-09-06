@@ -45,7 +45,7 @@
   },
   "graphdoc": {
     "endpoint": "http://localhost:8080/graphql",
-    "output": "./doc/schema"
+    "output": "./docs"
   },
   "dependencies": {
     "@2fd/graphdoc": "^2.4.0",
