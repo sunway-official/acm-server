@@ -16,6 +16,9 @@ type User {
   created_at: Date!
   # Document updated_at timestamp
   updated_at: Date!
+
+  # organizer detail
+  organizerDetail: OrganizerDetail!
 }
 
 enum Gender {

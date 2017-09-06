@@ -4,6 +4,7 @@ import userTypes from './userTypes';
 import roleTypes from './roleTypes';
 import featureTypes from './featureTypes';
 import defaultPermissionTypes from './defaultPermissionTypes';
+import organizerDetailTypes from './organizerDetailTypes';
 import globalTypes from './globalTypes';
 
 const types = [
@@ -12,6 +13,7 @@ const types = [
   roleTypes,
   featureTypes,
   defaultPermissionTypes,
+  organizerDetailTypes,
 ];
 
 export default mergeTypes(types);
