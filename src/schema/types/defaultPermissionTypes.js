@@ -23,7 +23,7 @@ type Mutation {
   insertDefaultPermission( role_id: ID!, feature_id: ID!): DefaultPermission!
 
   # Update DefaultPermission info by id
-  updateDefaultPermission(id:ID!, role_id: ID!, feature_id: ID!): DefaultPermission!
+  updateDefaultPermission(id:ID!, role_id: ID, feature_id: ID): DefaultPermission!
 
   # Delete DefaultPermission by id
   deleteDefaultPermission(id: ID!): DefaultPermission!

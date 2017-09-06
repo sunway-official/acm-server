@@ -10,4 +10,8 @@ export default class Feature extends Model {
       name: { type: 'string', maxLength: '100' },
     },
   };
+
+  async $beforeValidate(opt) {
+    this.id = parseInt(opt.old.id, 10);
+  }
 }
