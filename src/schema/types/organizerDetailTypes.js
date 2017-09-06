@@ -22,7 +22,7 @@ type OrganizerDetail {
   phone: String!
 }
 
-type Query {
+extend type Query {
   # Get information about all Organizer
   getAllOrganizerDetails: [OrganizerDetail!]!
 
@@ -30,7 +30,7 @@ type Query {
   getOrganizerDetailByID(id: ID!): OrganizerDetail!
 }
 
-type Mutation {
+extend type Mutation {
   # Insert new Organizer
   insertOrganizerDetail(
     user_id: ID!,

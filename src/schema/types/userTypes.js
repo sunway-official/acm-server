@@ -27,7 +27,7 @@ enum Gender {
   unknown
 }
 
-type Query {
+extend type Query {
   # Get information about all users
   getAllUsers: [User!]!
   # Get user by ID
@@ -36,7 +36,7 @@ type Query {
   me: User!
 }
 
-type Mutation {
+extend type Mutation {
   # Register new user, need to remove Authorization and RefreshToken headers
   register(
     # User firstname
