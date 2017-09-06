@@ -10,7 +10,7 @@ type Feature {
   defaultPermissions: [DefaultPermission!]!
 }
 
-type Query {
+extend type Query {
   # Get information about all features
   getAllFeatures: [Feature!]!
 
@@ -18,7 +18,7 @@ type Query {
   getFeatureByID(id: ID!): Feature!
 }
 
-type Mutation {
+extend type Mutation {
   # Insert new feature
   insertFeature(name: String!): Feature!
 

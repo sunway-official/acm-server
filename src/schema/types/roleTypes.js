@@ -9,7 +9,7 @@ export default `
     defaultPermissions: [DefaultPermission!]!
   }
 
-  type Query {
+  extend type Query {
     # Get information about all roles
     getAllRoles: [Role!]!
 
@@ -17,7 +17,7 @@ export default `
     getRoleByID(id: ID!): Role!
   }
 
- type Mutation {
+ extend type Mutation {
     # Insert new role
     insertRole(name: String!): Role!
 

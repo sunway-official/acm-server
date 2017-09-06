@@ -10,7 +10,7 @@ type DefaultPermission {
   feature: Feature!
 }
 
-type Query {
+extend type Query {
   # Get information about all DefaultPermission
   getAllDefaultPermissions: [DefaultPermission!]!
 
@@ -18,7 +18,7 @@ type Query {
   getDefaultPermissionByID(id: ID!): DefaultPermission!
 }
 
-type Mutation {
+extend type Mutation {
   # Insert new DefaultPermission
   insertDefaultPermission( role_id: ID!, feature_id: ID!): DefaultPermission!
 
