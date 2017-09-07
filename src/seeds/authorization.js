@@ -10,7 +10,7 @@ const date = genDate();
 function createUser(knex, user) {
   return knex
     .table('users')
-    .del()
+    .truncate()
     .then(() =>
       knex
         .table('users')
