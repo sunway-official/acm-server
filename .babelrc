@@ -14,5 +14,9 @@
       "plugins": ["istanbul"]
     }
   },
-  "plugins": ["transform-class-properties", "transform-object-rest-spread"]
+  "plugins": [
+    "transform-class-properties",
+    "transform-object-rest-spread",
+    "inline-dotenv"
+  ]
 }

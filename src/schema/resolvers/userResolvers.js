@@ -86,11 +86,11 @@ export default {
 
       const authUser = await User.query().findOne({ email });
       if (!authUser) {
-        throw new ValidationError('bad-credetials');
+        throw new ValidationError('bad-credentials');
       }
       const isPasswordMatch = await authUser.checkPassword(password);
       if (!isPasswordMatch) {
-        throw new ValidationError('bad-credetials');
+        throw new ValidationError('bad-credentials');
       }
 
       const tokenPayload = {
@@ -152,6 +152,95 @@ export default {
         console.error(e);
         throw new ValidationError('bad-request', 'password');
       }
+    },
+    sendForgotPasswordEmail: async (
+      root,
+      { email },
+      {
+        models: { User },
+        ValidationError,
+        config,
+        transporter,
+        emailTemplates,
+      },
+    ) => {
+      const user = await User.query().findOne({ email });
+      if (!user) {
+        throw new ValidationError('user-not-found', 'email');
+      }
+      const payload = {
+        id: user.id,
+        versionKey: user.version_key,
+      };
+
+      const token = jwt.sign(payload, config.jwtForgotPasswordSecret, {
+        expiresIn: '24h',
+      });
+      const template = emailTemplates.forgotPasswordTemplate(
+        config.swEmail,
+        user.email,
+        null,
+        token,
+      );
+      transporter.sendMail(template);
+
+      return {
+        success: true,
+        message: 'email-sent',
+      };
+    },
+    checkForgotPasswordToken: async (
+      root,
+      { token },
+      { ValidationError, models: { User }, config },
+    ) => {
+      const { id, versionKey } = jwt.verify(
+        token,
+        config.jwtForgotPasswordSecret,
+      );
+      if (!id || !versionKey) {
+        throw new ValidationError('invalid-token', 'token');
+      }
+      const userToCheck = await User.query().findOne({ id });
+      if (!userToCheck) {
+        throw new ValidationError('invalid-token', 'token');
+      }
+      const isVersionKeyMatch = userToCheck.version_key === versionKey;
+      if (!isVersionKeyMatch) {
+        throw new ValidationError('invalid-token', 'token');
+      }
+      return {
+        success: true,
+        message: 'token-valid',
+      };
+    },
+    resetUserPassword: async (
+      root,
+      { token, newPassword },
+      { models: { User }, ValidationError, config },
+    ) => {
+      const { id, versionKey } = jwt.verify(
+        token,
+        config.jwtForgotPasswordSecret,
+      );
+      if (!id || !versionKey) {
+        throw new ValidationError('invalid-token', 'token');
+      }
+      const userToCheck = await User.query().findOne({ id });
+      if (!userToCheck) {
+        throw new ValidationError('invalid-token', 'token');
+      }
+      const isVersionKeyMatch = userToCheck.version_key === versionKey;
+      if (!isVersionKeyMatch) {
+        throw new ValidationError('invalid-token', 'token');
+      }
+
+      await userToCheck.$query().patch({ password: newPassword });
+
+      return {
+        success: true,
+        message: 'token-valid',
+      };
     },
   },
 };

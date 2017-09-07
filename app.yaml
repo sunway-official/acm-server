@@ -8,15 +8,6 @@ network:
   - 65080
   instance_tag: websocket
 # [END network]
-env_variables:
-  WS_PORT: 65080
-  PG_USER: postgres
-  PG_PASSWORD: sunway123
-  PG_DATABASE: cem
-  PG_INSTANCE_NAME: cem-server-production:asia-northeast1:cem-server-production
-  JWT_SECRET: aksdjqopwieopqiw;dalskdl;askdas
-  JWT_REFRESH_SECRET: alksdjoiouqwedASDASDA1231232
-  SALT_FACTOR: 12
 beta_settings:
   cloud_sql_instances: cem-server-production:asia-northeast1:cem-server-production
 # [END app_yaml]

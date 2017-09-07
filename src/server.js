@@ -15,6 +15,8 @@ import knexConfig from './knexfile';
 import formatError from './utils/formatError';
 import ValidationError from './utils/ValidationError';
 import models from './models';
+import emailTemplates from './email/templates';
+import transporter from './email';
 
 const authenticate = async (req, res, next) => {
   try {
@@ -86,6 +88,8 @@ const start = async () => {
         config,
         models,
         user: req.user,
+        transporter,
+        emailTemplates,
       },
       formatError,
       schema,
@@ -116,6 +120,8 @@ const start = async () => {
         schema,
         onConnect: () => ({
           models,
+          transporter,
+          emailTemplates,
         }),
       },
       {

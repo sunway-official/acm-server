@@ -61,6 +61,16 @@ extend type Mutation {
   updateMe(firstname: String!, lastname: String!, dob: Date, gender: Gender!): User!
   # Update user password, need auth headers
   updatePassword(oldPassword: String, newPassword: String!): User!
+  # Send forgot password email to user inbox
+  sendForgotPasswordEmail(
+    # Email address to send the forgot token
+    email: String!): RequestResult!
+  # Check user forgot password token
+  checkForgotPasswordToken(
+    # Token to check valid
+    token: String!): RequestResult!
+  # Reset user password, requires the token from the forgot password email
+  resetUserPassword(token: String!, newPassword: String!): RequestResult!
 }
 
 type LoginResponse {
