@@ -21,7 +21,7 @@ enum Status{
   off
 }
 
-type Query {
+extend type Query {
   # Get all Permissions
   getAllPermissions: [Permission!]!
 
@@ -36,7 +36,7 @@ type Query {
 
 }
 
-type Mutation {
+extend type Mutation {
   # Insert Permission with role id, user id and status
   insertPermission(role_id: ID!, user_id: ID!) : [Permission!]!
 
