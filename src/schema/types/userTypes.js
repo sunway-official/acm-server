@@ -16,6 +16,9 @@ type User {
   created_at: Date!
   # Document updated_at timestamp
   updated_at: Date!
+
+  # organizer detail
+  organizerDetail: OrganizerDetail!
 }
 
 enum Gender {
@@ -24,16 +27,18 @@ enum Gender {
   unknown
 }
 
-type Query {
+extend type Query {
   # Get information about all users
   getAllUsers: [User!]!
   # Get user by ID
-  getUserByID(userId: ID!): User!
+  getUserByID(
+    # User ID
+    userId: ID!): User!
   # Get information about current logged in user, need Authorization and RefreshToken headers
   me: User!
 }
 
-type Mutation {
+extend type Mutation {
   # Register new user, need to remove Authorization and RefreshToken headers
   register(
     # User firstname
