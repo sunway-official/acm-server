@@ -1,5 +1,4 @@
 import User from './user';
-
 import Permission from './permission';
 import Role from './role';
 import Feature from './feature';

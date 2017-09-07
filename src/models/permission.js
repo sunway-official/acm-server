@@ -4,14 +4,7 @@ export default class Permission extends Model {
   static tableName = 'permissions';
   static jsonSchema = {
     type: 'object',
-    required: [
-      'role_id',
-      'role_name',
-      'user_id',
-      'user_name',
-      'feature_id',
-      'status',
-    ],
+    required: ['role_id', 'role_name', 'user_id', 'user_name', 'feature_id'],
     properties: {
       id: { type: 'integer' },
       role_id: {
@@ -35,8 +28,8 @@ export default class Permission extends Model {
         type: 'integer',
       },
       status: {
-        type: 'integer',
-        default: 0,
+        type: 'string',
+        default: 'off',
       },
     },
   };

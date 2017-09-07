@@ -83,12 +83,19 @@ export default {
     deleteFeature: async (
       root,
       { id },
-      { models: { Feature, DefaultPermission }, ValidationError },
+      { models: { Feature, DefaultPermission, Permission }, ValidationError },
     ) => {
       try {
+        // delete permission with feature_id
+        await Permission.query()
+          .delete()
+          .where('feature_id', id);
+
+        // delete default permission with feature_id
         await DefaultPermission.query()
           .delete()
           .where('feature_id', id);
+
         const feature = await Feature.query().findById(id);
         await Feature.query().deleteById(id);
         return feature;

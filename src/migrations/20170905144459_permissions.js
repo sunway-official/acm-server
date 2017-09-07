@@ -9,18 +9,18 @@ exports.up = function(knex, Promise) {
       table
         .integer('role_id')
         .unsigned()
-        .notNull();
-      table.string('role_name').notNull();
+        .notNullable();
+      table.string('role_name').notNullable();
       table
         .integer('user_id')
         .unsigned()
-        .notNull();
-      table.string('user_name').notNull();
+        .notNullable();
+      table.string('user_name').notNullable();
       table
         .integer('feature_id')
         .unsigned()
-        .notNull();
-      table.integer('status').notNull();
+        .notNullable();
+      table.string('status').notNullable();
     }),
   ]);
 };
