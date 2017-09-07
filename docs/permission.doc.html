@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="./styles/graphdoc.css" />
-    <title>Gender</title>
+    <title>Permission</title>
     <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700" rel="stylesheet"><link type="text/css" rel="stylesheet" href="./assets/code.css" /><link type="text/css" rel="stylesheet" href="./assets/require-by.css" />
 </head>
 <body class="slds-scrollable--y">
@@ -65,7 +65,7 @@
 <div class="slds-grid slds-grid--vertical slds-navigation-list--vertical">
     <h4 class="slds-text-title--caps slds-p-around--medium">Enums</h4>
     <ul>
-        <li class="slds-is-active" title="Gender">
+        <li  title="Gender">
             <a href="gender.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
                 Gender
             </a>
@@ -110,7 +110,7 @@
                 OrganizerDetail
             </a>
         </li>
-        <li  title="Permission">
+        <li class="slds-is-active" title="Permission">
             <a href="permission.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
                 Permission
             </a>
@@ -195,8 +195,8 @@
         </div>
     </div>
     <div class="container">
-        <p class="slds-text-title--caps slds-text-color--weak">ENUM</p>
-        <h1 class="slds-text-heading--large">Gender</h1>
+        <p class="slds-text-title--caps slds-text-color--weak">OBJECT</p>
+        <h1 class="slds-text-heading--large">Permission</h1>
         <div class="slds-text-body--regular"></div>
     </div>
 </section>
@@ -208,7 +208,7 @@
             </a>
             GraphQL Schema definition
         </h2>
-        <code class="highlight"><ul class="code" style="padding-left:28px"><li><span class="keyword operator ts">enum</span> <span class="identifier">Gender</span> {</li><li><span class="tab"></span></li><li><span class="tab"><span class="meta">male</span></span></li><li><span class="tab"></span></li><li><span class="tab"><span class="meta">female</span></span></li><li><span class="tab"></span></li><li><span class="tab"><span class="meta">unknown</span></span></li><li>}</li></ul></code>
+        <code class="highlight"><ul class="code" style="padding-left:42px"><li><span class="keyword operator ts">type</span> <span class="identifier">Permission</span> {</li><li></li><li><span class="tab"><span class="comment line">#   ID of permission</span></span></li><li><span class="tab"><span class="meta">id</span>: <a class="support type" href="id.doc.html">ID</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   role of permission</span></span></li><li><span class="tab"><span class="meta">role</span>: <a class="support type" href="role.doc.html">Role</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   user of permission</span></span></li><li><span class="tab"><span class="meta">user</span>: <a class="support type" href="user.doc.html">User</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   feature of user in perssion</span></span></li><li><span class="tab"><span class="meta">feature</span>: <a class="support type" href="feature.doc.html">Feature</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   status 'on' or 'off'</span></span></li><li><span class="tab"><span class="meta">status</span>: <a class="support type" href="status.doc.html">Status</a>! </span></li><li>}</li></ul></code>
     </div>
 </section>
 <section>
@@ -219,7 +219,7 @@
             </a>
             Require by
         </h2>
-        <ul class="require-by"><li><a href="mutation.doc.html" title="Mutation - ">Mutation<em></em></a><li><li><a href="user.doc.html" title="User - ">User<em></em></a><li></ul>
+        <ul class="require-by"><li><a href="mutation.doc.html" title="Mutation - ">Mutation<em></em></a><li><li><a href="query.doc.html" title="Query - ">Query<em></em></a><li></ul>
     </div>
 </section>
 <footer>

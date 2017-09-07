@@ -19,7 +19,7 @@
     "migrate:rollback:staged":
       "knex migrate:rollback --knexfile src/knexfile.js --env staged",
     "seed:staged": "knex seed:run --knexfile src/knexfile.js --env staged",
-    "doc": "graphdoc -f",
+    "doc:gen": "graphdoc -f",
     "lint": "esw *.js src config --color",
     "lint-staged": "lint-staged",
     "pretty":
