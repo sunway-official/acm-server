@@ -2,6 +2,7 @@ import { mergeResolvers } from 'merge-graphql-schemas';
 import GraphQLToolsTypes from 'graphql-tools-types';
 
 import userResolvers from './userResolvers';
+import permissionResolvers from './permissionResolvers';
 import roleResolvers from './roleResolvers';
 import featureResolvers from './featureResolvers';
 import defaultPermissionResolvers from './defaultPermissionResolvers';
@@ -17,6 +18,7 @@ const resolvers = [
   roleResolvers,
   featureResolvers,
   defaultPermissionResolvers,
+  permissionResolvers,
   organizerDetailResolvers,
 ];
 export default mergeResolvers(resolvers);

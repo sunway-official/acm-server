@@ -4,6 +4,7 @@ import featureTypes from './featureTypes';
 import defaultPermissionTypes from './defaultPermissionTypes';
 import organizerDetailTypes from './organizerDetailTypes';
 import globalTypes from './globalTypes';
+import permissionTypes from './permissionTypes';
 
 export default [
   userTypes,
@@ -11,5 +12,6 @@ export default [
   roleTypes,
   featureTypes,
   defaultPermissionTypes,
+  permissionTypes,
   organizerDetailTypes,
 ];

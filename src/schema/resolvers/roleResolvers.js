@@ -75,9 +75,15 @@ export default {
     deleteRole: async (
       root,
       { id },
-      { models: { Role, DefaultPermission }, ValidationError },
+      { models: { Role, DefaultPermission, Permission }, ValidationError },
     ) => {
       try {
+        // delete permission with role_id
+        await Permission.query()
+          .delete()
+          .where('role_id', id);
+
+        // delete permission with role_id
         await DefaultPermission.query()
           .delete()
           .where('role_id', id);
