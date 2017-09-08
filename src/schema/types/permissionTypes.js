@@ -34,6 +34,9 @@ extend type Query {
   # Get all permission by user_id
   getPermissionByUserID(user_id: ID!): [Permission!]!
 
+  # Get all permission by user_id and role_id
+  getPermissionByRoleIDUserID(role_id: ID!, user_id: ID!): [Permission!]!
+
 }
 
 extend type Mutation {
