@@ -84,6 +84,24 @@ export default {
         throw new ValidationError(e);
       }
     },
+
+    // get permission by user_id and role_id
+    getPermissionByRoleIDUserID: async (
+      root,
+      { role_id, user_id },
+      { models: { Permission }, ValidationError },
+    ) => {
+      try {
+        const permissions = await Permission.query().where(builder => {
+          builder.where('role_id', role_id).where('user_id', user_id);
+        });
+        return permissions;
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error(e);
+        throw new ValidationError(e);
+      }
+    },
   },
 
   //  mutation of permission
