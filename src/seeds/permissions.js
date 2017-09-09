@@ -1,11 +1,11 @@
-const users = require('../seedData/userData');
+const permissions = require('../seedData/permissionsData');
 
 // eslint-disable-next-line func-names, no-unused-vars
 exports.seed = function(knex, Promise) {
   return Promise.all([
     knex
-      .table('users')
+      .table('permissions')
       .truncate()
-      .then(() => knex.table('users').insert(users)),
+      .then(() => knex.table('permissions').insert(permissions)),
   ]);
 };
