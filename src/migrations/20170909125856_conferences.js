@@ -16,6 +16,10 @@ exports.up = function(knex, Promise) {
         .integer('organizer_id')
         .unsigned()
         .notNullable();
+      table
+        .integer('address_id')
+        .unsigned()
+        .notNullable();
     }),
   ]);
 };

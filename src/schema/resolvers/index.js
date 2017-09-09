@@ -8,6 +8,7 @@ import featureResolvers from './featureResolvers';
 import defaultPermissionResolvers from './defaultPermissionResolvers';
 import organizerDetailResolvers from './organizerDetailResolvers';
 import conferenceResolvers from './conferenceResolvers';
+import addressResolvers from './addressResolvers';
 
 const rootResolvers = {
   Date: GraphQLToolsTypes.Date({ name: 'Date' }),
@@ -22,5 +23,6 @@ const resolvers = [
   permissionResolvers,
   organizerDetailResolvers,
   conferenceResolvers,
+  addressResolvers,
 ];
 export default mergeResolvers(resolvers);

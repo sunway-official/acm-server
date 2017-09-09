@@ -14,6 +14,10 @@ export default {
       );
       return organizerDetail;
     },
+    address: async ({ address_id }, data, { models: { Address } }) => {
+      const address = await Address.query().findById(address_id);
+      return address;
+    },
   },
   Query: {
     getAllConferences: async (
@@ -77,6 +81,26 @@ export default {
     ) => {
       try {
         const conference = await Conference.query().findById(organizer_id);
+        if (!conference) {
+          throw new ValidationError('conference-not-found');
+        }
+        return conference;
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error(e);
+        if (e.message === 'conference-not-found') {
+          throw new ValidationError('conference-not-found');
+        }
+        throw new ValidationError('bad-request');
+      }
+    },
+    getConferenceByAddressID: async (
+      root,
+      { address_id },
+      { models: { Conference }, ValidationError },
+    ) => {
+      try {
+        const conference = await Conference.query().findById(address_id);
         if (!conference) {
           throw new ValidationError('conference-not-found');
         }

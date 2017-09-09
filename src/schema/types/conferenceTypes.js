@@ -9,6 +9,9 @@ type Conference {
   # User id
   user: User!
 
+  # Address id
+  address: Address!
+
   # Conference title
   title: String!
 
@@ -37,6 +40,9 @@ extend type Query {
 
   # Get Conference by User ID
   getConferenceByOrganizerDetailID(id: ID!): Conference!
+
+  # Get Conference by Address ID
+  getConferenceByAddressID(id: ID!): Conference!
 }
 
 extend type Mutation {

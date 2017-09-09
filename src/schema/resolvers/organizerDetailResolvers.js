@@ -4,6 +4,10 @@ export default {
       const user = await User.query().findById(user_id);
       return user;
     },
+    conference: async ({ id }, data, { models: { Conference } }) => {
+      const conference = await Conference.query().where('address_id', id);
+      return conference;
+    },
   },
   Query: {
     getAllOrganizerDetails: async (

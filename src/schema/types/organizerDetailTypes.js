@@ -20,6 +20,9 @@ type OrganizerDetail {
 
   # Organizer phone
   phone: String!
+
+  # conference
+  conference: [Conference!]!
 }
 
 extend type Query {

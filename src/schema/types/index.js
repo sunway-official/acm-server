@@ -6,6 +6,7 @@ import organizerDetailTypes from './organizerDetailTypes';
 import globalTypes from './globalTypes';
 import permissionTypes from './permissionTypes';
 import conferenceTypes from './conferenceTypes';
+import addressTypes from './addressTypes';
 
 export default [
   userTypes,
@@ -16,4 +17,5 @@ export default [
   permissionTypes,
   organizerDetailTypes,
   conferenceTypes,
+  addressTypes,
 ];

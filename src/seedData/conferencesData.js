@@ -8,6 +8,7 @@ const conferences = [
     bg_image: 'HoinghiquocteSigTelCom2017.png',
     user_id: '1',
     organizer_id: '1',
+    address_id: '1',
   },
   {
     title: 'Hoi nghi CDIO vung chau A 2017',
@@ -17,6 +18,7 @@ const conferences = [
     bg_image: 'HoinghiCDIOvungchauA2017.png',
     user_id: '2',
     organizer_id: '2',
+    address_id: '2',
   },
   {
     title: 'Hoi nghi Sinh viên ASEAN 2016',
@@ -26,6 +28,7 @@ const conferences = [
     bg_image: 'HoinghiSinhviênASEAN2016.png',
     user_id: '2',
     organizer_id: '2',
+    address_id: '3',
   },
 ];
 

@@ -12,6 +12,7 @@ export default class Conference extends Model {
       bg_image: { type: 'string', maxLength: '300' },
       user_id: { type: 'integer' },
       organizer_id: { type: 'integer' },
+      address_id: { type: 'integer' },
     },
   };
 
@@ -19,6 +20,7 @@ export default class Conference extends Model {
     this.id = parseInt(opt.old.id, 10);
     this.user_id = parseInt(opt.old.user_id, 10);
     this.organizer_id = parseInt(opt.old.organizer_id, 10);
+    this.address_id = parseInt(opt.old.address_id, 10);
   }
   async $beforeInsert() {
     this.start_date = new Date().toISOString();
