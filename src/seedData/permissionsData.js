@@ -84,7 +84,6 @@ function getUsersIDWithRoleID(role_id) {
 // eslint-disable-next-line camelcase
 function getPermissions(role_id, usersID, features) {
   const result = [];
-  // users id
   // eslint-disable-next-line camelcase, array-callback-return
   usersID.map(user_id => {
     // eslint-disable-next-line camelcase, array-callback-return
