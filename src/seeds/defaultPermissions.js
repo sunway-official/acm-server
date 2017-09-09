@@ -1,4 +1,8 @@
-const defaultPermissions = require('../seedData/defaultPermissionsData');
+const {
+  speaker,
+  participant,
+  organizer,
+} = require('../seedData/defaultPermissionsData');
 
 // eslint-disable-next-line camelcase
 function getDefaultPermissions(role_id, features) {
@@ -16,8 +20,8 @@ function getDefaultPermissions(role_id, features) {
   return temp;
 }
 
+// get all default permission
 function getAllData() {
-  const { speaker, participant, organizer } = defaultPermissions;
   let result = [];
   result = getDefaultPermissions(participant.role_id, participant.features)
     .concat(getDefaultPermissions(speaker.role_id, speaker.features))
