@@ -31,6 +31,12 @@ extend type Query {
 
   # Get Conference by ID
   getConferenceByID(id: ID!): Conference!
+
+  # Get Conference by User ID
+  getConferenceByUserID(id: ID!): Conference!
+
+  # Get Conference by User ID
+  getConferenceByOrganizerDetailID(id: ID!): Conference!
 }
 
 extend type Mutation {
