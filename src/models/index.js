@@ -4,6 +4,7 @@ import Role from './role';
 import Feature from './feature';
 import DefaultPermission from './defaultPermission';
 import OrganizerDetail from './organizerDetail';
+import Conference from './conference';
 
 const models = {
   User,
@@ -12,6 +13,7 @@ const models = {
   DefaultPermission,
   Permission,
   OrganizerDetail,
+  Conference,
 };
 
 export default models;

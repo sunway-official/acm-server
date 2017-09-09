@@ -1,6 +1,6 @@
 import { Model } from 'objection';
 
-export default class OfganizerDetail extends Model {
+export default class OrganizerDetail extends Model {
   static tableName = 'organizer_detail';
   static jsonSchema = {
     type: 'object',
