@@ -4,13 +4,16 @@ type Conference {
   id: ID!
 
   # Organizer id
-  OrganizerDetail: OrganizerDetail!
+  organizerDetail: OrganizerDetail!
 
   # User id
   user: User!
 
   # Address id
   address: Address!
+
+  # Conference Topic ID
+  conferenceTopic:[ConferenceTopic!]!
 
   # Conference title
   title: String!

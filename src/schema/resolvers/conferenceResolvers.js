@@ -4,7 +4,7 @@ export default {
       const user = await User.query().findById(user_id);
       return user;
     },
-    OrganizerDetail: async (
+    organizerDetail: async (
       { organizer_id },
       data,
       { models: { OrganizerDetail } },
@@ -17,6 +17,13 @@ export default {
     address: async ({ address_id }, data, { models: { Address } }) => {
       const address = await Address.query().findById(address_id);
       return address;
+    },
+    conferenceTopic: async ({ id }, data, { models: { ConferenceTopic } }) => {
+      const conferenceTopic = await ConferenceTopic.query().where(
+        'conference_id',
+        id,
+      );
+      return conferenceTopic;
     },
   },
   Query: {
@@ -174,9 +181,13 @@ export default {
     deleteConference: async (
       root,
       { id },
-      { models: { Conference }, ValidationError },
+      { models: { Conference, ConferenceTopic }, ValidationError },
     ) => {
       try {
+        // delete ConferenceTopic with topic_id
+        await ConferenceTopic.query()
+          .delete()
+          .where('conference_id', id);
         const conference = await Conference.query().findById(id);
         await Conference.query().deleteById(id);
         return conference;

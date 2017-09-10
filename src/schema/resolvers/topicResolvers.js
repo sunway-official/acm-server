@@ -1,4 +1,13 @@
 export default {
+  Topic: {
+    conferenceTopic: async ({ id }, data, { models: { ConferenceTopic } }) => {
+      const conferenceTopic = await ConferenceTopic.query().where(
+        'topic_id',
+        id,
+      );
+      return conferenceTopic;
+    },
+  },
   Query: {
     getAllTopics: async (
       root,
@@ -62,9 +71,13 @@ export default {
     deleteTopic: async (
       root,
       { id },
-      { models: { Topic }, ValidationError },
+      { models: { Topic, ConferenceTopic }, ValidationError },
     ) => {
       try {
+        // delete ConferenceTopic with topic_id
+        await ConferenceTopic.query()
+          .delete()
+          .where('topic_id', id);
         const topic = await Topic.query().findById(id);
         await Topic.query().deleteById(id);
         return topic;

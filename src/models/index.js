@@ -7,6 +7,7 @@ import OrganizerDetail from './organizerDetail';
 import Conference from './conference';
 import Addresses from './addresses';
 import Topic from './topic';
+import ConferenceTopic from './conferenceTopic';
 
 const models = {
   User,
@@ -18,6 +19,7 @@ const models = {
   Conference,
   Addresses,
   Topic,
+  ConferenceTopic,
 };
 
 export default models;
