@@ -6,6 +6,7 @@ import DefaultPermission from './defaultPermission';
 import OrganizerDetail from './organizerDetail';
 import Conference from './conference';
 import Addresses from './addresses';
+import Topic from './topic';
 
 const models = {
   User,
@@ -16,6 +17,7 @@ const models = {
   OrganizerDetail,
   Conference,
   Addresses,
+  Topic,
 };
 
 export default models;
