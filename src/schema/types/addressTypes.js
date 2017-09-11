@@ -3,6 +3,9 @@ type Address {
   # The ID of Address
   id: ID!
 
+  # conference
+  conference: [Conference!]!
+
   # street Address
   street: String!
 
@@ -12,8 +15,6 @@ type Address {
   # country Address
   country: String!
 
-  # conference
-  conference: [Conference!]!
 }
 
 extend type Query {

@@ -1,8 +1,8 @@
 export default {
   ConferenceTopic: {
-    coference: async ({ conference_id }, data, { models: { Coference } }) => {
-      const coference = await Coference.query().findById(conference_id);
-      return coference;
+    conference: async ({ conference_id }, data, { models: { Conference } }) => {
+      const conference = await Conference.query().findById(conference_id);
+      return conference;
     },
     topic: async ({ topic_id }, data, { models: { Topic } }) => {
       const topic = await Topic.query().findById(topic_id);

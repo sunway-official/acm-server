@@ -58,6 +58,7 @@ extend type Mutation {
     bg_image: String!,
     user_id: ID!,
     organizer_id: ID!,
+    address_id:ID!,
   ): Conference!
 
   # Update Conference info by id
@@ -70,6 +71,7 @@ extend type Mutation {
     bg_image: String!,
     user_id: ID!,
     organizer_id: ID!,
+    address_id:ID!,
   ): Conference!
 
   # Delete Conference by id

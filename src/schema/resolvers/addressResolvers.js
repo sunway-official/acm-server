@@ -13,8 +13,8 @@ export default {
       { models: { Address }, ValidationError },
     ) => {
       try {
-        const address = await Address.query();
-        return address;
+        const addresses = await Address.query();
+        return addresses;
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);
@@ -80,7 +80,7 @@ export default {
       { models: { Address, Conference }, ValidationError },
     ) => {
       try {
-        // delete permission with feature_id
+        // delete coference with address_id
         await Conference.query()
           .delete()
           .where('address_id', id);

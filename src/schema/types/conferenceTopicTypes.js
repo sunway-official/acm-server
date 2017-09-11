@@ -4,10 +4,10 @@ type ConferenceTopic {
   id: ID!
 
   # conference ID
-  conference_id: Conference!
+  conference: Conference!
 
   # topic ID
-  topic_id: Topic!
+  topic: Topic!
 }
 
 extend type Query {

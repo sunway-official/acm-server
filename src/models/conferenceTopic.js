@@ -1,6 +1,6 @@
 import { Model } from 'objection';
 
-export default class ConferenceTopics extends Model {
+export default class ConferenceTopic extends Model {
   static tableName = 'conference_topics';
   static jsonSchema = {
     type: 'object',

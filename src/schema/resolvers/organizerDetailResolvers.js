@@ -5,7 +5,7 @@ export default {
       return user;
     },
     conference: async ({ id }, data, { models: { Conference } }) => {
-      const conference = await Conference.query().where('address_id', id);
+      const conference = await Conference.query().where('conference_id', id);
       return conference;
     },
   },
@@ -90,9 +90,13 @@ export default {
     deleteOrganizerDetail: async (
       root,
       { id },
-      { models: { OrganizerDetail }, ValidationError },
+      { models: { OrganizerDetail, Conference }, ValidationError },
     ) => {
       try {
+        // delete coference with address_id
+        await Conference.query()
+          .delete()
+          .where('address_id', id);
         const organizerDetail = await OrganizerDetail.query().findById(id);
         await OrganizerDetail.query().deleteById(id);
         return organizerDetail;

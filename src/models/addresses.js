@@ -1,6 +1,6 @@
 import { Model } from 'objection';
 
-export default class Addresses extends Model {
+export default class Address extends Model {
   static tableName = 'addresses';
   static jsonSchema = {
     type: 'object',
