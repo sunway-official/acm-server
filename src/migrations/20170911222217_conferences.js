@@ -9,10 +9,6 @@ exports.up = function(knex, Promise) {
       table.timestamp('end_date').notNullable();
       table.string('bg_image').notNullable();
       table
-        .integer('user_id')
-        .unsigned()
-        .notNullable();
-      table
         .integer('organizer_id')
         .unsigned()
         .notNullable();

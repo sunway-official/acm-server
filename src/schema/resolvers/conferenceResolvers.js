@@ -1,9 +1,5 @@
 export default {
   Conference: {
-    user: async ({ user_id }, data, { models: { User } }) => {
-      const user = await User.query().findById(user_id);
-      return user;
-    },
     organizerDetail: async (
       { organizer_id },
       data,
@@ -18,8 +14,19 @@ export default {
       const address = await Address.query().findById(address_id);
       return address;
     },
-    conferenceTopic: async ({ id }, data, { models: { ConferenceTopic } }) => {
+    conferenceTopics: async ({ id }, data, { models: { ConferenceTopic } }) => {
       const conferenceTopic = await ConferenceTopic.query().where(
+        'conference_id',
+        id,
+      );
+      return conferenceTopic;
+    },
+    conferenceAttendees: async (
+      { id },
+      data,
+      { models: { ConferenceAttendee } },
+    ) => {
+      const conferenceTopic = await ConferenceAttendee.query().where(
         'conference_id',
         id,
       );
@@ -187,11 +194,18 @@ export default {
     deleteConference: async (
       root,
       { id },
-      { models: { Conference, ConferenceTopic }, ValidationError },
+      {
+        models: { Conference, ConferenceTopic, ConferenceAttendee },
+        ValidationError,
+      },
     ) => {
       try {
-        // delete ConferenceTopic with topic_id
+        // delete ConferenceTopic with conference_id_id
         await ConferenceTopic.query()
+          .delete()
+          .where('conference_id', id);
+        // delete ConferenceAttendee with conference_id
+        await ConferenceAttendee.query()
           .delete()
           .where('conference_id', id);
         const conference = await Conference.query().findById(id);

@@ -9,6 +9,17 @@ export default {
       );
       return organizerDetail;
     },
+    conferenceAttendees: async (
+      { id },
+      data,
+      { models: { ConferenceAttendee } },
+    ) => {
+      const conferenceAttendees = await ConferenceAttendee.query().where(
+        'user_id',
+        id,
+      );
+      return conferenceAttendees;
+    },
   },
   Query: {
     getAllUsers: async (root, data, { models: { User }, ValidationError }) => {

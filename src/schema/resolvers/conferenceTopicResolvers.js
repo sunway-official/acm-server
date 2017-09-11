@@ -96,12 +96,9 @@ export default {
       { models: { ConferenceTopic }, ValidationError },
     ) => {
       try {
-        const conferenceTopic = await ConferenceTopic.query().where(
-          'topic_id',
-          'conference_id',
-          topic_id,
-          conference_id,
-        );
+        const conferenceTopic = await ConferenceTopic.query()
+          .where('topic_id', topic_id)
+          .where('conference_id', conference_id);
         if (!conferenceTopic) {
           throw new ValidationError('conferenceTopic-not-found');
         }

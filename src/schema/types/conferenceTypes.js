@@ -6,14 +6,14 @@ type Conference {
   # Organizer id
   organizerDetail: OrganizerDetail!
 
-  # User id
-  user: User!
-
   # Address id
   address: Address!
 
   # Conference Topic ID
-  conferenceTopic:[ConferenceTopic!]!
+  conferenceTopics:[ConferenceTopic!]!
+
+  # Conference Attendees ID
+  conferenceAttendees:[ConferenceAttendee!]!
 
   # Conference title
   title: String!
@@ -38,9 +38,6 @@ extend type Query {
   # Get Conference by ID
   getConferenceByID(id: ID!): Conference!
 
-  # Get Conference by User ID
-  getConferenceByUserID(user_id: ID!): Conference!
-
   # Get Conference by OrganizerDetail ID
   getConferenceByOrganizerDetailID(organizerDetail_id: ID!): [Conference!]!
 
@@ -56,7 +53,6 @@ extend type Mutation {
     start_date: Date!,
     end_date: Date!,
     bg_image: String!,
-    user_id: ID!,
     organizer_id: ID!,
     address_id:ID!,
   ): Conference!
@@ -69,7 +65,6 @@ extend type Mutation {
     start_date: Date!,
     end_date: Date!,
     bg_image: String!,
-    user_id: ID!,
     organizer_id: ID!,
     address_id:ID!,
   ): Conference!
