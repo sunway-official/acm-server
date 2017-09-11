@@ -53,14 +53,16 @@ export default {
       }
     },
 
-    // get permission by role_id
-    getPermissionByRoleID: async (
+    // get all user by role_id
+    getAllUsersByRoleID: async (
       root,
       { role_id },
       { models: { Permission }, ValidationError },
     ) => {
       try {
-        const permissions = await Permission.query().where('role_id', role_id);
+        const permissions = await Permission.query()
+          .where('role_id', role_id)
+          .distinct('user_id');
         return permissions;
       } catch (e) {
         // eslint-disable-next-line no-console
@@ -69,14 +71,17 @@ export default {
       }
     },
 
-    // get permission by user_id
-    getPermissionByUserID: async (
+    // get all features by user_id
+    getAllFeaturesByUserID: async (
       root,
       { user_id },
       { models: { Permission }, ValidationError },
     ) => {
       try {
-        const permissions = await Permission.query().where('user_id', user_id);
+        const permissions = await Permission.query()
+          .where('user_id', user_id)
+          .distinct('feature_id');
+
         return permissions;
       } catch (e) {
         // eslint-disable-next-line no-console

@@ -24,6 +24,7 @@ export default {
         throw new ValidationError('bad-request');
       }
     },
+
     getDefaultPermissionByID: async (
       root,
       { id },
@@ -38,10 +39,25 @@ export default {
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);
-        if (e.message === 'defaultPermission-not-found') {
-          throw new ValidationError('defaultPermission-not-found');
-        }
-        throw new ValidationError('bad-request');
+        throw new ValidationError(e);
+      }
+    },
+
+    getDefaultPermissionByRoleID: async (
+      root,
+      { role_id },
+      { models: { DefaultPermission }, ValidationError },
+    ) => {
+      try {
+        const defaultPermission = await DefaultPermission.query().where(
+          'role_id',
+          role_id,
+        );
+        return defaultPermission;
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error(e);
+        throw new ValidationError(e);
       }
     },
   },

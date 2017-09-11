@@ -94,16 +94,11 @@ function getUsersIDWithRoleID(role_id) {
 // them cac features mac dinh theo role_id cho user
 // eslint-disable-next-line camelcase
 function getPermissions(role_id, usersID, features) {
-  console.log(role_id);
-  console.log(usersID);
-  console.log(features);
-
   const result = [];
   // eslint-disable-next-line camelcase, array-callback-return
   usersID.map(user_id => {
     // eslint-disable-next-line camelcase, array-callback-return
     features.map(feature => {
-      // eslint-disable-next-line camelcase
       const { feature_id } = feature;
       const temp = {
         role_id,
@@ -126,9 +121,6 @@ function getAllPermissions() {
 
   // eslint-disable-next-line camelcase, array-callback-return
   rolesID.map(role_id => {
-    // console.log(role_id);
-    // console.log(getDefaultFeaturesWithRoleID(role_id));
-    // console.log('---------------');
     const temp = getPermissions(
       role_id,
       getUsersIDWithRoleID(role_id),

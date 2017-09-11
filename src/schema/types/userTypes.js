@@ -19,6 +19,9 @@ type User {
 
   # organizer detail
   organizerDetail: OrganizerDetail!
+
+  # permissions of users
+  permissions: [Permission!]!
 }
 
 enum Gender {
