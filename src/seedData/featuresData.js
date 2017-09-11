@@ -35,6 +35,12 @@ const features = [
   {
     name: 'delete news feed',
   },
+  {
+    name: 'upload document',
+  },
+  {
+    name: 'delete document',
+  },
 ];
 
 module.exports = features;

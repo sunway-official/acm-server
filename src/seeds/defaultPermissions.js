@@ -2,6 +2,7 @@ const {
   speaker,
   participant,
   organizer,
+  author,
 } = require('../seedData/defaultPermissionsData');
 
 // eslint-disable-next-line camelcase
@@ -25,6 +26,7 @@ function getAllData() {
   let result = [];
   result = getDefaultPermissions(participant.role_id, participant.features)
     .concat(getDefaultPermissions(speaker.role_id, speaker.features))
+    .concat(getDefaultPermissions(author.role_id, author.features))
     .concat(getDefaultPermissions(organizer.role_id, organizer.features));
 
   return result;
