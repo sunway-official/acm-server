@@ -68,26 +68,6 @@ export default {
         throw new ValidationError('bad-request');
       }
     },
-    getConferenceByUserID: async (
-      root,
-      { user_id },
-      { models: { Conference }, ValidationError },
-    ) => {
-      try {
-        const conference = await Conference.query().where('user_id', user_id);
-        if (!conference) {
-          throw new ValidationError('conference-not-found');
-        }
-        return conference;
-      } catch (e) {
-        // eslint-disable-next-line no-console
-        console.error(e);
-        if (e.message === 'conference-not-found') {
-          throw new ValidationError('conference-not-found');
-        }
-        throw new ValidationError('bad-request');
-      }
-    },
     getConferenceByOrganizerDetailID: async (
       root,
       { organizer_id },
