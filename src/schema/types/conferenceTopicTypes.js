@@ -18,10 +18,14 @@ extend type Query {
   getConferenceTopicByID(id: ID!): ConferenceTopic!
 
   # Get ConferenceTopic by Conference ID
-  getConferenceTopicByConfID(id: ID!): ConferenceTopic!
+  getConferenceTopicByConfID(conference_id: ID!): [ConferenceTopic!]!
 
   # Get ConferenceTopic by Topic ID
-  getConferenceTopicByTopicID(id: ID!): ConferenceTopic!
+  getConferenceTopicByTopicID(topic_id: ID!): [ConferenceTopic!]!
+
+  # Get ConferenceTopic by Topic ID
+  getConferenceTopicByTopicIDConfID(topic_id: ID!, conference_id: ID!): [ConferenceTopic!]!
+
 }
 
 extend type Mutation {

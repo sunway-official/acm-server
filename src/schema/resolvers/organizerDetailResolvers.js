@@ -44,6 +44,29 @@ export default {
         throw new ValidationError('bad-request');
       }
     },
+    getOrganizerDetailByUserID: async (
+      root,
+      { user_id },
+      { models: { OrganizerDetail }, ValidationError },
+    ) => {
+      try {
+        const organizerDetail = await OrganizerDetail.query().where(
+          'user_id',
+          user_id,
+        );
+        if (!organizerDetail) {
+          throw new ValidationError('organizerDetail-not-found');
+        }
+        return organizerDetail;
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error(e);
+        if (e.message === 'organizerDetail-not-found') {
+          throw new ValidationError('organizerDetail-not-found');
+        }
+        throw new ValidationError('bad-request');
+      }
+    },
   },
   Mutation: {
     insertOrganizerDetail: async (

@@ -18,7 +18,7 @@ type User {
   updated_at: Date!
 
   # organizer detail
-  organizerDetail: OrganizerDetail!
+  organizerDetails: [OrganizerDetail!]!
 }
 
 enum Gender {

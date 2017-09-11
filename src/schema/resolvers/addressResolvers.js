@@ -1,6 +1,6 @@
 export default {
   Address: {
-    conference: async ({ id }, data, { models: { Conference } }) => {
+    conferences: async ({ id }, data, { models: { Conference } }) => {
       const conference = await Conference.query().where('address_id', id);
       return conference;
     },

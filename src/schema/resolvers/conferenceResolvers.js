@@ -67,7 +67,7 @@ export default {
       { models: { Conference }, ValidationError },
     ) => {
       try {
-        const conference = await Conference.query().findById(user_id);
+        const conference = await Conference.query().where('user_id', user_id);
         if (!conference) {
           throw new ValidationError('conference-not-found');
         }
@@ -87,7 +87,10 @@ export default {
       { models: { Conference }, ValidationError },
     ) => {
       try {
-        const conference = await Conference.query().findById(organizer_id);
+        const conference = await Conference.query().wher(
+          'organizer_id',
+          organizer_id,
+        );
         if (!conference) {
           throw new ValidationError('conference-not-found');
         }
@@ -107,7 +110,10 @@ export default {
       { models: { Conference }, ValidationError },
     ) => {
       try {
-        const conference = await Conference.query().findById(address_id);
+        const conference = await Conference.query().where(
+          'address_id',
+          address_id,
+        );
         if (!conference) {
           throw new ValidationError('conference-not-found');
         }

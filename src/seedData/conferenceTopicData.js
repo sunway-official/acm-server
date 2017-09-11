@@ -16,6 +16,19 @@ const conferenceTopics = [
     topic_id: '4',
   },
   {
+    conference_id: '2',
+    topic_id: '1',
+  },
+  {
+    conference_id: '2',
+    topic_id: '2',
+  },
+  {
+    conference_id: '2',
+    topic_id: '4',
+  },
+
+  {
     conference_id: '3',
     topic_id: '5',
   },

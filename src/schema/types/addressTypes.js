@@ -4,7 +4,7 @@ type Address {
   id: ID!
 
   # conference
-  conference: [Conference!]!
+  conferences: [Conference!]!
 
   # street Address
   street: String!
