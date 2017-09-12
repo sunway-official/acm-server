@@ -4,6 +4,10 @@ export default {
       const user = await User.query().findById(user_id);
       return user;
     },
+    conference: async ({ id }, data, { models: { Conference } }) => {
+      const conference = await Conference.query().where('conference_id', id);
+      return conference;
+    },
   },
   Query: {
     getAllOrganizerDetails: async (
@@ -27,6 +31,29 @@ export default {
     ) => {
       try {
         const organizerDetail = await OrganizerDetail.query().findById(id);
+        if (!organizerDetail) {
+          throw new ValidationError('organizerDetail-not-found');
+        }
+        return organizerDetail;
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error(e);
+        if (e.message === 'organizerDetail-not-found') {
+          throw new ValidationError('organizerDetail-not-found');
+        }
+        throw new ValidationError('bad-request');
+      }
+    },
+    getOrganizerDetailByUserID: async (
+      root,
+      { user_id },
+      { models: { OrganizerDetail }, ValidationError },
+    ) => {
+      try {
+        const organizerDetail = await OrganizerDetail.query().where(
+          'user_id',
+          user_id,
+        );
         if (!organizerDetail) {
           throw new ValidationError('organizerDetail-not-found');
         }
@@ -86,9 +113,13 @@ export default {
     deleteOrganizerDetail: async (
       root,
       { id },
-      { models: { OrganizerDetail }, ValidationError },
+      { models: { OrganizerDetail, Conference }, ValidationError },
     ) => {
       try {
+        // delete coference with address_id
+        await Conference.query()
+          .delete()
+          .where('organizer_id', id);
         const organizerDetail = await OrganizerDetail.query().findById(id);
         await OrganizerDetail.query().deleteById(id);
         return organizerDetail;

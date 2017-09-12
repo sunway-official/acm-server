@@ -1,0 +1,68 @@
+const organizerDetails = [
+  {
+    user_id: '1',
+    name: 'Dai hoc Duy tan, Khoa Dao tao Quoc te',
+    email: 'kdtqt@dtu.edu.vn',
+    address: '182 Nguyen Van Linh, Da Nang',
+    website: 'kdtqt.edu.vn',
+    phone: '012435678954',
+  },
+  {
+    user_id: '2',
+    name: 'Dai hoc Duy tan, Khoa Du lich',
+    email: 'kdulich@dtu.edu.vn',
+    address: '182 Nguyen Van Linh, Da Nang',
+    website: 'kdulich.edu.vn',
+    phone: '01452789533',
+  },
+  {
+    user_id: '3',
+    name: 'Dai hoc Duy tan, Khoa Bao chi',
+    email: 'kbaochi@dtu.edu.vn',
+    address: '182 Nguyen Van Linh, Da Nang',
+    website: 'kbaochi.edu.vn',
+    phone: '0124895763',
+  },
+  {
+    user_id: '4',
+    name: 'Dai hoc Duy tan, Khoa Ly luan chinh tri',
+    email: 'klyluanchinhtri@dtu.edu.vn',
+    address: '182 Nguyen Van Linh, Da Nang',
+    website: 'klyluanchinhtri.edu.vn',
+    phone: '0124895763',
+  },
+  {
+    user_id: '2',
+    name: 'Dai hoc Duy tan, Khoa Xay Dung',
+    email: 'kxaydung@dtu.edu.vn',
+    address: '182 Nguyen Van Linh, Da Nang',
+    website: 'kxaydung.edu.vn',
+    phone: '0124895763',
+  },
+  {
+    user_id: '3',
+    name: 'Dai hoc Duy tan, Khoa Kien truc',
+    email: 'kkientruc@dtu.edu.vn',
+    address: '182 Nguyen Van Linh, Da Nang',
+    website: 'kkientruc.edu.vn',
+    phone: '0124895763',
+  },
+  {
+    user_id: '1',
+    name: 'Dai hoc Duy tan, Khoa Ngoai ngu',
+    email: 'kngoaingu@dtu.edu.vn',
+    address: '182 Nguyen Van Linh, Da Nang',
+    website: 'kngoaingu.edu.vn',
+    phone: '0124895763',
+  },
+  {
+    user_id: '2',
+    name: 'Dai hoc Duy tan, Khoa Quan tri kinh doanh',
+    email: 'kquantrikinhdoanh@dtu.edu.vn',
+    address: '182 Nguyen Van Linh, Da Nang',
+    website: 'kquantrikinhdoanh.edu.vn',
+    phone: '0124895763',
+  },
+];
+
+module.exports = organizerDetails;

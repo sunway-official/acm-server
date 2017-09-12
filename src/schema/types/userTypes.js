@@ -17,11 +17,14 @@ type User {
   # Document updated_at timestamp
   updated_at: Date!
 
-  # organizer detail
-  organizerDetail: OrganizerDetail!
 
   # permissions of users
   permissions: [Permission!]!
+  # Organizer detail
+  organizerDetails: [OrganizerDetail!]!
+
+  # Conference Attendees
+  conferenceAttendees:[ConferenceAttendee!]!
 }
 
 enum Gender {

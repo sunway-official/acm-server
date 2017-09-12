@@ -1,22 +1,28 @@
 import jwt from 'jsonwebtoken';
 
 export default {
-  // OrganizerDetail: {
-  //   user: async (
-  //     { organizerDetail_id },
-  //     data,
-  //     { models: { OrganizerDetail } },
-  //   ) => {
-  //     const organizerDetail = await OrganizerDetail.query().findById(
-  //       organizerDetail_id,
-  //     );
-  //     return organizerDetail;
-  //   },
-  // },
   User: {
     permissions: async ({ id }, data, { models: { Permission } }) => {
       const permissions = Permission.query().where('user_id', id);
       return permissions;
+    },
+    organizerDetails: async ({ id }, data, { models: { OrganizerDetail } }) => {
+      const organizerDetail = await OrganizerDetail.query().where(
+        'user_id',
+        id,
+      );
+      return organizerDetail;
+    },
+    conferenceAttendees: async (
+      { id },
+      data,
+      { models: { ConferenceAttendee } },
+    ) => {
+      const conferenceAttendees = await ConferenceAttendee.query().where(
+        'user_id',
+        id,
+      );
+      return conferenceAttendees;
     },
   },
   Query: {

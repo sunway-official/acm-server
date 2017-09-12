@@ -2,6 +2,7 @@ export default `
   type Role {
     # The ID of role
     id: ID!
+
     # role name
     name: String!
 

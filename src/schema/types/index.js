@@ -5,6 +5,11 @@ import defaultPermissionTypes from './defaultPermissionTypes';
 import organizerDetailTypes from './organizerDetailTypes';
 import globalTypes from './globalTypes';
 import permissionTypes from './permissionTypes';
+import conferenceTypes from './conferenceTypes';
+import addressTypes from './addressTypes';
+import topicTypes from './topicTypes';
+import conferenceTopicTypes from './conferenceTopicTypes';
+import conferenceAttendeeTypes from './conferenceAttendeeTypes';
 
 export default [
   userTypes,
@@ -14,4 +19,9 @@ export default [
   defaultPermissionTypes,
   permissionTypes,
   organizerDetailTypes,
+  conferenceTypes,
+  addressTypes,
+  topicTypes,
+  conferenceTopicTypes,
+  conferenceAttendeeTypes,
 ];
