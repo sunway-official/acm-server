@@ -119,7 +119,7 @@ export default {
         // delete coference with address_id
         await Conference.query()
           .delete()
-          .where('address_id', id);
+          .where('organizer_id', id);
         const organizerDetail = await OrganizerDetail.query().findById(id);
         await OrganizerDetail.query().deleteById(id);
         return organizerDetail;

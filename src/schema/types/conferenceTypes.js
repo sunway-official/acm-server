@@ -60,13 +60,13 @@ extend type Mutation {
   # Update Conference info by id
   updateConference(
     id: ID!,
-    title: String!,
-    description: String!,
-    start_date: Date!,
-    end_date: Date!,
-    bg_image: String!,
-    organizer_id: ID!,
-    address_id:ID!,
+    title: String,
+    description: String,
+    start_date: Date,
+    end_date: Date,
+    bg_image: String,
+    organizer_id: ID,
+    address_id: ID,
   ): Conference!
 
   # Delete Conference by id

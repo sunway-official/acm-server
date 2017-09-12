@@ -92,28 +92,6 @@ export default {
         throw new ValidationError('bad-request');
       }
     },
-    getConfAttendByConfIDUserID: async (
-      root,
-      { user_id, conference_id },
-      { models: { ConferenceAttendee }, ValidationError },
-    ) => {
-      try {
-        const conferenceAttendee = await ConferenceAttendee.query()
-          .where('user_id', user_id)
-          .where('conference_id', conference_id);
-        if (!conferenceAttendee) {
-          throw new ValidationError('conferenceAttendee-not-found');
-        }
-        return conferenceAttendee;
-      } catch (e) {
-        // eslint-disable-next-line no-console
-        console.error(e);
-        if (e.message === 'conferenceAttendee-not-found') {
-          throw new ValidationError('conferenceAttendee-not-found');
-        }
-        throw new ValidationError('bad-request');
-      }
-    },
   },
   Mutation: {
     insertConferenceAttendee: async (

@@ -90,28 +90,6 @@ export default {
         throw new ValidationError('bad-request');
       }
     },
-    getConferenceTopicByTopicIDConfID: async (
-      root,
-      { topic_id, conference_id },
-      { models: { ConferenceTopic }, ValidationError },
-    ) => {
-      try {
-        const conferenceTopic = await ConferenceTopic.query()
-          .where('topic_id', topic_id)
-          .where('conference_id', conference_id);
-        if (!conferenceTopic) {
-          throw new ValidationError('conferenceTopic-not-found');
-        }
-        return conferenceTopic;
-      } catch (e) {
-        // eslint-disable-next-line no-console
-        console.error(e);
-        if (e.message === 'conferenceTopic-not-found') {
-          throw new ValidationError('conferenceTopic-not-found');
-        }
-        throw new ValidationError('bad-request');
-      }
-    },
   },
   Mutation: {
     insertConferenceTopic: async (

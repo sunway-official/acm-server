@@ -119,19 +119,9 @@ export default {
     insertConference: async (
       root,
       data,
-      { models: { Conference, User, OrganizerDetail }, ValidationError },
+      { models: { Conference }, ValidationError },
     ) => {
       try {
-        const userIdInsert = await User.query().findById(data.user_id);
-        if (!userIdInsert) {
-          throw new ValidationError('user-not-exist');
-        }
-        const OrganizerDetailIdInsert = await OrganizerDetail.query().findById(
-          data.organizer_id,
-        );
-        if (!OrganizerDetailIdInsert) {
-          throw new ValidationError('OrganizerDetail-not-exist');
-        }
         const conference = await Conference.query().insert(data);
         return conference;
       } catch (e) {
@@ -143,23 +133,9 @@ export default {
     updateConference: async (
       root,
       data,
-      { models: { Conference, User, OrganizerDetail }, ValidationError },
+      { models: { Conference }, ValidationError },
     ) => {
       try {
-        if (data.user_id != null) {
-          const userIdInsert = await User.query().findById(data.user_id);
-          if (!userIdInsert) {
-            throw new ValidationError('user-not-exist');
-          }
-        }
-        if (data.organizer_id != null) {
-          const organizerDetailIdInsert = await OrganizerDetail.query().findById(
-            data.organizer_id,
-          );
-          if (!organizerDetailIdInsert) {
-            throw new ValidationError('user-not-exist');
-          }
-        }
         const updateConference = await Conference.query().updateAndFetchById(
           data.id,
           data,

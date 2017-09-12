@@ -23,9 +23,6 @@ extend type Query {
   # Get ConferenceAttendee by User ID
   getConferenceAttendeeByUserID(user_id: ID!): [ConferenceAttendee!]!
 
-  # Get ConferenceAttendee by Conference ID and User ID
-  getConfAttendByConfIDUserID(user_id: ID!, conference_id: ID!): [ConferenceAttendee!]!
-
 }
 
 extend type Mutation {
