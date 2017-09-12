@@ -13,6 +13,7 @@ export default class DefaultPermission extends Model {
   };
 
   async $beforeValidate(opt) {
+    this.id = parseInt(opt.old.id, 10);
     this.role_id = parseInt(opt.old.role_id, 10);
     this.feature_id = parseInt(opt.old.feature_id, 10);
   }
