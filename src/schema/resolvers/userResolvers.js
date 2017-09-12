@@ -1,16 +1,24 @@
 import jwt from 'jsonwebtoken';
 
 export default {
-  OrganizerDetail: {
-    user: async (
-      { organizerDetail_id },
-      data,
-      { models: { OrganizerDetail } },
-    ) => {
-      const organizerDetail = await OrganizerDetail.query().findById(
-        organizerDetail_id,
+  User: {
+    organizerDetails: async ({ id }, data, { models: { OrganizerDetail } }) => {
+      const organizerDetail = await OrganizerDetail.query().where(
+        'user_id',
+        id,
       );
       return organizerDetail;
+    },
+    conferenceAttendees: async (
+      { id },
+      data,
+      { models: { ConferenceAttendee } },
+    ) => {
+      const conferenceAttendees = await ConferenceAttendee.query().where(
+        'user_id',
+        id,
+      );
+      return conferenceAttendees;
     },
   },
   Query: {

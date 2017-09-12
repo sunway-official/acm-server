@@ -20,6 +20,9 @@ type OrganizerDetail {
 
   # Organizer phone
   phone: String!
+
+  # conference
+  conference: [Conference!]!
 }
 
 extend type Query {
@@ -28,6 +31,9 @@ extend type Query {
 
   # Get OrganizerDetail by ID
   getOrganizerDetailByID(id: ID!): OrganizerDetail!
+
+  # Get OrganizerDetail by user ID
+  getOrganizerDetailByUserID(user_id: ID!): OrganizerDetail!
 }
 
 extend type Mutation {
