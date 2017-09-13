@@ -9,6 +9,19 @@ export default {
       const conference = await Conference.query().findById(conference_id);
       return conference;
     },
+
+    newsPhotos: async ({ id }, data, { models: { NewsPhoto } }) => {
+      const newsPhotos = await NewsPhoto.query().where('news_id', id);
+      return newsPhotos;
+    },
+    newsLikes: async ({ id }, data, { models: { NewsLike } }) => {
+      const newsPhotos = await NewsLike.query().where('news_id', id);
+      return newsPhotos;
+    },
+    newsComments: async ({ id }, data, { models: { NewsComment } }) => {
+      const newsComments = await NewsComment.query().where('news_id', id);
+      return newsComments;
+    },
   },
   Query: {
     getAllNews: async (root, data, { models: { News }, ValidationError }) => {

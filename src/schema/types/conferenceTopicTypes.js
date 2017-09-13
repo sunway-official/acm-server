@@ -30,7 +30,7 @@ extend type Mutation {
   insertConferenceTopic( conference_id: ID!, topic_id: ID!): ConferenceTopic!
 
   # Update ConferenceTopic info by id
-  updateConferenceTopic(id:ID!, conference_id: ID, topic_id: ID): ConferenceTopic!
+  updateConferenceTopic(id:ID!, topic_id: ID): ConferenceTopic!
 
   # Delete ConferenceTopic by id
   deleteConferenceTopic(id: ID!): ConferenceTopic!

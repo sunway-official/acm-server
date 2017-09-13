@@ -10,6 +10,9 @@ import Topic from './topic';
 import ConferenceTopic from './conferenceTopic';
 import ConferenceAttendee from './conferenceAttendee';
 import News from './news';
+import NewsPhoto from './newsPhoto';
+import NewsLike from './newsLike';
+import NewsComment from './newsComment';
 
 const models = {
   User,
@@ -24,6 +27,9 @@ const models = {
   ConferenceTopic,
   ConferenceAttendee,
   News,
+  NewsPhoto,
+  NewsLike,
+  NewsComment,
 };
 
 export default models;

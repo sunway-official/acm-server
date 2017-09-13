@@ -18,6 +18,15 @@ type News {
   # Document updated_at timestamp
   updated_at: Date!
 
+  # news photos
+  newsPhotos: [NewsPhoto!]!
+
+  # news likes
+  newsLikes: [NewsLike!]!
+
+  # news comments
+  newsComments: [NewsComment!]!
+
 }
 
 extend type Query {

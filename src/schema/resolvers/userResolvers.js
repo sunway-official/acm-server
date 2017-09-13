@@ -24,6 +24,18 @@ export default {
       const news = await News.query().where('user_id', id);
       return news;
     },
+    newsPhotos: async ({ id }, data, { models: { NewsPhoto } }) => {
+      const newsPhotos = await NewsPhoto.query().where('news_id', id);
+      return newsPhotos;
+    },
+    newsLikes: async ({ id }, data, { models: { NewsLike } }) => {
+      const newsPhotos = await NewsLike.query().where('news_id', id);
+      return newsPhotos;
+    },
+    newsComments: async ({ id }, data, { models: { NewsComment } }) => {
+      const newsComments = await NewsComment.query().where('news_id', id);
+      return newsComments;
+    },
   },
   Query: {
     getAllUsers: async (root, data, { models: { User }, ValidationError }) => {

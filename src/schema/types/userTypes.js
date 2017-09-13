@@ -25,6 +25,15 @@ type User {
 
   # News
   news: [News!]!
+
+  # news photos
+  newsPhotos: [NewsPhoto!]!
+
+  # news likes
+  newsLikes: [NewsLike!]!
+
+  # news comments
+  newsComments: [NewsComment!]!
 }
 
 enum Gender {

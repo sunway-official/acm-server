@@ -1,5 +1,5 @@
-const users = require('../seedData/userData');
-// const users = [];
+// const users = require('../seedData/userData');
+const users = [];
 
 // eslint-disable-next-line func-names, no-unused-vars
 exports.seed = function(knex, Promise) {
