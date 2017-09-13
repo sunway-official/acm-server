@@ -1,18 +1,22 @@
 export default {
   Conference: {
     organizerDetail: async (
-      { organizer_id },
+      { organizer_detail_id },
       data,
       { models: { OrganizerDetail } },
     ) => {
       const organizerDetail = await OrganizerDetail.query().findById(
-        organizer_id,
+        organizer_detail_id,
       );
       return organizerDetail;
     },
     address: async ({ address_id }, data, { models: { Address } }) => {
       const address = await Address.query().findById(address_id);
       return address;
+    },
+    user: async ({ user_id }, data, { models: { User } }) => {
+      const user = await User.query().findById(user_id);
+      return user;
     },
     conferenceTopics: async ({ id }, data, { models: { ConferenceTopic } }) => {
       const conferenceTopic = await ConferenceTopic.query().where(
@@ -74,13 +78,13 @@ export default {
     },
     getConferenceByOrganizerDetailID: async (
       root,
-      { organizer_id },
+      { organizer_detail_id },
       { models: { Conference }, ValidationError },
     ) => {
       try {
         const conference = await Conference.query().wher(
-          'organizer_id',
-          organizer_id,
+          'organizer_detail_id',
+          organizer_detail_id,
         );
         if (!conference) {
           throw new ValidationError('conference-not-found');
@@ -105,6 +109,92 @@ export default {
           'address_id',
           address_id,
         );
+        if (!conference) {
+          throw new ValidationError('conference-not-found');
+        }
+        return conference;
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error(e);
+        if (e.message === 'conference-not-found') {
+          throw new ValidationError('conference-not-found');
+        }
+        throw new ValidationError('bad-request');
+      }
+    },
+    getConferenceByUserID: async (
+      root,
+      { user_id },
+      { models: { Conference }, ValidationError },
+    ) => {
+      try {
+        const conference = await Conference.query().where('user_id', user_id);
+        if (!conference) {
+          throw new ValidationError('conference-not-found');
+        }
+        return conference;
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error(e);
+        if (e.message === 'conference-not-found') {
+          throw new ValidationError('conference-not-found');
+        }
+        throw new ValidationError('bad-request');
+      }
+    },
+    getConferenceByUserIDOrganizerDetailID: async (
+      root,
+      { user_id, organizer_detail_id },
+      { models: { Conference }, ValidationError },
+    ) => {
+      try {
+        const conference = await Conference.query()
+          .where('user_id', user_id)
+          .where('organizer_detail_id', organizer_detail_id);
+        if (!conference) {
+          throw new ValidationError('conference-not-found');
+        }
+        return conference;
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error(e);
+        if (e.message === 'conference-not-found') {
+          throw new ValidationError('conference-not-found');
+        }
+        throw new ValidationError('bad-request');
+      }
+    },
+    getConferenceByAddressIDOrganizerDetailID: async (
+      root,
+      { address_id, organizer_detail_id },
+      { models: { Conference }, ValidationError },
+    ) => {
+      try {
+        const conference = await Conference.query()
+          .where('address_id', address_id)
+          .where('organizer_detail_id', organizer_detail_id);
+        if (!conference) {
+          throw new ValidationError('conference-not-found');
+        }
+        return conference;
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error(e);
+        if (e.message === 'conference-not-found') {
+          throw new ValidationError('conference-not-found');
+        }
+        throw new ValidationError('bad-request');
+      }
+    },
+    getConferenceByAddressIDUserID: async (
+      root,
+      { address_id, user_id },
+      { models: { Conference }, ValidationError },
+    ) => {
+      try {
+        const conference = await Conference.query()
+          .where('address_id', address_id)
+          .where('user_id', user_id);
         if (!conference) {
           throw new ValidationError('conference-not-found');
         }

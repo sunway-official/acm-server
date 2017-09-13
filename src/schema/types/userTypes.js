@@ -23,6 +23,9 @@ type User {
   # Conference Attendees
   conferenceAttendees:[ConferenceAttendee!]!
 
+  # conference
+  conferences: [Conference!]!
+
   # News
   news: [News!]!
 

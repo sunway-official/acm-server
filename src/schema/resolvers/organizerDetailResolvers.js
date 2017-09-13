@@ -4,9 +4,12 @@ export default {
       const user = await User.query().findById(user_id);
       return user;
     },
-    conference: async ({ id }, data, { models: { Conference } }) => {
-      const conference = await Conference.query().where('conference_id', id);
-      return conference;
+    conferences: async ({ id }, data, { models: { Conference } }) => {
+      const conferences = await Conference.query().where(
+        'organizer_detail_id',
+        id,
+      );
+      return conferences;
     },
   },
   Query: {
@@ -118,13 +121,13 @@ export default {
       try {
         // delete coference with organizer_id
         const organizerWithConfId = Conference.query().where(
-          'organizer_id',
+          'organizer_detail_id',
           id,
         );
         if (organizerWithConfId) {
           await Conference.query()
             .delete()
-            .where('organizer_id', id);
+            .where('organizer_detail_id', id);
         }
         const organizerDetail = await OrganizerDetail.query().findById(id);
         await OrganizerDetail.query().deleteById(id);

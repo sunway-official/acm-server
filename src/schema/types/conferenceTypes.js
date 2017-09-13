@@ -9,6 +9,9 @@ type Conference {
   # Address id
   address: Address!
 
+  # Id of person who creates the conference
+  user: User!
+
   # Conference Topic ID
   conferenceTopics:[ConferenceTopic!]!
 
@@ -42,34 +45,48 @@ extend type Query {
   getConferenceByID(id: ID!): Conference!
 
   # Get Conference by OrganizerDetail ID
-  getConferenceByOrganizerDetailID(organizerDetail_id: ID!): [Conference!]!
+  getConferenceByOrganizerDetailID( organizerDetail_id: ID!): [Conference!]!
 
   # Get Conference by Address ID
-  getConferenceByAddressID(address_id: ID!): Conference!
+  getConferenceByAddressID( address_id: ID!): [Conference!]!
+
+  # Get Conference by User ID
+  getConferenceByUserID( user_id: ID! ): [Conference!]!
+
+  # Get Conference by User ID and organizer detail
+  getConferenceByUserIDOrganizerDetailID( user_id: ID!, organizerDetail_id: ID! ): Conference!
+
+  # Get Conference by Address ID and organizer detail
+  getConferenceByAddressIDOrganizerDetailID( address_id: ID!, organizerDetail_id: ID! ): Conference!
+
+  # Get Conference by Address ID and user detail
+  getConferenceByAddressIDUserID( address_id: ID!, user_id: ID! ): Conference!
 }
 
 extend type Mutation {
   # Insert new Conference
   insertConference(
+    organizer_id: ID!,
+    address_id: ID!,
+    user_id: ID!,
     title: String!,
     description: String!,
     start_date: Date!,
     end_date: Date!,
     bg_image: String!,
-    organizer_id: ID!,
-    address_id:ID!,
   ): Conference!
 
   # Update Conference info by id
   updateConference(
     id: ID!,
+    organizer_id: ID,
+    address_id: ID,
+    user_id: ID,
     title: String,
     description: String,
     start_date: Date,
     end_date: Date,
     bg_image: String,
-    organizer_id: ID,
-    address_id: ID,
   ): Conference!
 
   # Delete Conference by id

@@ -17,12 +17,6 @@ extend type Query {
   # Get ConferenceTopic by ID
   getConferenceTopicByID(id: ID!): ConferenceTopic!
 
-  # Get ConferenceTopic by Conference ID
-  getConferenceTopicByConfID(conference_id: ID!): [ConferenceTopic!]!
-
-  # Get ConferenceTopic by Topic ID
-  getConferenceTopicByTopicID(topic_id: ID!): [ConferenceTopic!]!
-
 }
 
 extend type Mutation {

@@ -24,11 +24,6 @@ extend type Query {
   # Get NewsLike by ID
   getNewsLikeByID(id: ID!): NewsLike!
 
-  # Get NewsLike by news ID
-  getNewsLikeByNewsID(news_id: ID!): [NewsLike!]!
-
-  # Get NewsLike by user ID
-  getNewsLikeByUserID(user_id: ID!): [NewsLike!]!
 }
 
 extend type Mutation {

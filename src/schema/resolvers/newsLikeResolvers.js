@@ -44,46 +44,6 @@ export default {
         throw new ValidationError('bad-request');
       }
     },
-    getNewsLikeByNewsID: async (
-      root,
-      { news_id },
-      { models: { NewsLike }, ValidationError },
-    ) => {
-      try {
-        const newsLike = await NewsLike.query().where('news_id', news_id);
-        if (!newsLike) {
-          throw new ValidationError('newsLike-not-found');
-        }
-        return newsLike;
-      } catch (e) {
-        // eslint-disable-next-line no-console
-        console.error(e);
-        if (e.message === 'newsLike-not-found') {
-          throw new ValidationError('newsLike-not-found');
-        }
-        throw new ValidationError(e);
-      }
-    },
-    getNewsLikeByUserID: async (
-      root,
-      { user_id },
-      { models: { NewsLike }, ValidationError },
-    ) => {
-      try {
-        const newsLike = await NewsLike.query().where('user_id', user_id);
-        if (!newsLike) {
-          throw new ValidationError('newsLike-not-found');
-        }
-        return newsLike;
-      } catch (e) {
-        // eslint-disable-next-line no-console
-        console.error(e);
-        if (e.message === 'newsLike-not-found') {
-          throw new ValidationError('newsLike-not-found');
-        }
-        throw new ValidationError('bad-request');
-      }
-    },
   },
   Mutation: {
     insertNewsLike: async (
