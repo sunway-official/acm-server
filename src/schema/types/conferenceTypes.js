@@ -15,6 +15,9 @@ type Conference {
   # Conference Attendees ID
   conferenceAttendees:[ConferenceAttendee!]!
 
+  # Conference news
+  news:[News!]!
+
   # Conference title
   title: String!
 

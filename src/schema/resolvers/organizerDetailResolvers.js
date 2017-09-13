@@ -116,10 +116,16 @@ export default {
       { models: { OrganizerDetail, Conference }, ValidationError },
     ) => {
       try {
-        // delete coference with address_id
-        await Conference.query()
-          .delete()
-          .where('organizer_id', id);
+        // delete coference with organizer_id
+        const organizerWithConfId = Conference.query().where(
+          'organizer_id',
+          id,
+        );
+        if (organizerWithConfId) {
+          await Conference.query()
+            .delete()
+            .where('organizer_id', id);
+        }
         const organizerDetail = await OrganizerDetail.query().findById(id);
         await OrganizerDetail.query().deleteById(id);
         return organizerDetail;

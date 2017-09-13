@@ -75,9 +75,15 @@ export default {
     ) => {
       try {
         // delete ConferenceTopic with topic_id
-        await ConferenceTopic.query()
-          .delete()
-          .where('topic_id', id);
+        const confTopicWithTopicId = ConferenceTopic.query().where(
+          'topic_id',
+          id,
+        );
+        if (confTopicWithTopicId) {
+          await ConferenceTopic.query()
+            .delete()
+            .where('topic_id', id);
+        }
         const topic = await Topic.query().findById(id);
         await Topic.query().deleteById(id);
         return topic;

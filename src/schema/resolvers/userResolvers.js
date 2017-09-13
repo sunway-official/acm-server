@@ -20,6 +20,10 @@ export default {
       );
       return conferenceAttendees;
     },
+    news: async ({ id }, data, { models: { News } }) => {
+      const news = await News.query().where('user_id', id);
+      return news;
+    },
   },
   Query: {
     getAllUsers: async (root, data, { models: { User }, ValidationError }) => {

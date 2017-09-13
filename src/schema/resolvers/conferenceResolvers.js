@@ -32,6 +32,10 @@ export default {
       );
       return conferenceTopic;
     },
+    news: async ({ id }, data, { models: { News } }) => {
+      const news = await News.query().where('conference_id', id);
+      return news;
+    },
   },
   Query: {
     getAllConferences: async (
@@ -151,19 +155,36 @@ export default {
       root,
       { id },
       {
-        models: { Conference, ConferenceTopic, ConferenceAttendee },
+        models: { Conference, ConferenceTopic, ConferenceAttendee, News },
         ValidationError,
       },
     ) => {
       try {
-        // delete ConferenceTopic with conference_id_id
-        await ConferenceTopic.query()
-          .delete()
-          .where('conference_id', id);
+        // delete ConferenceTopic with conference_id
+        const confTopicWithConfId = Conference.query().where('address_id', id);
+        if (confTopicWithConfId) {
+          await ConferenceTopic.query()
+            .delete()
+            .where('conference_id', id);
+        }
         // delete ConferenceAttendee with conference_id
-        await ConferenceAttendee.query()
-          .delete()
-          .where('conference_id', id);
+        const confAttenWithConfId = ConferenceAttendee.query().where(
+          'conference_id',
+          id,
+        );
+        if (confAttenWithConfId) {
+          await ConferenceAttendee.query()
+            .delete()
+            .where('conference_id', id);
+        }
+        // delete News with conference_id
+        const newsWithConfId = News.query().where('conference_id', id);
+        if (newsWithConfId) {
+          await News.query()
+            .delete()
+            .where('conference_id', id);
+        }
+
         const conference = await Conference.query().findById(id);
         await Conference.query().deleteById(id);
         return conference;

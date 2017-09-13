@@ -24,4 +24,9 @@ export default class Conference extends Model {
     this.start_date = new Date().toISOString();
     this.end_date = new Date().toISOString();
   }
+
+  async $beforeUpdate() {
+    this.start_date = new Date().toISOString();
+    this.end_date = new Date().toISOString();
+  }
 }

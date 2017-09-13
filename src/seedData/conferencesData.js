@@ -4,7 +4,7 @@ const conferences = [
     description:
       'International Conference on Recent Advances on Signal Processing, Telecommunications & Computing',
     start_date: '2017-01-09 09:20',
-    end_date: '2017-01-011 09:20',
+    end_date: '2017-01-11 09:20',
     bg_image: 'HoinghiquocteSigTelCom2017.png',
     organizer_id: '1',
     address_id: '1',

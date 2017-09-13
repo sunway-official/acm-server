@@ -22,6 +22,9 @@ type User {
 
   # Conference Attendees
   conferenceAttendees:[ConferenceAttendee!]!
+
+  # News
+  news: [News!]!
 }
 
 enum Gender {

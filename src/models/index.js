@@ -9,6 +9,7 @@ import Address from './address';
 import Topic from './topic';
 import ConferenceTopic from './conferenceTopic';
 import ConferenceAttendee from './conferenceAttendee';
+import News from './news';
 
 const models = {
   User,
@@ -22,6 +23,7 @@ const models = {
   Topic,
   ConferenceTopic,
   ConferenceAttendee,
+  News,
 };
 
 export default models;
