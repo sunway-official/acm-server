@@ -87,14 +87,26 @@ export default {
     ) => {
       try {
         // delete permission with feature_id
-        await Permission.query()
-          .delete()
-          .where('feature_id', id);
+        const permissionWithFeatureID = Permission.query().where(
+          'feature_id',
+          id,
+        );
+        if (permissionWithFeatureID) {
+          await Permission.query()
+            .delete()
+            .where('feature_id', id);
+        }
 
         // delete default permission with feature_id
-        await DefaultPermission.query()
-          .delete()
-          .where('feature_id', id);
+        const defaultPermissionWithFeatureID = DefaultPermission.query().where(
+          'feature_id',
+          id,
+        );
+        if (defaultPermissionWithFeatureID) {
+          await DefaultPermission.query()
+            .delete()
+            .where('feature_id', id);
+        }
 
         const feature = await Feature.query().findById(id);
         await Feature.query().deleteById(id);

@@ -3,7 +3,7 @@ exports.up = function(knex, Promise) {
   return Promise.all([
     knex.schema.createTable('activity_types', table => {
       table.increments('id').primary();
-      table.string('type');
+      table.string('name');
     }),
   ]);
 };

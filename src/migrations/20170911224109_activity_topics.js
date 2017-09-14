@@ -1,7 +1,7 @@
 // eslint-disable-next-line func-names
 exports.up = function(knex, Promise) {
   return Promise.all([
-    knex.schema.createTable('activity_topic', table => {
+    knex.schema.createTable('activity_topics', table => {
       table.increments('id').primary();
       table
         .integer('activity_id')
@@ -17,5 +17,5 @@ exports.up = function(knex, Promise) {
 
 // eslint-disable-next-line func-names
 exports.down = function(knex, Promise) {
-  return Promise.all([knex.schema.dropTable('activity_topic')]);
+  return Promise.all([knex.schema.dropTable('activity_topics')]);
 };

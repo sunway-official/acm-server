@@ -1,10 +1,9 @@
 import { Model } from 'objection';
 
-export default class Schedules extends Model {
+export default class Schedule extends Model {
   static tableName = 'schedules';
   static jsonSchema = {
     type: 'object',
-    description: 'All schedules',
     properties: {
       id: { type: 'integer' },
       activity_id: { type: 'integer' },

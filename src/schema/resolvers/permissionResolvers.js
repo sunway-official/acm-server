@@ -141,7 +141,6 @@ export default {
             user_id: user.id,
             user_name: `${user.firstname} ${user.lastname}`,
             feature_id: defaultPermission.feature_id,
-            status: 'on',
           };
 
           // eslint-disable-next-line no-await-in-loop
@@ -212,7 +211,6 @@ export default {
             user_id,
             user_name: `${user.firstname} ${user.lastname}`,
             feature_id: defaultPermission.feature_id,
-            status: 'on',
           };
           // insert permission
           // eslint-disable-next-line no-await-in-loop

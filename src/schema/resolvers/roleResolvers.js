@@ -11,6 +11,10 @@ export default {
       );
       return defaultPermissions;
     },
+    permissions: async ({ id }, data, { models: { Permission } }) => {
+      const defaultPermissions = await Permission.query().where('role_id', id);
+      return defaultPermissions;
+    },
   },
 
   Query: {
@@ -79,14 +83,23 @@ export default {
     ) => {
       try {
         // delete permission with role_id
-        await Permission.query()
-          .delete()
-          .where('role_id', id);
+        const permissionWithFeatureID = Permission.query().where('role_id', id);
+        if (permissionWithFeatureID) {
+          await Permission.query()
+            .delete()
+            .where('role_id', id);
+        }
 
-        // delete permission with role_id
-        await DefaultPermission.query()
-          .delete()
-          .where('role_id', id);
+        // delete default permission with role_id
+        const defaultPermissionWithFeatureID = DefaultPermission.query().where(
+          'role_id',
+          id,
+        );
+        if (defaultPermissionWithFeatureID) {
+          await DefaultPermission.query()
+            .delete()
+            .where('role_id', id);
+        }
         const role = await Role.query().findById(id);
         await Role.query().deleteById(id);
         return role;

@@ -42,24 +42,6 @@ export default {
         throw new ValidationError(e);
       }
     },
-
-    getDefaultPermissionByRoleID: async (
-      root,
-      { role_id },
-      { models: { DefaultPermission }, ValidationError },
-    ) => {
-      try {
-        const defaultPermission = await DefaultPermission.query().where(
-          'role_id',
-          role_id,
-        );
-        return defaultPermission;
-      } catch (e) {
-        // eslint-disable-next-line no-console
-        console.error(e);
-        throw new ValidationError(e);
-      }
-    },
   },
   Mutation: {
     insertDefaultPermission: async (

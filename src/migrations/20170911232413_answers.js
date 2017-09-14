@@ -12,7 +12,7 @@ exports.up = function(knex, Promise) {
         .unsigned()
         .notNullable();
       table.text('content');
-      table.timestamps();
+      table.timestamp('created_at').defaultTo(knex.fn.now());
     }),
   ]);
 };

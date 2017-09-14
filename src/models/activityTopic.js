@@ -1,7 +1,7 @@
 import { Model } from 'objection';
 
-export default class ActivityTopics extends Model {
-  static tableName = 'activity_topic';
+export default class ActivityTopic extends Model {
+  static tableName = 'activity_topics';
   static jsonSchema = {
     type: 'object',
     description: 'All topics of activity',

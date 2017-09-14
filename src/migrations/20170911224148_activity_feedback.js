@@ -13,7 +13,7 @@ exports.up = function(knex, Promise) {
         .notNullable();
       table.text('content');
       table.float('rating');
-      table.timestamps();
+      table.timestamp('created_at').defaultTo(knex.fn.now());
     }),
   ]);
 };

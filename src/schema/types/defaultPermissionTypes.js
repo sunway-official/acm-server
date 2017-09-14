@@ -18,7 +18,7 @@ extend type Query {
   getDefaultPermissionByID(id: ID!): DefaultPermission!
 
   # Get DefaulPermission by role_id
-  getDefaultPermissionByRoleID(role_id: ID!): [DefaultPermission!]!
+  # getDefaultPermissionByRoleID(role_id: ID!): [DefaultPermission!]!
 }
 
 extend type Mutation {

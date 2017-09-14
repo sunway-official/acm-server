@@ -8,11 +8,14 @@ exports.up = function(knex, Promise) {
         .unsigned()
         .notNullable();
       table
-        .integer('activity_id')
+        .integer('activity_type_id')
         .unsigned()
         .notNullable();
       table.string('title');
-      table.string('status');
+      table
+        .enu('status', ['on', 'off'])
+        .defaultTo('on')
+        .notNullable();
     }),
   ]);
 };

@@ -26,13 +26,11 @@ type User {
   # Conference Attendees
   conferenceAttendees:[ConferenceAttendee!]!
 }
-
 enum Gender {
   male
   female
   unknown
 }
-
 extend type Query {
   # Get information about all users
   getAllUsers: [User!]!

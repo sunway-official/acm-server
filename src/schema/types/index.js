@@ -10,6 +10,10 @@ import addressTypes from './addressTypes';
 import topicTypes from './topicTypes';
 import conferenceTopicTypes from './conferenceTopicTypes';
 import conferenceAttendeeTypes from './conferenceAttendeeTypes';
+import activityTypeTypes from './activityTypeTypes';
+import activityTypes from './activityTypes';
+import activityFeedbackTypes from './activityFeedbackTypes';
+import activityTopicTypes from './activityTopicTypes';
 
 export default [
   userTypes,
@@ -24,4 +28,8 @@ export default [
   topicTypes,
   conferenceTopicTypes,
   conferenceAttendeeTypes,
+  activityTypeTypes,
+  activityTypes,
+  activityFeedbackTypes,
+  activityTopicTypes,
 ];
