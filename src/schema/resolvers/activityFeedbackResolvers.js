@@ -106,7 +106,6 @@ export default {
     ) => {
       try {
         const newActivityFeedback = await ActivityFeedback.query().insert(data);
-        console.log(newActivityFeedback);
         return newActivityFeedback;
       } catch (e) {
         // eslint-disable-next-line no-console
