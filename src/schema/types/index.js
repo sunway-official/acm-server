@@ -14,6 +14,8 @@ import newsTypes from './newsTypes';
 import newsPhotoTypes from './newsPhotoTypes';
 import newsLikeTypes from './newsLikeTypes';
 import newsCommentTypes from './newsCommentTypes';
+// import questionTypes from './questionTypes';
+// import answerTypes from './answerTypes';
 
 export default [
   userTypes,
@@ -32,4 +34,6 @@ export default [
   newsPhotoTypes,
   newsLikeTypes,
   newsCommentTypes,
+  // questionTypes,
+  // answerTypes,
 ];

@@ -13,6 +13,8 @@ import News from './news';
 import NewsPhoto from './newsPhoto';
 import NewsLike from './newsLike';
 import NewsComment from './newsComment';
+import Question from './question';
+import Answer from './answer';
 
 const models = {
   User,
@@ -30,6 +32,8 @@ const models = {
   NewsPhoto,
   NewsLike,
   NewsComment,
+  Question,
+  Answer,
 };
 
 export default models;

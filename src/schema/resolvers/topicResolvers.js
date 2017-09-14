@@ -1,6 +1,6 @@
 export default {
   Topic: {
-    conferenceTopic: async ({ id }, data, { models: { ConferenceTopic } }) => {
+    conferenceTopics: async ({ id }, data, { models: { ConferenceTopic } }) => {
       const conferenceTopic = await ConferenceTopic.query().where(
         'topic_id',
         id,
