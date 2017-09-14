@@ -1,6 +1,6 @@
 import { Model } from 'objection';
 
-export default class Role extends Model {
+export default class NewsComment extends Model {
   static tableName = 'news_comments';
   static jsonSchema = {
     type: 'object',
@@ -17,12 +17,5 @@ export default class Role extends Model {
     this.id = parseInt(opt.old.id, 10);
     this.news_id = parseInt(opt.old.news_id, 10);
     this.user_id = parseInt(opt.old.user_id, 10);
-  }
-  async $beforeInsert() {
-    this.created_at = new Date().toISOString();
-    this.updated_at = new Date().toISOString();
-  }
-  async $beforeUpdate() {
-    this.updated_at = new Date().toISOString();
   }
 }

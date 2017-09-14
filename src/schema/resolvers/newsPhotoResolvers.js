@@ -46,7 +46,7 @@ export default {
       { models: { NewsPhoto }, ValidationError },
     ) => {
       try {
-        const newsPhoto = await NewsPhoto.query().wher('news_id', news_id);
+        const newsPhoto = await NewsPhoto.query().where('news_id', news_id);
         if (!newsPhoto) {
           throw new ValidationError('newsPhoto-not-found');
         }

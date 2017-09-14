@@ -21,7 +21,7 @@ export default {
       return conferenceAttendees;
     },
     conferences: async ({ id }, data, { models: { Conference } }) => {
-      const conference = await Conference.query().where('address_id', id);
+      const conference = await Conference.query().where('user_id', id);
       return conference;
     },
     news: async ({ id }, data, { models: { News } }) => {
@@ -29,15 +29,15 @@ export default {
       return news;
     },
     newsPhotos: async ({ id }, data, { models: { NewsPhoto } }) => {
-      const newsPhotos = await NewsPhoto.query().where('news_id', id);
+      const newsPhotos = await NewsPhoto.query().where('user_id', id);
       return newsPhotos;
     },
     newsLikes: async ({ id }, data, { models: { NewsLike } }) => {
-      const newsPhotos = await NewsLike.query().where('news_id', id);
-      return newsPhotos;
+      const newsLikes = await NewsLike.query().where('user_id', id);
+      return newsLikes;
     },
     newsComments: async ({ id }, data, { models: { NewsComment } }) => {
-      const newsComments = await NewsComment.query().where('news_id', id);
+      const newsComments = await NewsComment.query().where('user_id', id);
       return newsComments;
     },
   },

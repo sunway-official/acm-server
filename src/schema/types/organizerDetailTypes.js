@@ -33,7 +33,7 @@ extend type Query {
   getOrganizerDetailByID(id: ID!): OrganizerDetail!
 
   # Get OrganizerDetail by user ID
-  getOrganizerDetailByUserID(user_id: ID!): OrganizerDetail!
+  getOrganizerDetailByUserID(user_id: ID!): [OrganizerDetail!]!
 }
 
 extend type Mutation {

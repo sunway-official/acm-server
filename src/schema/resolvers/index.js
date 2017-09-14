@@ -15,8 +15,9 @@ import conferenceAttendeeResolvers from './conferenceAttendeeResolvers';
 import newsResolvers from './newsResolvers';
 import newsPhotoResolvers from './newsPhotoResolvers';
 import newsLikeResolvers from './newsLikeResolvers';
-// import newsCommentResolvers from './newsCommentResolvers';
+import newsCommentResolvers from './newsCommentResolvers';
 // import questionResolvers from './questionResolvers';
+// import answerResolvers from './answerResolvers';
 
 const rootResolvers = {
   Date: GraphQLToolsTypes.Date({ name: 'Date' }),
@@ -38,7 +39,8 @@ const resolvers = [
   newsResolvers,
   newsPhotoResolvers,
   newsLikeResolvers,
-  // newsCommentResolvers,
+  newsCommentResolvers,
   // questionResolvers,
+  // answerResolvers,
 ];
 export default mergeResolvers(resolvers);

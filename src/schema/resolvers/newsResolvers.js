@@ -60,7 +60,7 @@ export default {
       { models: { News }, ValidationError },
     ) => {
       try {
-        const news = await News.query().wher('user_id', user_id);
+        const news = await News.query().where('user_id', user_id);
         if (!news) {
           throw new ValidationError('news-not-found');
         }
@@ -80,7 +80,7 @@ export default {
       { models: { News }, ValidationError },
     ) => {
       try {
-        const news = await News.query().wher('conference_id', conference_id);
+        const news = await News.query().where('conference_id', conference_id);
         if (!news) {
           throw new ValidationError('news-not-found');
         }
