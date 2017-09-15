@@ -1,4 +1,4 @@
-const activityTypes = require('../seedData/activityTypesData');
+const activityTypes = require('../seedData/activity/activityTypesData');
 
 // eslint-disable-next-line func-names, no-unused-vars
 exports.seed = function(knex, Promise) {

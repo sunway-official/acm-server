@@ -1,11 +1,11 @@
 import { Model } from 'objection';
 import bcrypt from 'bcryptjs';
-import config from '../config';
-import commonUtils from '../utils/common';
+import config from '../../config';
+import commonUtils from '../../utils/common';
 import Permission from './permission';
-import PersonalSchedule from './personalSchedule';
-import Conference from './conference';
-import ActivityFeedback from './activityFeedback';
+import PersonalSchedule from '../schedule/personalSchedule';
+import Conference from '../conference';
+import ActivityFeedback from '../activity/activityFeedback';
 
 // Import the plugin.
 // TODO: Remember to add unique back to the class definition

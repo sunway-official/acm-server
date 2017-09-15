@@ -1,4 +1,4 @@
-const features = require('../seedData/featuresData');
+const features = require('../seedData/authorization/featuresData');
 
 // eslint-disable-next-line func-names, no-unused-vars
 exports.seed = function(knex, Promise) {

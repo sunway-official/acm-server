@@ -22,7 +22,7 @@ type User {
   permissions: [Permission!]!
 
   # personal feedback
-  personalFeedback: [PersonalFeedback!]!
+  activityFeedback: [ActivityFeedback!]!
 
   # Organizer detail
   organizerDetails: [OrganizerDetail!]!

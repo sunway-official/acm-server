@@ -1,11 +1,11 @@
-const roles = require('../seedData/rolesData');
-const users = require('../seedData/userData');
+const roles = require('./rolesData');
+const users = require('./userData');
 const {
   participant,
   speaker,
   organizer,
   author,
-} = require('../seedData/defaultPermissionsData');
+} = require('./defaultPermissionsData');
 
 // array role_id want to add into permission
 const rolesID = [1, 2, 5, 8];

@@ -24,16 +24,16 @@ export default {
       );
       return conferenceAttendees;
     },
-    personalFeedback: async (
+    activityFeedback: async (
       { id },
       data,
-      { models: { PersonalFeedback } },
+      { models: { ActivityFeedback } },
     ) => {
-      const personalFeedback = await PersonalFeedback.query().where(
+      const activityFeedback = await ActivityFeedback.query().where(
         'user_id',
         id,
       );
-      return personalFeedback;
+      return activityFeedback;
     },
     conferences: async ({ id }, data, { models: { Conference } }) => {
       const conferences = await Conference.query().where('user_id', id);
