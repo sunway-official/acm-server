@@ -119,6 +119,13 @@ export default {
     deleteNews: async (root, { id }, { models: { News }, ValidationError }) => {
       try {
         const news = await News.query().findById(id);
+        // delete all NewsComment of news with id
+        // delete all NewsLike of news with id
+        // delete all NewsPhoto of news with id
+        await news.deleteAllRelationship();
+
+        if (!news) throw new ValidationError('Not found news');
+
         await News.query().deleteById(id);
         return news;
       } catch (e) {

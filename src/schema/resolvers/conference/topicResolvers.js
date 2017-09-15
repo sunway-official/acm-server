@@ -75,21 +75,17 @@ export default {
     deleteTopic: async (
       root,
       { id },
-      { models: { Topic, ConferenceTopic }, ValidationError },
+      { models: { Topic }, ValidationError },
     ) => {
       try {
-        // delete ConferenceTopic with topic_id
-        const confTopicWithTopicId = ConferenceTopic.query().where(
-          'topic_id',
-          id,
-        );
-        if (confTopicWithTopicId) {
-          await ConferenceTopic.query()
-            .delete()
-            .where('topic_id', id);
-        }
         const topic = await Topic.query().findById(id);
-        await Topic.query().deleteById(id);
+
+        // delete all conferenceTopic of topic with id
+        // delete all activityTopics of topic with id
+        await topic.deleteAllRelationship();
+        if (topic) {
+          await Topic.query().deleteById(id);
+        }
         return topic;
       } catch (e) {
         // eslint-disable-next-line no-console

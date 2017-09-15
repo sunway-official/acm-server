@@ -77,17 +77,16 @@ export default {
     deleteAddress: async (
       root,
       { id },
-      { models: { Address, Conference }, ValidationError },
+      { models: { Address }, ValidationError },
     ) => {
       try {
-        // delete coference with address_id
-        const confWithAddressId = Conference.query().where('address_id', id);
-        if (confWithAddressId) {
-          await Conference.query()
-            .delete()
-            .where('address_id', id);
-        }
         const address = await Address.query().findById(id);
+
+        // // delete all conference of address with id
+        await address.deleteConference();
+        if (!address) throw new ValidationError('Not found address');
+
+        // delete address
         await Address.query().deleteById(id);
         return address;
       } catch (e) {

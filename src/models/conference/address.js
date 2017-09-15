@@ -1,9 +1,11 @@
 import { Model } from 'objection';
+import Conference from './conference';
 
 export default class Address extends Model {
   static tableName = 'addresses';
   static jsonSchema = {
     type: 'object',
+    required: ['street', 'city', 'country'],
     description: 'A conference address',
     properties: {
       id: { type: 'integer' },
@@ -15,5 +17,17 @@ export default class Address extends Model {
 
   async $beforeValidate(opt) {
     this.id = parseInt(opt.old.id, 10);
+  }
+
+  // delete all conference of address with id
+  async deleteConference() {
+    const addresses = Conference.query().where('address_id', this.id);
+    if (addresses) {
+      addresses.map(address => address.deleteAllRelationship());
+      await Conference.query()
+        .delete()
+        .where('address_id', this.id);
+    }
+    return addresses;
   }
 }

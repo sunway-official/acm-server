@@ -1,9 +1,11 @@
 import { Model } from 'objection';
+import Conference from './conference';
 
 export default class OrganizerDetail extends Model {
   static tableName = 'organizer_detail';
   static jsonSchema = {
     type: 'object',
+    required: ['user_id', 'name', 'email', 'address'],
     description: 'The detail of an organizer',
     properties: {
       id: { type: 'integer' },
@@ -24,5 +26,22 @@ export default class OrganizerDetail extends Model {
   async $beforeValidate(opt) {
     this.id = parseInt(opt.old.id, 10);
     this.user_id = parseInt(opt.old.user_id, 10);
+  }
+
+  // delete all conferences of organizer detail with id
+  async deleteConference() {
+    const organizerDetails = Conference.query().where(
+      'organizer_detail_id',
+      this.id,
+    );
+    if (organizerDetails) {
+      organizerDetails.map(organizerDetail =>
+        organizerDetail.deleteAllRelationship(),
+      );
+      await Conference.query()
+        .delete()
+        .where('organizer_detail_id', this.id);
+    }
+    return organizerDetails;
   }
 }

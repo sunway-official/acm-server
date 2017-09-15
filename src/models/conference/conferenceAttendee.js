@@ -4,6 +4,7 @@ export default class ConferenceAttendee extends Model {
   static tableName = 'conferences_attendees';
   static jsonSchema = {
     type: 'object',
+    required: ['conference_id', 'user_id'],
     description: 'An attendee in a conference',
     properties: {
       id: { type: 'integer' },

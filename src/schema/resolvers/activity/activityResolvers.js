@@ -19,6 +19,14 @@ export default {
       const activityTopic = ActivityTopic.query().where('activity_id', id);
       return activityTopic;
     },
+    schedules: async ({ id }, data, { models: { Schedule } }) => {
+      const schedules = Schedule.query().where('activity_id', id);
+      return schedules;
+    },
+    questions: async ({ id }, data, { models: { Question } }) => {
+      const questions = Question.query().where('activity_id', id);
+      return questions;
+    },
     activityFeedback: async (
       { id },
       data,
@@ -128,6 +136,8 @@ export default {
         // // delete all schedules of activity with id
 
         // // delete all topic of activity with id
+
+        //  // delete all question of activity with id
         await activity.deleteAllRelationship();
 
         if (!activity) throw new ValidationError('Not found Activity');
