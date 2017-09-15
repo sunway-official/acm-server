@@ -5,6 +5,7 @@ export default class Answer extends Model {
   static jsonSchema = {
     type: 'object',
     description: 'all answers',
+    required: ['user_id', 'question_id', 'content'],
     properties: {
       id: { type: 'integer' },
       user_id: { type: 'integer' },

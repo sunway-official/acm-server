@@ -74,21 +74,16 @@ export default {
     deleteActivityType: async (
       root,
       { id },
-      { models: { ActivityType, Activity }, ValidationError },
+      { models: { ActivityType }, ValidationError },
     ) => {
       try {
-        // delete activities with activity_type_id
-        const activitiesOfActivityType = Activity.query().where(
-          'activity_type_id',
-          id,
-        );
-        if (activitiesOfActivityType)
-          await Activity.query()
-            .delete()
-            .where('activity_type_id', id);
-
         const activityType = await ActivityType.query().findById(id);
         if (!activityType) throw new ValidationError('Not found Activitytype');
+
+        // delete all activities of type
+        activityType.deleteActivity();
+
+        // delete activity type with id
         await ActivityType.query().deleteById(id);
         return activityType;
       } catch (e) {

@@ -16,12 +16,15 @@ type Activity {
   # all feedback of activity
   activityFeedback: [ActivityFeedback!]!
 
+  # all schedules of activity
+  schedules: [Schedule!]!
+
   # title of this activity
   title: String!
 
   # status of this activity
   # status 'on' or 'off'
-  status: Status
+  status: Status!
 
 
 }

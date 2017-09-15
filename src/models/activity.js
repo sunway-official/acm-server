@@ -1,4 +1,7 @@
 import { Model } from 'objection';
+import Schedule from './schedule';
+import ActivityFeedback from './activityFeedback';
+import ActivityTopic from './activityTopic';
 
 export default class Activity extends Model {
   static tableName = 'activities';
@@ -25,5 +28,53 @@ export default class Activity extends Model {
 
   async $beforeInsert() {
     if (!this.status) this.status = 'on';
+  }
+
+  // delete all schedules of activity with id
+  async deleteSchedule() {
+    const schedules = await Schedule.query().where('activity_id', this.id);
+
+    if (schedules) {
+      schedules.map(schedule => schedule.deletePersonalSchedule());
+      await Schedule.query()
+        .delete()
+        .where('activity_id', this.id);
+    }
+
+    return schedules;
+  }
+
+  // delete all feedback of activity with id
+  async deleteActivityFeedback() {
+    const activityFeedback = await ActivityFeedback.query().where(
+      'activity_id',
+      this.id,
+    );
+
+    if (activityFeedback)
+      await ActivityFeedback.query()
+        .delete()
+        .where('activity_id', this.id);
+    return activityFeedback;
+  }
+
+  // delete all topic of activity with id
+  async deleteActivityTopic() {
+    const activityTopic = await ActivityTopic.query().where(
+      'activity_id',
+      this.id,
+    );
+
+    if (activityTopic)
+      await ActivityTopic.query()
+        .delete()
+        .where('activity_id', this.id);
+    return activityTopic;
+  }
+
+  async deleteAllRelationship() {
+    this.deleteActivityFeedback();
+    this.deleteActivityTopic();
+    this.deleteSchedule();
   }
 }

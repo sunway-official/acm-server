@@ -5,6 +5,7 @@ export default class DefaultPermission extends Model {
   static jsonSchema = {
     type: 'object',
     description: 'A default permission',
+    required: ['role_id', 'feature_id'],
     properties: {
       id: { type: 'integer' },
       role_id: { type: 'integer' },

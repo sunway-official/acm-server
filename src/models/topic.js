@@ -4,6 +4,7 @@ export default class Topic extends Model {
   static tableName = 'topics';
   static jsonSchema = {
     type: 'object',
+    required: ['name'],
     properties: {
       id: { type: 'integer' },
       name: { type: 'string', maxLength: '100' },

@@ -5,6 +5,7 @@ export default class ActivityTopic extends Model {
   static jsonSchema = {
     type: 'object',
     description: 'All topics of activity',
+    required: ['activity_id', 'topic_id'],
     properties: {
       id: { type: 'integer' },
       activity_id: { type: 'integer' },

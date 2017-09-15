@@ -14,6 +14,9 @@ import activityTypeTypes from './activityTypeTypes';
 import activityTypes from './activityTypes';
 import activityFeedbackTypes from './activityFeedbackTypes';
 import activityTopicTypes from './activityTopicTypes';
+import roomTypes from './roomTypes';
+import scheduleTypes from './scheduleTypes';
+import personalScheduleTypes from './personalScheduleTypes';
 
 export default [
   userTypes,
@@ -32,4 +35,7 @@ export default [
   activityTypes,
   activityFeedbackTypes,
   activityTopicTypes,
+  roomTypes,
+  scheduleTypes,
+  personalScheduleTypes,
 ];

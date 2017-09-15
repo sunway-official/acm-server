@@ -5,6 +5,7 @@ export default class ActivityFeedback extends Model {
   static jsonSchema = {
     type: 'object',
     description: 'all feedback of activity',
+    required: ['activity_id', 'user_id', 'content', 'rating'],
     properties: {
       id: { type: 'integer' },
       activity_id: { type: 'integer' },

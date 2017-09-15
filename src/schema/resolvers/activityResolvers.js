@@ -118,38 +118,21 @@ export default {
     deleteActivity: async (
       root,
       { id },
-      {
-        models: { Activity, ActivityTopic, ActivityFeedback },
-        ValidationError,
-      },
+      { models: { Activity }, ValidationError },
     ) => {
       try {
         const activity = await Activity.query().findById(id);
-        // delete activity in activity topic
-        const getActivityInActivityTopic = await ActivityTopic.query().where(
-          'activity_id',
-          id,
-        );
-        if (getActivityInActivityTopic) {
-          await ActivityTopic.query()
-            .delete()
-            .where('activity_id', id);
-        }
 
-        // delete activity in activity feedback
-        const getActivityInActivityFeedback = await ActivityFeedback.query().where(
-          'activity_id',
-          id,
-        );
-        if (getActivityInActivityFeedback) {
-          await ActivityFeedback.query()
-            .delete()
-            .where('activity_id', id);
-        }
+        // // delete all feedback of activity with id
 
-        // delete activity
+        // // delete all schedules of activity with id
+
+        // // delete all topic of activity with id
+        await activity.deleteAllRelationship();
 
         if (!activity) throw new ValidationError('Not found Activity');
+
+        // delete activity
         await Activity.query().deleteById(id);
         return activity;
       } catch (e) {

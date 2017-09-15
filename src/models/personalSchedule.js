@@ -4,6 +4,7 @@ export default class PersonalSchedule extends Model {
   static tableName = 'personal_schedules';
   static jsonSchema = {
     type: 'object',
+    required: ['user_id', 'schedule_id', 'activity_id'],
     properties: {
       id: { type: 'integer' },
       user_id: { type: 'integer' },

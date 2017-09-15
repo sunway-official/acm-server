@@ -3,8 +3,6 @@ exports.up = function(knex, Promise) {
   return Promise.all([
     knex.schema.createTable('schedules', table => {
       table.increments('id').primary();
-      table.dateTime('start');
-      table.dateTime('end');
       table
         .integer('activity_id')
         .unsigned()
@@ -13,6 +11,8 @@ exports.up = function(knex, Promise) {
         .integer('room_id')
         .unsigned()
         .notNullable();
+      table.dateTime('start');
+      table.dateTime('end');
     }),
   ]);
 };
