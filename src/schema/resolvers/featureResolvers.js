@@ -83,20 +83,16 @@ export default {
     deleteFeature: async (
       root,
       { id },
-      { models: { Feature, DefaultPermission, Permission }, ValidationError },
+      { models: { Feature }, ValidationError },
     ) => {
       try {
-        // delete permission with feature_id
-        await Permission.query()
-          .delete()
-          .where('feature_id', id);
-
-        // delete default permission with feature_id
-        await DefaultPermission.query()
-          .delete()
-          .where('feature_id', id);
-
         const feature = await Feature.query().findById(id);
+        if (!feature) throw new ValidationError('Feature not found');
+        // delete permission with feature_id
+        // delete default permission with feature_id
+        feature.deleteAllRelationship();
+
+        // delete feature
         await Feature.query().deleteById(id);
         return feature;
       } catch (e) {

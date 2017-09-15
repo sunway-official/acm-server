@@ -5,6 +5,7 @@ export default class DefaultPermission extends Model {
   static jsonSchema = {
     type: 'object',
     description: 'A default permission',
+    required: ['role_id', 'feature_id'],
     properties: {
       id: { type: 'integer' },
       role_id: { type: 'integer' },
@@ -13,6 +14,7 @@ export default class DefaultPermission extends Model {
   };
 
   async $beforeValidate(opt) {
+    this.id = parseInt(opt.old.id, 10);
     this.role_id = parseInt(opt.old.role_id, 10);
     this.feature_id = parseInt(opt.old.feature_id, 10);
   }

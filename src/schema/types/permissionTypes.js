@@ -29,10 +29,10 @@ extend type Query {
   getPermissionByID(id: ID!): Permission!
 
   # Get all permission by role_id
-  getPermissionByRoleID(role_id: ID!): [Permission!]!
+  getAllUsersByRoleID(role_id: ID!): [Permission!]!
 
   # Get all permission by user_id
-  getPermissionByUserID(user_id: ID!): [Permission!]!
+  getAllFeaturesByUserID(user_id: ID!): [Permission!]!
 
   # Get all permission by user_id and role_id
   getPermissionByRoleIDUserID(role_id: ID!, user_id: ID!): [Permission!]!

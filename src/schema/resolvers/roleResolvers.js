@@ -11,6 +11,10 @@ export default {
       );
       return defaultPermissions;
     },
+    permissions: async ({ id }, data, { models: { Permission } }) => {
+      const defaultPermissions = await Permission.query().where('role_id', id);
+      return defaultPermissions;
+    },
   },
 
   Query: {
@@ -72,22 +76,15 @@ export default {
         throw new ValidationError('bad-request');
       }
     },
-    deleteRole: async (
-      root,
-      { id },
-      { models: { Role, DefaultPermission, Permission }, ValidationError },
-    ) => {
+    deleteRole: async (root, { id }, { models: { Role }, ValidationError }) => {
       try {
-        // delete permission with role_id
-        await Permission.query()
-          .delete()
-          .where('role_id', id);
-
-        // delete permission with role_id
-        await DefaultPermission.query()
-          .delete()
-          .where('role_id', id);
         const role = await Role.query().findById(id);
+        if (!role) throw new ValidationError('Role not found');
+        // delete defaultpermission with role id
+        // delete permission with role id
+        role.deleteAllRelationship();
+
+        // delete role
         await Role.query().deleteById(id);
         return role;
       } catch (e) {
