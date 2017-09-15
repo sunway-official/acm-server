@@ -1,4 +1,4 @@
-const schedules = require('../seedData/schedulesData');
+const schedules = require('../seedData/schedule/schedulesData');
 
 // eslint-disable-next-line func-names, no-unused-vars
 exports.seed = function(knex, Promise) {

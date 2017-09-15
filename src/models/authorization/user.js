@@ -1,10 +1,11 @@
 import { Model } from 'objection';
 import bcrypt from 'bcryptjs';
-import config from '../config';
-import commonUtils from '../utils/common';
-// import Permission from './permission';
-// import PersonalSchedule from './personalSchedule';
-// import Conference from './conference';
+import config from '../../config';
+import commonUtils from '../../utils/common';
+import Permission from './permission';
+import PersonalSchedule from '../schedule/personalSchedule';
+import Conference from '../conference';
+import ActivityFeedback from '../activity/activityFeedback';
 
 // Import the plugin.
 // TODO: Remember to add unique back to the class definition
@@ -64,5 +65,63 @@ export default class User extends unique(Model) {
   }
   async hashPassword() {
     this.password = await bcrypt.hash(this.password, config.saltFactor);
+  }
+
+  // delete all permission of user with id
+  async deletePermissions() {
+    const permissions = await Permission.query().where('user_id', this.id);
+
+    if (permissions) {
+      await Permission.query()
+        .delete()
+        .where('user_id', this.id);
+    }
+
+    return permissions;
+  }
+
+  // delete all personal schedule of user with id
+  async deletePersonalSchedule() {
+    const personalSchedules = await PersonalSchedule.query().where(
+      'user_id',
+      this.id,
+    );
+
+    if (personalSchedules) {
+      await PersonalSchedule.query()
+        .delete()
+        .where('user_id', this.id);
+    }
+
+    return personalSchedules;
+  }
+
+  // delete all conferences of user with id
+  async deleteConferences() {
+    const conferences = await Conference.query().where('user_id', this.id);
+
+    if (conferences) {
+      await Conference.query()
+        .delete()
+        .where('user_id', this.id);
+    }
+
+    return conferences;
+  }
+
+  // delete all feedback of user with id
+  async deleteActivityFeedback() {
+    const activityFeedback = await ActivityFeedback.query().where(
+      'user_id',
+      this.id,
+    );
+
+    if (activityFeedback) {
+      await ActivityFeedback.query()
+        .delete()
+        .where('user_id', this.id);
+    }
+
+    return activityFeedback;
   }
 }

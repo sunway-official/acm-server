@@ -1,4 +1,4 @@
-const roles = require('../seedData/rolesData');
+const roles = require('../seedData/authorization/rolesData');
 
 // eslint-disable-next-line func-names, no-unused-vars
 exports.seed = function(knex, Promise) {

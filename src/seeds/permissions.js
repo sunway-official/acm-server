@@ -1,4 +1,4 @@
-const permissions = require('../seedData/permissionsData');
+const permissions = require('../seedData/authorization/permissionsData');
 // const permissions = [];
 
 // eslint-disable-next-line func-names, no-unused-vars

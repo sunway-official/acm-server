@@ -20,6 +20,10 @@ type User {
 
   # permissions of users
   permissions: [Permission!]!
+
+  # personal feedback
+  activityFeedback: [ActivityFeedback!]!
+
   # Organizer detail
   organizerDetails: [OrganizerDetail!]!
 

@@ -1,5 +1,5 @@
 import { Model } from 'objection';
-import Schedule from './schedule';
+import Schedule from '../schedule';
 import ActivityFeedback from './activityFeedback';
 import ActivityTopic from './activityTopic';
 

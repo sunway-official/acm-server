@@ -1,4 +1,4 @@
-const conferences = require('../seedData/conferencesData');
+const conferences = require('../seedData/conference/conferencesData');
 
 // eslint-disable-next-line func-names, no-unused-vars
 exports.seed = function(knex, Promise) {
