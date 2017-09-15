@@ -17,12 +17,6 @@ extend type Query {
   # Get ConferenceTopic by ID
   getConferenceTopicByID(id: ID!): ConferenceTopic!
 
-  # Get ConferenceTopic by Conference ID
-  getConferenceTopicByConfID(conference_id: ID!): [ConferenceTopic!]!
-
-  # Get ConferenceTopic by Topic ID
-  getConferenceTopicByTopicID(topic_id: ID!): [ConferenceTopic!]!
-
 }
 
 extend type Mutation {
@@ -30,7 +24,7 @@ extend type Mutation {
   insertConferenceTopic( conference_id: ID!, topic_id: ID!): ConferenceTopic!
 
   # Update ConferenceTopic info by id
-  updateConferenceTopic(id:ID!, conference_id: ID, topic_id: ID): ConferenceTopic!
+  updateConferenceTopic(id:ID!, topic_id: ID): ConferenceTopic!
 
   # Delete ConferenceTopic by id
   deleteConferenceTopic(id: ID!): ConferenceTopic!

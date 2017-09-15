@@ -22,7 +22,7 @@ type OrganizerDetail {
   phone: String!
 
   # conference
-  conference: [Conference!]!
+  conferences: [Conference!]!
 }
 
 extend type Query {
@@ -33,7 +33,7 @@ extend type Query {
   getOrganizerDetailByID(id: ID!): OrganizerDetail!
 
   # Get OrganizerDetail by user ID
-  getOrganizerDetailByUserID(user_id: ID!): OrganizerDetail!
+  getOrganizerDetailByUserID(user_id: ID!): [OrganizerDetail!]!
 }
 
 extend type Mutation {

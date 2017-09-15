@@ -1,18 +1,22 @@
 export default {
   Conference: {
     organizerDetail: async (
-      { organizer_id },
+      { organizer_detail_id },
       data,
       { models: { OrganizerDetail } },
     ) => {
       const organizerDetail = await OrganizerDetail.query().findById(
-        organizer_id,
+        organizer_detail_id,
       );
       return organizerDetail;
     },
     address: async ({ address_id }, data, { models: { Address } }) => {
       const address = await Address.query().findById(address_id);
       return address;
+    },
+    user: async ({ user_id }, data, { models: { User } }) => {
+      const user = await User.query().findById(user_id);
+      return user;
     },
     conferenceTopics: async ({ id }, data, { models: { ConferenceTopic } }) => {
       const conferenceTopic = await ConferenceTopic.query().where(
@@ -31,6 +35,10 @@ export default {
         id,
       );
       return conferenceTopic;
+    },
+    news: async ({ id }, data, { models: { News } }) => {
+      const news = await News.query().where('conference_id', id);
+      return news;
     },
   },
   Query: {
@@ -70,13 +78,13 @@ export default {
     },
     getConferenceByOrganizerDetailID: async (
       root,
-      { organizer_id },
+      { organizer_detail_id },
       { models: { Conference }, ValidationError },
     ) => {
       try {
         const conference = await Conference.query().wher(
-          'organizer_id',
-          organizer_id,
+          'organizer_detail_id',
+          organizer_detail_id,
         );
         if (!conference) {
           throw new ValidationError('conference-not-found');
@@ -101,6 +109,92 @@ export default {
           'address_id',
           address_id,
         );
+        if (!conference) {
+          throw new ValidationError('conference-not-found');
+        }
+        return conference;
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error(e);
+        if (e.message === 'conference-not-found') {
+          throw new ValidationError('conference-not-found');
+        }
+        throw new ValidationError('bad-request');
+      }
+    },
+    getConferenceByUserID: async (
+      root,
+      { user_id },
+      { models: { Conference }, ValidationError },
+    ) => {
+      try {
+        const conference = await Conference.query().where('user_id', user_id);
+        if (!conference) {
+          throw new ValidationError('conference-not-found');
+        }
+        return conference;
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error(e);
+        if (e.message === 'conference-not-found') {
+          throw new ValidationError('conference-not-found');
+        }
+        throw new ValidationError('bad-request');
+      }
+    },
+    getConferenceByUserIDOrganizerDetailID: async (
+      root,
+      { user_id, organizer_detail_id },
+      { models: { Conference }, ValidationError },
+    ) => {
+      try {
+        const conference = await Conference.query()
+          .where('user_id', user_id)
+          .where('organizer_detail_id', organizer_detail_id);
+        if (!conference) {
+          throw new ValidationError('conference-not-found');
+        }
+        return conference;
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error(e);
+        if (e.message === 'conference-not-found') {
+          throw new ValidationError('conference-not-found');
+        }
+        throw new ValidationError('bad-request');
+      }
+    },
+    getConferenceByAddressIDOrganizerDetailID: async (
+      root,
+      { address_id, organizer_detail_id },
+      { models: { Conference }, ValidationError },
+    ) => {
+      try {
+        const conference = await Conference.query()
+          .where('address_id', address_id)
+          .where('organizer_detail_id', organizer_detail_id);
+        if (!conference) {
+          throw new ValidationError('conference-not-found');
+        }
+        return conference;
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error(e);
+        if (e.message === 'conference-not-found') {
+          throw new ValidationError('conference-not-found');
+        }
+        throw new ValidationError('bad-request');
+      }
+    },
+    getConferenceByAddressIDUserID: async (
+      root,
+      { address_id, user_id },
+      { models: { Conference }, ValidationError },
+    ) => {
+      try {
+        const conference = await Conference.query()
+          .where('address_id', address_id)
+          .where('user_id', user_id);
         if (!conference) {
           throw new ValidationError('conference-not-found');
         }
@@ -151,19 +245,36 @@ export default {
       root,
       { id },
       {
-        models: { Conference, ConferenceTopic, ConferenceAttendee },
+        models: { Conference, ConferenceTopic, ConferenceAttendee, News },
         ValidationError,
       },
     ) => {
       try {
-        // delete ConferenceTopic with conference_id_id
-        await ConferenceTopic.query()
-          .delete()
-          .where('conference_id', id);
+        // delete ConferenceTopic with conference_id
+        const confTopicWithConfId = Conference.query().where('address_id', id);
+        if (confTopicWithConfId) {
+          await ConferenceTopic.query()
+            .delete()
+            .where('conference_id', id);
+        }
         // delete ConferenceAttendee with conference_id
-        await ConferenceAttendee.query()
-          .delete()
-          .where('conference_id', id);
+        const confAttenWithConfId = ConferenceAttendee.query().where(
+          'conference_id',
+          id,
+        );
+        if (confAttenWithConfId) {
+          await ConferenceAttendee.query()
+            .delete()
+            .where('conference_id', id);
+        }
+        // delete News with conference_id
+        const newsWithConfId = News.query().where('conference_id', id);
+        if (newsWithConfId) {
+          await News.query()
+            .delete()
+            .where('conference_id', id);
+        }
+
         const conference = await Conference.query().findById(id);
         await Conference.query().deleteById(id);
         return conference;
