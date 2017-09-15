@@ -127,6 +127,11 @@ export default {
     ) => {
       try {
         const deleteQuestion = await Question.query().findById(id);
+
+        // delete all answer of question with id
+        await deleteQuestion.deleteAnswer();
+
+        // delete question
         await Question.query().deleteById(id);
         return deleteQuestion;
       } catch (e) {

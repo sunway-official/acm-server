@@ -1,4 +1,5 @@
 import { Model } from 'objection';
+import ConferenceTopic from './conferenceTopic';
 
 export default class Topic extends Model {
   static tableName = 'topics';
@@ -14,5 +15,21 @@ export default class Topic extends Model {
 
   async $beforeValidate(opt) {
     this.id = parseInt(opt.old.id, 10);
+  }
+
+  // delete all conferenceTopic of conference with id
+  async deleteConConferenceTopic() {
+    const conferenceTopics = await ConferenceTopic.query().where(
+      'topic_id',
+      this.id,
+    );
+
+    if (conferenceTopics) {
+      await ConferenceTopic.query()
+        .delete()
+        .where('topic_id', this.id);
+    }
+
+    return conferenceTopics;
   }
 }

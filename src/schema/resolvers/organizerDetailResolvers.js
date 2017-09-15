@@ -116,20 +116,17 @@ export default {
     deleteOrganizerDetail: async (
       root,
       { id },
-      { models: { OrganizerDetail, Conference }, ValidationError },
+      { models: { OrganizerDetail }, ValidationError },
     ) => {
       try {
-        // delete coference with organizer_id
-        const organizerWithConfId = Conference.query().where(
-          'organizer_detail_id',
-          id,
-        );
-        if (organizerWithConfId) {
-          await Conference.query()
-            .delete()
-            .where('organizer_detail_id', id);
-        }
         const organizerDetail = await OrganizerDetail.query().findById(id);
+
+        // delete coference with organizer_id
+        await organizerDetail.deleteConference();
+
+        if (!organizerDetail)
+          throw new ValidationError('Not found organizerDetail');
+
         await OrganizerDetail.query().deleteById(id);
         return organizerDetail;
       } catch (e) {

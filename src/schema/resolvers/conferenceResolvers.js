@@ -244,39 +244,23 @@ export default {
     deleteConference: async (
       root,
       { id },
-      {
-        models: { Conference, ConferenceTopic, ConferenceAttendee, News },
-        ValidationError,
-      },
+      { models: { Conference }, ValidationError },
     ) => {
       try {
-        // delete ConferenceTopic with conference_id
-        const confTopicWithConfId = Conference.query().where('address_id', id);
-        if (confTopicWithConfId) {
-          await ConferenceTopic.query()
-            .delete()
-            .where('conference_id', id);
-        }
-        // delete ConferenceAttendee with conference_id
-        const confAttenWithConfId = ConferenceAttendee.query().where(
-          'conference_id',
-          id,
-        );
-        if (confAttenWithConfId) {
-          await ConferenceAttendee.query()
-            .delete()
-            .where('conference_id', id);
-        }
-        // delete News with conference_id
-        const newsWithConfId = News.query().where('conference_id', id);
-        if (newsWithConfId) {
-          await News.query()
-            .delete()
-            .where('conference_id', id);
-        }
-
         const conference = await Conference.query().findById(id);
-        await Conference.query().deleteById(id);
+
+        // delete ConferenceTopic with conference_id
+
+        // delete ConferenceAttendee with conference_id
+
+        // delete News with conference_id
+
+        // delete Activity with conference_id
+
+        await conference.deleteAllRelationship();
+
+        if (!conference) throw new ValidationError('Not found conference');
+
         return conference;
       } catch (e) {
         // eslint-disable-next-line no-console
