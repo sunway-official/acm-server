@@ -17,12 +17,6 @@ extend type Query {
   # Get ConferenceAttendee by ID
   getConferenceAttendeeByID(id: ID!): ConferenceAttendee!
 
-  # Get ConferenceAttendee by Conference ID
-  getConferenceAttendeeByConfID(conference_id: ID!): [ConferenceAttendee!]!
-
-  # Get ConferenceAttendee by User ID
-  getConferenceAttendeeByUserID(user_id: ID!): [ConferenceAttendee!]!
-
 }
 
 extend type Mutation {

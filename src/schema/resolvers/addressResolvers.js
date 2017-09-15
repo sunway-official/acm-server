@@ -81,10 +81,12 @@ export default {
     ) => {
       try {
         // delete coference with address_id
-        await Conference.query()
-          .delete()
-          .where('address_id', id);
-
+        const confWithAddressId = Conference.query().where('address_id', id);
+        if (confWithAddressId) {
+          await Conference.query()
+            .delete()
+            .where('address_id', id);
+        }
         const address = await Address.query().findById(id);
         await Address.query().deleteById(id);
         return address;

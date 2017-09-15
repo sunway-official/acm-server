@@ -4,7 +4,7 @@ type Topic {
   id: ID!
 
   # Conference Topic ID
-  conferenceTopic:[ConferenceTopic!]!
+  conferenceTopics:[ConferenceTopic!]!
 
   # name of Topic
   name: String!

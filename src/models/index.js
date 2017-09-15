@@ -9,7 +9,10 @@ import Address from './address';
 import Topic from './topic';
 import ConferenceTopic from './conferenceTopic';
 import ConferenceAttendee from './conferenceAttendee';
-
+import News from './news';
+import NewsPhoto from './newsPhoto';
+import NewsLike from './newsLike';
+import NewsComment from './newsComment';
 import Activity from './activity';
 import ActivityFeedback from './activityFeedback';
 import ActivityTopic from './activityTopic';
@@ -32,6 +35,11 @@ const models = {
   Topic,
   ConferenceTopic,
   ConferenceAttendee,
+
+  News,
+  NewsPhoto,
+  NewsLike,
+  NewsComment,
   Activity,
   ActivityFeedback,
   ActivityTopic,
@@ -39,6 +47,7 @@ const models = {
   Room,
   PersonalSchedule,
   Schedule,
+
   Question,
   Answer,
 };

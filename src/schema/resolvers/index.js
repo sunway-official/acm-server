@@ -12,6 +12,12 @@ import addressResolvers from './addressResolvers';
 import topicResolvers from './topicResolvers';
 import conferenceTopicResolvers from './conferenceTopicResolvers';
 import conferenceAttendeeResolvers from './conferenceAttendeeResolvers';
+import newsResolvers from './newsResolvers';
+import newsPhotoResolvers from './newsPhotoResolvers';
+import newsLikeResolvers from './newsLikeResolvers';
+import newsCommentResolvers from './newsCommentResolvers';
+import questionResolvers from './questionResolvers';
+import answerResolvers from './answerResolvers';
 import activityTypeResolvers from './activityTypeResolvers';
 import activityFeedbackResolvers from './activityFeedbackResolvers';
 import activityTopicResolvers from './activityTopicResolvers';
@@ -37,6 +43,12 @@ const resolvers = [
   topicResolvers,
   conferenceTopicResolvers,
   conferenceAttendeeResolvers,
+  newsResolvers,
+  newsPhotoResolvers,
+  newsLikeResolvers,
+  newsCommentResolvers,
+  questionResolvers,
+  answerResolvers,
   activityTypeResolvers,
   activityFeedbackResolvers,
   activityTopicResolvers,

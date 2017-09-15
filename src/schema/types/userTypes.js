@@ -29,6 +29,21 @@ type User {
 
   # Conference Attendees
   conferenceAttendees:[ConferenceAttendee!]!
+
+  # conference
+  conferences: [Conference!]!
+
+  # News
+  news: [News!]!
+
+  # news photos
+  newsPhotos: [NewsPhoto!]!
+
+  # news likes
+  newsLikes: [NewsLike!]!
+
+  # news comments
+  newsComments: [NewsComment!]!
 }
 enum Gender {
   male
