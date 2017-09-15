@@ -21,11 +21,13 @@ export default class Address extends Model {
 
   // delete all conference of address with id
   async deleteConference() {
-    const conference = Conference.query().where('address_id', this.id);
-    if (conference) {
+    const addresses = Conference.query().where('address_id', this.id);
+    if (addresses) {
+      addresses.map(address => address.deleteAllRelationship());
       await Conference.query()
         .delete()
         .where('address_id', this.id);
     }
+    return addresses;
   }
 }

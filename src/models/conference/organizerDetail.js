@@ -30,14 +30,18 @@ export default class OrganizerDetail extends Model {
 
   // delete all conferences of organizer detail with id
   async deleteConference() {
-    const organizerDetail = Conference.query().where(
+    const organizerDetails = Conference.query().where(
       'organizer_detail_id',
       this.id,
     );
-    if (organizerDetail) {
+    if (organizerDetails) {
+      organizerDetails.map(organizerDetail =>
+        organizerDetail.deleteAllRelationship(),
+      );
       await Conference.query()
         .delete()
         .where('organizer_detail_id', this.id);
     }
+    return organizerDetails;
   }
 }
