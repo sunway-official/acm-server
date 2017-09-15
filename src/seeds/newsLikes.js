@@ -1,4 +1,4 @@
-const newsLikes = require('../seedData/newsLikesData');
+const newsLikes = require('../seedData/newsFeed/newsLikesData');
 
 // eslint-disable-next-line func-names, no-unused-vars
 exports.seed = function(knex, Promise) {

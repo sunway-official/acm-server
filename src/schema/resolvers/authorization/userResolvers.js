@@ -24,9 +24,20 @@ export default {
       );
       return conferenceAttendees;
     },
+    activityFeedback: async (
+      { id },
+      data,
+      { models: { ActivityFeedback } },
+    ) => {
+      const activityFeedback = await ActivityFeedback.query().where(
+        'user_id',
+        id,
+      );
+      return activityFeedback;
+    },
     conferences: async ({ id }, data, { models: { Conference } }) => {
-      const conference = await Conference.query().where('user_id', id);
-      return conference;
+      const conferences = await Conference.query().where('user_id', id);
+      return conferences;
     },
     news: async ({ id }, data, { models: { News } }) => {
       const news = await News.query().where('user_id', id);

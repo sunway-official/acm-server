@@ -1,4 +1,4 @@
-const conferencesAttendees = require('../seedData/conferencesAttendeesData');
+const conferencesAttendees = require('../seedData/conference/conferencesAttendeesData');
 // const conferencesAttendees = [];
 
 // eslint-disable-next-line func-names, no-unused-vars

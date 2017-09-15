@@ -3,7 +3,7 @@ const {
   participant,
   organizer,
   author,
-} = require('../seedData/defaultPermissionsData');
+} = require('../seedData/authorization/defaultPermissionsData');
 
 // eslint-disable-next-line camelcase
 function getDefaultPermissions(role_id, features) {
