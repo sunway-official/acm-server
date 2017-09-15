@@ -24,6 +24,21 @@ export default {
       );
       return conferenceAttendees;
     },
+    personalFeedback: async (
+      { id },
+      data,
+      { models: { PersonalFeedback } },
+    ) => {
+      const personalFeedback = await PersonalFeedback.query().where(
+        'user_id',
+        id,
+      );
+      return personalFeedback;
+    },
+    conferences: async ({ id }, data, { models: { Conference } }) => {
+      const conferences = await Conference.query().where('user_id', id);
+      return conferences;
+    },
   },
   Query: {
     getAllUsers: async (root, data, { models: { User }, ValidationError }) => {
