@@ -36,7 +36,7 @@ export default class Conference extends Model {
     this.start_date = new Date().toISOString();
     this.end_date = new Date().toISOString();
   }
-  // delete all conference topic of conference with conference id
+  // delete all conference topics of conference with id
   async deleteConferenceTopic() {
     const conferenceTopics = await ConferenceTopic.query().where(
       'conference_id',
@@ -52,7 +52,7 @@ export default class Conference extends Model {
     return conferenceTopics;
   }
 
-  // delete all conference attendees of activity with id
+  // delete all conference attendees of conference with id
   async deleteConferenceAttendee() {
     const conferenceAttendee = await ConferenceAttendee.query().where(
       'conference_id',
@@ -66,26 +66,30 @@ export default class Conference extends Model {
     return conferenceAttendee;
   }
 
-  // delete all topic of activity with id
+  // delete all news of conference with id
   async deleteNews() {
     const news = await News.query().where('conference_id', this.id);
 
-    if (news)
+    if (news) {
+      news.map(newsDelete => newsDelete.deleteAllRelationship());
       await News.query()
         .delete()
         .where('conference_id', this.id);
+    }
     return news;
   }
 
-  // delete all topic of activity with id
+  // delete all activities of conference with id
   async deleteActivity() {
-    const activity = await Activity.query().where('conference_id', this.id);
+    const activities = await Activity.query().where('conference_id', this.id);
 
-    if (activity)
+    if (activities) {
+      activities.map(activity => activity.deleteAllRelationship());
       await Activity.query()
         .delete()
         .where('conference_id', this.id);
-    return activity;
+    }
+    return activities;
   }
 
   async deleteAllRelationship() {

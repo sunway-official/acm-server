@@ -72,9 +72,23 @@ export default class Activity extends Model {
     return activityTopic;
   }
 
+  // delete all question of activity with id
+  async deleteQuestion() {
+    const questions = await ActivityTopic.query().where('activity_id', this.id);
+
+    if (questions) {
+      questions.map(question => question.deleteAnswer());
+      await ActivityTopic.query()
+        .delete()
+        .where('activity_id', this.id);
+    }
+    return questions;
+  }
+
   async deleteAllRelationship() {
     this.deleteActivityFeedback();
     this.deleteActivityTopic();
     this.deleteSchedule();
+    this.deleteQuestion();
   }
 }

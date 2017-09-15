@@ -1,5 +1,6 @@
 import { Model } from 'objection';
 import ConferenceTopic from './conferenceTopic';
+import ActivityTopic from '../activity/activityTopic';
 
 export default class Topic extends Model {
   static tableName = 'topics';
@@ -17,7 +18,7 @@ export default class Topic extends Model {
     this.id = parseInt(opt.old.id, 10);
   }
 
-  // delete all conferenceTopic of conference with id
+  // delete all conferenceTopic of topic with id
   async deleteConConferenceTopic() {
     const conferenceTopics = await ConferenceTopic.query().where(
       'topic_id',
@@ -31,5 +32,25 @@ export default class Topic extends Model {
     }
 
     return conferenceTopics;
+  }
+
+  // delete all activityTopics of topic with id
+  async deleteActivityTopic() {
+    const activityTopic = await ActivityTopic.query().where(
+      'topic_id',
+      this.id,
+    );
+
+    if (activityTopic) {
+      await ActivityTopic.query()
+        .delete()
+        .where('topic_id', this.id);
+    }
+
+    return activityTopic;
+  }
+  async deleteAllRelationship() {
+    this.deleteActivityTopic();
+    this.deleteConConferenceTopic();
   }
 }

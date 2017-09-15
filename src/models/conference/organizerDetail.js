@@ -27,6 +27,8 @@ export default class OrganizerDetail extends Model {
     this.id = parseInt(opt.old.id, 10);
     this.user_id = parseInt(opt.old.user_id, 10);
   }
+
+  // delete all conferences of organizer detail with id
   async deleteConference() {
     const organizerDetail = Conference.query().where(
       'organizer_detail_id',

@@ -19,7 +19,7 @@ export default class Address extends Model {
     this.id = parseInt(opt.old.id, 10);
   }
 
-  // delete all topic of activity with id
+  // delete all conference of address with id
   async deleteConference() {
     const conference = Conference.query().where('address_id', this.id);
     if (conference) {

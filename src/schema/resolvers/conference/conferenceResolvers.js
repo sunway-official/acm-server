@@ -253,16 +253,11 @@ export default {
       try {
         const conference = await Conference.query().findById(id);
 
-        // delete ConferenceTopic with conference_id
-
-        // delete ConferenceAttendee with conference_id
-
-        // delete News with conference_id
-
-        // delete Activity with conference_id
-
+        // // delete ConferenceTopic with conference_id
+        // // delete ConferenceAttendee with conference_id
+        // // delete News with conference_id
+        // // delete Activity with conference_id
         await conference.deleteAllRelationship();
-
         if (!conference) throw new ValidationError('Not found conference');
 
         await Conference.query().deleteById(id);

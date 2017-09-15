@@ -128,6 +128,8 @@ export default {
         // // delete all schedules of activity with id
 
         // // delete all topic of activity with id
+
+        //  // delete all question of activity with id
         await activity.deleteAllRelationship();
 
         if (!activity) throw new ValidationError('Not found Activity');

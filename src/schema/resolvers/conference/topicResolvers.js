@@ -79,8 +79,10 @@ export default {
     ) => {
       try {
         const topic = await Topic.query().findById(id);
-        // delete ConferenceTopic with topic_id
-        await topic.deleteConConferenceTopic();
+
+        // delete all conferenceTopic of topic with id
+        // delete all activityTopics of topic with id
+        await topic.deleteAllRelationship();
         if (topic) {
           await Topic.query().deleteById(id);
         }

@@ -82,9 +82,8 @@ export default {
       try {
         const address = await Address.query().findById(id);
 
-        // delete coference with address_id
+        // // delete all conference of address with id
         await address.deleteConference();
-
         if (!address) throw new ValidationError('Not found address');
 
         // delete address

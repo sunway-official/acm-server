@@ -21,7 +21,7 @@ export default class Question extends Model {
     this.user_id = parseInt(opt.old.user_id, 10);
   }
 
-  // delete all answer of question with id
+  // delete all answers of question with id
   async deleteAnswer() {
     const answer = await Answer.query().where('question_id', this.id);
 

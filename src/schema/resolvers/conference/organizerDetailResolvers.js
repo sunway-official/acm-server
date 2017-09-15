@@ -121,9 +121,8 @@ export default {
       try {
         const organizerDetail = await OrganizerDetail.query().findById(id);
 
-        // delete coference with organizer_id
+        // delete all conferences of organizer detail with id
         await organizerDetail.deleteConference();
-
         if (!organizerDetail)
           throw new ValidationError('Not found organizerDetail');
 
