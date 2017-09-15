@@ -4,6 +4,7 @@ export default class NewsComment extends Model {
   static tableName = 'news_comments';
   static jsonSchema = {
     type: 'object',
+    required: ['news_id', 'user_id', 'content'],
     description: 'A news comment',
     properties: {
       id: { type: 'integer' },

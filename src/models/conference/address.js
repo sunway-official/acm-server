@@ -5,6 +5,7 @@ export default class Address extends Model {
   static tableName = 'addresses';
   static jsonSchema = {
     type: 'object',
+    required: ['street', 'city', 'country'],
     description: 'A conference address',
     properties: {
       id: { type: 'integer' },

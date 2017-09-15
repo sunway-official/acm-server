@@ -21,6 +21,9 @@ type Conference {
   # Conference news
   news:[News!]!
 
+  # conference activities
+  activities:[Activity!]!
+
   # Conference title
   title: String!
 

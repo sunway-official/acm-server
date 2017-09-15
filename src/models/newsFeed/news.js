@@ -7,6 +7,7 @@ export default class Role extends Model {
   static tableName = 'news';
   static jsonSchema = {
     type: 'object',
+    required: ['user_id', 'conference_id', 'content'],
     description: 'A news',
     properties: {
       id: { type: 'integer' },

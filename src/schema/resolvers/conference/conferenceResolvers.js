@@ -40,6 +40,10 @@ export default {
       const news = await News.query().where('conference_id', id);
       return news;
     },
+    activities: async ({ id }, data, { models: { Activity } }) => {
+      const activities = await Activity.query().where('conference_id', id);
+      return activities;
+    },
   },
   Query: {
     getAllConferences: async (

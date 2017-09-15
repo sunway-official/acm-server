@@ -1,13 +1,14 @@
 import { Model } from 'objection';
 import ConferenceAttendee from './conferenceAttendee';
 import ConferenceTopic from './conferenceTopic';
-import News from './news';
-import Activity from './activity';
+import News from '../newsFeed/news';
+import Activity from '../activity/activity';
 
 export default class Conference extends Model {
   static tableName = 'conferences';
   static jsonSchema = {
     type: 'object',
+    required: ['organizer_detail_id', 'address_id', 'user_id', 'title'],
     description: 'A conference',
     properties: {
       id: { type: 'integer' },

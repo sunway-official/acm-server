@@ -5,6 +5,7 @@ export default class OrganizerDetail extends Model {
   static tableName = 'organizer_detail';
   static jsonSchema = {
     type: 'object',
+    required: ['user_id', 'name', 'email', 'address'],
     description: 'The detail of an organizer',
     properties: {
       id: { type: 'integer' },

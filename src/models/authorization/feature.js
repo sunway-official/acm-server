@@ -6,6 +6,7 @@ export default class Feature extends Model {
   static tableName = 'features';
   static jsonSchema = {
     type: 'object',
+    required: ['name'],
     description: 'A feature',
     properties: {
       id: { type: 'integer' },

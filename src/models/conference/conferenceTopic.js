@@ -4,6 +4,7 @@ export default class ConferenceTopic extends Model {
   static tableName = 'conference_topics';
   static jsonSchema = {
     type: 'object',
+    required: ['conference_id', 'topic_id'],
     description: 'A default conference topic',
     properties: {
       id: { type: 'integer' },
