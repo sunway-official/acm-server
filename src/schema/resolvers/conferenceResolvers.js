@@ -261,6 +261,7 @@ export default {
 
         if (!conference) throw new ValidationError('Not found conference');
 
+        await Conference.query().deleteById(id);
         return conference;
       } catch (e) {
         // eslint-disable-next-line no-console
