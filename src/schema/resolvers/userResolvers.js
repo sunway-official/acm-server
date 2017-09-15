@@ -2,6 +2,10 @@ import jwt from 'jsonwebtoken';
 
 export default {
   User: {
+    permissions: async ({ id }, data, { models: { Permission } }) => {
+      const permissions = Permission.query().where('user_id', id);
+      return permissions;
+    },
     organizerDetails: async ({ id }, data, { models: { OrganizerDetail } }) => {
       const organizerDetail = await OrganizerDetail.query().where(
         'user_id',

@@ -20,7 +20,10 @@ exports.up = function(knex, Promise) {
         .integer('feature_id')
         .unsigned()
         .notNullable();
-      table.string('status').notNullable();
+      table
+        .enu('status', ['on', 'off'])
+        .defaultTo('on')
+        .notNullable();
     }),
   ]);
 };

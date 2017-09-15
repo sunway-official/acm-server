@@ -8,6 +8,10 @@ export default `
 
     # DefaultPermission
     defaultPermissions: [DefaultPermission!]!
+
+    # Permissions
+    permissions: [Permission!]!
+
   }
 
   extend type Query {

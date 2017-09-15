@@ -12,6 +12,9 @@ type Topic {
   # description of Topic
   description: String!
 
+  # all activities have this topic
+  activityTopics: [ActivityTopic!]!
+
 }
 
 extend type Query {

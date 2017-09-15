@@ -4,7 +4,7 @@ export default class Question extends Model {
   static tableName = 'questions';
   static jsonSchema = {
     type: 'object',
-    description: 'A question',
+    required: ['user_id', 'activity_id', 'content'],
     properties: {
       id: { type: 'integer' },
       user_id: { type: 'integer' },

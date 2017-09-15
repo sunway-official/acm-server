@@ -7,6 +7,10 @@ export default {
       );
       return conferenceTopic;
     },
+    activityTopics: async ({ id }, data, { models: { ActivityTopic } }) => {
+      const activityTopics = await ActivityTopic.query().where('topic_id', id);
+      return activityTopics;
+    },
   },
   Query: {
     getAllTopics: async (

@@ -17,6 +17,9 @@ type User {
   # Document updated_at timestamp
   updated_at: Date!
 
+
+  # permissions of users
+  permissions: [Permission!]!
   # Organizer detail
   organizerDetails: [OrganizerDetail!]!
 
@@ -38,13 +41,11 @@ type User {
   # news comments
   newsComments: [NewsComment!]!
 }
-
 enum Gender {
   male
   female
   unknown
 }
-
 extend type Query {
   # Get information about all users
   getAllUsers: [User!]!

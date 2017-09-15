@@ -14,8 +14,15 @@ import newsTypes from './newsTypes';
 import newsPhotoTypes from './newsPhotoTypes';
 import newsLikeTypes from './newsLikeTypes';
 import newsCommentTypes from './newsCommentTypes';
-// import questionTypes from './questionTypes';
-// import answerTypes from './answerTypes';
+import questionTypes from './questionTypes';
+import answerTypes from './answerTypes';
+import activityTypeTypes from './activityTypeTypes';
+import activityTypes from './activityTypes';
+import activityFeedbackTypes from './activityFeedbackTypes';
+import activityTopicTypes from './activityTopicTypes';
+import roomTypes from './roomTypes';
+import scheduleTypes from './scheduleTypes';
+import personalScheduleTypes from './personalScheduleTypes';
 
 export default [
   userTypes,
@@ -34,6 +41,13 @@ export default [
   newsPhotoTypes,
   newsLikeTypes,
   newsCommentTypes,
-  // questionTypes,
-  // answerTypes,
+  questionTypes,
+  answerTypes,
+  activityTypeTypes,
+  activityTypes,
+  activityFeedbackTypes,
+  activityTopicTypes,
+  roomTypes,
+  scheduleTypes,
+  personalScheduleTypes,
 ];

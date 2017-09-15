@@ -4,10 +4,11 @@ const {
   participant,
   speaker,
   organizer,
+  author,
 } = require('../seedData/defaultPermissionsData');
 
 // array role_id want to add into permission
-const rolesID = [1, 2, 5];
+const rolesID = [1, 2, 5, 8];
 
 // array role_id want to add into permission
 
@@ -16,6 +17,9 @@ const organizersID = [2, 5, 6];
 
 // user_id want to become a speaker
 const speakersID = [3, 7, 8];
+
+// user_id want to become a author
+const authorsID = [3];
 
 // user_id want to become a participant
 const participantsID = [4, 9];
@@ -53,6 +57,10 @@ function getDefaultFeaturesWithRoleID(role_id) {
       // eslint-disable-next-line prefer-destructuring
       features = participant.features;
       break;
+    case 8:
+      // eslint-disable-next-line prefer-destructuring
+      features = author.features;
+      break;
     default:
       features = [];
   }
@@ -74,6 +82,9 @@ function getUsersIDWithRoleID(role_id) {
     case 5:
       usersID = participantsID;
       break;
+    case 8:
+      usersID = authorsID;
+      break;
     default:
       usersID = [];
   }
@@ -87,9 +98,8 @@ function getPermissions(role_id, usersID, features) {
   // eslint-disable-next-line camelcase, array-callback-return
   usersID.map(user_id => {
     // eslint-disable-next-line camelcase, array-callback-return
-    features.map((currElement, index) => {
-      // eslint-disable-next-line camelcase
-      const feature_id = index + 1;
+    features.map(feature => {
+      const { feature_id } = feature;
       const temp = {
         role_id,
         role_name: getRoleName(role_id),

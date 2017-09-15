@@ -2,10 +2,7 @@
 exports.up = function(knex, Promise) {
   return Promise.all([
     knex.schema.createTable('questions', table => {
-      table
-        .increments('id')
-        .unsigned()
-        .primary();
+      table.increments('id').primary();
       table
         .integer('user_id')
         .unsigned()
@@ -14,7 +11,7 @@ exports.up = function(knex, Promise) {
         .integer('activity_id')
         .unsigned()
         .notNullable();
-      table.string('content').notNullable();
+      table.text('content');
       table.timestamp('created_at').defaultTo(knex.fn.now());
     }),
   ]);
