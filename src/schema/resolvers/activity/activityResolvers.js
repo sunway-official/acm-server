@@ -19,6 +19,10 @@ export default {
       const activityTopic = ActivityTopic.query().where('activity_id', id);
       return activityTopic;
     },
+    schedules: async ({ id }, data, { models: { Schedule } }) => {
+      const schedules = Schedule.query().where('activity_id', id);
+      return schedules;
+    },
     activityFeedback: async (
       { id },
       data,
