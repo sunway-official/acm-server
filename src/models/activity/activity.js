@@ -1,7 +1,8 @@
 import { Model } from 'objection';
-import Schedule from '../schedule';
+import Schedule from '../schedule/schedule';
 import ActivityFeedback from './activityFeedback';
 import ActivityTopic from './activityTopic';
+import Question from '../questionAndAnswer/question';
 
 export default class Activity extends Model {
   static tableName = 'activities';
@@ -74,11 +75,11 @@ export default class Activity extends Model {
 
   // delete all question of activity with id
   async deleteQuestion() {
-    const questions = await ActivityTopic.query().where('activity_id', this.id);
+    const questions = await Question.query().where('activity_id', this.id);
 
     if (questions) {
       questions.map(question => question.deleteAnswer());
-      await ActivityTopic.query()
+      await Question.query()
         .delete()
         .where('activity_id', this.id);
     }

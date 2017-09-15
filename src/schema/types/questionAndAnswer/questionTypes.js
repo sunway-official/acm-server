@@ -9,6 +9,9 @@ type Question {
   # Activity ID
   activity: Activity!
 
+  # All answers of question
+  answers: [Answer!]!
+
   # Question content
   content:String!
 

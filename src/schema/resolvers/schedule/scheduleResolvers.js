@@ -13,7 +13,7 @@ export default {
       data,
       { models: { PersonalSchedule } },
     ) => {
-      const personalSchedules = await PersonalSchedule.query().ưhere(
+      const personalSchedules = await PersonalSchedule.query().where(
         'schedule_id',
         id,
       );

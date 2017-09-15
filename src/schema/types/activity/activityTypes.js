@@ -19,6 +19,9 @@ type Activity {
   # all schedules of activity
   schedules: [Schedule!]!
 
+  # all question of activity
+  questions: [Question!]!
+
   # title of this activity
   title: String!
 

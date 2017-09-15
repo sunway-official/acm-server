@@ -8,6 +8,10 @@ export default {
       const user = await User.query().findById(user_id);
       return user;
     },
+    answers: async ({ id }, data, { models: { Answer } }) => {
+      const answers = Answer.query().where('question_id', id);
+      return answers;
+    },
   },
   Query: {
     getAllQuestions: async (
