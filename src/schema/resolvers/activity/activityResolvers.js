@@ -130,17 +130,15 @@ export default {
     ) => {
       try {
         const activity = await Activity.query().findById(id);
-
-        // // delete all feedback of activity with id
-
-        // // delete all schedules of activity with id
-
-        // // delete all topic of activity with id
-
-        //  // delete all question of activity with id
-        await activity.deleteAllRelationship();
+        console.log(activity);
 
         if (!activity) throw new ValidationError('Not found Activity');
+
+        // delete all feedback of activity with id
+        // delete all schedules of activity with id
+        // delete all topic of activity with id
+        // delete all question of activity with id
+        await activity.deleteAllRelationship();
 
         // delete activity
         await Activity.query().deleteById(id);
