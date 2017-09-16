@@ -7,7 +7,6 @@ import Permission from './permission';
 
 import PersonalSchedule from '../schedule/personalSchedule';
 
-import Conference from '../conference/conference';
 import OrganizerDetail from '../conference/organizerDetail';
 import ConferenceAttendee from '../conference/conferenceAttendee';
 
@@ -109,19 +108,6 @@ export default class User extends unique(Model) {
     return personalSchedules;
   }
 
-  // delete all conferences of user with id
-  async deleteConference() {
-    const conferences = await Conference.query().where('user_id', this.id);
-
-    if (conferences) {
-      await Conference.query()
-        .delete()
-        .where('user_id', this.id);
-    }
-
-    return conferences;
-  }
-
   // delete all organizer detail schedule of user with id
   async deleteOrganizerDetail() {
     const organizerDetail = await OrganizerDetail.query().where(
@@ -130,6 +116,7 @@ export default class User extends unique(Model) {
     );
 
     if (organizerDetail) {
+      organizerDetail.map(organizer => organizer.deleteAllRelationship());
       await OrganizerDetail.query()
         .delete()
         .where('user_id', this.id);
@@ -237,7 +224,6 @@ export default class User extends unique(Model) {
     this.deletePermissions();
     this.deletePersonalSchedule();
 
-    this.deleteConference();
     this.deleteOrganizerDetail();
     this.deleteConferenceAttendee();
 

@@ -146,29 +146,6 @@ export default {
         throw new ValidationError(e);
       }
     },
-    getConferenceByUserIDOrganizerDetailID: async (
-      root,
-      { user_id, organizer_detail_id },
-      { models: { Conference }, ValidationError },
-    ) => {
-      try {
-        const conference = await Conference.query()
-          .where('user_id', user_id)
-          .where('organizer_detail_id', organizer_detail_id);
-
-        if (!conference) {
-          throw new ValidationError('conference-not-found');
-        }
-        return conference;
-      } catch (e) {
-        // eslint-disable-next-line no-console
-        console.error(e);
-        if (e.message === 'conference-not-found') {
-          throw new ValidationError('conference-not-found');
-        }
-        throw new ValidationError(e);
-      }
-    },
     getConferenceByAddressIDOrganizerDetailID: async (
       root,
       { address_id, organizer_detail_id },
@@ -191,36 +168,35 @@ export default {
         throw new ValidationError(e);
       }
     },
-    getConferenceByAddressIDUserID: async (
-      root,
-      { address_id, user_id },
-      { models: { Conference }, ValidationError },
-    ) => {
-      try {
-        const conference = await Conference.query()
-          .where('address_id', address_id)
-          .where('user_id', user_id);
-        if (!conference) {
-          throw new ValidationError('conference-not-found');
-        }
-        return conference;
-      } catch (e) {
-        // eslint-disable-next-line no-console
-        console.error(e);
-        if (e.message === 'conference-not-found') {
-          throw new ValidationError('conference-not-found');
-        }
-        throw new ValidationError(e);
-      }
-    },
   },
   Mutation: {
     insertConference: async (
       root,
-      data,
-      { models: { Conference }, ValidationError },
+      {
+        organizer_detail_id,
+        address_id,
+        title,
+        description,
+        start_date,
+        end_date,
+        bg_image,
+      },
+      { models: { Conference, OrganizerDetail }, ValidationError },
     ) => {
       try {
+        const { user_id } = await OrganizerDetail.query().findById(
+          organizer_detail_id,
+        );
+        const data = {
+          organizer_detail_id,
+          address_id,
+          user_id,
+          title,
+          description,
+          start_date,
+          end_date,
+          bg_image,
+        };
         const conference = await Conference.query().insert(data);
         return conference;
       } catch (e) {
@@ -232,9 +208,21 @@ export default {
     updateConference: async (
       root,
       data,
-      { models: { Conference }, ValidationError },
+      { models: { Conference, OrganizerDetail }, ValidationError },
     ) => {
       try {
+        const { organizer_detail_id } = data;
+
+        // eslint-disable-next-line camelcase
+        if (organizer_detail_id) {
+          const { user_id } = await OrganizerDetail.query().findById(
+            organizer_detail_id,
+          );
+          Object.assign(data, data, {
+            user_id,
+          });
+        }
+
         const updateConference = await Conference.query().updateAndFetchById(
           data.id,
           data,
