@@ -21,7 +21,7 @@ export default {
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);
-        throw new ValidationError('bad-request');
+        throw new ValidationError(e);
       }
     },
     getConferenceTopicByID: async (
@@ -41,7 +41,7 @@ export default {
         if (e.message === 'conferenceTopic-not-found') {
           throw new ValidationError('conferenceTopic-not-found');
         }
-        throw new ValidationError('bad-request');
+        throw new ValidationError(e);
       }
     },
   },
@@ -57,7 +57,7 @@ export default {
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);
-        throw new ValidationError('bad-request');
+        throw new ValidationError(e);
       }
     },
     updateConferenceTopic: async (
@@ -74,7 +74,7 @@ export default {
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);
-        throw new ValidationError('bad-request');
+        throw new ValidationError(e);
       }
     },
     deleteConferenceTopic: async (
@@ -84,12 +84,16 @@ export default {
     ) => {
       try {
         const conferenceTopic = await ConferenceTopic.query().findById(id);
+
+        if (!conferenceTopic)
+          throw new ValidationError('Conference topic not found');
+
         await ConferenceTopic.query().deleteById(id);
         return conferenceTopic;
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);
-        throw new ValidationError('bad-request');
+        throw new ValidationError(e);
       }
     },
   },

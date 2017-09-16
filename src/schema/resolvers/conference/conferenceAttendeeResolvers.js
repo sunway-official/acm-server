@@ -21,7 +21,7 @@ export default {
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);
-        throw new ValidationError('bad-request');
+        throw new ValidationError(e);
       }
     },
     getConferenceAttendeeByID: async (
@@ -43,7 +43,7 @@ export default {
         if (e.message === 'conferenceAttendee-not-found') {
           throw new ValidationError('conferenceAttendee-not-found');
         }
-        throw new ValidationError('bad-request');
+        throw new ValidationError(e);
       }
     },
   },
@@ -61,7 +61,7 @@ export default {
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);
-        throw new ValidationError('bad-request');
+        throw new ValidationError(e);
       }
     },
     updateConferenceAttendee: async (
@@ -78,7 +78,7 @@ export default {
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);
-        throw new ValidationError('bad-request');
+        throw new ValidationError(e);
       }
     },
     deleteConferenceAttendee: async (
@@ -90,12 +90,15 @@ export default {
         const conferenceAttendee = await ConferenceAttendee.query().findById(
           id,
         );
+        if (!conferenceAttendee)
+          throw new ValidationError('Conference attendee not found');
+
         await ConferenceAttendee.query().deleteById(id);
         return conferenceAttendee;
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);
-        throw new ValidationError('bad-request');
+        throw new ValidationError(e);
       }
     },
   },
