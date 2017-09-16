@@ -32,7 +32,7 @@ const organizerDetails = [
     phone: '0124895763',
   },
   {
-    user_id: '2',
+    user_id: '5',
     name: 'Dai hoc Duy tan, Khoa Xay Dung',
     email: 'kxaydung@dtu.edu.vn',
     address: '182 Nguyen Van Linh, Da Nang',
@@ -40,7 +40,7 @@ const organizerDetails = [
     phone: '0124895763',
   },
   {
-    user_id: '3',
+    user_id: '6',
     name: 'Dai hoc Duy tan, Khoa Kien truc',
     email: 'kkientruc@dtu.edu.vn',
     address: '182 Nguyen Van Linh, Da Nang',
@@ -48,7 +48,7 @@ const organizerDetails = [
     phone: '0124895763',
   },
   {
-    user_id: '1',
+    user_id: '7',
     name: 'Dai hoc Duy tan, Khoa Ngoai ngu',
     email: 'kngoaingu@dtu.edu.vn',
     address: '182 Nguyen Van Linh, Da Nang',
@@ -56,7 +56,7 @@ const organizerDetails = [
     phone: '0124895763',
   },
   {
-    user_id: '2',
+    user_id: '8',
     name: 'Dai hoc Duy tan, Khoa Quan tri kinh doanh',
     email: 'kquantrikinhdoanh@dtu.edu.vn',
     address: '182 Nguyen Van Linh, Da Nang',
