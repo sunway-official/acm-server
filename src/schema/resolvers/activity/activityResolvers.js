@@ -130,7 +130,6 @@ export default {
     ) => {
       try {
         const activity = await Activity.query().findById(id);
-        console.log(activity);
 
         if (!activity) throw new ValidationError('Not found Activity');
 
