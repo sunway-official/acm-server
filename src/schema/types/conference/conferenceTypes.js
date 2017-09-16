@@ -9,7 +9,7 @@ type Conference {
   # Address id
   address: Address!
 
-  # Id of person who creates the conference
+  # Id of person who creates the conference _ in organizer detail
   user: User!
 
   # Conference Topic ID
@@ -56,14 +56,8 @@ extend type Query {
   # Get Conference by User ID
   getConferenceByUserID( user_id: ID! ): [Conference!]!
 
-  # Get Conference by User ID and organizer detail
-  getConferenceByUserIDOrganizerDetailID( user_id: ID!, organizer_detail_id: ID! ): Conference!
-
   # Get Conference by Address ID and organizer detail
   getConferenceByAddressIDOrganizerDetailID( address_id: ID!, organizer_detail_id: ID! ): Conference!
-
-  # Get Conference by Address ID and user detail
-  getConferenceByAddressIDUserID( address_id: ID!, user_id: ID! ): Conference!
 }
 
 extend type Mutation {
@@ -71,7 +65,6 @@ extend type Mutation {
   insertConference(
     organizer_detail_id: ID!,
     address_id: ID!,
-    user_id: ID!,
     title: String!,
     description: String!,
     start_date: Date!,
@@ -84,7 +77,6 @@ extend type Mutation {
     id: ID!,
     organizer_detail_id: ID,
     address_id: ID,
-    user_id: ID,
     title: String,
     description: String,
     start_date: Date,
