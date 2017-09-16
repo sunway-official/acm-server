@@ -18,7 +18,7 @@ export default {
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);
-        throw new ValidationError('bad-request');
+        throw new ValidationError(e);
       }
     },
     getAddressByID: async (
@@ -38,7 +38,7 @@ export default {
         if (e.message === 'address-not-found') {
           throw new ValidationError('address-not-found');
         }
-        throw new ValidationError('bad-request');
+        throw new ValidationError(e);
       }
     },
   },
@@ -54,7 +54,7 @@ export default {
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);
-        throw new ValidationError('bad-request');
+        throw new ValidationError(e);
       }
     },
     updateAddress: async (
@@ -71,7 +71,7 @@ export default {
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);
-        throw new ValidationError('bad-request');
+        throw new ValidationError(e);
       }
     },
     deleteAddress: async (
@@ -92,7 +92,7 @@ export default {
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);
-        throw new ValidationError('bad-request');
+        throw new ValidationError(e);
       }
     },
   },

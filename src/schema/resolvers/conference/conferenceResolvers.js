@@ -52,12 +52,12 @@ export default {
       { models: { Conference }, ValidationError },
     ) => {
       try {
-        const conference = await Conference.query();
-        return conference;
+        const conferences = await Conference.query();
+        return conferences;
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);
-        throw new ValidationError('bad-request');
+        throw new ValidationError(e);
       }
     },
     getConferenceByID: async (
@@ -77,7 +77,7 @@ export default {
         if (e.message === 'conference-not-found') {
           throw new ValidationError('conference-not-found');
         }
-        throw new ValidationError('bad-request');
+        throw new ValidationError(e);
       }
     },
     getConferenceByOrganizerDetailID: async (
@@ -100,7 +100,7 @@ export default {
         if (e.message === 'conference-not-found') {
           throw new ValidationError('conference-not-found');
         }
-        throw new ValidationError('bad-request');
+        throw new ValidationError(e);
       }
     },
     getConferenceByAddressID: async (
@@ -123,7 +123,7 @@ export default {
         if (e.message === 'conference-not-found') {
           throw new ValidationError('conference-not-found');
         }
-        throw new ValidationError('bad-request');
+        throw new ValidationError(e);
       }
     },
     getConferenceByUserID: async (
@@ -143,7 +143,7 @@ export default {
         if (e.message === 'conference-not-found') {
           throw new ValidationError('conference-not-found');
         }
-        throw new ValidationError('bad-request');
+        throw new ValidationError(e);
       }
     },
     getConferenceByAddressIDOrganizerDetailID: async (
@@ -165,7 +165,7 @@ export default {
         if (e.message === 'conference-not-found') {
           throw new ValidationError('conference-not-found');
         }
-        throw new ValidationError('bad-request');
+        throw new ValidationError(e);
       }
     },
   },
@@ -202,7 +202,7 @@ export default {
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);
-        throw new ValidationError('bad-request');
+        throw new ValidationError(e);
       }
     },
     updateConference: async (
@@ -231,7 +231,7 @@ export default {
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);
-        throw new ValidationError('bad-request');
+        throw new ValidationError(e);
       }
     },
     deleteConference: async (
@@ -254,7 +254,7 @@ export default {
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);
-        throw new ValidationError('bad-request');
+        throw new ValidationError(e);
       }
     },
   },

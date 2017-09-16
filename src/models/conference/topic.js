@@ -19,7 +19,7 @@ export default class Topic extends Model {
   }
 
   // delete all conferenceTopic of topic with id
-  async deleteConConferenceTopic() {
+  async deleteConferenceTopic() {
     const conferenceTopics = await ConferenceTopic.query().where(
       'topic_id',
       this.id,
@@ -51,6 +51,6 @@ export default class Topic extends Model {
   }
   async deleteAllRelationship() {
     this.deleteActivityTopic();
-    this.deleteConConferenceTopic();
+    this.deleteConferenceTopic();
   }
 }
