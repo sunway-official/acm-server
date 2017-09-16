@@ -44,6 +44,12 @@ type User {
 
   # news comments
   newsComments: [NewsComment!]!
+
+  # questions
+  questions: [Question!]!
+
+  # answers
+  answers: [Answer!]!
 }
 enum Gender {
   male
@@ -94,6 +100,9 @@ extend type Mutation {
     token: String!): RequestResult!
   # Reset user password, requires the token from the forgot password email
   resetUserPassword(token: String!, newPassword: String!): RequestResult!
+
+  # delete user with id
+  deleteUser(id: ID!): User!
 }
 
 type LoginResponse {

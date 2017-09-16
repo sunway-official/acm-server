@@ -55,6 +55,14 @@ export default {
       const newsComments = await NewsComment.query().where('user_id', id);
       return newsComments;
     },
+    questions: async ({ id }, data, { models: { Question } }) => {
+      const questions = await Question.query().where('user_id', id);
+      return questions;
+    },
+    answers: async ({ id }, data, { models: { Answer } }) => {
+      const answers = await Answer.query().where('user_id', id);
+      return answers;
+    },
   },
   Query: {
     getAllUsers: async (root, data, { models: { User }, ValidationError }) => {
@@ -284,6 +292,37 @@ export default {
         success: true,
         message: 'token-valid',
       };
+    },
+
+    deleteUser: async (root, { id }, { models: { User }, ValidationError }) => {
+      try {
+        const user = await User.query().findById(id);
+
+        if (!user) throw new ValidationError('User not exist');
+
+        // delete all permission of user with id
+        // delete all personal schedule of user with id
+        // delete all conferences of user with id
+        // delete all organizer detail schedule of user with id
+        // delete all conference attendee schedule of user with id
+        // delete all feedback of user with id
+        // delete all question of user with id
+        // delete all answers of user with id
+        // delete all news of user with id
+        // delete all news commnent of user with id
+        // delete all news like of user with id
+
+        await user.deleteAllRelationship();
+
+        // delete user
+        await User.query().deleteById(id);
+
+        return user;
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error(e);
+        throw new ValidationError(e);
+      }
     },
   },
 };

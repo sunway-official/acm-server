@@ -1,7 +1,7 @@
 import { Model } from 'objection';
 
 export default class Role extends Model {
-  static tableName = 'news_photos';
+  static tableName = 'news_likes';
   static jsonSchema = {
     type: 'object',
     required: ['news_id', 'user_id'],
