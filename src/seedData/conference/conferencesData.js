@@ -26,7 +26,7 @@ const conferences = [
     start_date: ' 2018-08-11 09:00',
     end_date: '2018-08-14 09:00',
     bg_image: 'HoinghiSinhviênASEAN2016.png',
-    organizer_detail_id: '2',
+    organizer_detail_id: '3',
     address_id: '3',
     user_id: '3',
   },
@@ -37,9 +37,9 @@ const conferences = [
     start_date: ' 2017-11-23 09:00',
     end_date: '2017-11-25 09:00',
     bg_image: 'QuanhehoptacgiuaDTUvoicongdongdoanhnghiep.png',
-    organizer_detail_id: '3',
+    organizer_detail_id: '4',
     address_id: '4',
-    user_id: '3',
+    user_id: '4',
   },
   {
     title: 'Hoi nghi Nghien cuu khoa hoc sinh vien Duy Tan',
@@ -50,7 +50,7 @@ const conferences = [
     bg_image: 'QuanhehoptacgiuaDTUvoicongdongdoanhnghiep.png',
     organizer_detail_id: '5',
     address_id: '5',
-    user_id: '2',
+    user_id: '5',
   },
   {
     title: 'Hoi nghi Cac truong dai hoc ngoai cong lap',
@@ -61,7 +61,7 @@ const conferences = [
     bg_image: 'HoinghiCactruongdaihocngoaiconglap.png',
     organizer_detail_id: '6',
     address_id: '7',
-    user_id: '3',
+    user_id: '6',
   },
 ];
 

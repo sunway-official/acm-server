@@ -42,4 +42,8 @@ export default class OrganizerDetail extends Model {
     }
     return conferences;
   }
+
+  async deleteAllRelationship() {
+    this.deleteConference();
+  }
 }
