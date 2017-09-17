@@ -50,9 +50,19 @@
                 Date
             </a>
         </li>
+        <li  title="Float">
+            <a href="float.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Float
+            </a>
+        </li>
         <li  title="ID">
             <a href="id.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
                 ID
+            </a>
+        </li>
+        <li  title="Int">
+            <a href="int.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Int
             </a>
         </li>
         <li  title="String">
@@ -90,6 +100,51 @@
 <div class="slds-grid slds-grid--vertical slds-navigation-list--vertical">
     <h4 class="slds-text-title--caps slds-p-around--medium">Objects</h4>
     <ul>
+        <li  title="Activity">
+            <a href="activity.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Activity
+            </a>
+        </li>
+        <li  title="ActivityFeedback">
+            <a href="activityfeedback.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ActivityFeedback
+            </a>
+        </li>
+        <li  title="ActivityTopic">
+            <a href="activitytopic.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ActivityTopic
+            </a>
+        </li>
+        <li  title="ActivityType">
+            <a href="activitytype.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ActivityType
+            </a>
+        </li>
+        <li  title="Address">
+            <a href="address.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Address
+            </a>
+        </li>
+        <li  title="Answer">
+            <a href="answer.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Answer
+            </a>
+        </li>
+        <li  title="Conference">
+            <a href="conference.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Conference
+            </a>
+        </li>
+        <li  title="ConferenceAttendee">
+            <a href="conferenceattendee.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ConferenceAttendee
+            </a>
+        </li>
+        <li  title="ConferenceTopic">
+            <a href="conferencetopic.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ConferenceTopic
+            </a>
+        </li>
         <li  title="DefaultPermission">
             <a href="defaultpermission.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
                 DefaultPermission
@@ -105,6 +160,26 @@
                 LoginResponse
             </a>
         </li>
+        <li  title="News">
+            <a href="news.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                News
+            </a>
+        </li>
+        <li  title="NewsComment">
+            <a href="newscomment.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                NewsComment
+            </a>
+        </li>
+        <li  title="NewsLike">
+            <a href="newslike.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                NewsLike
+            </a>
+        </li>
+        <li  title="NewsPhoto">
+            <a href="newsphoto.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                NewsPhoto
+            </a>
+        </li>
         <li class="slds-is-active" title="OrganizerDetail">
             <a href="organizerdetail.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
                 OrganizerDetail
@@ -115,6 +190,16 @@
                 Permission
             </a>
         </li>
+        <li  title="PersonalSchedule">
+            <a href="personalschedule.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                PersonalSchedule
+            </a>
+        </li>
+        <li  title="Question">
+            <a href="question.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Question
+            </a>
+        </li>
         <li  title="RequestResult">
             <a href="requestresult.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
                 RequestResult
@@ -123,6 +208,21 @@
         <li  title="Role">
             <a href="role.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
                 Role
+            </a>
+        </li>
+        <li  title="Room">
+            <a href="room.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Room
+            </a>
+        </li>
+        <li  title="Schedule">
+            <a href="schedule.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Schedule
+            </a>
+        </li>
+        <li  title="Topic">
+            <a href="topic.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Topic
             </a>
         </li>
         <li  title="User">
@@ -208,7 +308,7 @@
             </a>
             GraphQL Schema definition
         </h2>
-        <code class="highlight"><ul class="code" style="padding-left:42px"><li><span class="keyword operator ts">type</span> <span class="identifier">OrganizerDetail</span> {</li><li></li><li><span class="tab"><span class="comment line">#   The ID of Organizer</span></span></li><li><span class="tab"><span class="meta">id</span>: <a class="support type" href="id.doc.html">ID</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   Organizer id</span></span></li><li><span class="tab"><span class="meta">user</span>: <a class="support type" href="user.doc.html">User</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   Organizer name</span></span></li><li><span class="tab"><span class="meta">name</span>: <a class="support type" href="string.doc.html">String</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   Organizer email</span></span></li><li><span class="tab"><span class="meta">email</span>: <a class="support type" href="string.doc.html">String</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   Organizer address</span></span></li><li><span class="tab"><span class="meta">address</span>: <a class="support type" href="string.doc.html">String</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   Organizer website</span></span></li><li><span class="tab"><span class="meta">website</span>: <a class="support type" href="string.doc.html">String</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   Organizer phone</span></span></li><li><span class="tab"><span class="meta">phone</span>: <a class="support type" href="string.doc.html">String</a>! </span></li><li>}</li></ul></code>
+        <code class="highlight"><ul class="code" style="padding-left:42px"><li><span class="keyword operator ts">type</span> <span class="identifier">OrganizerDetail</span> {</li><li></li><li><span class="tab"><span class="comment line">#   The ID of Organizer</span></span></li><li><span class="tab"><span class="meta">id</span>: <a class="support type" href="id.doc.html">ID</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   Organizer id</span></span></li><li><span class="tab"><span class="meta">user</span>: <a class="support type" href="user.doc.html">User</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   Organizer name</span></span></li><li><span class="tab"><span class="meta">name</span>: <a class="support type" href="string.doc.html">String</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   Organizer email</span></span></li><li><span class="tab"><span class="meta">email</span>: <a class="support type" href="string.doc.html">String</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   Organizer address</span></span></li><li><span class="tab"><span class="meta">address</span>: <a class="support type" href="string.doc.html">String</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   Organizer website</span></span></li><li><span class="tab"><span class="meta">website</span>: <a class="support type" href="string.doc.html">String</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   Organizer phone</span></span></li><li><span class="tab"><span class="meta">phone</span>: <a class="support type" href="string.doc.html">String</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   conference</span></span></li><li><span class="tab"><span class="meta">conferences</span>: [<a class="support type" href="conference.doc.html">Conference</a>!]! </span></li><li>}</li></ul></code>
     </div>
 </section>
 <section>
@@ -219,7 +319,7 @@
             </a>
             Require by
         </h2>
-        <ul class="require-by"><li><a href="mutation.doc.html" title="Mutation - ">Mutation<em></em></a><li><li><a href="query.doc.html" title="Query - ">Query<em></em></a><li><li><a href="user.doc.html" title="User - ">User<em></em></a><li></ul>
+        <ul class="require-by"><li><a href="conference.doc.html" title="Conference - ">Conference<em></em></a><li><li><a href="mutation.doc.html" title="Mutation - ">Mutation<em></em></a><li><li><a href="query.doc.html" title="Query - ">Query<em></em></a><li><li><a href="user.doc.html" title="User - ">User<em></em></a><li></ul>
     </div>
 </section>
 <footer>
