@@ -8,7 +8,8 @@
   },
   "scripts": {
     "start": "node build/index.js",
-    "build": "babel -d ./build ./src -s",
+    "build:only": "babel -d ./build ./src -s",
+    "build-all": "run-s clean:build build:*",
     "deploy": "gcloud app deploy",
     "dev": "cross-env NODE_PATH=/ nodemon -e js --exec babel-node src/index.js",
     "migrate:latest:dev": "knex migrate:latest --knexfile src/knexfile.js",
@@ -24,7 +25,10 @@
     "lint-staged": "lint-staged",
     "pretty":
       "prettier --single-quote --trailing-comma all --write '{src,tests}/**/*.js'",
-    "precommit": "run-s lint-staged lint"
+    "precommit": "run-s lint-staged lint",
+    "clean:build": "rimraf ./build",
+    "clean:docs": "rimraf ./docs",
+    "clean-all": "run-s clean:*"
   },
   "repository": {
     "type": "git",
@@ -69,6 +73,7 @@
     "objection-unique": "^0.2.0",
     "optics-agent": "^1.1.6",
     "pg": "^7.3.0",
+    "rimraf": "^2.6.2",
     "subscriptions-transport-ws": "^0.8.3",
     "yup": "^0.22.0"
   },
