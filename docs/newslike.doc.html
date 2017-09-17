@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="./styles/graphdoc.css" />
-    <title>Status</title>
+    <title>NewsLike</title>
     <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700" rel="stylesheet"><link type="text/css" rel="stylesheet" href="./assets/code.css" /><link type="text/css" rel="stylesheet" href="./assets/require-by.css" />
 </head>
 <body class="slds-scrollable--y">
@@ -80,7 +80,7 @@
                 Gender
             </a>
         </li>
-        <li class="slds-is-active" title="Status">
+        <li  title="Status">
             <a href="status.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
                 Status
             </a>
@@ -170,7 +170,7 @@
                 NewsComment
             </a>
         </li>
-        <li  title="NewsLike">
+        <li class="slds-is-active" title="NewsLike">
             <a href="newslike.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
                 NewsLike
             </a>
@@ -295,8 +295,8 @@
         </div>
     </div>
     <div class="container">
-        <p class="slds-text-title--caps slds-text-color--weak">ENUM</p>
-        <h1 class="slds-text-heading--large">Status</h1>
+        <p class="slds-text-title--caps slds-text-color--weak">OBJECT</p>
+        <h1 class="slds-text-heading--large">NewsLike</h1>
         <div class="slds-text-body--regular"></div>
     </div>
 </section>
@@ -308,7 +308,7 @@
             </a>
             GraphQL Schema definition
         </h2>
-        <code class="highlight"><ul class="code" style="padding-left:28px"><li><span class="keyword operator ts">enum</span> <span class="identifier">Status</span> {</li><li><span class="tab"></span></li><li><span class="tab"><span class="meta">on</span></span></li><li><span class="tab"></span></li><li><span class="tab"><span class="meta">off</span></span></li><li>}</li></ul></code>
+        <code class="highlight"><ul class="code" style="padding-left:42px"><li><span class="keyword operator ts">type</span> <span class="identifier">NewsLike</span> {</li><li></li><li><span class="tab"><span class="comment line">#   The ID of NewsLike</span></span></li><li><span class="tab"><span class="meta">id</span>: <a class="support type" href="id.doc.html">ID</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   News ID</span></span></li><li><span class="tab"><span class="meta">news</span>: <a class="support type" href="news.doc.html">News</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   User ID</span></span></li><li><span class="tab"><span class="meta">user</span>: <a class="support type" href="user.doc.html">User</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   Document created_at timestamp</span></span></li><li><span class="tab"><span class="meta">created_at</span>: <a class="support type" href="date.doc.html">Date</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   Document updated_at timestamp</span></span></li><li><span class="tab"><span class="meta">updated_at</span>: <a class="support type" href="date.doc.html">Date</a>! </span></li><li>}</li></ul></code>
     </div>
 </section>
 <section>
@@ -319,7 +319,7 @@
             </a>
             Require by
         </h2>
-        <ul class="require-by"><li><a href="activity.doc.html" title="Activity - ">Activity<em></em></a><li><li><a href="mutation.doc.html" title="Mutation - ">Mutation<em></em></a><li><li><a href="permission.doc.html" title="Permission - ">Permission<em></em></a><li><li><a href="room.doc.html" title="Room - ">Room<em></em></a><li></ul>
+        <ul class="require-by"><li><a href="mutation.doc.html" title="Mutation - ">Mutation<em></em></a><li><li><a href="news.doc.html" title="News - ">News<em></em></a><li><li><a href="query.doc.html" title="Query - ">Query<em></em></a><li><li><a href="user.doc.html" title="User - ">User<em></em></a><li></ul>
     </div>
 </section>
 <footer>

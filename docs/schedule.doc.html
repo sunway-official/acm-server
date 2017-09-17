@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="./styles/graphdoc.css" />
-    <title>Status</title>
+    <title>Schedule</title>
     <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700" rel="stylesheet"><link type="text/css" rel="stylesheet" href="./assets/code.css" /><link type="text/css" rel="stylesheet" href="./assets/require-by.css" />
 </head>
 <body class="slds-scrollable--y">
@@ -80,7 +80,7 @@
                 Gender
             </a>
         </li>
-        <li class="slds-is-active" title="Status">
+        <li  title="Status">
             <a href="status.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
                 Status
             </a>
@@ -215,7 +215,7 @@
                 Room
             </a>
         </li>
-        <li  title="Schedule">
+        <li class="slds-is-active" title="Schedule">
             <a href="schedule.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
                 Schedule
             </a>
@@ -295,8 +295,8 @@
         </div>
     </div>
     <div class="container">
-        <p class="slds-text-title--caps slds-text-color--weak">ENUM</p>
-        <h1 class="slds-text-heading--large">Status</h1>
+        <p class="slds-text-title--caps slds-text-color--weak">OBJECT</p>
+        <h1 class="slds-text-heading--large">Schedule</h1>
         <div class="slds-text-body--regular"></div>
     </div>
 </section>
@@ -308,7 +308,7 @@
             </a>
             GraphQL Schema definition
         </h2>
-        <code class="highlight"><ul class="code" style="padding-left:28px"><li><span class="keyword operator ts">enum</span> <span class="identifier">Status</span> {</li><li><span class="tab"></span></li><li><span class="tab"><span class="meta">on</span></span></li><li><span class="tab"></span></li><li><span class="tab"><span class="meta">off</span></span></li><li>}</li></ul></code>
+        <code class="highlight"><ul class="code" style="padding-left:42px"><li><span class="keyword operator ts">type</span> <span class="identifier">Schedule</span> {</li><li></li><li><span class="tab"><span class="comment line">#   The ID of Schedule</span></span></li><li><span class="tab"><span class="meta">id</span>: <a class="support type" href="id.doc.html">ID</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   room of activity in schedule</span></span></li><li><span class="tab"><span class="meta">room</span>: <a class="support type" href="room.doc.html">Room</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   schedule of activity</span></span></li><li><span class="tab"><span class="meta">activity</span>: <a class="support type" href="activity.doc.html">Activity</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   personal schedule</span></span></li><li><span class="tab"><span class="meta">personalSchedules</span>: [<a class="support type" href="personalschedule.doc.html">PersonalSchedule</a>!]! </span></li><li></li><li><span class="tab"><span class="comment line">#   start time of Schedule</span></span></li><li><span class="tab"><span class="meta">start</span>: <a class="support type" href="date.doc.html">Date</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   end time of Schedule</span></span></li><li><span class="tab"><span class="meta">end</span>: <a class="support type" href="date.doc.html">Date</a>! </span></li><li>}</li></ul></code>
     </div>
 </section>
 <section>
@@ -319,7 +319,7 @@
             </a>
             Require by
         </h2>
-        <ul class="require-by"><li><a href="activity.doc.html" title="Activity - ">Activity<em></em></a><li><li><a href="mutation.doc.html" title="Mutation - ">Mutation<em></em></a><li><li><a href="permission.doc.html" title="Permission - ">Permission<em></em></a><li><li><a href="room.doc.html" title="Room - ">Room<em></em></a><li></ul>
+        <ul class="require-by"><li><a href="activity.doc.html" title="Activity - ">Activity<em></em></a><li><li><a href="mutation.doc.html" title="Mutation - ">Mutation<em></em></a><li><li><a href="personalschedule.doc.html" title="PersonalSchedule - ">PersonalSchedule<em></em></a><li><li><a href="query.doc.html" title="Query - ">Query<em></em></a><li><li><a href="room.doc.html" title="Room - ">Room<em></em></a><li></ul>
     </div>
 </section>
 <footer>

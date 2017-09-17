@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="./styles/graphdoc.css" />
-    <title>Status</title>
+    <title>Activity</title>
     <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700" rel="stylesheet"><link type="text/css" rel="stylesheet" href="./assets/code.css" /><link type="text/css" rel="stylesheet" href="./assets/require-by.css" />
 </head>
 <body class="slds-scrollable--y">
@@ -80,7 +80,7 @@
                 Gender
             </a>
         </li>
-        <li class="slds-is-active" title="Status">
+        <li  title="Status">
             <a href="status.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
                 Status
             </a>
@@ -100,7 +100,7 @@
 <div class="slds-grid slds-grid--vertical slds-navigation-list--vertical">
     <h4 class="slds-text-title--caps slds-p-around--medium">Objects</h4>
     <ul>
-        <li  title="Activity">
+        <li class="slds-is-active" title="Activity">
             <a href="activity.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
                 Activity
             </a>
@@ -295,8 +295,8 @@
         </div>
     </div>
     <div class="container">
-        <p class="slds-text-title--caps slds-text-color--weak">ENUM</p>
-        <h1 class="slds-text-heading--large">Status</h1>
+        <p class="slds-text-title--caps slds-text-color--weak">OBJECT</p>
+        <h1 class="slds-text-heading--large">Activity</h1>
         <div class="slds-text-body--regular"></div>
     </div>
 </section>
@@ -308,7 +308,7 @@
             </a>
             GraphQL Schema definition
         </h2>
-        <code class="highlight"><ul class="code" style="padding-left:28px"><li><span class="keyword operator ts">enum</span> <span class="identifier">Status</span> {</li><li><span class="tab"></span></li><li><span class="tab"><span class="meta">on</span></span></li><li><span class="tab"></span></li><li><span class="tab"><span class="meta">off</span></span></li><li>}</li></ul></code>
+        <code class="highlight"><ul class="code" style="padding-left:42px"><li><span class="keyword operator ts">type</span> <span class="identifier">Activity</span> {</li><li></li><li><span class="tab"><span class="comment line">#   ID of activity</span></span></li><li><span class="tab"><span class="meta">id</span>: <a class="support type" href="id.doc.html">ID</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   conferen have this activity</span></span></li><li><span class="tab"><span class="meta">conference</span>: <a class="support type" href="conference.doc.html">Conference</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   type of this activity</span></span></li><li><span class="tab"><span class="meta">activityType</span>: <a class="support type" href="activitytype.doc.html">ActivityType</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   all topics of activity</span></span></li><li><span class="tab"><span class="meta">activityTopics</span>: [<a class="support type" href="activitytopic.doc.html">ActivityTopic</a>!]! </span></li><li></li><li><span class="tab"><span class="comment line">#   all feedback of activity</span></span></li><li><span class="tab"><span class="meta">activityFeedback</span>: [<a class="support type" href="activityfeedback.doc.html">ActivityFeedback</a>!]! </span></li><li></li><li><span class="tab"><span class="comment line">#   all schedules of activity</span></span></li><li><span class="tab"><span class="meta">schedules</span>: [<a class="support type" href="schedule.doc.html">Schedule</a>!]! </span></li><li></li><li><span class="tab"><span class="comment line">#   all question of activity</span></span></li><li><span class="tab"><span class="meta">questions</span>: [<a class="support type" href="question.doc.html">Question</a>!]! </span></li><li></li><li><span class="tab"><span class="comment line">#   title of this activity</span></span></li><li><span class="tab"><span class="meta">title</span>: <a class="support type" href="string.doc.html">String</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   status of this activity</span></span></li><li><span class="tab"><span class="comment line">#   status 'on' or 'off'</span></span></li><li><span class="tab"><span class="meta">status</span>: <a class="support type" href="status.doc.html">Status</a>! </span></li><li>}</li></ul></code>
     </div>
 </section>
 <section>
@@ -319,7 +319,7 @@
             </a>
             Require by
         </h2>
-        <ul class="require-by"><li><a href="activity.doc.html" title="Activity - ">Activity<em></em></a><li><li><a href="mutation.doc.html" title="Mutation - ">Mutation<em></em></a><li><li><a href="permission.doc.html" title="Permission - ">Permission<em></em></a><li><li><a href="room.doc.html" title="Room - ">Room<em></em></a><li></ul>
+        <ul class="require-by"><li><a href="activityfeedback.doc.html" title="ActivityFeedback - ">ActivityFeedback<em></em></a><li><li><a href="activitytopic.doc.html" title="ActivityTopic - ">ActivityTopic<em></em></a><li><li><a href="activitytype.doc.html" title="ActivityType - ">ActivityType<em></em></a><li><li><a href="conference.doc.html" title="Conference - ">Conference<em></em></a><li><li><a href="mutation.doc.html" title="Mutation - ">Mutation<em></em></a><li><li><a href="personalschedule.doc.html" title="PersonalSchedule - ">PersonalSchedule<em></em></a><li><li><a href="query.doc.html" title="Query - ">Query<em></em></a><li><li><a href="question.doc.html" title="Question - ">Question<em></em></a><li><li><a href="schedule.doc.html" title="Schedule - ">Schedule<em></em></a><li></ul>
     </div>
 </section>
 <footer>
