@@ -19,6 +19,9 @@ import schedule from './schedule';
 // globalTypes
 import globalTypes from './globalTypes';
 
+// staff
+import staff from './staff';
+
 export default [
   ...authorization,
   ...activity,
@@ -27,4 +30,5 @@ export default [
   ...questionAndAnswer,
   ...schedule,
   globalTypes,
+  staff,
 ];
