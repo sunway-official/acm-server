@@ -72,16 +72,13 @@ export default {
     },
 
     // get all features by user_id
-    getAllFeaturesByUserID: async (
+    getAllPermissionsByUserID: async (
       root,
       { user_id },
       { models: { Permission }, ValidationError },
     ) => {
       try {
-        const permissions = await Permission.query()
-          .where('user_id', user_id)
-          .distinct('feature_id');
-
+        const permissions = await Permission.query().where('user_id', user_id);
         return permissions;
       } catch (e) {
         // eslint-disable-next-line no-console
@@ -157,15 +154,19 @@ export default {
       }
     },
 
-    // update status of permission
-    updateStatusPermission: async (
+    // update status of feature
+    updateStatusFeatureOfUser: async (
       root,
-      { id, status },
+      { user_id, feature_id, status },
       { models: { Permission }, ValidationError },
     ) => {
       try {
-        const updatePermission = await Permission.query().updateAndFetchById(
-          id,
+        const permission = await Permission.query().where({
+          user_id,
+          feature_id,
+        });
+        const updatePermission = await Permission.query().patchAndFetchById(
+          permission[0].id,
           { status },
         );
         return updatePermission;

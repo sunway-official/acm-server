@@ -32,10 +32,12 @@ extend type Query {
   getAllUsersByRoleID(role_id: ID!): [Permission!]!
 
   # Get all permission by user_id
-  getAllFeaturesByUserID(user_id: ID!): [Permission!]!
+  getAllPermissionsByUserID(user_id: ID!): [Permission!]!
 
   # Get all permission by user_id and role_id
   getPermissionByRoleIDUserID(role_id: ID!, user_id: ID!): [Permission!]!
+
+
 
 }
 
@@ -44,7 +46,7 @@ extend type Mutation {
   insertPermission(role_id: ID!, user_id: ID!) : [Permission!]!
 
   # Update status permission
-  updateStatusPermission(id: ID!, status: Status!) : Permission!
+  updateStatusFeatureOfUser(user_id: ID!, feature_id: ID!, status: Status!) : Permission!
 
   # Update role of User
   updateRoleOfUserInPermission(role_id: ID!, user_id: ID!) : [Permission!]!
