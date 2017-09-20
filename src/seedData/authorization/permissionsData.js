@@ -13,13 +13,13 @@ const rolesID = [1, 2, 5, 8];
 // array role_id want to add into permission
 
 // user_id want to become a organizer
-const organizersID = [2, 5, 6];
+const organizersID = [2, 5, 6, 7, 8, 9, 10, 11, 12];
 
 // user_id want to become a speaker
 const speakersID = [3, 7, 8, 12, 13, 15, 10];
 
 // user_id want to become a author
-const authorsID = [3, 2];
+const authorsID = [14, 15];
 
 // user_id want to become a participant
 const participantsID = [4, 9];
