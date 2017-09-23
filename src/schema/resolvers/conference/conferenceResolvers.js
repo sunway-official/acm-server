@@ -23,11 +23,15 @@ export default {
       data,
       { models: { ConferenceAttendee } },
     ) => {
-      const conferenceTopic = await ConferenceAttendee.query().where(
+      const conferenceAttendees = await ConferenceAttendee.query().where(
         'conference_id',
         id,
       );
-      return conferenceTopic;
+      return conferenceAttendees;
+    },
+    topics: async ({ id }, data, { models: { Topic } }) => {
+      const topics = await Topic.query().where('conference_id', id);
+      return topics;
     },
     news: async ({ id }, data, { models: { News } }) => {
       const news = await News.query().where('conference_id', id);
@@ -167,6 +171,7 @@ export default {
       root,
       {
         organizer_detail_id,
+        co_organizer_ids,
         address_id,
         title,
         description,
@@ -182,6 +187,7 @@ export default {
         );
         const data = {
           organizer_detail_id,
+          co_organizer_ids,
           address_id,
           user_id,
           title,
@@ -235,7 +241,7 @@ export default {
       try {
         const conference = await Conference.query().findById(id);
 
-        // // delete ConferenceTopic with conference_id
+        // delete all topics of conference with id
         // // delete ConferenceAttendee with conference_id
         // // delete News with conference_id
         // // delete Activity with conference_id
