@@ -19,7 +19,7 @@ export default class Permission extends Model {
       user_id: {
         type: 'integer',
       },
-      user_name: {
+      full_name: {
         type: 'string',
         minLength: '1',
         maxLength: '100',

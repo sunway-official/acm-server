@@ -13,10 +13,10 @@ const rolesID = [1, 2, 5, 8];
 // array role_id want to add into permission
 
 // user_id want to become a organizer
-const organizersID = [2, 5, 6, 7, 8, 9, 10, 11, 12];
+const organizersID = [2, 5, 6, 7, 8, 9, 10, 11, 12, 13];
 
 // user_id want to become a speaker
-const speakersID = [3, 7, 8, 12, 13, 15, 10];
+const speakersID = [3, 15];
 
 // user_id want to become a author
 const authorsID = [14, 15];
@@ -104,7 +104,7 @@ function getPermissions(role_id, usersID, features) {
         role_id,
         role_name: getRoleName(role_id),
         user_id,
-        user_name: getUserName(user_id),
+        full_name: getUserName(user_id),
         feature_id,
         status: 'on',
       };
