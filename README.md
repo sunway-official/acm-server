@@ -23,7 +23,7 @@ Backend project for CEM
 
 - Open [Gcloud Console](https://console.cloud.google.com/home/dashboard?project=cem-server-production)
 - Activate Google Cloud Shell
-- `rm -rf cem-server && git clone https://github.com/sunway-team/cem-server && cd cem-server && git checkout production && cp .env.production .env && npm i && npm run build`
+- `rm -rf cem-server && git clone https://github.com/sunway-team/cem-server && cd cem-server && git checkout production && cp .env.production .env && npm i && npm run build-all`
 - `gcloud app deploy`
 - Review and accept or change the services
 - `gcloud app browse`

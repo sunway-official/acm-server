@@ -16,8 +16,8 @@ module.exports = {
   staged: {
     client: 'pg',
     connection: `pg://${process.env.PG_USER}:${process.env
-      .PG_PASSWORD}@/${process.env.PG_DATABASE}?host=/cloudsql/${process.env
-      .PG_INSTANCE_NAME}`,
+      .PG_PASSWORD}@${process.env.PG_IP_ADDRESS}/${process.env
+      .PG_DATABASE}?host=/cloudsql/${process.env.PG_INSTANCE_NAME}`,
   },
   production: {
     client: 'pg',
