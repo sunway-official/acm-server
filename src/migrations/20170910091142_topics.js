@@ -6,6 +6,10 @@ exports.up = function(knex, Promise) {
         .increments('id')
         .unsigned()
         .primary();
+      table
+        .integer('conference_id')
+        .unsigned()
+        .notNullable();
       table.string('name').notNullable();
       table.string('description').notNullable();
     }),

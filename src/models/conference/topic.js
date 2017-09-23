@@ -1,5 +1,4 @@
 import { Model } from 'objection';
-import ConferenceTopic from './conferenceTopic';
 import ActivityTopic from '../activity/activityTopic';
 
 export default class Topic extends Model {
@@ -9,6 +8,7 @@ export default class Topic extends Model {
     required: ['name'],
     properties: {
       id: { type: 'integer' },
+      conference_id: { type: 'integer' },
       name: { type: 'string', maxLength: '100' },
       description: { type: 'string', maxLength: '300' },
     },
@@ -16,22 +16,7 @@ export default class Topic extends Model {
 
   async $beforeValidate(opt) {
     this.id = parseInt(opt.old.id, 10);
-  }
-
-  // delete all conferenceTopic of topic with id
-  async deleteConferenceTopic() {
-    const conferenceTopics = await ConferenceTopic.query().where(
-      'topic_id',
-      this.id,
-    );
-
-    if (conferenceTopics) {
-      await ConferenceTopic.query()
-        .delete()
-        .where('topic_id', this.id);
-    }
-
-    return conferenceTopics;
+    this.conference_id = parseInt(opt.old.conference_id, 10);
   }
 
   // delete all activityTopics of topic with id
@@ -51,6 +36,5 @@ export default class Topic extends Model {
   }
   async deleteAllRelationship() {
     this.deleteActivityTopic();
-    this.deleteConferenceTopic();
   }
 }

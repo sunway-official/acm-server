@@ -1,6 +1,6 @@
 import { Model } from 'objection';
+import Topic from './topic';
 import ConferenceAttendee from './conferenceAttendee';
-import ConferenceTopic from './conferenceTopic';
 import News from '../newsFeed/news';
 import Activity from '../activity/activity';
 
@@ -13,6 +13,7 @@ export default class Conference extends Model {
     properties: {
       id: { type: 'integer' },
       organizer_detail_id: { type: 'integer' },
+      co_organizer_ids: { type: 'string', maxLength: '200' },
       address_id: { type: 'integer' },
       user_id: { type: 'integer' },
       title: { type: 'string', maxLength: '100' },
@@ -36,20 +37,16 @@ export default class Conference extends Model {
     this.start_date = new Date().toISOString();
     this.end_date = new Date().toISOString();
   }
-  // delete all conference topics of conference with id
-  async deleteConferenceTopic() {
-    const conferenceTopics = await ConferenceTopic.query().where(
-      'conference_id',
-      this.id,
-    );
 
-    if (conferenceTopics) {
-      await ConferenceTopic.query()
+  // delete all topics of conference with id
+  async deleteTopics() {
+    const topics = await Topic.query().where('conference_id', this.id);
+
+    if (topics)
+      await Topic.query()
         .delete()
         .where('conference_id', this.id);
-    }
-
-    return conferenceTopics;
+    return topics;
   }
 
   // delete all conference attendees of conference with id
@@ -93,7 +90,7 @@ export default class Conference extends Model {
   }
 
   async deleteAllRelationship() {
-    this.deleteConferenceTopic();
+    this.deleteTopics();
     this.deleteConferenceAttendee();
     this.deleteNews();
     this.deleteActivity();
