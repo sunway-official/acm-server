@@ -171,6 +171,7 @@ export default {
       root,
       {
         organizer_detail_id,
+        co_organizer_ids,
         address_id,
         title,
         description,
@@ -186,6 +187,7 @@ export default {
         );
         const data = {
           organizer_detail_id,
+          co_organizer_ids,
           address_id,
           user_id,
           title,

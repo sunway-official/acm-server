@@ -6,6 +6,9 @@ type Conference {
   # Organizer id
   organizerDetail: OrganizerDetail!
 
+  # Co_oragnizer
+  co_organizer_ids: String!
+
   # Address id
   address: Address!
 
@@ -64,6 +67,7 @@ extend type Mutation {
   # Insert new Conference
   insertConference(
     organizer_detail_id: ID!,
+    co_organizer_ids: String!,
     address_id: ID!,
     title: String!,
     description: String!,
@@ -76,6 +80,7 @@ extend type Mutation {
   updateConference(
     id: ID!,
     organizer_detail_id: ID,
+    co_organizer_ids: String,
     address_id: ID,
     title: String,
     description: String,
