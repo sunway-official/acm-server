@@ -48,6 +48,27 @@ export default class User extends unique(Model) {
         default: 'not-set',
       },
       dob: { type: ['string', 'null'] },
+      bio: {
+        type: 'string',
+        maxLength: '200',
+      },
+      language: {
+        type: 'string',
+        maxLength: '100',
+      },
+      avatar: {
+        type: 'string',
+      },
+      linkedin_id: {
+        type: 'string',
+      },
+      facebook_id: {
+        type: 'string',
+      },
+      twitter_id: {
+        type: 'string',
+      },
+
       version_key: { type: 'string' },
     },
   };

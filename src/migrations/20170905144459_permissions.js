@@ -15,7 +15,7 @@ exports.up = function(knex, Promise) {
         .integer('user_id')
         .unsigned()
         .notNullable();
-      table.string('user_name').notNullable();
+      table.string('full_name').notNullable();
       table
         .integer('feature_id')
         .unsigned()

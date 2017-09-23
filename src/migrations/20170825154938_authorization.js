@@ -16,6 +16,12 @@ exports.up = function(knex, Promise) {
         .notNullable();
       table.date('dob').nullable();
       table.string('version_key').notNullable();
+      table.string('bio').nullable();
+      table.string('language').nullable();
+      table.string('avatar').nullable();
+      table.string('linkedin_id').nullable();
+      table.string('facebook_id').nullable();
+      table.string('twitter_id').nullable();
       table.timestamps();
     }),
   ]);

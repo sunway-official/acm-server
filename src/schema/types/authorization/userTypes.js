@@ -2,20 +2,45 @@ export default `
 type User {
   # The ID of user
   id: ID!
+
   # User firstname
   firstname: String!
+
   # User lastname
   lastname: String!
+
   # User email address
   email: String!
+
   # User birthdate
   dob: Date
+
   # User gender
   gender: Gender!
+
   # Document created_at timestamp
   created_at: Date!
+
   # Document updated_at timestamp
   updated_at: Date!
+
+  # Bio
+  bio: String!
+
+  # Language
+  language: String!
+
+  # Avatar
+  avatar: String!
+
+  # Linkedin id
+  linkedin_id: String!
+
+  # Facebook id
+  facebook_id: String!
+
+  # Twitter id
+  twitter_id: String!
 
 
   # permissions of users
@@ -86,10 +111,15 @@ extend type Mutation {
     # User password
     password: String!
   ): LoginResponse
+
   # Update user info, need auth headers
-  updateMe(firstname: String!, lastname: String!, dob: Date, gender: Gender!): User!
+  updateMe(firstname: String!, lastname: String!, dob: Date, gender: Gender!,
+    bio: String!, language: String!,avatar: String!,linkedin_id: String!,
+    facebook_id: String!,twitter_id: String! ): User!
+
   # Update user password, need auth headers
   updatePassword(oldPassword: String, newPassword: String!): User!
+
   # Send forgot password email to user inbox
   sendForgotPasswordEmail(
     # Email address to send the forgot token

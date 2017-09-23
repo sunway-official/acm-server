@@ -12,9 +12,6 @@ type Conference {
   # Id of person who creates the conference _ in organizer detail
   user: User!
 
-  # Conference Topic ID
-  conferenceTopics:[ConferenceTopic!]!
-
   # Conference Attendees ID
   conferenceAttendees:[ConferenceAttendee!]!
 
