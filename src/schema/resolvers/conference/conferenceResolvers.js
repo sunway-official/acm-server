@@ -18,13 +18,6 @@ export default {
       const user = await User.query().findById(user_id);
       return user;
     },
-    conferenceTopics: async ({ id }, data, { models: { ConferenceTopic } }) => {
-      const conferenceTopic = await ConferenceTopic.query().where(
-        'conference_id',
-        id,
-      );
-      return conferenceTopic;
-    },
     conferenceAttendees: async (
       { id },
       data,
@@ -242,7 +235,6 @@ export default {
       try {
         const conference = await Conference.query().findById(id);
 
-        // // delete ConferenceTopic with conference_id
         // // delete ConferenceAttendee with conference_id
         // // delete News with conference_id
         // // delete Activity with conference_id

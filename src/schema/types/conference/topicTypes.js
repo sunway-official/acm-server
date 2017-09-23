@@ -3,9 +3,6 @@ type Topic {
   # The ID of Topic
   id: ID!
 
-  # Conference Topic ID
-  conferenceTopics:[ConferenceTopic!]!
-
   # name of Topic
   name: String!
 
