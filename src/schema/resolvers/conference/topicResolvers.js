@@ -4,6 +4,10 @@ export default {
       const activityTopics = await ActivityTopic.query().where('topic_id', id);
       return activityTopics;
     },
+    conference: async ({ conference_id }, data, { models: { Conference } }) => {
+      const conference = await Conference.query().findById(conference_id);
+      return conference;
+    },
   },
   Query: {
     getAllTopics: async (
