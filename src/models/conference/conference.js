@@ -19,6 +19,8 @@ export default class Conference extends Model {
       title: { type: 'string', maxLength: '100' },
       description: { type: 'string', maxLength: '500' },
       bg_image: { type: 'string', maxLength: '300' },
+      start_date: { type: ['string', 'null'] },
+      end_date: { type: ['string', 'null'] },
     },
   };
 
@@ -27,15 +29,6 @@ export default class Conference extends Model {
     this.organizer_detail_id = parseInt(opt.old.organizer_detail_id, 10);
     this.address_id = parseInt(opt.old.address_id, 10);
     this.user_id = parseInt(opt.old.user_id, 10);
-  }
-  async $beforeInsert() {
-    this.start_date = new Date().toISOString();
-    this.end_date = new Date().toISOString();
-  }
-
-  async $beforeUpdate() {
-    this.start_date = new Date().toISOString();
-    this.end_date = new Date().toISOString();
   }
 
   // delete all topics of conference with id
