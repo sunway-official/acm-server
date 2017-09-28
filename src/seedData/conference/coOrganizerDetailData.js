@@ -1,0 +1,60 @@
+const coOrganizerDetail = [
+  {
+    conference_id: '1',
+    name: 'Fpt Software Company',
+    email: 'fptsoft@gmail.com',
+    address: 'FPT City, Hoa Hai, Ngu hanh son, Đà Nẵng Da Nang',
+    website: 'fptsoft.vn',
+    phone: '0236 3952 332',
+  },
+  {
+    conference_id: '1',
+    name: 'NeoLab Viet Nam',
+    email: 'neolab@gmail.com',
+    address: '346 2 Thang 9, Hoa Cuong Bac, Da Nang',
+    website: 'neolab.com.vn',
+    phone: '01452789533',
+  },
+  {
+    conference_id: '3',
+    name: 'Enclave',
+    email: 'enclaveit@gmail.com',
+    address: '455 Hoang Dieu Street, Danang, Vietnam',
+    website: 'enclaveit.com',
+    phone: '0124895763',
+  },
+  {
+    conference_id: '2',
+    name: 'BAP',
+    email: 'bap@gmail.com',
+    address: '81 Quang Trung, Hai Chau, Da Nang',
+    website: 'bap.com.vn',
+    phone: '0124895763',
+  },
+  {
+    conference_id: '2',
+    name: 'LogiGear',
+    email: 'logigear@hmail.com',
+    address: '346 2 Thang 9, Hai Chau, Da Nang',
+    website: 'logigear.com.vn',
+    phone: '0124895763',
+  },
+  {
+    conference_id: '4',
+    name: 'Framgia Inc',
+    email: 'framgia@gmail.com',
+    address: 'Ha Noi , Nam Tu Liem, Keangnam Hanoi Landmark Tower ',
+    website: 'framgia.com.vn',
+    phone: '0124895763',
+  },
+  {
+    conference_id: '1',
+    name: 'Evolable Asia',
+    email: 'Evolable@dgmail.com',
+    address: 'Da Nang , Hai Chau, Duy Tan',
+    website: 'Evolable.com.vn',
+    phone: '0124895763',
+  },
+];
+
+module.exports = coOrganizerDetail;

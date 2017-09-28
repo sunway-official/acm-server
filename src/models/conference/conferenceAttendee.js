@@ -14,6 +14,7 @@ export default class ConferenceAttendee extends Model {
   };
 
   async $beforeValidate(opt) {
+    this.id = parseInt(opt.old.id, 10);
     this.conference_id = parseInt(opt.old.conference_id, 10);
     this.user_id = parseInt(opt.old.user_id, 10);
   }
