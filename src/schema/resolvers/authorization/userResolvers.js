@@ -137,11 +137,11 @@ export default {
 
       const authUser = await User.query().findOne({ email });
       if (!authUser) {
-        throw new ValidationError('bad-credentials');
+        throw new ValidationError('user-not-exists');
       }
       const isPasswordMatch = await authUser.checkPassword(password);
       if (!isPasswordMatch) {
-        throw new ValidationError('bad-credentials');
+        throw new ValidationError('wrong-email-or-password');
       }
 
       const tokenPayload = {
@@ -164,10 +164,13 @@ export default {
         throw new ValidationError('unauthorized');
       }
       try {
+        const newData = Object.assign({}, data, {
+          dob: new Date(data.dob).toUTCString(),
+        });
         const updatedUser = await user
           .$query()
           .findById(user.id)
-          .patchAndFetch(data);
+          .patchAndFetch(newData);
         return updatedUser;
       } catch (e) {
         // eslint-disable-next-line no-console

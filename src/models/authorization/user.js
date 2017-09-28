@@ -1,23 +1,18 @@
-import { Model } from 'objection';
 import bcrypt from 'bcryptjs';
+import { Model } from 'objection';
+
 import config from '../../config';
 import commonUtils from '../../utils/common';
-
-import Permission from './permission';
-
-import PersonalSchedule from '../schedule/personalSchedule';
-
-import OrganizerDetail from '../conference/organizerDetail';
-import ConferenceAttendee from '../conference/conferenceAttendee';
-
 import ActivityFeedback from '../activity/activityFeedback';
-
-import Question from '../questionAndAnswer/question';
-import Answer from '../questionAndAnswer/answer';
-
+import ConferenceAttendee from '../conference/conferenceAttendee';
+import OrganizerDetail from '../conference/organizerDetail';
 import News from '../newsFeed/news';
 import NewsComment from '../newsFeed/newsComment';
 import NewsLike from '../newsFeed/newsLike';
+import Answer from '../questionAndAnswer/answer';
+import Question from '../questionAndAnswer/question';
+import PersonalSchedule from '../schedule/personalSchedule';
+import Permission from './permission';
 
 // Import the plugin.
 // TODO: Remember to add unique back to the class definition
@@ -45,28 +40,28 @@ export default class User extends unique(Model) {
       gender: {
         type: 'string',
         enum: ['male', 'female', 'unknown'],
-        default: 'not-set',
+        default: 'unknown',
       },
-      dob: { type: ['string', 'null'] },
+      dob: { type: 'string' },
       bio: {
-        type: 'string',
+        type: ['string', 'null'],
         maxLength: '200',
       },
       language: {
-        type: 'string',
+        type: ['string', 'null'],
         maxLength: '100',
       },
       avatar: {
-        type: 'string',
+        type: ['string', 'null'],
       },
       linkedin_id: {
-        type: 'string',
+        type: ['string', 'null'],
       },
       facebook_id: {
-        type: 'string',
+        type: ['string', 'null'],
       },
       twitter_id: {
-        type: 'string',
+        type: ['string', 'null'],
       },
 
       version_key: { type: 'string' },

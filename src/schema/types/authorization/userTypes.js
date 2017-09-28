@@ -113,9 +113,27 @@ extend type Mutation {
   ): LoginResponse
 
   # Update user info, need auth headers
-  updateMe(firstname: String!, lastname: String!, dob: Date, gender: Gender!,
-    bio: String!, language: String!,avatar: String!,linkedin_id: String!,
-    facebook_id: String!,twitter_id: String! ): User!
+  updateMe(
+    # User first name
+    firstname: String!,
+    # User last name
+    lastname: String!,
+    # User birthdate
+    dob: Date,
+    # User gender
+    gender: Gender!,
+    # More information about user
+    bio: String,
+    # User language
+    language: String,
+    # Avatar url
+    avatar: String,
+    # Linkin ID
+    linkedin_id: String,
+    # Facebook ID
+    facebook_id: String,
+    # Twiiter ID
+    twitter_id: String): User!
 
   # Update user password, need auth headers
   updatePassword(oldPassword: String, newPassword: String!): User!

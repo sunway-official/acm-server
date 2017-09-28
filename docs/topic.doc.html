@@ -140,11 +140,6 @@
                 ConferenceAttendee
             </a>
         </li>
-        <li  title="ConferenceTopic">
-            <a href="conferencetopic.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
-                ConferenceTopic
-            </a>
-        </li>
         <li  title="DefaultPermission">
             <a href="defaultpermission.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
                 DefaultPermission
@@ -308,7 +303,7 @@
             </a>
             GraphQL Schema definition
         </h2>
-        <code class="highlight"><ul class="code" style="padding-left:42px"><li><span class="keyword operator ts">type</span> <span class="identifier">Topic</span> {</li><li></li><li><span class="tab"><span class="comment line">#   The ID of Topic</span></span></li><li><span class="tab"><span class="meta">id</span>: <a class="support type" href="id.doc.html">ID</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   Conference Topic ID</span></span></li><li><span class="tab"><span class="meta">conferenceTopics</span>: [<a class="support type" href="conferencetopic.doc.html">ConferenceTopic</a>!]! </span></li><li></li><li><span class="tab"><span class="comment line">#   name of Topic</span></span></li><li><span class="tab"><span class="meta">name</span>: <a class="support type" href="string.doc.html">String</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   description of Topic</span></span></li><li><span class="tab"><span class="meta">description</span>: <a class="support type" href="string.doc.html">String</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   all activities have this topic</span></span></li><li><span class="tab"><span class="meta">activityTopics</span>: [<a class="support type" href="activitytopic.doc.html">ActivityTopic</a>!]! </span></li><li>}</li></ul></code>
+        <code class="highlight"><ul class="code" style="padding-left:42px"><li><span class="keyword operator ts">type</span> <span class="identifier">Topic</span> {</li><li></li><li><span class="tab"><span class="comment line">#   The ID of Topic</span></span></li><li><span class="tab"><span class="meta">id</span>: <a class="support type" href="id.doc.html">ID</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   Conference ID</span></span></li><li><span class="tab"><span class="meta">conference</span>: <a class="support type" href="conference.doc.html">Conference</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   name of Topic</span></span></li><li><span class="tab"><span class="meta">name</span>: <a class="support type" href="string.doc.html">String</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   description of Topic</span></span></li><li><span class="tab"><span class="meta">description</span>: <a class="support type" href="string.doc.html">String</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   all activities have this topic</span></span></li><li><span class="tab"><span class="meta">activityTopics</span>: [<a class="support type" href="activitytopic.doc.html">ActivityTopic</a>!]! </span></li><li>}</li></ul></code>
     </div>
 </section>
 <section>
@@ -319,7 +314,7 @@
             </a>
             Require by
         </h2>
-        <ul class="require-by"><li><a href="activitytopic.doc.html" title="ActivityTopic - ">ActivityTopic<em></em></a><li><li><a href="conferencetopic.doc.html" title="ConferenceTopic - ">ConferenceTopic<em></em></a><li><li><a href="mutation.doc.html" title="Mutation - ">Mutation<em></em></a><li><li><a href="query.doc.html" title="Query - ">Query<em></em></a><li></ul>
+        <ul class="require-by"><li><a href="activitytopic.doc.html" title="ActivityTopic - ">ActivityTopic<em></em></a><li><li><a href="conference.doc.html" title="Conference - ">Conference<em></em></a><li><li><a href="mutation.doc.html" title="Mutation - ">Mutation<em></em></a><li><li><a href="query.doc.html" title="Query - ">Query<em></em></a><li></ul>
     </div>
 </section>
 <footer>

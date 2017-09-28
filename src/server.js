@@ -1,22 +1,23 @@
-import express from 'express';
+import { graphiqlExpress, graphqlExpress } from 'apollo-server-express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
+import express from 'express';
+import { execute, subscribe } from 'graphql';
 import helmet from 'helmet';
+import { createServer } from 'http';
 import jwt from 'jsonwebtoken';
 import knex from 'knex';
 import { Model } from 'objection';
-import { graphqlExpress, graphiqlExpress } from 'apollo-server-express';
-import { execute, subscribe } from 'graphql';
-import { createServer } from 'http';
 import { SubscriptionServer } from 'subscriptions-transport-ws';
-import schema from './schema';
+
 import config from './config';
+import transporter from './email';
+import emailTemplates from './email/templates';
 import knexConfig from './knexfile';
+import models from './models';
+import schema from './schema';
 import formatError from './utils/formatError';
 import ValidationError from './utils/ValidationError';
-import models from './models';
-import emailTemplates from './email/templates';
-import transporter from './email';
 
 const authenticate = async (req, res, next) => {
   try {
@@ -102,7 +103,7 @@ const start = async () => {
     '/graphiql',
     graphiqlExpress({
       endpointURL: '/graphql',
-      subscriptionsEndpoint: `ws://127.0.0.1:65080/subscriptions`,
+      subscriptionsEndpoint: `ws://localhost:65080/subscriptions`,
     }),
   );
 
