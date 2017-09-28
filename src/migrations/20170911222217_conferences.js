@@ -7,7 +7,6 @@ exports.up = function(knex, Promise) {
         .integer('organizer_detail_id')
         .unsigned()
         .notNullable();
-      table.string('co_organizer_ids').notNullable();
       table
         .integer('address_id')
         .unsigned()

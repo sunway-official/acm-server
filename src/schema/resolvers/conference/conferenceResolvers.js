@@ -29,6 +29,17 @@ export default {
       );
       return conferenceAttendees;
     },
+    coOrganizerDetails: async (
+      { id },
+      data,
+      { models: { CoOrganizerDetail } },
+    ) => {
+      const coOrganizerDetails = await CoOrganizerDetail.query().where(
+        'conference_id',
+        id,
+      );
+      return coOrganizerDetails;
+    },
     topics: async ({ id }, data, { models: { Topic } }) => {
       const topics = await Topic.query().where('conference_id', id);
       return topics;
@@ -171,7 +182,6 @@ export default {
       root,
       {
         organizer_detail_id,
-        co_organizer_ids,
         address_id,
         title,
         description,
@@ -187,7 +197,6 @@ export default {
         );
         const data = {
           organizer_detail_id,
-          co_organizer_ids,
           address_id,
           user_id,
           title,

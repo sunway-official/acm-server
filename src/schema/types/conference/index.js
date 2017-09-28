@@ -3,6 +3,7 @@ import addressTypes from './addressTypes';
 import topicTypes from './topicTypes';
 import conferenceAttendeeTypes from './conferenceAttendeeTypes';
 import organizerDetailTypes from './organizerDetailTypes';
+import coOrganizerDetailTypes from './coOrganizerDetailTypes';
 
 export default [
   conferenceTypes,
@@ -10,4 +11,5 @@ export default [
   topicTypes,
   conferenceAttendeeTypes,
   organizerDetailTypes,
+  coOrganizerDetailTypes,
 ];

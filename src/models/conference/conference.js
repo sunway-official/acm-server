@@ -3,6 +3,7 @@ import Topic from './topic';
 import ConferenceAttendee from './conferenceAttendee';
 import News from '../newsFeed/news';
 import Activity from '../activity/activity';
+import CoOrganizerDetail from './coOrganizerDetail';
 
 export default class Conference extends Model {
   static tableName = 'conferences';
@@ -13,7 +14,6 @@ export default class Conference extends Model {
     properties: {
       id: { type: 'integer' },
       organizer_detail_id: { type: 'integer' },
-      co_organizer_ids: { type: 'string', maxLength: '200' },
       address_id: { type: 'integer' },
       user_id: { type: 'integer' },
       title: { type: 'string', maxLength: '100' },
@@ -82,10 +82,26 @@ export default class Conference extends Model {
     return activities;
   }
 
+  // delete all activities of conference with id
+  async deleteCoOrganizer() {
+    const coOrganizers = await CoOrganizerDetail.query().where(
+      'conference_id',
+      this.id,
+    );
+
+    if (coOrganizers) {
+      await CoOrganizerDetail.query()
+        .delete()
+        .where('conference_id', this.id);
+    }
+    return coOrganizers;
+  }
+
   async deleteAllRelationship() {
     this.deleteTopics();
     this.deleteConferenceAttendee();
     this.deleteNews();
     this.deleteActivity();
+    this.deleteCoOrganizer();
   }
 }

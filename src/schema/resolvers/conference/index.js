@@ -3,6 +3,7 @@ import conferenceResolvers from './conferenceResolvers';
 import addressResolvers from './addressResolvers';
 import topicResolvers from './topicResolvers';
 import conferenceAttendeeResolvers from './conferenceAttendeeResolvers';
+import coOrganizerDetailResolvers from './coOrganizerDetailResolvers';
 
 export default [
   organizerDetailResolvers,
@@ -10,4 +11,5 @@ export default [
   addressResolvers,
   topicResolvers,
   conferenceAttendeeResolvers,
+  coOrganizerDetailResolvers,
 ];
