@@ -1,26 +1,72 @@
 export default {
   News: {
-    user: async ({ user_id }, data, { models: { User } }) => {
-      const user = await User.query().findById(user_id);
-      return user;
+    user: async ({ user_id }, data, { models: { User }, ValidationError }) => {
+      try {
+        const user = await User.query().findById(user_id);
+        return user;
+      } catch (e) {
+        // eslint-disable-next-line
+        console.error(e);
+        throw new ValidationError('bad-request', 'user');
+      }
     },
 
-    conference: async ({ conference_id }, data, { models: { Conference } }) => {
-      const conference = await Conference.query().findById(conference_id);
-      return conference;
+    conference: async (
+      { conference_id },
+      data,
+      { models: { Conference }, ValidationError },
+    ) => {
+      try {
+        const conference = await Conference.query().findById(conference_id);
+        return conference;
+      } catch (e) {
+        // eslint-disable-next-line
+        console.error(e);
+        throw new ValidationError('bad-request', 'conference');
+      }
     },
 
-    newsPhotos: async ({ id }, data, { models: { NewsPhoto } }) => {
-      const newsPhotos = await NewsPhoto.query().where('news_id', id);
-      return newsPhotos;
+    newsPhotos: async (
+      { id },
+      data,
+      { models: { NewsPhoto }, ValidationError },
+    ) => {
+      try {
+        const newsPhotos = await NewsPhoto.query().where('news_id', id);
+        return newsPhotos;
+      } catch (e) {
+        // eslint-disable-next-line
+        console.error(e);
+        throw new ValidationError('bad-request', 'newsPhotos');
+      }
     },
-    newsLikes: async ({ id }, data, { models: { NewsLike } }) => {
-      const newsPhotos = await NewsLike.query().where('news_id', id);
-      return newsPhotos;
+    newsLikes: async (
+      { id },
+      data,
+      { models: { NewsLike }, ValidationError },
+    ) => {
+      try {
+        const newsPhotos = await NewsLike.query().where('news_id', id);
+        return newsPhotos;
+      } catch (e) {
+        // eslint-disable-next-line
+        console.error(e);
+        throw new ValidationError('bad-request', 'newsLikes');
+      }
     },
-    newsComments: async ({ id }, data, { models: { NewsComment } }) => {
-      const newsComments = await NewsComment.query().where('news_id', id);
-      return newsComments;
+    newsComments: async (
+      { id },
+      data,
+      { models: { NewsComment }, ValidationError },
+    ) => {
+      try {
+        const newsComments = await NewsComment.query().where('news_id', id);
+        return newsComments;
+      } catch (e) {
+        // eslint-disable-next-line
+        console.error(e);
+        throw new ValidationError('bad-request', 'newsComments');
+      }
     },
   },
   Query: {
