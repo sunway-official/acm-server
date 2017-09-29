@@ -6,12 +6,13 @@ const randomStr = () =>
     .toString(36)
     .substring(2, 15);
 
-export const passwordRegex = new RegExp(
-  '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{9,})',
+const passwordRegex = new RegExp(
+  '^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{6,})',
 );
 
 const commonUtils = {
   randomStr,
+  passwordRegex,
 };
 
 export default commonUtils;

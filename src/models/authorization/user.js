@@ -14,8 +14,6 @@ import Question from '../questionAndAnswer/question';
 import PersonalSchedule from '../schedule/personalSchedule';
 import Permission from './permission';
 
-// Import the plugin.
-// TODO: Remember to add unique back to the class definition
 const unique = require('objection-unique')({
   fields: ['email'],
   identifiers: ['id'],
@@ -36,7 +34,7 @@ export default class User extends unique(Model) {
         minLength: '5',
         maxLength: '100',
       },
-      password: { type: 'string' },
+      password: { type: 'string', pattern: commonUtils.passwordRegex.source },
       gender: {
         type: 'string',
         enum: ['male', 'female', 'unknown'],
