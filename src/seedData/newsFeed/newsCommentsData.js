@@ -1,3 +1,5 @@
+const faker = require('faker');
+
 const newsComments = [
   {
     news_id: '1',
@@ -41,5 +43,16 @@ const newsComments = [
     content: 'There needs to be a well rounded look at production',
   },
 ];
+
+for (let i = 0; i < 100; i += 1) {
+  newsComments.push({
+    news_id: faker.random.number({
+      min: 1,
+      max: 70,
+    }),
+    user_id: faker.random.arrayElement([1, 2, 3, 4]),
+    content: faker.lorem.sentence(),
+  });
+}
 
 module.exports = newsComments;
