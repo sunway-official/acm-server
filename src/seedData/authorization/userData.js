@@ -9,7 +9,7 @@ const randomStr = () =>
     .substring(2, 15);
 
 const password = bcrypt.hashSync(
-  'abc123',
+  'Abc123@@',
   parseInt(process.env.SALT_FACTOR, 10),
 );
 const versionKey = bcrypt.hashSync(
