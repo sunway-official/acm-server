@@ -164,11 +164,6 @@ export default {
         throw new ValidationError('unauthorized');
       }
       try {
-        if (data.dob) {
-          Object.assign(data, data, {
-            dob: new Date(data.dob).toUTCString() || undefined,
-          });
-        }
         const updatedUser = await user
           .$query()
           .findById(user.id)

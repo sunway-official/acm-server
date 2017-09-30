@@ -65,6 +65,14 @@ export default class User extends unique(Model) {
       version_key: { type: 'string' },
     },
   };
+  // eslint-disable-next-line class-methods-use-this
+  $beforeValidate(jsonSchema, json) {
+    const newJson = { ...json };
+    if (json.dob) {
+      newJson.dob = json.dob.toUTCString();
+    }
+    return newJson;
+  }
   async $beforeInsert() {
     this.created_at = new Date().toISOString();
     this.updated_at = new Date().toISOString();
