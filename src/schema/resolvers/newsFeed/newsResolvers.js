@@ -70,10 +70,14 @@ export default {
     },
   },
   Query: {
-    getAllNews: async (root, data, { models: { News }, ValidationError }) => {
+    getAllNews: async (
+      root,
+      { pageNumber, pageSize },
+      { models: { News }, ValidationError },
+    ) => {
       try {
-        const news = await News.query();
-        return news;
+        const news = await News.query().page(pageNumber || 0, pageSize || 10);
+        return news.results;
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);

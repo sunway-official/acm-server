@@ -26,12 +26,15 @@ type News {
 
   # news comments
   newsComments: [NewsComment!]!
-
 }
 
 extend type Query {
   # Get information about all News
-  getAllNews: [News!]!
+  getAllNews(
+    # Page Number
+    pageNumber: Int,
+    # Numers of news per page
+    pageSize: Int): [News!]!
 
   # Get News by ID
   getNewsByID(id: ID!): News!
