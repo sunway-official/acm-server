@@ -115,13 +115,13 @@ extend type Mutation {
   # Update user info, need auth headers
   updateMe(
     # User first name
-    firstname: String!,
+    firstname: String,
     # User last name
-    lastname: String!,
+    lastname: String,
     # User birthdate
     dob: Date,
     # User gender
-    gender: Gender!,
+    gender: Gender,
     # More information about user
     bio: String,
     # User language
