@@ -164,13 +164,15 @@ export default {
         throw new ValidationError('unauthorized');
       }
       try {
-        const newData = Object.assign({}, data, {
-          dob: new Date(data.dob).toUTCString(),
-        });
+        if (data.dob) {
+          Object.assign(data, data, {
+            dob: new Date(data.dob).toUTCString() || undefined,
+          });
+        }
         const updatedUser = await user
           .$query()
           .findById(user.id)
-          .patchAndFetch(newData);
+          .patchAndFetch(data);
         return updatedUser;
       } catch (e) {
         // eslint-disable-next-line no-console
