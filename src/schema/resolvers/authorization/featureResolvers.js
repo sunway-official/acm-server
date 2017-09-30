@@ -66,12 +66,12 @@ export default {
     },
     updateFeature: async (
       root,
-      { id, name },
+      { id, description },
       { models: { Feature }, ValidationError },
     ) => {
       try {
         const updateFeature = await Feature.query().updateAndFetchById(id, {
-          name,
+          description,
         });
         return updateFeature;
       } catch (e) {

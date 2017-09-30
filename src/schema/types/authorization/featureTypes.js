@@ -1,10 +1,10 @@
 export default `
 type Feature {
   # The ID of feature
-  id: ID!
+  id: String!
 
-  # feature name
-  name: String!
+  # The description of feature
+  description: String!
 
   # DefaultPermission
   defaultPermissions: [DefaultPermission!]!
@@ -20,10 +20,10 @@ extend type Query {
 
 extend type Mutation {
   # Insert new feature
-  insertFeature(name: String!): Feature!
+  insertFeature(id: String!): Feature!
 
   # Update Feature info by id
-  updateFeature(id:ID!, name: String!): Feature!
+  updateFeature(id:String!, description: String!): Feature!
 
   # Delete feature by id
   deleteFeature(id: ID!): Feature!

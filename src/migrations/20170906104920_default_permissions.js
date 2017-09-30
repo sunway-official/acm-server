@@ -10,10 +10,7 @@ exports.up = function(knex, Promise) {
         .integer('role_id')
         .unsigned()
         .notNullable();
-      table
-        .integer('feature_id')
-        .unsigned()
-        .notNullable();
+      table.string('feature_id').nullable();
     }),
   ]);
 };
