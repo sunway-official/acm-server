@@ -1,12 +1,5 @@
 const featuresOfParticipant = require('./participantData');
 
-const featuresOfAuthor = [
-  {
-    feature_id: 13,
-  },
-  {
-    feature_id: 14,
-  },
-];
+const featuresOfAuthor = [];
 
 module.exports = featuresOfAuthor.concat(featuresOfParticipant);

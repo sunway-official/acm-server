@@ -2,11 +2,8 @@
 exports.up = function(knex, Promise) {
   return Promise.all([
     knex.schema.createTable('features', table => {
-      table
-        .increments('id')
-        .unsigned()
-        .primary();
-      table.string('name').notNullable();
+      table.string('id').primary();
+      table.string('description').nullable();
     }),
   ]);
 };

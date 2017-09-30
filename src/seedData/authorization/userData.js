@@ -124,6 +124,61 @@ const users = [
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley ",
     language: 'Vietnamese',
   },
+  {
+    firstname: 'Supporter',
+    lastname: 'Supporter',
+    email: 'supporter@gmail.com',
+    gender: 'male',
+    password,
+    version_key: versionKey,
+    bio:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley ",
+    language: 'Vietnamese',
+  },
+  {
+    firstname: 'Moderator',
+    lastname: 'Moderator',
+    email: 'moderator@gmail.com',
+    gender: 'male',
+    password,
+    version_key: versionKey,
+    bio:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley ",
+    language: 'Vietnamese',
+  },
+  {
+    firstname: 'ticket',
+    lastname: 'checker',
+    email: 'ticket@duytan.edu.vn',
+    gender: 'male',
+    password,
+    version_key: versionKey,
+    bio:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley ",
+    language: 'Vietnamese',
+  },
+  {
+    firstname: 'author',
+    lastname: '',
+    email: 'author@gmail.com',
+    gender: 'male',
+    password,
+    version_key: versionKey,
+    bio:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley ",
+    language: 'Vietnamese',
+  },
+  {
+    firstname: 'reviewer',
+    lastname: '',
+    email: 'reviewer@gmail.com',
+    gender: 'male',
+    password,
+    version_key: versionKey,
+    bio:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley ",
+    language: 'Vietnamese',
+  },
 ];
 
 module.exports = users;

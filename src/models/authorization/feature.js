@@ -9,8 +9,8 @@ export default class Feature extends Model {
     required: ['name'],
     description: 'A feature',
     properties: {
-      id: { type: 'integer' },
-      name: { type: 'string', maxLength: '100' },
+      id: { type: 'string' },
+      description: { type: 'string' },
     },
   };
 

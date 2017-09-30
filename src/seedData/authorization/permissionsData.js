@@ -5,24 +5,40 @@ const {
   speaker,
   organizer,
   author,
+  moderator,
+  reviewer,
+  supporter,
+  ticketChecker,
 } = require('./defaultPermissionsData');
 
 // array role_id want to add into permission
-const rolesID = [1, 2, 5, 8];
+const rolesID = [1, 2, 3, 4, 5, 6, 7, 8];
 
 // array role_id want to add into permission
 
 // user_id want to become a organizer
-const organizersID = [2, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+const organizersID = [1, 2, 5, 6, 7, 8, 9, 12, 13];
 
 // user_id want to become a speaker
-const speakersID = [3, 15];
+const speakersID = [3];
 
 // user_id want to become a author
-const authorsID = [14, 15];
+const authorsID = [17];
+
+// user_id want to become a reviewer
+const reviewersID = [18];
+// user_id want to become a ticketChecker
+
+const ticketCheckersID = [16];
+// user_id want to become a supporter
+
+const supportersID = [14];
+// user_id want to become a moderator
+
+const moderatorsID = [15];
 
 // user_id want to become a participant
-const participantsID = [4, 9];
+const participantsID = [11, 10, 4];
 
 // get name of roles with id
 function getRoleName(id) {
@@ -53,9 +69,25 @@ function getDefaultFeaturesWithRoleID(role_id) {
       // eslint-disable-next-line prefer-destructuring
       features = speaker.features;
       break;
+    case 3:
+      // eslint-disable-next-line prefer-destructuring
+      features = moderator.features;
+      break;
+    case 4:
+      // eslint-disable-next-line prefer-destructuring
+      features = supporter.features;
+      break;
     case 5:
       // eslint-disable-next-line prefer-destructuring
       features = participant.features;
+      break;
+    case 6:
+      // eslint-disable-next-line prefer-destructuring
+      features = ticketChecker.features;
+      break;
+    case 7:
+      // eslint-disable-next-line prefer-destructuring
+      features = reviewer.features;
       break;
     case 8:
       // eslint-disable-next-line prefer-destructuring
@@ -79,8 +111,20 @@ function getUsersIDWithRoleID(role_id) {
     case 2:
       usersID = speakersID;
       break;
+    case 3:
+      usersID = moderatorsID;
+      break;
+    case 4:
+      usersID = supportersID;
+      break;
     case 5:
       usersID = participantsID;
+      break;
+    case 6:
+      usersID = ticketCheckersID;
+      break;
+    case 7:
+      usersID = reviewersID;
       break;
     case 8:
       usersID = authorsID;

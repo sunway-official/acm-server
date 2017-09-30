@@ -3,6 +3,10 @@ const {
   participant,
   organizer,
   author,
+  moderator,
+  reviewer,
+  supporter,
+  ticketChecker,
 } = require('../seedData/authorization/defaultPermissionsData');
 
 // eslint-disable-next-line camelcase
@@ -24,10 +28,16 @@ function getDefaultPermissions(role_id, features) {
 // get all default permission
 function getAllData() {
   let result = [];
-  result = getDefaultPermissions(participant.role_id, participant.features)
+  result = getDefaultPermissions(organizer.role_id, organizer.features)
     .concat(getDefaultPermissions(speaker.role_id, speaker.features))
-    .concat(getDefaultPermissions(author.role_id, author.features))
-    .concat(getDefaultPermissions(organizer.role_id, organizer.features));
+    .concat(getDefaultPermissions(moderator.role_id, moderator.features))
+    .concat(getDefaultPermissions(supporter.role_id, supporter.features))
+    .concat(getDefaultPermissions(participant.role_id, participant.features))
+    .concat(
+      getDefaultPermissions(ticketChecker.role_id, ticketChecker.features),
+    )
+    .concat(getDefaultPermissions(reviewer.role_id, reviewer.features))
+    .concat(getDefaultPermissions(author.role_id, author.features));
 
   return result;
 }
