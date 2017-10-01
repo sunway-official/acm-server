@@ -8,7 +8,8 @@
   },
   "scripts": {
     "start": "node build/index.js",
-    "build:only": "babel -d ./build ./src -s",
+    "build:only":
+      "babel --compact --minified --comments=false -d ./build ./src",
     "build-all": "run-s clean:build build:*",
     "deploy": "gcloud app deploy",
     "dev": "cross-env NODE_PATH=/ nodemon -e js --exec babel-node src/index.js",
@@ -16,14 +17,18 @@
     "migrate:rollback:dev": "knex migrate:rollback --knexfile src/knexfile.js",
     "seed:dev": "knex seed:run --knexfile src/knexfile.js",
     "reset:db:dev": "run-s migrate:rollback:dev migrate:latest:dev seed:dev",
-    "migrate:latest:staged": "knex migrate:latest --knexfile src/knexfile.js --env staged",
-    "migrate:rollback:staged": "knex migrate:rollback --knexfile src/knexfile.js --env staged",
+    "migrate:latest:staged":
+      "knex migrate:latest --knexfile src/knexfile.js --env staged",
+    "migrate:rollback:staged":
+      "knex migrate:rollback --knexfile src/knexfile.js --env staged",
     "seed:staged": "knex seed:run --knexfile src/knexfile.js --env staged",
-    "reset:db:staged": "run-s migrate:rollback:staged migrate:latest:staged seed:staged",
+    "reset:db:staged":
+      "run-s migrate:rollback:staged migrate:latest:staged seed:staged",
     "doc:gen": "graphdoc -f",
     "lint": "esw *.js src config --color",
     "lint-staged": "lint-staged",
-    "pretty": "prettier --single-quote --trailing-comma all --write '{src,tests}/**/*.js'",
+    "pretty":
+      "prettier --single-quote --trailing-comma all --write '{src,tests}/**/*.js'",
     "precommit": "run-s lint-staged lint",
     "clean:build": "rimraf ./build",
     "clean:docs": "rimraf ./docs",
@@ -50,7 +55,6 @@
     "output": "./docs"
   },
   "dependencies": {
-    "@2fd/graphdoc": "^2.4.0",
     "apollo-server-express": "^1.1.2",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.2",
@@ -73,11 +77,11 @@
     "objection-unique": "^0.2.1",
     "optics-agent": "^1.1.7",
     "pg": "^7.3.0",
-    "rimraf": "^2.6.2",
     "subscriptions-transport-ws": "^0.8.3",
     "yup": "^0.22.0"
   },
   "devDependencies": {
+    "@2fd/graphdoc": "^2.4.0",
     "@istanbuljs/nyc-config-babel": "^1.2.2",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
@@ -106,6 +110,7 @@
     "npm-run-all": "^4.1.1",
     "nyc": "^11.2.1",
     "prettier": "^1.7.2",
-    "prettier-eslint": "^8.2.0"
+    "prettier-eslint": "^8.2.0",
+    "rimraf": "^2.6.2"
   }
 }
