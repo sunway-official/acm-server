@@ -12,11 +12,11 @@ type User {
   # User email address
   email: String!
 
-  # User birthdate
-  dob: Date
-
   # User gender
   gender: Gender!
+
+  # User birthdate
+  dob: Date
 
   # Document created_at timestamp
   created_at: Date!
@@ -25,22 +25,22 @@ type User {
   updated_at: Date!
 
   # Bio
-  bio: String!
+  bio: String
 
   # Language
-  language: String!
+  language: String
 
   # Avatar
-  avatar: String!
+  avatar: String
 
   # Linkedin id
-  linkedin_id: String!
+  linkedin_id: String
 
   # Facebook id
-  facebook_id: String!
+  facebook_id: String
 
   # Twitter id
-  twitter_id: String!
+  twitter_id: String
 
 
   # permissions of users
