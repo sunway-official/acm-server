@@ -47,34 +47,34 @@ type User {
   permissions: [Permission!]!
 
   # personal feedback
-  activityFeedback: [ActivityFeedback!]!
+  activityFeedback: [ActivityFeedback!]
 
   # Organizer detail
-  organizerDetails: [OrganizerDetail!]!
+  organizerDetails: [OrganizerDetail!]
 
   # Conference Attendees
-  conferenceAttendees:[ConferenceAttendee!]!
+  conferenceAttendees:[ConferenceAttendee!]
 
   # conference
-  conferences: [Conference!]!
+  conferences: [Conference!]
 
   # News
-  news: [News!]!
+  news: [News!]
 
   # news photos
-  newsPhotos: [NewsPhoto!]!
+  newsPhotos: [NewsPhoto!]
 
   # news likes
-  newsLikes: [NewsLike!]!
+  newsLikes: [NewsLike!]
 
   # news comments
-  newsComments: [NewsComment!]!
+  newsComments: [NewsComment!]
 
   # questions
-  questions: [Question!]!
+  questions: [Question!]
 
   # answers
-  answers: [Answer!]!
+  answers: [Answer!]
 }
 enum Gender {
   male
