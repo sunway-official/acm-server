@@ -20,25 +20,25 @@ const rolesID = [1, 2, 3, 4, 5, 6, 7, 8];
 const organizersID = [1, 2, 5, 6, 7, 8, 9, 12, 13];
 
 // user_id want to become a speaker
-const speakersID = [3];
+const speakersID = [3, 24];
 
 // user_id want to become a author
-const authorsID = [17];
+const authorsID = [20, 21];
 
 // user_id want to become a reviewer
-const reviewersID = [18];
+const reviewersID = [22, 23];
 // user_id want to become a ticketChecker
 
-const ticketCheckersID = [16];
+const ticketCheckersID = [18, 17, 19];
 // user_id want to become a supporter
 
-const supportersID = [14];
+const supportersID = [14, 15, 16];
 // user_id want to become a moderator
 
-const moderatorsID = [15];
+const moderatorsID = [16, 17];
 
 // user_id want to become a participant
-const participantsID = [11, 10, 4];
+const participantsID = [4];
 
 // get name of roles with id
 function getRoleName(id) {

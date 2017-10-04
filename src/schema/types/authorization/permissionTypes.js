@@ -31,6 +31,9 @@ extend type Query {
   # Get all permission by role_id
   getAllUsersByRoleID(role_id: ID!): [Permission!]!
 
+  # Get all role of user by id
+  getAllRolesByUserID(user_id: ID!): [Permission!]!
+
   # Get all permission by user_id
   getAllPermissionsByUserID(user_id: ID!): [Permission!]!
 

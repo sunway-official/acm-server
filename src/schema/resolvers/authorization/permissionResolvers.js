@@ -71,6 +71,24 @@ export default {
       }
     },
 
+    // get all roles by user id
+    getAllRolesByUserID: async (
+      root,
+      { user_id },
+      { models: { Permission }, ValidationError },
+    ) => {
+      try {
+        const permissions = await Permission.query()
+          .where('user_id', user_id)
+          .distinct('role_id');
+        return permissions;
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error(e);
+        throw new ValidationError(e);
+      }
+    },
+
     // get all features by user_id
     getAllPermissionsByUserID: async (
       root,
