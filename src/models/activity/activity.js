@@ -12,7 +12,6 @@ export default class Activity extends Model {
     properties: {
       id: { type: 'integer' },
       conference_id: { type: 'integer' },
-      activity_type_id: { type: 'integer' },
       title: { type: 'string', maxLength: '300' },
       status: {
         enum: ['on', 'off'],

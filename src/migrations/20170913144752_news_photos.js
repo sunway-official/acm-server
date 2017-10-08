@@ -12,6 +12,7 @@ exports.up = function(knex, Promise) {
         .notNullable();
       table.string('name').notNullable();
       table.string('url').notNullable();
+      table.timestamps();
     }),
   ]);
 };
