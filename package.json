@@ -8,7 +8,7 @@
   },
   "scripts": {
     "prestart": "npm i -g nodemon",
-    "start": "node build/index.js",
+    "start": "nodemon build/index.js",
     "build:only": "babel --minified --no-comments -d ./build ./src",
     "build-all": "run-s clean:build build:*",
     "dev": "cross-env NODE_PATH=/ nodemon -e js --exec babel-node src/index.js",
