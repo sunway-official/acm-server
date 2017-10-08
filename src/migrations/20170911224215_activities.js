@@ -7,10 +7,6 @@ exports.up = function(knex, Promise) {
         .integer('conference_id')
         .unsigned()
         .notNullable();
-      table
-        .integer('activity_type_id')
-        .unsigned()
-        .notNullable();
       table.string('title');
       table
         .enu('status', ['on', 'off'])

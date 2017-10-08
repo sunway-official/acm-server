@@ -1,15 +1,5 @@
 export default {
   Activity: {
-    activityType: async (
-      { activity_type_id },
-      data,
-      { models: { ActivityType } },
-    ) => {
-      const activityType = await ActivityType.query().findById(
-        activity_type_id,
-      );
-      return activityType;
-    },
     conference: async ({ conference_id }, data, { models: { Conference } }) => {
       const conference = await Conference.query().findById(conference_id);
       return conference;

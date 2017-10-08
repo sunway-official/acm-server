@@ -7,9 +7,6 @@ type Activity {
   # conferen have this activity
   conference: Conference!
 
-  # type of this activity
-  activityType: ActivityType!
-
   # all topics of activity
   activityTopics: [ActivityTopic!]!
 
@@ -48,10 +45,10 @@ extend type Query {
 
 extend type Mutation {
   # insert activity with conference_id, activity_type_id, title and status
-  insertActivity(conference_id: ID!, activity_type_id: ID!, title: String!, status:Status): Activity!
+  insertActivity(conference_id: ID!, title: String!, status:Status): Activity!
 
   # update activity with id, activity_type_id, title and status
-  updateActivity(id: ID!, activity_type_id: ID, title: String, status:Status): Activity!
+  updateActivity(id: ID!, title: String, status:Status): Activity!
 
   # delete activity with id
   deleteActivity(id: ID!): Activity!
