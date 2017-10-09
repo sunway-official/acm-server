@@ -1,4 +1,5 @@
 const bcrypt = require('bcryptjs');
+const faker = require('faker');
 
 const randomStr = () =>
   Math.random()
@@ -17,34 +18,42 @@ const versionKey = bcrypt.hashSync(
   parseInt(process.env.SALT_FACTOR, 10),
 );
 
-const users = [
+const usersData = [
   {
     firstname: 'Admin',
-    lastname: '',
+    lastname: 'Mr.',
     email: 'admin@gmail.com',
     password,
     version_key: versionKey,
+    created_at: new Date(),
+    updated_at: new Date(),
   },
   {
     firstname: 'Organizer',
-    lastname: '',
+    lastname: 'Mr.',
     email: 'organizer@gmail.com',
     password,
     version_key: versionKey,
+    created_at: new Date(),
+    updated_at: new Date(),
   },
   {
     firstname: 'Speaker',
-    lastname: '',
+    lastname: 'Mr.',
     email: 'speaker@gmail.com',
     password,
     version_key: versionKey,
+    created_at: new Date(),
+    updated_at: new Date(),
   },
   {
     firstname: 'Participant',
-    lastname: '',
+    lastname: 'Mr.',
     email: 'participant@gmail.com',
     password,
     version_key: versionKey,
+    created_at: new Date(),
+    updated_at: new Date(),
   },
   {
     firstname: 'Tri',
@@ -56,6 +65,8 @@ const users = [
     bio:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley ",
     language: 'Vietnamese',
+    created_at: new Date(),
+    updated_at: new Date(),
   },
   {
     firstname: 'Thuc',
@@ -64,6 +75,8 @@ const users = [
     gender: 'male',
     password,
     version_key: versionKey,
+    created_at: new Date(),
+    updated_at: new Date(),
   },
   {
     firstname: 'Vinh',
@@ -75,6 +88,8 @@ const users = [
     bio:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley ",
     language: 'Vietnamese',
+    created_at: new Date(),
+    updated_at: new Date(),
   },
   {
     firstname: 'Manh',
@@ -83,6 +98,8 @@ const users = [
     gender: 'male',
     password,
     version_key: versionKey,
+    created_at: new Date(),
+    updated_at: new Date(),
   },
   {
     firstname: 'Minh',
@@ -91,6 +108,8 @@ const users = [
     gender: 'female',
     password,
     version_key: versionKey,
+    created_at: new Date(),
+    updated_at: new Date(),
   },
   {
     firstname: 'Dung',
@@ -99,6 +118,8 @@ const users = [
     gender: 'male',
     password,
     version_key: versionKey,
+    created_at: new Date(),
+    updated_at: new Date(),
   },
   {
     firstname: 'Khanh',
@@ -107,6 +128,8 @@ const users = [
     gender: 'male',
     password,
     version_key: versionKey,
+    created_at: new Date(),
+    updated_at: new Date(),
   },
   {
     firstname: 'Khanh',
@@ -115,6 +138,8 @@ const users = [
     gender: 'male',
     password,
     version_key: versionKey,
+    created_at: new Date(),
+    updated_at: new Date(),
   },
   {
     firstname: 'Man',
@@ -126,10 +151,12 @@ const users = [
     bio:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley ",
     language: 'Vietnamese',
+    created_at: new Date(),
+    updated_at: new Date(),
   },
   {
     firstname: 'Supporter',
-    lastname: '',
+    lastname: 'Mr.',
     email: 'supporter@gmail.com',
     gender: 'male',
     password,
@@ -137,6 +164,8 @@ const users = [
     bio:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley ",
     language: 'Vietnamese',
+    created_at: new Date(),
+    updated_at: new Date(),
   },
   {
     firstname: 'An',
@@ -148,10 +177,12 @@ const users = [
     bio:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley ",
     language: 'Vietnamese',
+    created_at: new Date(),
+    updated_at: new Date(),
   },
   {
     firstname: 'Moderator',
-    lastname: '',
+    lastname: 'Mr.',
     email: 'moderator@gmail.com',
     gender: 'male',
     password,
@@ -159,6 +190,8 @@ const users = [
     bio:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley ",
     language: 'Vietnamese',
+    created_at: new Date(),
+    updated_at: new Date(),
   },
   {
     firstname: 'Huong',
@@ -170,6 +203,8 @@ const users = [
     bio:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley ",
     language: 'Vietnamese',
+    created_at: new Date(),
+    updated_at: new Date(),
   },
   {
     firstname: 'ticket',
@@ -181,6 +216,8 @@ const users = [
     bio:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley ",
     language: 'Vietnamese',
+    created_at: new Date(),
+    updated_at: new Date(),
   },
   {
     firstname: 'Tien',
@@ -192,10 +229,12 @@ const users = [
     bio:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley ",
     language: 'Vietnamese',
+    created_at: new Date(),
+    updated_at: new Date(),
   },
   {
-    firstname: 'author',
-    lastname: '',
+    firstname: 'Athor',
+    lastname: 'Mr.',
     email: 'author@gmail.com',
     gender: 'male',
     password,
@@ -203,6 +242,8 @@ const users = [
     bio:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley ",
     language: 'Vietnamese',
+    created_at: new Date(),
+    updated_at: new Date(),
   },
   {
     firstname: 'Hoang',
@@ -214,10 +255,12 @@ const users = [
     bio:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley ",
     language: 'Vietnamese',
+    created_at: new Date(),
+    updated_at: new Date(),
   },
   {
-    firstname: 'reviewer',
-    lastname: '',
+    firstname: 'Reviewer',
+    lastname: 'Mr.',
     email: 'reviewer@gmail.com',
     gender: 'male',
     password,
@@ -225,6 +268,8 @@ const users = [
     bio:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley ",
     language: 'Vietnamese',
+    created_at: new Date(),
+    updated_at: new Date(),
   },
   {
     firstname: 'Dat',
@@ -236,6 +281,8 @@ const users = [
     bio:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley ",
     language: 'Vietnamese',
+    created_at: new Date(),
+    updated_at: new Date(),
   },
   {
     firstname: 'Ming',
@@ -247,7 +294,26 @@ const users = [
     bio:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley ",
     language: 'Vietnamese',
+    created_at: new Date(),
+    updated_at: new Date(),
   },
 ];
 
-module.exports = users;
+for (let i = 1; i < 111; i += 1) {
+  const firstname = faker.name.firstName();
+  const lastname = faker.name.lastName();
+  usersData.push({
+    firstname,
+    lastname,
+    email: faker.internet.email(firstname, lastname, 'gmail'),
+    gender: faker.random.arrayElement(['male', 'female', 'unknown']),
+    password,
+    version_key: versionKey,
+    bio: faker.lorem.sentence(),
+    language: 'Vietnamese',
+    created_at: new Date(),
+    updated_at: new Date(),
+  });
+}
+
+module.exports = usersData;
