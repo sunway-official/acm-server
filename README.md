@@ -27,6 +27,7 @@ Backend project for CEM
 - Install dependencies: `npm i`
 - Create the production .env file: `cp .env.production .env`
 - Build project: `npm run build`
+- Run `reset:db:staged` to reset production database and reseed data, if there is any errors then restart the database, remove the `cem` database, recreate `cem` and run the command again
 - Open [Bucket](https://console.cloud.google.com/storage/browser/acm-server?project=cem-server-production)
 - Remove all files inside it and upload: `app.yaml`, `package.json` and `build` folder to the bucket
 - Open `Gcloud Console` (top right corner of the screen)

@@ -7,16 +7,13 @@
           "node": "current"
         }
       }
-    ]
+    ],
+    ["stage-2"]
   ],
   "env": {
     "test": {
       "plugins": ["istanbul"]
     }
   },
-  "plugins": [
-    "transform-class-properties",
-    "transform-object-rest-spread",
-    "inline-dotenv"
-  ]
+  "plugins": ["inline-dotenv"]
 }
