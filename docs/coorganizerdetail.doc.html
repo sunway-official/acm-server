@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="./styles/graphdoc.css" />
-    <title>ActivityType</title>
+    <title>CoOrganizerDetail</title>
     <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700" rel="stylesheet"><link type="text/css" rel="stylesheet" href="./assets/code.css" /><link type="text/css" rel="stylesheet" href="./assets/require-by.css" />
 </head>
 <body class="slds-scrollable--y">
@@ -115,11 +115,6 @@
                 ActivityTopic
             </a>
         </li>
-        <li class="slds-is-active" title="ActivityType">
-            <a href="activitytype.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
-                ActivityType
-            </a>
-        </li>
         <li  title="Address">
             <a href="address.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
                 Address
@@ -138,6 +133,11 @@
         <li  title="ConferenceAttendee">
             <a href="conferenceattendee.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
                 ConferenceAttendee
+            </a>
+        </li>
+        <li class="slds-is-active" title="CoOrganizerDetail">
+            <a href="coorganizerdetail.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                CoOrganizerDetail
             </a>
         </li>
         <li  title="DefaultPermission">
@@ -291,7 +291,7 @@
     </div>
     <div class="container">
         <p class="slds-text-title--caps slds-text-color--weak">OBJECT</p>
-        <h1 class="slds-text-heading--large">ActivityType</h1>
+        <h1 class="slds-text-heading--large">CoOrganizerDetail</h1>
         <div class="slds-text-body--regular"></div>
     </div>
 </section>
@@ -303,7 +303,7 @@
             </a>
             GraphQL Schema definition
         </h2>
-        <code class="highlight"><ul class="code" style="padding-left:42px"><li><span class="keyword operator ts">type</span> <span class="identifier">ActivityType</span> {</li><li></li><li><span class="tab"><span class="comment line">#   ID of activity type</span></span></li><li><span class="tab"><span class="meta">id</span>: <a class="support type" href="id.doc.html">ID</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   name of activity type</span></span></li><li><span class="tab"><span class="meta">name</span>: <a class="support type" href="string.doc.html">String</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   all activities of type</span></span></li><li><span class="tab"><span class="meta">activities</span>: [<a class="support type" href="activity.doc.html">Activity</a>!]! </span></li><li>}</li></ul></code>
+        <code class="highlight"><ul class="code" style="padding-left:42px"><li><span class="keyword operator ts">type</span> <span class="identifier">CoOrganizerDetail</span> {</li><li></li><li><span class="tab"><span class="comment line">#   The ID of CoOrganizerDetail</span></span></li><li><span class="tab"><span class="meta">id</span>: <a class="support type" href="id.doc.html">ID</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   Conference id</span></span></li><li><span class="tab"><span class="meta">conference</span>: <a class="support type" href="conference.doc.html">Conference</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   Conference name</span></span></li><li><span class="tab"><span class="meta">name</span>: <a class="support type" href="string.doc.html">String</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   CoOrganizerDetail Address</span></span></li><li><span class="tab"><span class="meta">address</span>: <a class="support type" href="string.doc.html">String</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   CoOrganizerDetail email</span></span></li><li><span class="tab"><span class="meta">email</span>: <a class="support type" href="string.doc.html">String</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   CoOrganizerDetail website</span></span></li><li><span class="tab"><span class="meta">website</span>: <a class="support type" href="string.doc.html">String</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   CoOrganizerDetail phone</span></span></li><li><span class="tab"><span class="meta">phone</span>: <a class="support type" href="string.doc.html">String</a>! </span></li><li>}</li></ul></code>
     </div>
 </section>
 <section>
@@ -314,7 +314,7 @@
             </a>
             Require by
         </h2>
-        <ul class="require-by"><li><a href="activity.doc.html" title="Activity - ">Activity<em></em></a><li><li><a href="mutation.doc.html" title="Mutation - ">Mutation<em></em></a><li><li><a href="query.doc.html" title="Query - ">Query<em></em></a><li></ul>
+        <ul class="require-by"><li><a href="conference.doc.html" title="Conference - ">Conference<em></em></a><li><li><a href="mutation.doc.html" title="Mutation - ">Mutation<em></em></a><li><li><a href="query.doc.html" title="Query - ">Query<em></em></a><li></ul>
     </div>
 </section>
 <footer>

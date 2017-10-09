@@ -31,6 +31,6 @@ Backend project for CEM
 - Open [Bucket](https://console.cloud.google.com/storage/browser/acm-server?project=cem-server-production)
 - Remove all files inside it and upload: `app.yaml`, `package.json` and `build` folder to the bucket
 - Open `Gcloud Console` (top right corner of the screen)
-- `rm -rf acm-server && mkdir acm-server && gsutil rsync -r gs://acm-server ./acm-server && cd acm-server && gcloud app deploy`
+- `rm -rf acm-server && mkdir acm-server && gsutil rsync -r gs://acm-server ./acm-server && cd acm-server && gcloud app deploy -q`
 - `gcloud app browse`
 - Production app will be serve at [cem-server-production.appspot.com](http://cem-server-production.appspot.com)
