@@ -5,41 +5,49 @@ const newsLikes = [
     news_id: '1',
     user_id: '1',
     created_at: new Date(),
+    updated_at: new Date(),
   },
   {
     news_id: '1',
     user_id: '2',
     created_at: new Date(),
+    updated_at: new Date(),
   },
   {
     news_id: '2',
     user_id: '1',
     created_at: new Date(),
+    updated_at: new Date(),
   },
   {
     news_id: '2',
     user_id: '2',
     created_at: new Date(),
+    updated_at: new Date(),
   },
   {
     news_id: '3',
     user_id: '1',
     created_at: new Date(),
+    updated_at: new Date(),
   },
   {
     news_id: '3',
     user_id: '2',
     created_at: new Date(),
+    updated_at: new Date(),
   },
   {
     news_id: '3',
     user_id: '3',
     created_at: new Date(),
+    updated_at: new Date(),
   },
   {
     news_id: '3',
     user_id: '4',
     created_at: new Date(),
+    updated_at: new Date(),
   },
 ];
 
@@ -51,6 +59,7 @@ for (let i = 0; i < 100; i += 1) {
       max: 70,
     }),
     created_at: new Date(),
+    updated_at: new Date(),
   });
 }
 

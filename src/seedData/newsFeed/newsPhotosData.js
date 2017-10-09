@@ -7,6 +7,7 @@ const newsPhotos = [
     url:
       'https://onehdwallpaper.com/wp-content/uploads/2016/11/Most-Beautiful-Girls-Wallpapers.jpg',
     created_at: new Date(),
+    updated_at: new Date(),
   },
   {
     news_id: '2',
@@ -14,6 +15,7 @@ const newsPhotos = [
     url:
       'https://onehdwallpaper.com/wp-content/uploads/2016/11/Most-Beautiful-Girls-Wallpapers.jpg',
     created_at: new Date(),
+    updated_at: new Date(),
   },
   {
     news_id: '3',
@@ -21,6 +23,7 @@ const newsPhotos = [
     url:
       'https://onehdwallpaper.com/wp-content/uploads/2016/11/Most-Beautiful-Girls-Wallpapers.jpg',
     created_at: new Date(),
+    updated_at: new Date(),
   },
   {
     news_id: '2',
@@ -28,6 +31,7 @@ const newsPhotos = [
     url:
       'https://onehdwallpaper.com/wp-content/uploads/2016/11/Most-Beautiful-Girls-Wallpapers.jpg',
     created_at: new Date(),
+    updated_at: new Date(),
   },
   {
     news_id: '3',
@@ -35,6 +39,7 @@ const newsPhotos = [
     url:
       'https://onehdwallpaper.com/wp-content/uploads/2016/11/Most-Beautiful-Girls-Wallpapers.jpg',
     created_at: new Date(),
+    updated_at: new Date(),
   },
   {
     news_id: '1',
@@ -42,6 +47,7 @@ const newsPhotos = [
     url:
       'https://onehdwallpaper.com/wp-content/uploads/2016/11/Most-Beautiful-Girls-Wallpapers.jpg',
     created_at: new Date(),
+    updated_at: new Date(),
   },
   {
     news_id: '3',
@@ -49,6 +55,7 @@ const newsPhotos = [
     url:
       'https://onehdwallpaper.com/wp-content/uploads/2016/11/Most-Beautiful-Girls-Wallpapers.jpg',
     created_at: new Date(),
+    updated_at: new Date(),
   },
   {
     news_id: '3',
@@ -56,6 +63,7 @@ const newsPhotos = [
     url:
       'https://onehdwallpaper.com/wp-content/uploads/2016/11/Most-Beautiful-Girls-Wallpapers.jpg',
     created_at: new Date(),
+    updated_at: new Date(),
   },
 ];
 
@@ -69,6 +77,7 @@ for (let i = 0; i < 100; i += 1) {
     url:
       'https://onehdwallpaper.com/wp-content/uploads/2016/11/Most-Beautiful-Girls-Wallpapers.jpg',
     created_at: new Date(),
+    updated_at: new Date(),
   });
 }
 
