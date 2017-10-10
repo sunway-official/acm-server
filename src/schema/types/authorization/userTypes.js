@@ -139,6 +139,12 @@ extend type Mutation {
     language: String,
     # Avatar url
     avatar: String,
+    # User's organization
+    organization: String,
+    # User's position
+    position: String,
+    # User interest
+    interested_in: String,
     # Linkin ID
     linkedin_id: String,
     # Facebook ID
