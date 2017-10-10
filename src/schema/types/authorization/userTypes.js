@@ -42,6 +42,17 @@ type User {
   # Twitter id
   twitter_id: String
 
+  # Address
+  address: Address
+
+  # Position
+  position: String
+
+  # Organization
+  organization: String
+
+  # User interest
+  interested_in: String
 
   # permissions of users
   permissions: [Permission!]!

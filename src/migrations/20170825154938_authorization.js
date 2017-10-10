@@ -19,6 +19,10 @@ exports.up = function(knex, Promise) {
       table.string('bio').nullable();
       table.string('language').nullable();
       table.string('avatar').nullable();
+      table.string('organization').nullable();
+      table.string('position').nullable();
+      table.string('address_id').nullable();
+      table.string('interested_in').nullable();
       table.string('linkedin_id').nullable();
       table.string('facebook_id').nullable();
       table.string('twitter_id').nullable();

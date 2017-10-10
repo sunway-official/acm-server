@@ -63,6 +63,10 @@ export default {
       const answers = await Answer.query().where('user_id', id);
       return answers;
     },
+    address: async ({ address_id }, data, { models: { Address } }) => {
+      const address = Address.query().findById(address_id);
+      return address;
+    },
   },
   Query: {
     getAllUsers: async (root, data, { models: { User }, ValidationError }) => {
