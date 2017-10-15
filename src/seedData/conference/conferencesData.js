@@ -3,8 +3,8 @@ const conferences = [
     title: 'Hoi nghi quoc te SigTelCom 2017',
     description:
       'International Conference on Recent Advances on Signal Processing, Telecommunications & Computing',
-    start_date: '2017-01-09 09:20',
-    end_date: '2017-01-11 09:20',
+    start_date: '2017-10-22 00:00',
+    end_date: '2017-10-26 00:00',
     bg_image: 'HoinghiquocteSigTelCom2017.png',
     organizer_detail_id: '1',
     address_id: '1',
