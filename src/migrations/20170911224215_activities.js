@@ -12,6 +12,7 @@ exports.up = function(knex, Promise) {
         .enu('status', ['on', 'off'])
         .defaultTo('on')
         .notNullable();
+      table.string('description');
     }),
   ]);
 };

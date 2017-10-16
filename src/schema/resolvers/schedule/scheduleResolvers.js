@@ -8,6 +8,10 @@ export default {
       const activity = await Activity.query().findById(activity_id);
       return activity;
     },
+    conference: async ({ conference_id }, data, { models: { Conference } }) => {
+      const conference = await Conference.query().findById(conference_id);
+      return conference;
+    },
     personalSchedules: async (
       { id },
       data,

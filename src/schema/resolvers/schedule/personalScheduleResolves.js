@@ -8,6 +8,10 @@ export default {
       const activity = await Activity.query().findById(activity_id);
       return activity;
     },
+    conference: async ({ conference_id }, data, { models: { Conference } }) => {
+      const conference = await Conference.query().findById(conference_id);
+      return conference;
+    },
     user: async ({ user_id }, data, { models: { User } }) => {
       const user = await User.query().findById(user_id);
       return user;
@@ -49,16 +53,10 @@ export default {
   Mutation: {
     insertPersonalSchedule: async (
       root,
-      { schedule_id, user_id },
-      { models: { PersonalSchedule, Schedule }, ValidationError },
+      data,
+      { models: { PersonalSchedule }, ValidationError },
     ) => {
       try {
-        const { activity_id } = await Schedule.query().findById(schedule_id);
-        const data = {
-          user_id,
-          schedule_id,
-          activity_id,
-        };
         const newPersonalSchedule = await PersonalSchedule.query().insert(data);
 
         return newPersonalSchedule;
@@ -71,18 +69,16 @@ export default {
     updatePersonalSchedule: async (
       root,
       data,
-      { models: { PersonalSchedule, Schedule }, ValidationError },
+      { models: { PersonalSchedule }, ValidationError },
     ) => {
       try {
-        const { schedule_id } = data;
-
         // eslint-disable-next-line camelcase
-        if (schedule_id) {
-          const { activity_id } = await Schedule.query().findById(schedule_id);
-          Object.assign(data, data, {
-            activity_id,
-          });
-        }
+        // if (schedule_id) {
+        //   const { activity_id } = await Schedule.query().findById(schedule_id);
+        //   Object.assign(data, data, {
+        //     activity_id,
+        //   });
+        // }
 
         const updatePersonalSchedule = await PersonalSchedule.query().updateAndFetchById(
           data.id,

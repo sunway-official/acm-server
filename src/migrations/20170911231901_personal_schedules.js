@@ -12,6 +12,10 @@ exports.up = function(knex, Promise) {
         .unsigned()
         .notNullable();
       table
+        .integer('conference_id')
+        .unsigned()
+        .notNullable();
+      table
         .integer('activity_id')
         .unsigned()
         .notNullable();

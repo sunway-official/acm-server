@@ -22,10 +22,14 @@ type Activity {
   # title of this activity
   title: String!
 
+  # description of this activity
+  description: String!
+
   # status of this activity
   # status 'on' or 'off'
   status: Status!
 
+ 
 
 }
 
@@ -45,10 +49,10 @@ extend type Query {
 
 extend type Mutation {
   # insert activity with conference_id, activity_type_id, title and status
-  insertActivity(conference_id: ID!, title: String!, status:Status): Activity!
+  insertActivity(conference_id: ID!, title: String!, description: String!, status:Status): Activity!
 
   # update activity with id, activity_type_id, title and status
-  updateActivity(id: ID!, title: String, status:Status): Activity!
+  updateActivity(id: ID!, title: String, description: String, status:Status, ): Activity!
 
   # delete activity with id
   deleteActivity(id: ID!): Activity!

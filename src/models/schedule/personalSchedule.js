@@ -9,6 +9,7 @@ export default class PersonalSchedule extends Model {
       id: { type: 'integer' },
       user_id: { type: 'integer' },
       schedule_id: { type: 'integer' },
+      conference_id: { type: 'integer' },
       activity_id: { type: 'integer' },
     },
   };
@@ -17,6 +18,7 @@ export default class PersonalSchedule extends Model {
     this.id = parseInt(opt.old.id, 10);
     this.user_id = parseInt(opt.old.user_id, 10);
     this.schedule_id = parseInt(opt.old.schedule_id, 10);
+    this.conference_id = parseInt(opt.old.conference_id, 10);
     this.activity_id = parseInt(opt.old.activity_id, 10);
   }
 }

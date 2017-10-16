@@ -17,6 +17,7 @@ export default class Activity extends Model {
         enum: ['on', 'off'],
         default: 'on',
       },
+      description: { type: 'string', maxLength: '300' },
     },
   };
 
