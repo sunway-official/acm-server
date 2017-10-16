@@ -9,7 +9,11 @@ type PersonalSchedule {
   # schedule of personal
   schedule: Schedule!
 
+  # actity 
   activity: Activity!
+
+  # conference 
+  conference: Conference!
 
 
 }
@@ -24,7 +28,7 @@ extend type Query {
 
 extend type Mutation {
   # Insert new PersonalSchedule
-  insertPersonalSchedule( user_id: ID!, schedule_id: ID! ): PersonalSchedule!
+  insertPersonalSchedule( user_id: ID!, schedule_id: ID!, conference_id: ID!, activity_id: ID! ): PersonalSchedule!
 
   # Update PersonalSchedule info by id
   updatePersonalSchedule(id:ID!, user_id: ID, schedule_id: ID ): PersonalSchedule!

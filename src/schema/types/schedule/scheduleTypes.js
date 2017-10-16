@@ -3,11 +3,16 @@ type Schedule {
   # The ID of Schedule
   id: ID!
 
+  # schedule of activity
+  activity: Activity!
+
+  # conference 
+  conference: Conference!
+
   # room of activity in schedule
   room: Room!
 
-  # schedule of activity
-  activity: Activity!
+ 
 
   # personal schedule
   personalSchedules: [PersonalSchedule!]!
@@ -32,7 +37,7 @@ extend type Query {
 
 extend type Mutation {
   # Insert new Schedule
-  insertSchedule( activity_id: ID!, room_id: ID! ,start: Date!, end: Date!): Schedule!
+  insertSchedule( activity_id: ID!, conference_id: ID!, room_id: ID! ,start: Date!, end: Date!): Schedule!
 
   # Update Schedule info by id
   updateSchedule(id:ID!, activity_id: ID, room_id: ID, start: Date, end: Date ): Schedule!
