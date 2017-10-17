@@ -31,7 +31,7 @@ export default {
       { models: { Schedule }, ValidationError },
     ) => {
       try {
-        const schedules = await Schedule.query();
+        const schedules = await Schedule.query().orderBy('start', 'desc');
         return schedules;
       } catch (e) {
         // eslint-disable-next-line no-console
