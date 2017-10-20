@@ -76,7 +76,9 @@ export default {
       { models: { News }, ValidationError },
     ) => {
       try {
-        const news = await News.query().page(pageNumber || 0, pageSize || 10);
+        const news = await News.query()
+          .page(pageNumber || 0, pageSize || 10)
+          .orderBy('created_at', 'DESC');
         return news.results;
       } catch (e) {
         // eslint-disable-next-line no-console
