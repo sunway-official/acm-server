@@ -3,7 +3,7 @@ exports.up = function(knex, Promise) {
   return Promise.all([
     knex.schema.createTable('features', table => {
       table.string('id').primary();
-      table.string('description').nullable();
+      table.text('description').nullable();
     }),
   ]);
 };

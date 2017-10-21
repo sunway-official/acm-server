@@ -16,7 +16,7 @@ exports.up = function(knex, Promise) {
         .unsigned()
         .notNullable();
       table.string('title').notNullable();
-      table.string('description').notNullable();
+      table.text('description').notNullable();
       table.timestamp('start_date').notNullable();
       table.timestamp('end_date').notNullable();
       table.string('bg_image').notNullable();

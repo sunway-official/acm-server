@@ -17,7 +17,7 @@ export default class Conference extends Model {
       address_id: { type: 'integer' },
       user_id: { type: 'integer' },
       title: { type: 'string', maxLength: '100' },
-      description: { type: 'string', maxLength: '500' },
+      description: { type: 'text' },
       bg_image: { type: 'string', maxLength: '300' },
       start_date: { type: ['string', 'null'] },
       end_date: { type: ['string', 'null'] },

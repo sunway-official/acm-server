@@ -10,7 +10,7 @@ export default class Topic extends Model {
       id: { type: 'integer' },
       conference_id: { type: 'integer' },
       name: { type: 'string', maxLength: '100' },
-      description: { type: 'string', maxLength: '300' },
+      description: { type: 'text' },
     },
   };
 

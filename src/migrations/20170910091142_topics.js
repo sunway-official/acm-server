@@ -11,7 +11,7 @@ exports.up = function(knex, Promise) {
         .unsigned()
         .notNullable();
       table.string('name').notNullable();
-      table.string('description').notNullable();
+      table.text('description').notNullable();
     }),
   ]);
 };
