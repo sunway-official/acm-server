@@ -10,7 +10,7 @@ export default class Feature extends Model {
     description: 'A feature',
     properties: {
       id: { type: 'string' },
-      description: { type: 'string' },
+      description: { type: 'text' },
     },
   };
 
