@@ -21,10 +21,16 @@ export default {
     getAllPersonalSchedules: async (
       root,
       data,
-      { models: { PersonalSchedule }, ValidationError },
+      { models: { PersonalSchedule }, ValidationError, user },
     ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
       try {
-        const personalSchedules = await PersonalSchedule.query();
+        const personalSchedules = await PersonalSchedule.query().where(
+          'user_id',
+          user.id,
+        );
         return personalSchedules;
       } catch (e) {
         // eslint-disable-next-line no-console
@@ -35,10 +41,16 @@ export default {
     getPersonalScheduleByID: async (
       root,
       { id },
-      { models: { PersonalSchedule }, ValidationError },
+      { models: { PersonalSchedule }, ValidationError, user },
     ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
       try {
-        const personalSchedule = await PersonalSchedule.query().findById(id);
+        const personalSchedule = await PersonalSchedule.query()
+          .where('user_id', user.id)
+          .andWhere('id', id)
+          .first();
         if (!personalSchedule) {
           throw new ValidationError('PersonalSchedule-not-found');
         }
@@ -54,10 +66,16 @@ export default {
     insertPersonalSchedule: async (
       root,
       data,
-      { models: { PersonalSchedule }, ValidationError },
+      { models: { PersonalSchedule }, ValidationError, user },
     ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
       try {
-        const newPersonalSchedule = await PersonalSchedule.query().insert(data);
+        const newPersonalSchedule = await PersonalSchedule.query().insert({
+          ...data,
+          user_id: user.id,
+        });
 
         return newPersonalSchedule;
       } catch (e) {
@@ -69,21 +87,15 @@ export default {
     updatePersonalSchedule: async (
       root,
       data,
-      { models: { PersonalSchedule }, ValidationError },
+      { models: { PersonalSchedule }, ValidationError, user },
     ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
       try {
-        // eslint-disable-next-line camelcase
-        // if (schedule_id) {
-        //   const { activity_id } = await Schedule.query().findById(schedule_id);
-        //   Object.assign(data, data, {
-        //     activity_id,
-        //   });
-        // }
-
-        const updatePersonalSchedule = await PersonalSchedule.query().updateAndFetchById(
-          data.id,
-          data,
-        );
+        const updatePersonalSchedule = await PersonalSchedule.query()
+          .where('user_id', user.id)
+          .updateAndFetchById(data.id, data);
         return updatePersonalSchedule;
       } catch (e) {
         // eslint-disable-next-line no-console
@@ -94,12 +106,21 @@ export default {
     deletePersonalSchedule: async (
       root,
       { id },
-      { models: { PersonalSchedule }, ValidationError },
+      { models: { PersonalSchedule }, ValidationError, user },
     ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
       try {
-        const personalSchedule = await PersonalSchedule.query().findById(id);
+        const personalSchedule = await PersonalSchedule.query()
+          .where('user_id', user.id)
+          .andWhere('id', id)
+          .first();
         if (personalSchedule) {
-          await PersonalSchedule.query().deleteById(id);
+          await PersonalSchedule.query()
+            .where('user_id', user.id)
+            .andWhere('id', id)
+            .deleteById(id);
         }
         return personalSchedule;
       } catch (e) {
