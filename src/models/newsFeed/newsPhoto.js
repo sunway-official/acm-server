@@ -14,6 +14,15 @@ export default class Role extends Model {
     },
   };
 
+  async $beforeInsert() {
+    this.created_at = new Date().toISOString();
+    this.updated_at = new Date().toISOString();
+  }
+
+  async $beforeUpdate() {
+    this.updated_at = new Date().toISOString();
+  }
+
   async $beforeValidate(opt) {
     this.id = parseInt(opt.old.id, 10);
     this.news_id = parseInt(opt.old.news_id, 10);

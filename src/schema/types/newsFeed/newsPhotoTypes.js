@@ -11,6 +11,9 @@ type NewsPhoto {
 
   # NewsPhoto url
   url: String!
+
+  created_at: Date!
+  updated_at: Date!
 }
 
 extend type Query {
