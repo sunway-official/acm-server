@@ -103,7 +103,7 @@ const start = async () => {
     '/graphiql',
     graphiqlExpress({
       endpointURL: '/graphql',
-      subscriptionsEndpoint: `ws://localhost:65080/subscriptions`,
+      subscriptionsEndpoint: `ws://127.0.0.1:65080/subscriptions`,
     }),
   );
 

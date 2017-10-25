@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+import pubsub from '../../pubsub';
 
 export default {
   User: {
@@ -66,6 +67,11 @@ export default {
     address: async ({ address_id }, data, { models: { Address } }) => {
       const address = Address.query().findById(address_id);
       return address;
+    },
+  },
+  Subscription: {
+    Me: {
+      subscribe: () => pubsub.asyncIterator('Me'),
     },
   },
   Query: {
@@ -172,6 +178,11 @@ export default {
           .$query()
           .findById(user.id)
           .patchAndFetch(data);
+
+        pubsub.publish('Me', {
+          Me: updatedUser,
+        });
+
         return updatedUser;
       } catch (e) {
         // eslint-disable-next-line no-console

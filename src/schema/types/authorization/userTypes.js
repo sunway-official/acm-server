@@ -92,6 +92,11 @@ enum Gender {
   female
   unknown
 }
+
+extend type Subscription {
+  Me: User!
+}
+
 extend type Query {
   # Get information about all users
   getAllUsers: [User!]!

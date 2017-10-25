@@ -10,4 +10,7 @@ type Query {
 type Mutation {
   testMutation: String
 }
+type Subscription {
+  placeholder: String
+}
 `;
