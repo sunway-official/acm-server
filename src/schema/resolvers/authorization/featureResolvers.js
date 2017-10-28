@@ -17,9 +17,12 @@ export default {
     getAllFeatures: async (
       root,
       data,
-      { models: { Feature }, ValidationError },
+      { models: { Feature }, ValidationError, user },
     ) => {
       try {
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
         const features = await Feature.query();
         return features;
       } catch (e) {
@@ -31,9 +34,12 @@ export default {
     getFeatureByID: async (
       root,
       { id },
-      { models: { Feature }, ValidationError },
+      { models: { Feature }, ValidationError, user },
     ) => {
       try {
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
         const feature = await Feature.query().findById(id);
         if (!feature) {
           throw new ValidationError('feature-not-found');
@@ -53,9 +59,12 @@ export default {
     insertFeature: async (
       root,
       data,
-      { models: { Feature }, ValidationError },
+      { models: { Feature }, ValidationError, user },
     ) => {
       try {
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
         const newFeature = await Feature.query().insert(data);
         return newFeature;
       } catch (e) {
@@ -67,9 +76,12 @@ export default {
     updateFeature: async (
       root,
       { id, description },
-      { models: { Feature }, ValidationError },
+      { models: { Feature }, ValidationError, user },
     ) => {
       try {
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
         const updateFeature = await Feature.query().updateAndFetchById(id, {
           description,
         });
@@ -83,9 +95,12 @@ export default {
     deleteFeature: async (
       root,
       { id },
-      { models: { Feature }, ValidationError },
+      { models: { Feature }, ValidationError, user },
     ) => {
       try {
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
         const feature = await Feature.query().findById(id);
         if (!feature) throw new ValidationError('Feature not found');
         // delete permission with feature_id

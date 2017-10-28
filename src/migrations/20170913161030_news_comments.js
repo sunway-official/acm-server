@@ -14,7 +14,7 @@ exports.up = function(knex, Promise) {
         .integer('user_id')
         .unsigned()
         .notNullable();
-      table.string('content').notNullable();
+      table.text('content').notNullable();
       table.timestamps();
     }),
   ]);
