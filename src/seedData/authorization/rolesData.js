@@ -1,27 +1,27 @@
 const roles = [
   {
-    name: 'organizer', // 0
+    name: 'Organizer', // 0
   },
   {
-    name: 'speaker', // 1
+    name: 'Speaker', // 1
   },
   {
-    name: 'moderator', // 2
+    name: 'Moderator', // 2
   },
   {
-    name: 'supporter', // 3
+    name: 'Supporter', // 3
   },
   {
-    name: 'participant', // 4
+    name: 'Participant', // 4
   },
   {
-    name: 'ticket checker', // 5
+    name: 'Ticket Checker', // 5
   },
   {
-    name: 'reviewer', // 6
+    name: 'Reviewer', // 6
   },
   {
-    name: 'author', // 7
+    name: 'Author', // 7
   },
 ];
 

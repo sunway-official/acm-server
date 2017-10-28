@@ -4,6 +4,7 @@ import Address from './address';
 import Topic from './topic';
 import ConferenceAttendee from './conferenceAttendee';
 import CoOrganizerDetail from './coOrganizerDetail';
+import LandingPage from './landingPage';
 
 export default {
   OrganizerDetail,
@@ -12,4 +13,5 @@ export default {
   Topic,
   ConferenceAttendee,
   CoOrganizerDetail,
+  LandingPage,
 };

@@ -13,9 +13,12 @@ export default {
     getAllDefaultPermissions: async (
       root,
       data,
-      { models: { DefaultPermission }, ValidationError },
+      { models: { DefaultPermission }, ValidationError, user },
     ) => {
       try {
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
         const defaultPermissions = await DefaultPermission.query();
         return defaultPermissions;
       } catch (e) {
@@ -28,9 +31,12 @@ export default {
     getDefaultPermissionByID: async (
       root,
       { id },
-      { models: { DefaultPermission }, ValidationError },
+      { models: { DefaultPermission }, ValidationError, user },
     ) => {
       try {
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
         const defaultPermission = await DefaultPermission.query().findById(id);
         if (!defaultPermission) {
           throw new ValidationError('defaultPermission-not-found');
@@ -47,9 +53,12 @@ export default {
     insertDefaultPermission: async (
       root,
       data,
-      { models: { DefaultPermission }, ValidationError },
+      { models: { DefaultPermission }, ValidationError, user },
     ) => {
       try {
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
         const newDefaultPermission = await DefaultPermission.query().insert(
           data,
         );
@@ -63,9 +72,12 @@ export default {
     updateDefaultPermission: async (
       root,
       data,
-      { models: { DefaultPermission }, ValidationError },
+      { models: { DefaultPermission }, ValidationError, user },
     ) => {
       try {
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
         const updateDefaultPermission = await DefaultPermission.query().updateAndFetchById(
           data.id,
           data,
@@ -80,9 +92,12 @@ export default {
     deleteDefaultPermission: async (
       root,
       { id },
-      { models: { DefaultPermission }, ValidationError },
+      { models: { DefaultPermission }, ValidationError, user },
     ) => {
       try {
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
         const defaultPermission = await DefaultPermission.query().findById(id);
         await DefaultPermission.query().deleteById(id);
         return defaultPermission;

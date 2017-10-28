@@ -11,10 +11,11 @@ const conferences = [
     user_id: '1',
   },
   {
-    title: 'Hoi nghi CDIO vung chau A 2017',
-    description: 'Conceive Design Implement Operate',
-    start_date: '2017-03-13 10:00',
-    end_date: '2017-03-15 10:00',
+    title: 'Block Chain for Big Coin',
+    description:
+      'The practical consequence […is…] for the first time, a way for one Internet user to transfer a unique piece of digital property to another Internet user, such that the transfer is guaranteed to be safe and secure, everyone knows that the transfer has taken place, and nobody can challenge the legitimacy of the transfer. The consequences of this breakthrough are hard to overstate.',
+    start_date: '2017-01-11 ',
+    end_date: '2017-01-12',
     bg_image: 'HoinghiCDIOvungchauA2017.png',
     organizer_detail_id: '2',
     address_id: '2',

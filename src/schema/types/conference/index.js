@@ -4,6 +4,7 @@ import topicTypes from './topicTypes';
 import conferenceAttendeeTypes from './conferenceAttendeeTypes';
 import organizerDetailTypes from './organizerDetailTypes';
 import coOrganizerDetailTypes from './coOrganizerDetailTypes';
+import landingPageTypes from './landingPageTypes';
 
 export default [
   conferenceTypes,
@@ -12,4 +13,5 @@ export default [
   conferenceAttendeeTypes,
   organizerDetailTypes,
   coOrganizerDetailTypes,
+  landingPageTypes,
 ];

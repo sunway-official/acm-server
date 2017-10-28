@@ -14,9 +14,12 @@ export default {
     getAllActivityFeedback: async (
       root,
       data,
-      { models: { ActivityFeedback }, ValidationError },
+      { models: { ActivityFeedback }, ValidationError, user },
     ) => {
       try {
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
         const activityFeedback = await ActivityFeedback.query();
         return activityFeedback;
       } catch (e) {
@@ -28,9 +31,12 @@ export default {
     getActivityFeedbackByID: async (
       root,
       { id },
-      { models: { ActivityFeedback }, ValidationError },
+      { models: { ActivityFeedback }, ValidationError, user },
     ) => {
       try {
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
         const activityFeedback = await ActivityFeedback.query().findById(id);
         return activityFeedback;
       } catch (e) {
@@ -44,9 +50,12 @@ export default {
     getAllActivityFeedbackByUserID: async (
       root,
       { user_id },
-      { models: { ActivityFeedback }, ValidationError },
+      { models: { ActivityFeedback }, ValidationError, user },
     ) => {
       try {
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
         const allFeedbackOfUser = await ActivityFeedback.query().where(
           'user_id',
           user_id,
@@ -63,9 +72,12 @@ export default {
     getAllActivityFeedbackByActivityID: async (
       root,
       { activity_id },
-      { models: { ActivityFeedback }, ValidationError },
+      { models: { ActivityFeedback }, ValidationError, user },
     ) => {
       try {
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
         const allFeedbackOfActivity = await ActivityFeedback.query().where(
           'activity_id',
           activity_id,
@@ -81,9 +93,12 @@ export default {
     getAllActivityFeedbackByActivityIDUserID: async (
       root,
       { activity_id, user_id },
-      { models: { ActivityFeedback }, ValidationError },
+      { models: { ActivityFeedback }, ValidationError, user },
     ) => {
       try {
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
         const feedbackWithActivityIDUserID = await ActivityFeedback.query().where(
           builder => {
             builder.where('activity_id', activity_id).where('user_id', user_id);
@@ -102,9 +117,12 @@ export default {
     insertActivityFeedback: async (
       root,
       data,
-      { models: { ActivityFeedback }, ValidationError },
+      { models: { ActivityFeedback }, ValidationError, user },
     ) => {
       try {
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
         const newActivityFeedback = await ActivityFeedback.query().insert(data);
         return newActivityFeedback;
       } catch (e) {
@@ -117,9 +135,12 @@ export default {
     updateActivityFeedback: async (
       root,
       data,
-      { models: { ActivityFeedback }, ValidationError },
+      { models: { ActivityFeedback }, ValidationError, user },
     ) => {
       try {
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
         const updateActivityFeedback = await ActivityFeedback.query().updateAndFetchById(
           data.id,
           data,
@@ -134,9 +155,12 @@ export default {
     deleteActivityFeedback: async (
       root,
       { id },
-      { models: { ActivityFeedback }, ValidationError },
+      { models: { ActivityFeedback }, ValidationError, user },
     ) => {
       try {
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
         const activityFeedback = await ActivityFeedback.query().findById(id);
         if (!activityFeedback)
           throw new ValidationError('Not found ActivityFeedback');

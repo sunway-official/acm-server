@@ -25,9 +25,12 @@ export default {
     getAllPermissions: async (
       root,
       data,
-      { models: { Permission }, ValidationError },
+      { models: { Permission }, ValidationError, user },
     ) => {
       try {
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
         const permissions = await Permission.query();
         return permissions;
       } catch (e) {
@@ -41,9 +44,12 @@ export default {
     getPermissionByID: async (
       root,
       { id },
-      { models: { Permission }, ValidationError },
+      { models: { Permission }, ValidationError, user },
     ) => {
       try {
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
         const permission = await Permission.query().findById(id);
         return permission;
       } catch (e) {
@@ -57,9 +63,12 @@ export default {
     getAllUsersByRoleID: async (
       root,
       { role_id },
-      { models: { Permission }, ValidationError },
+      { models: { Permission }, ValidationError, user },
     ) => {
       try {
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
         const permissions = await Permission.query()
           .where('role_id', role_id)
           .distinct('user_id');
@@ -75,9 +84,12 @@ export default {
     getAllRolesByUserID: async (
       root,
       { user_id },
-      { models: { Permission }, ValidationError },
+      { models: { Permission }, ValidationError, user },
     ) => {
       try {
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
         const permissions = await Permission.query()
           .where('user_id', user_id)
           .distinct('role_id');
@@ -93,9 +105,12 @@ export default {
     getAllPermissionsByUserID: async (
       root,
       { user_id },
-      { models: { Permission }, ValidationError },
+      { models: { Permission }, ValidationError, user },
     ) => {
       try {
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
         const permissions = await Permission.query().where('user_id', user_id);
         return permissions;
       } catch (e) {
@@ -109,9 +124,12 @@ export default {
     getPermissionByRoleIDUserID: async (
       root,
       { role_id, user_id },
-      { models: { Permission }, ValidationError },
+      { models: { Permission }, ValidationError, user },
     ) => {
       try {
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
         const permissions = await Permission.query().where(builder => {
           builder.where('role_id', role_id).where('user_id', user_id);
         });
@@ -130,13 +148,16 @@ export default {
       root,
       { user_id, role_id },
       {
-        models: { Permission, User, DefaultPermission, Role },
+        models: { Permission, User, DefaultPermission, Role, user },
         ValidationError,
       },
     ) => {
       try {
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
         // get user with user_id
-        const user = await User.query().findById(user_id);
+        const getUser = await User.query().findById(user_id);
 
         // get default permission with role_id
         const defaultPermissions = await DefaultPermission.query().where(
@@ -153,8 +174,8 @@ export default {
           const permission = {
             role_id: role.id,
             role_name: role.name,
-            user_id: user.id,
-            user_name: `${user.firstname} ${user.lastname}`,
+            user_id,
+            user_name: `${getUser.firstname} ${getUser.lastname}`,
             feature_id: defaultPermission.feature_id,
           };
 
@@ -176,9 +197,12 @@ export default {
     updateStatusFeatureOfUser: async (
       root,
       { user_id, feature_id, status },
-      { models: { Permission }, ValidationError },
+      { models: { Permission }, ValidationError, user },
     ) => {
       try {
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
         const permission = await Permission.query().where({
           user_id,
           feature_id,
@@ -199,13 +223,16 @@ export default {
       root,
       { role_id, user_id },
       {
-        models: { Permission, Role, User, DefaultPermission },
+        models: { Permission, Role, User, DefaultPermission, user },
         ValidationError,
       },
     ) => {
       try {
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
         // get user with user_id
-        const user = await User.query().findById(user_id);
+        const getUser = await User.query().findById(user_id);
 
         // get role with role_id
         const role = await Role.query().findById(role_id); // role id, name
@@ -228,7 +255,7 @@ export default {
             role_id,
             role_name: role.name,
             user_id,
-            user_name: `${user.firstname} ${user.lastname}`,
+            user_name: `${getUser.firstname} ${getUser.lastname}`,
             feature_id: defaultPermission.feature_id,
           };
           // insert permission
@@ -252,9 +279,12 @@ export default {
     deletePermission: async (
       root,
       { id },
-      { models: { Permission }, ValidationError },
+      { models: { Permission }, ValidationError, user },
     ) => {
       try {
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
         const permission = await Permission.query().findById(id);
         // delete permission
         await Permission.query().deleteById(id);
