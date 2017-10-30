@@ -15,6 +15,27 @@ type PersonalSchedule {
   # conference 
   conference: Conference!
 
+  # activity title
+  activity_title: String!
+
+  # activity description
+  activity_description: String!
+
+  # activity status
+  activity_status: Status!
+
+  # conference 
+  conference: Conference!
+
+  # room name
+  room_name: String!
+
+  # room seats
+  room_seats: Int!
+
+  # room status
+  room_status: Status!
+
 
 }
 
@@ -28,7 +49,7 @@ extend type Query {
 
 extend type Mutation {
   # Insert new PersonalSchedule
-  insertPersonalSchedule( user_id: ID!, schedule_id: ID!, conference_id: ID!, activity_id: ID! ): PersonalSchedule!
+  insertPersonalSchedule( user_id: ID!, schedule_id: ID! ): PersonalSchedule!
 
   # Update PersonalSchedule info by id
   updatePersonalSchedule(id:ID!, user_id: ID, schedule_id: ID ): PersonalSchedule!
