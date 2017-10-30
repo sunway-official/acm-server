@@ -2,12 +2,12 @@ const rooms = [
   {
     name: 'P101', // 0
     seat_num: 20,
-    status: 'off',
+    status: 'on',
   },
   {
     name: 'P102', // 1
     seat_num: 40,
-    status: 'off',
+    status: 'on',
   },
   {
     name: 'P201', // 2
