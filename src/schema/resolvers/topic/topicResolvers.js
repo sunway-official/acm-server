@@ -8,6 +8,10 @@ export default {
       const conference = await Conference.query().findById(conference_id);
       return conference;
     },
+    color: async ({ color_id }, data, { models: { Color } }) => {
+      const color = await Color.query().findById(color_id);
+      return color;
+    },
   },
   Query: {
     getAllTopics: async (
@@ -21,7 +25,7 @@ export default {
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);
-        throw new ValidationError('bad-request');
+        throw new ValidationError(e);
       }
     },
     getTopicByID: async (
@@ -38,10 +42,7 @@ export default {
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);
-        if (e.message === 'topic-not-found') {
-          throw new ValidationError('topic-not-found');
-        }
-        throw new ValidationError('bad-request');
+        throw new ValidationError(e);
       }
     },
   },
@@ -53,7 +54,7 @@ export default {
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);
-        throw new ValidationError('bad-request');
+        throw new ValidationError(e);
       }
     },
     updateTopic: async (root, data, { models: { Topic }, ValidationError }) => {
@@ -66,7 +67,7 @@ export default {
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);
-        throw new ValidationError('bad-request');
+        throw new ValidationError(e);
       }
     },
     deleteTopic: async (
@@ -78,15 +79,18 @@ export default {
         const topic = await Topic.query().findById(id);
 
         // delete all activityTopics of topic with id
-        await topic.deleteAllRelationship();
+
         if (topic) {
+          await topic.deleteAllRelationship();
           await Topic.query().deleteById(id);
+        } else {
+          throw new ValidationError('Not found topic');
         }
         return topic;
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);
-        throw new ValidationError('bad-request');
+        throw new ValidationError(e);
       }
     },
   },

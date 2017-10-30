@@ -16,6 +16,9 @@ import questionAndAnswer from './questionAndAnswer';
 // schedule
 import schedule from './schedule';
 
+// topic
+import topic from './topic';
+
 const models = {
   ...activity,
   ...authorization,
@@ -23,6 +26,7 @@ const models = {
   ...newsFeed,
   ...questionAndAnswer,
   ...schedule,
+  ...topic,
 };
 
 export default models;

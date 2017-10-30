@@ -1,5 +1,5 @@
 import { Model } from 'objection';
-import Topic from './topic';
+import Topic from '../topic/topic';
 import ConferenceAttendee from './conferenceAttendee';
 import News from '../newsFeed/news';
 import Activity from '../activity/activity';

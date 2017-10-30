@@ -14,13 +14,13 @@ export default class PersonalSchedule extends Model {
       activity_id: { type: 'integer' },
       start: { type: ['string', 'null'] },
       end: { type: ['string', 'null'] },
-      activity_title: { type: ['string', 'null'] },
-      activity_description: { type: ['text', 'null'] },
+      activity_title: { type: ['string', 'null'], maxLength: '100' },
+      activity_description: { type: ['text', 'null'], maxLength: '300' },
       activity_status: {
         enum: ['on', 'off'],
         default: 'on',
       },
-      room_name: { type: ['string', 'null'] },
+      room_name: { type: ['string', 'null'], maxLength: '50' },
       room_seats: { type: 'integer' },
       room_status: {
         enum: ['on', 'off'],

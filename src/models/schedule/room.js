@@ -9,7 +9,7 @@ export default class Room extends Model {
     properties: {
       id: { type: 'integer' },
       name: { type: 'string', maxLength: '300' },
-      seat_num: { type: 'integer' },
+      seats: { type: 'integer' },
       status: {
         enum: ['on', 'off'],
         default: 'on',

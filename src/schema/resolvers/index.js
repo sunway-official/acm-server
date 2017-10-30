@@ -22,6 +22,8 @@ import activity from './activity';
 // staff
 import staff from './staff';
 
+import topic from './topic';
+
 const rootResolvers = {
   Date: GraphQLToolsTypes.Date({ name: 'Date' }),
 };
@@ -34,6 +36,7 @@ const resolvers = [
   ...schedule,
   ...questionAndAnswer,
   ...activity,
+  ...topic,
   staff,
 ];
 export default mergeResolvers(resolvers);

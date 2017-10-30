@@ -4,7 +4,7 @@ exports.up = function(knex, Promise) {
     knex.schema.createTable('rooms', table => {
       table.increments('id').primary();
       table.string('name');
-      table.integer('seat_num');
+      table.integer('seats');
       table
         .enu('status', ['on', 'off'])
         .defaultTo('on')

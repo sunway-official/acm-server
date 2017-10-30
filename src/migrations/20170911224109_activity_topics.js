@@ -11,6 +11,9 @@ exports.up = function(knex, Promise) {
         .integer('topic_id')
         .unsigned()
         .notNullable();
+      table.string('topic_name');
+      table.text('topic_description');
+      table.string('topic_color_code');
     }),
   ]);
 };
