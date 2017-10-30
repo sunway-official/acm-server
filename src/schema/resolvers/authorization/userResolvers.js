@@ -169,6 +169,28 @@ export default {
         refreshToken,
       };
     },
+    updateAvatar: async (root, { avatarUrl }, { ValidationError, user }) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
+      try {
+        const updatedUser = await user
+          .$query()
+          .findById(user.id)
+          .patchAndFetch({
+            avatar: avatarUrl,
+          });
+
+        pubsub.publish('Me', {
+          Me: updatedUser,
+        });
+        return updatedUser;
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error(error);
+        throw new ValidationError('bad-request');
+      }
+    },
     updateMe: async (root, data, { ValidationError, user }) => {
       if (!user) {
         throw new ValidationError('unauthorized');

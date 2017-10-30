@@ -128,6 +128,9 @@ extend type Mutation {
     password: String!
   ): LoginResponse
 
+  # Update user avatar
+  updateAvatar(avatarUrl: String): User!
+
   # Update user info, need auth headers
   updateMe(
     # User first name
