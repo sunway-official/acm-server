@@ -14,12 +14,9 @@ export default {
     getAllActivityTopics: async (
       root,
       data,
-      { models: { ActivityTopic }, ValidationError, user },
+      { models: { ActivityTopic }, ValidationError },
     ) => {
       try {
-        if (!user) {
-          throw new ValidationError('unauthorized');
-        }
         const activityTopics = await ActivityTopic.query();
         return activityTopics;
       } catch (e) {
@@ -31,12 +28,9 @@ export default {
     getActivityTopicByID: async (
       root,
       { id },
-      { models: { ActivityTopic }, ValidationError, user },
+      { models: { ActivityTopic }, ValidationError },
     ) => {
       try {
-        if (!user) {
-          throw new ValidationError('unauthorized');
-        }
         const activityTopic = await ActivityTopic.query().findById(id);
         return activityTopic;
       } catch (e) {
@@ -51,12 +45,9 @@ export default {
     insertActivityTopic: async (
       root,
       data,
-      { models: { ActivityTopic }, ValidationError, user },
+      { models: { ActivityTopic }, ValidationError },
     ) => {
       try {
-        if (!user) {
-          throw new ValidationError('unauthorized');
-        }
         const newActivityTopic = await ActivityTopic.query().insert(data);
         return newActivityTopic;
       } catch (e) {
@@ -69,12 +60,9 @@ export default {
     updateActivityTopic: async (
       root,
       data,
-      { models: { ActivityTopic }, ValidationError, user },
+      { models: { ActivityTopic }, ValidationError },
     ) => {
       try {
-        if (!user) {
-          throw new ValidationError('unauthorized');
-        }
         const updateActivityTopic = await ActivityTopic.query().updateAndFetchById(
           data.id,
           data,
@@ -89,12 +77,9 @@ export default {
     deleteActivityTopic: async (
       root,
       { id },
-      { models: { ActivityTopic }, ValidationError, user },
+      { models: { ActivityTopic }, ValidationError },
     ) => {
       try {
-        if (!user) {
-          throw new ValidationError('unauthorized');
-        }
         const activityTopic = await ActivityTopic.query().findById(id);
         if (!activityTopic)
           throw new ValidationError('Not found ActivityTopic');
