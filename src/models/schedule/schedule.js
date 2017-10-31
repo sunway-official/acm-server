@@ -15,13 +15,13 @@ export default class Schedule extends Model {
       room_id: { type: 'integer' },
       start: { type: ['string', 'null'] },
       end: { type: ['string', 'null'] },
-      activity_title: { type: ['string', 'null'] },
-      activity_description: { type: ['text', 'null'] },
+      activity_title: { type: ['string', 'null'], maxLength: '100' },
+      activity_description: { type: ['text', 'null'], maxLength: '300' },
       activity_status: {
         enum: ['on', 'off'],
         default: 'on',
       },
-      room_name: { type: ['string', 'null'] },
+      room_name: { type: ['string', 'null'], maxLength: '50' },
       room_seats: { type: 'integer' },
       room_status: {
         enum: ['on', 'off'],
@@ -45,7 +45,7 @@ export default class Schedule extends Model {
     this.activity_description = activity[0].description;
     this.activity_status = activity[0].status;
     this.room_name = room[0].name;
-    this.room_seats = room[0].seat_num;
+    this.room_seats = room[0].seats;
     this.room_status = room[0].status;
   }
 
@@ -57,7 +57,7 @@ export default class Schedule extends Model {
     this.activity_description = activity[0].description;
     this.activity_status = activity[0].status;
     this.room_name = room[0].name;
-    this.room_seats = room[0].seat_num;
+    this.room_seats = room[0].seats;
     this.room_status = room[0].status;
   }
 

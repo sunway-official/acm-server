@@ -7,7 +7,7 @@ type Room {
   name: String!
 
   # number of seats
-  seat_num: Int!
+  seats: Int!
 
   # status of Room
   status: Status!
@@ -28,10 +28,10 @@ extend type Query {
 
 extend type Mutation {
   # Insert new Room
-  insertRoom( name: String!, seat_num: Int! ,status: Status): Room!
+  insertRoom( name: String!, seats: Int! ,status: Status): Room!
 
   # Update Room info by id
-  updateRoom(id:ID!, name: String, seat_num: Int, status: Status ): Room!
+  updateRoom(id:ID!, name: String, seats: Int, status: Status ): Room!
 
   # Delete Room by id
   deleteRoom(id: ID!): Room!

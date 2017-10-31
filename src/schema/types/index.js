@@ -22,6 +22,8 @@ import globalTypes from './globalTypes';
 // staff
 import staff from './staff';
 
+import topic from './topic';
+
 export default [
   ...authorization,
   ...activity,
@@ -29,6 +31,7 @@ export default [
   ...newsFeed,
   ...questionAndAnswer,
   ...schedule,
+  ...topic,
   globalTypes,
   staff,
 ];

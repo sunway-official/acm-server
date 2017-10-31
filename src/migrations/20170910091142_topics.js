@@ -12,6 +12,11 @@ exports.up = function(knex, Promise) {
         .notNullable();
       table.string('name').notNullable();
       table.text('description').notNullable();
+      table
+        .integer('color_id')
+        .unsigned()
+        .notNullable();
+      table.string('color_code');
     }),
   ]);
 };

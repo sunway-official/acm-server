@@ -8,7 +8,17 @@ type ActivityTopic {
 
   # topic
   topic: Topic!
+
+  # topic name
+  topic_name: String!
+
+  # topic description
+  topic_description: String!
+
+  # topic color code 
+  topic_color_code: String!
 }
+
 
 extend type Query {
   # get all activity topics
