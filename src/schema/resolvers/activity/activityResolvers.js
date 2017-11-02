@@ -34,12 +34,9 @@ export default {
     getAllActivities: async (
       root,
       data,
-      { models: { Activity }, ValidationError, user },
+      { models: { Activity }, ValidationError },
     ) => {
       try {
-        if (!user) {
-          throw new ValidationError('unauthorized');
-        }
         const activities = await Activity.query();
         return activities;
       } catch (e) {
@@ -51,12 +48,9 @@ export default {
     getActivityByID: async (
       root,
       { id },
-      { models: { Activity }, ValidationError, user },
+      { models: { Activity }, ValidationError },
     ) => {
       try {
-        if (!user) {
-          throw new ValidationError('unauthorized');
-        }
         const activity = await Activity.query().findById(id);
         return activity;
       } catch (e) {
@@ -69,12 +63,9 @@ export default {
     getActivitiesByConferenceID: async (
       root,
       { conference_id },
-      { models: { Activity }, ValidationError, user },
+      { models: { Activity }, ValidationError },
     ) => {
       try {
-        if (!user) {
-          throw new ValidationError('unauthorized');
-        }
         const allActivitiesOfConference = await Activity.query().where(
           'conference_id',
           conference_id,
@@ -92,12 +83,9 @@ export default {
     insertActivity: async (
       root,
       data,
-      { models: { Activity }, ValidationError, user },
+      { models: { Activity }, ValidationError },
     ) => {
       try {
-        if (!user) {
-          throw new ValidationError('unauthorized');
-        }
         const newActivity = await Activity.query().insert(data);
         return newActivity;
       } catch (e) {
@@ -110,12 +98,9 @@ export default {
     updateActivity: async (
       root,
       data,
-      { models: { Activity }, ValidationError, user },
+      { models: { Activity }, ValidationError },
     ) => {
       try {
-        if (!user) {
-          throw new ValidationError('unauthorized');
-        }
         const updateActivity = await Activity.query().updateAndFetchById(
           data.id,
           data,
@@ -130,12 +115,9 @@ export default {
     deleteActivity: async (
       root,
       { id },
-      { models: { Activity }, ValidationError, user },
+      { models: { Activity }, ValidationError },
     ) => {
       try {
-        if (!user) {
-          throw new ValidationError('unauthorized');
-        }
         const activity = await Activity.query().findById(id);
 
         if (!activity) throw new ValidationError('Not found Activity');
