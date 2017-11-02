@@ -15,6 +15,8 @@ type Address {
   # country Address
   country: String!
 
+  lat: Float
+  long: Float
 }
 
 extend type Query {
