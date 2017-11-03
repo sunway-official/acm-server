@@ -12,6 +12,8 @@ export default class Address extends Model {
       street: { type: 'string', maxLength: '100' },
       city: { type: 'string', maxLength: '100' },
       country: { type: 'string', maxLength: '100' },
+      lat: { type: 'number' },
+      long: { type: 'number' },
     },
   };
 

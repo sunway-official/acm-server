@@ -9,6 +9,8 @@ exports.up = function(knex, Promise) {
       table.string('street').notNullable();
       table.string('city').notNullable();
       table.string('country').notNullable();
+      table.float('lat');
+      table.float('long');
     }),
   ]);
 };
