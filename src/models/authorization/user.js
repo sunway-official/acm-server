@@ -41,6 +41,10 @@ export default class User extends unique(Model) {
         default: 'unknown',
       },
       dob: { type: 'string' },
+      phone_number: {
+        type: ['string', 'null'],
+        maxLength: '12',
+      },
       bio: {
         type: ['string', 'null'],
         maxLength: '200',

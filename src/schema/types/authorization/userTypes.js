@@ -24,6 +24,9 @@ type User {
   # Document updated_at timestamp
   updated_at: Date!
 
+  # phone number
+  phone_number: String!
+
   # Bio
   bio: String
 

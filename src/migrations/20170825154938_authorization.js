@@ -14,6 +14,7 @@ exports.up = function(knex, Promise) {
         .enu('gender', ['male', 'female', 'unknown'])
         .defaultTo('unknown')
         .notNullable();
+      table.string('phone_number').nullable();
       table.date('dob').nullable();
       table.string('version_key').notNullable();
       table.string('bio').nullable();
