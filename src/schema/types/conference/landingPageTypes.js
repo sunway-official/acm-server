@@ -51,13 +51,13 @@ extend type Mutation {
   # Update CoOrganizerDetail info by id
   updateLandingPage(
     id:ID!,
-    slogan: String!,
-    register_description: String!,
-    call_paper_description: String!,
+    slogan: String,
+    register_description: String,
+    call_paper_description: String,
     speaker_description: String!,
-    email: String!,
-    phone_number: String!,
-    facebook_id: String!,
+    email: String,
+    phone_number: String,
+    facebook_id: String,
   ): LandingPage!
 
   # Delete landing page by id
