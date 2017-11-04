@@ -15,8 +15,8 @@ type Address {
   # country Address
   country: String!
 
-  lat: Float
-  long: Float
+  lat: Float!
+  long: Float!
 }
 
 extend type Query {
@@ -29,10 +29,10 @@ extend type Query {
 
 extend type Mutation {
   # Insert new Address
-  insertAddress( street: String!, city: String!, country: String!): Address!
+  insertAddress( street: String!, city: String!, country: String!, lat: Float!, long: Float!): Address!
 
   # Update Address info by id
-  updateAddress(id:ID!, street: String, city: String, country: String ): Address!
+  updateAddress(id:ID!, street: String, city: String, country: String, lat: Float, long: Float ): Address!
 
   # Delete Address by id
   deleteAddress(id: ID!): Address!
