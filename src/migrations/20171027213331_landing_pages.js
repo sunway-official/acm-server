@@ -16,9 +16,9 @@ exports.up = function(knex, Promise) {
       table.text('speaker_description').notNullable();
       table.string('email').notNullable();
       table.string('phone_number').notNullable();
-      table.string('facebook_id').notNullable();
-      table.string('twitter_id').notNullable();
-      table.string('linkedin_id').notNullable();
+      table.string('facebook_id');
+      table.string('twitter_id');
+      table.string('linkedin_id');
     }),
   ]);
 };

@@ -6,11 +6,11 @@ exports.up = function(knex, Promise) {
         .increments('id')
         .unsigned()
         .primary();
-      table.string('street').notNullable();
-      table.string('city').notNullable();
-      table.string('country').notNullable();
-      table.float('lat');
-      table.float('long');
+      table.string('street');
+      table.string('city');
+      table.string('country');
+      table.string('lat');
+      table.string('long');
     }),
   ]);
 };
