@@ -12,6 +12,8 @@ export default class LandingPage extends Model {
       'email',
       'phone_number',
       'facebook_id',
+      'twitter_id',
+      'linkedin_id',
       'conference_id',
     ],
     properties: {
@@ -24,6 +26,8 @@ export default class LandingPage extends Model {
       email: { type: 'string', maxLength: '100' },
       phone_number: { type: 'string', maxLength: '12' },
       facebook_id: { type: 'string', maxLength: '100' },
+      twitter_id: { type: 'string', maxLength: '100' },
+      linkedin_id: { type: 'string', maxLength: '100' },
     },
   };
 

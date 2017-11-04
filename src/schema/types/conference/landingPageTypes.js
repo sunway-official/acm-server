@@ -46,6 +46,8 @@ extend type Mutation {
     email: String!,
     phone_number: String!,
     facebook_id: String!,
+    twitter_id: String!,
+    linkedin_id: String!,
   ): LandingPage!
 
   # Update CoOrganizerDetail info by id
@@ -54,10 +56,12 @@ extend type Mutation {
     slogan: String,
     register_description: String,
     call_paper_description: String,
-    speaker_description: String!,
+    speaker_description: String,
     email: String,
     phone_number: String,
     facebook_id: String,
+    twitter_id: String,
+    linkedin_id: String,
   ): LandingPage!
 
   # Delete landing page by id
