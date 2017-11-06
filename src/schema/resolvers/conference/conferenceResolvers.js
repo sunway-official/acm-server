@@ -254,9 +254,10 @@ export default {
         // // delete ConferenceAttendee with conference_id
         // // delete News with conference_id
         // // delete Activity with conference_id
-        await conference.deleteAllRelationship();
+
         if (!conference) throw new ValidationError('Not found conference');
 
+        await conference.deleteAllRelationship();
         await Conference.query().deleteById(id);
         return conference;
       } catch (e) {
