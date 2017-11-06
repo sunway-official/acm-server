@@ -66,10 +66,10 @@ export default class Schedule extends Model {
       'schedule_id',
       this.id,
     );
-    if (personalSchedules)
-      await PersonalSchedule.query()
-        .delete()
-        .where('schedule_id', this.id);
+    if (!personalSchedules) return [];
+    await PersonalSchedule.query()
+      .delete()
+      .where('schedule_id', this.id);
     return personalSchedules;
   }
 }
