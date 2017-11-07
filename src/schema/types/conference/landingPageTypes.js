@@ -26,6 +26,12 @@ type LandingPage {
 
   # facebook_id
   facebook_id: String!
+
+  # twitter_id
+  twitter_id: String!,
+
+  #linkedin_id
+  linkedin_id: String!,
 }
 
 extend type Query {
