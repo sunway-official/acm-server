@@ -144,47 +144,57 @@ export default {
 
   //  mutation of permission
   Mutation: {
-    insertPermission: async (
+    updateStatusRoleOfUser: async (
       root,
-      { user_id, role_id },
+      { user_id, role_id, status },
       {
-        models: { Permission, User, DefaultPermission, Role, user },
+        models: { Permission, User, DefaultPermission, Role },
         ValidationError,
       },
     ) => {
       try {
-        if (!user) {
-          throw new ValidationError('unauthorized');
-        }
-        // get user with user_id
-        const getUser = await User.query().findById(user_id);
-
-        // get default permission with role_id
-        const defaultPermissions = await DefaultPermission.query().where(
-          'role_id',
+        const checkRoleOfUser = await Permission.query().where({
+          user_id,
           role_id,
-        );
+        });
+        let permissions = [];
+        if (checkRoleOfUser.length <= 0) {
+          // get user with user_id
+          const getUser = await User.query().findById(user_id);
 
-        // get role with role_id
-        const role = await Role.query().findById(role_id);
+          // get default permission with role_id
+          const defaultPermissions = await DefaultPermission.query().where(
+            'role_id',
+            role_id,
+          );
 
-        // add default feature for user with role_id
-        for (let i = 0; i < defaultPermissions.length; i += 1) {
-          const defaultPermission = defaultPermissions[i];
-          const permission = {
-            role_id: role.id,
-            role_name: role.name,
-            user_id,
-            user_name: `${getUser.firstname} ${getUser.lastname}`,
-            feature_id: defaultPermission.feature_id,
-          };
+          // get role with role_id
+          const role = await Role.query().findById(role_id);
 
-          // eslint-disable-next-line no-await-in-loop
-          await Permission.query().insert(permission);
+          // add default feature for user with role_id
+          for (let i = 0; i < defaultPermissions.length; i += 1) {
+            const defaultPermission = defaultPermissions[i];
+            const permission = {
+              role_id: role.id,
+              role_name: role.name,
+              user_id,
+              full_name: `${getUser.firstname} ${getUser.lastname}`,
+              feature_id: defaultPermission.feature_id,
+            };
+
+            // eslint-disable-next-line no-await-in-loop
+            await Permission.query().insert(permission);
+          }
+        } else {
+          await Permission.query()
+            .update({ status })
+            .where({
+              user_id,
+              role_id,
+            });
         }
-
         // return all permission of user with user_id
-        const permissions = await Permission.query().where('user_id', user_id);
+        permissions = await Permission.query().where('user_id', user_id);
         return permissions;
       } catch (e) {
         // eslint-disable-next-line no-console
@@ -194,81 +204,20 @@ export default {
     },
 
     // update status of feature
-    updateStatusFeatureOfUser: async (
+    updateStatusOfPermission: async (
       root,
-      { user_id, feature_id, status },
+      data,
       { models: { Permission }, ValidationError, user },
     ) => {
       try {
         if (!user) {
           throw new ValidationError('unauthorized');
         }
-        const permission = await Permission.query().where({
-          user_id,
-          feature_id,
-        });
-        const updatePermission = await Permission.query().patchAndFetchById(
-          permission[0].id,
-          { status },
+        const updatePermission = await Permission.query().updateAndFetchById(
+          data.id,
+          data,
         );
         return updatePermission;
-      } catch (e) {
-        // eslint-disable-next-line no-console
-        console.error(e);
-        throw new ValidationError(e);
-      }
-    },
-
-    updateRoleOfUserInPermission: async (
-      root,
-      { role_id, user_id },
-      {
-        models: { Permission, Role, User, DefaultPermission, user },
-        ValidationError,
-      },
-    ) => {
-      try {
-        if (!user) {
-          throw new ValidationError('unauthorized');
-        }
-        // get user with user_id
-        const getUser = await User.query().findById(user_id);
-
-        // get role with role_id
-        const role = await Role.query().findById(role_id); // role id, name
-
-        // get default feature with new role_id
-        const defaultPermissions = await DefaultPermission.query().where(
-          'role_id',
-          role_id,
-        );
-
-        // delete all permision with user_id
-        await Permission.query()
-          .delete()
-          .where('user_id', user_id);
-
-        // add new feature of new role for user
-        for (let i = 0; i < defaultPermissions.length; i += 1) {
-          const defaultPermission = defaultPermissions[i];
-          const permission = {
-            role_id,
-            role_name: role.name,
-            user_id,
-            user_name: `${getUser.firstname} ${getUser.lastname}`,
-            feature_id: defaultPermission.feature_id,
-          };
-          // insert permission
-          // eslint-disable-next-line no-await-in-loop
-          await Permission.query().insert(permission);
-        }
-
-        const updateRoleOfUser = await Permission.query().where(
-          'user_id',
-          user_id,
-        );
-
-        return updateRoleOfUser;
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);
