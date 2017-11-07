@@ -27,6 +27,9 @@ type Conference {
   # CoOrganizerDetail
   coOrganizerDetails: [CoOrganizerDetail!]!
 
+  # landingPage
+  landingPage: LandingPage!
+
   # Conference title
   title: String!
 
