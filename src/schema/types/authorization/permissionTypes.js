@@ -6,8 +6,14 @@ type Permission {
   # role of permission
   role: Role!
 
+  # role name
+  role_name: String!
+
   # user of permission
   user: User!
+
+  # full name
+  full_name: String!
 
   # feature of user in perssion
   feature: Feature!
@@ -45,14 +51,12 @@ extend type Query {
 }
 
 extend type Mutation {
-  # Insert Permission with role id, user id and status
-  insertPermission(role_id: ID!, user_id: ID!) : [Permission!]!
 
   # Update status permission
-  updateStatusFeatureOfUser(user_id: ID!, feature_id: ID!, status: Status!) : Permission!
+  updateStatusOfPermission(id: ID!, status: Status!) : Permission!
 
-  # Update role of User
-  updateRoleOfUserInPermission(role_id: ID!, user_id: ID!) : [Permission!]!
+  # Update status role of User
+  updateStatusRoleOfUser(role_id: ID!, user_id: ID!, status: Status) : [Permission!]!
 
   # Delete Permission with permission id
   deletePermission(id: ID!) : [Permission!]!
