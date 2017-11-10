@@ -60,6 +60,9 @@ type User {
   # permissions of users
   permissions: [Permission!]!
 
+  # The current conference session of each user
+  currentConference: Conference
+
   # personal feedback
   activityFeedback: [ActivityFeedback!]
 
@@ -109,6 +112,8 @@ extend type Query {
     userId: ID!): User!
   # Get information about current logged in user, need Authorization and RefreshToken headers
   me: User!
+  # Get current conference session of user
+  getCurrentConference: Conference!
 }
 
 extend type Mutation {
@@ -179,6 +184,11 @@ extend type Mutation {
 
   # delete user with id
   deleteUser(id: ID!): User!
+
+  # Switch current conference session of user
+  switchCurrentConference(
+    conference_id: ID!
+  ): Conference!
 }
 
 type LoginResponse {
