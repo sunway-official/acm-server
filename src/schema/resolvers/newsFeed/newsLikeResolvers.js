@@ -61,7 +61,10 @@ export default {
         throw new ValidationError('unauthorized');
       }
       try {
-        const newsLikeInsert = await NewsLike.query().insert(data);
+        const newsLikeInsert = await NewsLike.query().insert({
+          ...data,
+          user_id: user.id,
+        });
         return newsLikeInsert;
       } catch (e) {
         // eslint-disable-next-line no-console

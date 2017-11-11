@@ -169,7 +169,11 @@ export default {
         throw new ValidationError('unauthorized');
       }
       try {
-        const news = await News.query().insert(data);
+        const news = await News.query().insert({
+          ...data,
+          user_id: user.id,
+          conference_id: user.current_conference_id,
+        });
         return news;
       } catch (e) {
         // eslint-disable-next-line no-console
