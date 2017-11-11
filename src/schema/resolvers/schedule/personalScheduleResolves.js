@@ -27,14 +27,15 @@ export default {
         throw new ValidationError('unauthorized');
       }
       try {
-        const personalSchedules = await PersonalSchedule.query().where(
-          'user_id',
-          user.id,
-        );
+        if (user.current_conference_id === 0) {
+          throw new ValidationError('no-current-conference');
+        }
+        const personalSchedules = await PersonalSchedule.query()
+          .where('user_id', user.id)
+          .andWhere('conference_id', user.current_conference_id);
         return personalSchedules;
       } catch (e) {
         // eslint-disable-next-line no-console
-        console.error(e);
         throw new ValidationError(e);
       }
     },
@@ -47,12 +48,16 @@ export default {
         throw new ValidationError('unauthorized');
       }
       try {
+        if (user.current_conference_id === 0) {
+          throw new ValidationError('no-current-conference');
+        }
         const personalSchedule = await PersonalSchedule.query()
           .where('user_id', user.id)
           .andWhere('id', id)
+          .andWhere('conference_id', user.current_conference_id)
           .first();
         if (!personalSchedule) {
-          throw new ValidationError('PersonalSchedule-not-found');
+          throw new ValidationError('personal-chedule-not-found');
         }
         return personalSchedule;
       } catch (e) {

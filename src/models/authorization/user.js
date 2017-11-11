@@ -26,6 +26,7 @@ export default class User extends unique(Model) {
     required: ['firstname', 'lastname', 'email', 'password', 'gender'],
     properties: {
       id: { type: 'number' },
+      current_conference_id: { type: 'number' },
       firstname: { type: 'string', maxLength: '100' },
       lastname: { type: 'string', maxLength: '255' },
       email: {

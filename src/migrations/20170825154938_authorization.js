@@ -3,6 +3,10 @@ exports.up = function(knex, Promise) {
   return Promise.all([
     knex.schema.createTable('users', table => {
       table.increments('id').primary();
+      table
+        .integer('current_conference_id')
+        .notNullable()
+        .default(0);
       table.string('firstname').notNullable();
       table.string('lastname').notNullable();
       table.string('password').notNullable();

@@ -7,6 +7,16 @@ export default {
       const permissions = Permission.query().where('user_id', id);
       return permissions;
     },
+    currentConference: async (
+      { current_conference_id },
+      data,
+      { models: { Conference } },
+    ) => {
+      const conference = Conference.query()
+        .where('id', current_conference_id)
+        .first();
+      return conference;
+    },
     organizerDetails: async ({ id }, data, { models: { OrganizerDetail } }) => {
       const organizerDetail = await OrganizerDetail.query().where(
         'user_id',
@@ -110,6 +120,19 @@ export default {
         throw new ValidationError('unauthorized');
       }
       return user;
+    },
+    getCurrentConference: (
+      root,
+      data,
+      { models: { Conference }, ValidationError, user },
+    ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
+      const conference = Conference.query()
+        .where('id', user.current_conference_id)
+        .first();
+      return conference;
     },
   },
   Mutation: {
@@ -330,7 +353,26 @@ export default {
         message: 'token-valid',
       };
     },
-
+    switchCurrentConference: async (
+      root,
+      { conference_id },
+      { models: { Conference }, ValidationError, user },
+    ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
+      try {
+        // Update current_conference_id
+        await user
+          .$query()
+          .patchAndFetch({ current_conference_id: conference_id });
+        // Then fetch new conference data
+        const conference = await Conference.query().findById(conference_id);
+        return conference;
+      } catch (err) {
+        throw new ValidationError('bad-request');
+      }
+    },
     deleteUser: async (root, { id }, { models: { User }, ValidationError }) => {
       try {
         const user = await User.query().findById(id);

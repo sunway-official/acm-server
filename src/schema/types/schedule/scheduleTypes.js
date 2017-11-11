@@ -15,7 +15,7 @@ type Schedule {
   # activity status
   activity_status: Status!
 
-  # conference 
+  # conference
   conference: Conference!
 
   # room of activity in schedule
