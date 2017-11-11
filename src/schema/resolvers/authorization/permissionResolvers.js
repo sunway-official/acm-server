@@ -138,13 +138,16 @@ export default {
     // getAllRolesActiveByUserId
     getAllRolesActiveByUserID: async (
       root,
-      { user_id },
+      { user_id, conference_id },
       { models: { Permission }, ValidationError },
     ) => {
       try {
         const permissions = await Permission.query()
           .where(builder => {
-            builder.where('status', 'on').where('user_id', user_id);
+            builder
+              .where('status', 'on')
+              .where('user_id', user_id)
+              .where('conference_id', conference_id);
           })
           .distinct('role_id');
         return permissions;
