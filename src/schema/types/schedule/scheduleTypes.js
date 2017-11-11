@@ -18,10 +18,10 @@ type Schedule {
   # conference
   conference: Conference!
 
-  #start
+  # start
   start: String!
 
-  #end
+  # end
   end: String!
 
   # room of activity in schedule

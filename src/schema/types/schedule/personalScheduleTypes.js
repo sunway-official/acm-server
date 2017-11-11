@@ -9,16 +9,19 @@ type PersonalSchedule {
   # schedule of personal
   schedule: Schedule!
 
+  # schedule_id
+  schedule_id: ID!
+
   # actity 
   activity: Activity!
 
   # conference 
   conference: Conference!
 
-  #start
+  # start
   start: String!
 
-  #end
+  # end
   end: String!
 
   # activity title
