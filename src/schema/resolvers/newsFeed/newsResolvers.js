@@ -106,9 +106,6 @@ export default {
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);
-        if (e.message === 'news-not-found') {
-          throw new ValidationError('news-not-found');
-        }
         throw new ValidationError('bad-request');
       }
     },
@@ -129,9 +126,6 @@ export default {
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);
-        if (e.message === 'news-not-found') {
-          throw new ValidationError('news-not-found');
-        }
         throw new ValidationError('bad-request');
       }
     },
@@ -152,9 +146,6 @@ export default {
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);
-        if (e.message === 'news-not-found') {
-          throw new ValidationError('news-not-found');
-        }
         throw new ValidationError('bad-request');
       }
     },
@@ -213,7 +204,7 @@ export default {
         // delete all NewsPhoto of news with id
         await news.deleteAllRelationship();
 
-        if (!news) throw new ValidationError('Not found news');
+        if (!news) throw new ValidationError('news-not-found');
 
         await News.query().deleteById(id);
         return news;

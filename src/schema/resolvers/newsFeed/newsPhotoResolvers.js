@@ -40,9 +40,6 @@ export default {
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);
-        if (e.message === 'newsPhoto-not-found') {
-          throw new ValidationError('newsPhoto-not-found');
-        }
         throw new ValidationError('bad-request');
       }
     },
@@ -63,9 +60,6 @@ export default {
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);
-        if (e.message === 'newsPhoto-not-found') {
-          throw new ValidationError('newsPhoto-not-found');
-        }
         throw new ValidationError('bad-request');
       }
     },

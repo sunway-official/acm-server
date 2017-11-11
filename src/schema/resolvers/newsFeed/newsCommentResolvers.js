@@ -44,9 +44,6 @@ export default {
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);
-        if (e.message === 'newsComment-not-found') {
-          throw new ValidationError('newsComment-not-found');
-        }
         throw new ValidationError('bad-request');
       }
     },
@@ -67,10 +64,7 @@ export default {
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);
-        if (e.message === 'newsComment-not-found') {
-          throw new ValidationError('newsComment-not-found');
-        }
-        throw new ValidationError(e);
+        throw new ValidationError('bad-request');
       }
     },
     getNewsCommentByUserID: async (
@@ -90,9 +84,6 @@ export default {
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);
-        if (e.message === 'newsComment-not-found') {
-          throw new ValidationError('newsComment-not-found');
-        }
         throw new ValidationError('bad-request');
       }
     },

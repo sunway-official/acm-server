@@ -44,9 +44,6 @@ export default {
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);
-        if (e.message === 'newsLike-not-found') {
-          throw new ValidationError('newsLike-not-found');
-        }
         throw new ValidationError('bad-request');
       }
     },
