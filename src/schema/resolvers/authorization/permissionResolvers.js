@@ -182,6 +182,7 @@ export default {
               user_id,
               full_name: `${getUser.firstname} ${getUser.lastname}`,
               feature_id: defaultPermission.feature_id,
+              conference_id: getUser.current_conference_id,
             };
 
             // eslint-disable-next-line no-await-in-loop
