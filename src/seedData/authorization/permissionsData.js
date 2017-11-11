@@ -140,7 +140,7 @@ function getUsersIDWithRoleID(role_id) {
 
 // them cac features mac dinh theo role_id cho user
 // eslint-disable-next-line camelcase, no-shadow
-function getPermissions(role_id, usersID, features) {
+function getPermissions(role_id, usersID, features, conference_id) {
   const result = [];
   // eslint-disable-next-line camelcase, array-callback-return
   usersID.map(user_id => {
@@ -155,7 +155,7 @@ function getPermissions(role_id, usersID, features) {
         full_name: getUserName(user_id),
         feature_id,
         status: 'on',
-        conference_id: 1,
+        conference_id,
       };
       result.push(temp);
     });
@@ -170,18 +170,22 @@ function getAllPermissions() {
   let result = [];
 
   // eslint-disable-next-line camelcase, array-callback-return
-  rolesID.map(role_id => {
-    const temp = getPermissions(
-      role_id,
-      getUsersIDWithRoleID(role_id),
-      getDefaultFeaturesWithRoleID(role_id),
-    );
-    result = result.concat(temp);
+  conferenceIDs.map(conference_id => {
+    // eslint-disable-next-line camelcase, array-callback-return
+    rolesID.map(role_id => {
+      const temp = getPermissions(
+        role_id,
+        getUsersIDWithRoleID(role_id),
+        getDefaultFeaturesWithRoleID(role_id),
+        conference_id,
+      );
+      result = result.concat(temp);
+    });
   });
 
   return result;
 }
 
-const permissions = getAllPermissions(conferenceIDs);
+const permissions = getAllPermissions();
 
 module.exports = permissions;

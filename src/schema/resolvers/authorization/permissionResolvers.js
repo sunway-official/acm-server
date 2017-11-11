@@ -127,12 +127,9 @@ export default {
     getAllRolesActiveByUserID: async (
       root,
       { user_id },
-      { models: { Permission }, ValidationError, user },
+      { models: { Permission }, ValidationError },
     ) => {
       try {
-        if (!user) {
-          throw new ValidationError('unauthorized');
-        }
         const permissions = await Permission.query()
           .where(builder => {
             builder.where('status', 'on').where('user_id', user_id);
