@@ -52,7 +52,7 @@ extend type Query {
   getAllPermissionsByUserID(user_id: ID!, conference_id: ID!): [Permission!]!
 
   # Get all roles active with user id 
-  getAllRolesActiveByUserID(user_id: ID!): [Permission!]!
+  getAllRolesActiveByUserID(user_id: ID!, conference_id: ID!): [Permission!]!
 
 }
 
