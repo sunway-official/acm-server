@@ -15,8 +15,14 @@ type Schedule {
   # activity status
   activity_status: Status!
 
-  # conference 
+  # conference
   conference: Conference!
+
+  # start
+  start: String!
+
+  # end
+  end: String!
 
   # room of activity in schedule
   room: Room!

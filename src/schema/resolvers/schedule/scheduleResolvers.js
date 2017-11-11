@@ -28,14 +28,21 @@ export default {
     getAllSchedules: async (
       root,
       data,
-      { models: { Schedule }, ValidationError },
+      { models: { Schedule }, ValidationError, user },
     ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
       try {
-        const schedules = await Schedule.query().orderBy('start', 'desc');
+        if (user.current_conference_id === 0) {
+          throw new ValidationError('no-current-conference');
+        }
+        const schedules = await Schedule.query()
+          .where('conference_id', user.current_conference_id)
+          .orderBy('start', 'desc');
         return schedules;
       } catch (e) {
         // eslint-disable-next-line no-console
-        console.error(e);
         throw new ValidationError(e);
       }
     },
