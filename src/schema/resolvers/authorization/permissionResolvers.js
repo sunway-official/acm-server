@@ -78,12 +78,16 @@ export default {
     // get all roles by user id
     getAllRolesByUserID: async (
       root,
-      { user_id },
+      { user_id, conference_id },
       { models: { Permission }, ValidationError },
     ) => {
       try {
         const permissions = await Permission.query()
-          .where('user_id', user_id)
+          .where(builder => {
+            builder
+              .where('conference_id', conference_id)
+              .where('user_id', user_id);
+          })
           .distinct('role_id');
         return permissions;
       } catch (e) {
@@ -96,11 +100,15 @@ export default {
     // get all features by user_id
     getAllPermissionsByUserID: async (
       root,
-      { user_id },
+      { user_id, conference_id },
       { models: { Permission }, ValidationError },
     ) => {
       try {
-        const permissions = await Permission.query().where('user_id', user_id);
+        const permissions = await Permission.query().where(builder => {
+          builder
+            .where('conference_id', conference_id)
+            .where('user_id', user_id);
+        });
         return permissions;
       } catch (e) {
         // eslint-disable-next-line no-console
@@ -200,6 +208,7 @@ export default {
             .where({
               user_id,
               role_id,
+              conference_id,
             });
         }
         // return all permission of user with user_id
