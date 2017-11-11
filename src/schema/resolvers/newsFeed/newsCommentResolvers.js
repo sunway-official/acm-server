@@ -13,8 +13,11 @@ export default {
     getAllNewsComments: async (
       root,
       data,
-      { models: { NewsComment }, ValidationError },
+      { models: { NewsComment }, ValidationError, user },
     ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
       try {
         const newsComment = await NewsComment.query();
         return newsComment;
@@ -27,8 +30,11 @@ export default {
     getNewsCommentByID: async (
       root,
       { id },
-      { models: { NewsComment }, ValidationError },
+      { models: { NewsComment }, ValidationError, user },
     ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
       try {
         const newsComment = await NewsComment.query().findById(id);
         if (!newsComment) {
@@ -47,8 +53,11 @@ export default {
     getNewsCommentByNewsID: async (
       root,
       { news_id },
-      { models: { NewsComment }, ValidationError },
+      { models: { NewsComment }, ValidationError, user },
     ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
       try {
         const newsComment = await NewsComment.query().where('news_id', news_id);
         if (!newsComment) {
@@ -67,8 +76,11 @@ export default {
     getNewsCommentByUserID: async (
       root,
       { user_id },
-      { models: { NewsComment }, ValidationError },
+      { models: { NewsComment }, ValidationError, user },
     ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
       try {
         const newsComment = await NewsComment.query().where('user_id', user_id);
         if (!newsComment) {
@@ -89,8 +101,11 @@ export default {
     insertNewsComment: async (
       root,
       data,
-      { models: { NewsComment }, ValidationError },
+      { models: { NewsComment }, ValidationError, user },
     ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
       try {
         const newsCommentInsert = await NewsComment.query().insert(data);
         return newsCommentInsert;
@@ -103,8 +118,11 @@ export default {
     updateNewsComment: async (
       root,
       data,
-      { models: { NewsComment }, ValidationError },
+      { models: { NewsComment }, ValidationError, user },
     ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
       try {
         const updateNewsComment = await NewsComment.query().updateAndFetchById(
           data.id,
@@ -120,8 +138,11 @@ export default {
     deleteNewsComment: async (
       root,
       { id },
-      { models: { NewsComment }, ValidationError },
+      { models: { NewsComment }, ValidationError, user },
     ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
       try {
         const deleteNewsComment = await NewsComment.query().findById(id);
         await NewsComment.query().deleteById(id);

@@ -13,8 +13,11 @@ export default {
     getAllNewsLikes: async (
       root,
       data,
-      { models: { NewsLike }, ValidationError },
+      { models: { NewsLike }, ValidationError, user },
     ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
       try {
         const newsLike = await NewsLike.query();
         return newsLike;
@@ -27,8 +30,11 @@ export default {
     getNewsLikeByID: async (
       root,
       { id },
-      { models: { NewsLike }, ValidationError },
+      { models: { NewsLike }, ValidationError, user },
     ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
       try {
         const newsLike = await NewsLike.query().findById(id);
         if (!newsLike) {
@@ -49,8 +55,11 @@ export default {
     insertNewsLike: async (
       root,
       data,
-      { models: { NewsLike }, ValidationError },
+      { models: { NewsLike }, ValidationError, user },
     ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
       try {
         const newsLikeInsert = await NewsLike.query().insert(data);
         return newsLikeInsert;
@@ -63,8 +72,11 @@ export default {
     updateNewsLike: async (
       root,
       data,
-      { models: { NewsLike }, ValidationError },
+      { models: { NewsLike }, ValidationError, user },
     ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
       try {
         const updateNewsLike = await NewsLike.query().updateAndFetchById(
           data.id,
@@ -80,8 +92,11 @@ export default {
     deleteNewsLike: async (
       root,
       { id },
-      { models: { NewsLike }, ValidationError },
+      { models: { NewsLike }, ValidationError, user },
     ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
       try {
         const deleteNewsLike = await NewsLike.query().findById(id);
         await NewsLike.query().deleteById(id);

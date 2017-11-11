@@ -73,8 +73,11 @@ export default {
     getAllNews: async (
       root,
       { pageNumber, pageSize },
-      { models: { News }, ValidationError },
+      { models: { News }, ValidationError, user },
     ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
       try {
         const news = await News.query()
           .page(pageNumber || 0, pageSize || 10)
@@ -89,8 +92,11 @@ export default {
     getNewsByID: async (
       root,
       { id },
-      { models: { News }, ValidationError },
+      { models: { News }, ValidationError, user },
     ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
       try {
         const news = await News.query().findById(id);
         if (!news) {
@@ -109,8 +115,11 @@ export default {
     getNewsByUserID: async (
       root,
       { user_id },
-      { models: { News }, ValidationError },
+      { models: { News }, ValidationError, user },
     ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
       try {
         const news = await News.query().where('user_id', user_id);
         if (!news) {
@@ -129,8 +138,11 @@ export default {
     getNewsByConferenceID: async (
       root,
       { conference_id },
-      { models: { News }, ValidationError },
+      { models: { News }, ValidationError, user },
     ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
       try {
         const news = await News.query().where('conference_id', conference_id);
         if (!news) {
@@ -148,7 +160,14 @@ export default {
     },
   },
   Mutation: {
-    insertNews: async (root, data, { models: { News }, ValidationError }) => {
+    insertNews: async (
+      root,
+      data,
+      { models: { News }, ValidationError, user },
+    ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
       try {
         const news = await News.query().insert(data);
         return news;
@@ -158,7 +177,14 @@ export default {
         throw new ValidationError('bad-request');
       }
     },
-    updateNews: async (root, data, { models: { News }, ValidationError }) => {
+    updateNews: async (
+      root,
+      data,
+      { models: { News }, ValidationError, user },
+    ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
       try {
         const updateNews = await News.query().updateAndFetchById(data.id, data);
         return updateNews;
@@ -168,7 +194,14 @@ export default {
         throw new ValidationError('bad-request');
       }
     },
-    deleteNews: async (root, { id }, { models: { News }, ValidationError }) => {
+    deleteNews: async (
+      root,
+      { id },
+      { models: { News }, ValidationError, user },
+    ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
       try {
         const news = await News.query().findById(id);
         // delete all NewsComment of news with id

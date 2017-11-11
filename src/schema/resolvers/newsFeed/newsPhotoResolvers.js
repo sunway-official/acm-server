@@ -9,8 +9,11 @@ export default {
     getAllNewsPhotos: async (
       root,
       data,
-      { models: { NewsPhoto }, ValidationError },
+      { models: { NewsPhoto }, ValidationError, user },
     ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
       try {
         const newsPhoto = await NewsPhoto.query();
         return newsPhoto;
@@ -23,8 +26,11 @@ export default {
     getNewsPhotoByID: async (
       root,
       { id },
-      { models: { NewsPhoto }, ValidationError },
+      { models: { NewsPhoto }, ValidationError, user },
     ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
       try {
         const newsPhoto = await NewsPhoto.query().findById(id);
         if (!newsPhoto) {
@@ -43,8 +49,11 @@ export default {
     getNewsPhotoByNewsID: async (
       root,
       { news_id },
-      { models: { NewsPhoto }, ValidationError },
+      { models: { NewsPhoto }, ValidationError, user },
     ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
       try {
         const newsPhoto = await NewsPhoto.query().where('news_id', news_id);
         if (!newsPhoto) {
@@ -65,8 +74,11 @@ export default {
     insertNewsPhoto: async (
       root,
       data,
-      { models: { NewsPhoto }, ValidationError },
+      { models: { NewsPhoto }, ValidationError, user },
     ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
       try {
         const newsPhoto = await NewsPhoto.query().insert(data);
         return newsPhoto;
@@ -79,8 +91,11 @@ export default {
     updateNewsPhoto: async (
       root,
       data,
-      { models: { NewsPhoto }, ValidationError },
+      { models: { NewsPhoto }, ValidationError, user },
     ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
       try {
         const updateNewsPhoto = await NewsPhoto.query().updateAndFetchById(
           data.id,
@@ -96,8 +111,11 @@ export default {
     deleteNewsPhoto: async (
       root,
       { id },
-      { models: { NewsPhoto }, ValidationError },
+      { models: { NewsPhoto }, ValidationError, user },
     ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
       try {
         const newsPhoto = await NewsPhoto.query().findById(id);
         await NewsPhoto.query().deleteById(id);
