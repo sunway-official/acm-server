@@ -15,6 +15,12 @@ type PersonalSchedule {
   # conference 
   conference: Conference!
 
+  #start
+  start: String!
+
+  #end
+  end: String!
+
   # activity title
   activity_title: String!
 
