@@ -52,6 +52,10 @@ export default {
       const activities = await Activity.query().where('conference_id', id);
       return activities;
     },
+    landingPage: async ({ id }, data, { models: { LandingPage } }) => {
+      const landingPage = await LandingPage.query().where('conference_id', id);
+      return landingPage;
+    },
   },
   Query: {
     getAllConferences: async (

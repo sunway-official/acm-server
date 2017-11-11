@@ -7,7 +7,7 @@ const rooms = [
   {
     name: 'P102', // 1
     seats: 40,
-    status: 'on',
+    status: 'off',
   },
   {
     name: 'P201', // 2
@@ -18,9 +18,23 @@ const rooms = [
     seats: 30,
   },
   {
+    name: 'P301', // 3
+    seats: 30,
+  },
+  {
     name: 'P302', // 4
     seats: 40,
-    status: 'on',
+    status: 'off',
+  },
+  {
+    name: 'P401', // 4
+    seats: 40,
+    status: 'off',
+  },
+  {
+    name: 'P402', // 4
+    seats: 40,
+    status: 'off',
   },
 ];
 

@@ -16,6 +16,10 @@ exports.up = function(knex, Promise) {
         .unsigned()
         .notNullable();
       table.string('full_name').notNullable();
+      table
+        .integer('conference_id')
+        .unsigned()
+        .notNullable();
       table.string('feature_id').nullable();
       table
         .enu('status', ['on', 'off'])

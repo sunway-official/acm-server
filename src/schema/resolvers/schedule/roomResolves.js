@@ -16,6 +16,20 @@ export default {
         throw new ValidationError(e);
       }
     },
+    getRoomsByStatus: async (
+      root,
+      { status },
+      { models: { Room }, ValidationError },
+    ) => {
+      try {
+        const rooms = await Room.query().where('status', status);
+        return rooms;
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error(e);
+        throw new ValidationError(e);
+      }
+    },
     getRoomByID: async (
       root,
       { id },

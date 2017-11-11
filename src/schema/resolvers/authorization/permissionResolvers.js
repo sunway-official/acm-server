@@ -122,6 +122,29 @@ export default {
         throw new ValidationError(e);
       }
     },
+
+    // getAllRolesActiveByUserId
+    getAllRolesActiveByUserID: async (
+      root,
+      { user_id },
+      { models: { Permission }, ValidationError, user },
+    ) => {
+      try {
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
+        const permissions = await Permission.query()
+          .where(builder => {
+            builder.where('status', 'on').where('user_id', user_id);
+          })
+          .distinct('role_id');
+        return permissions;
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error(e);
+        throw new ValidationError(e);
+      }
+    },
   },
 
   //  mutation of permission
