@@ -17,6 +17,10 @@ export default {
       const feature = Feature.query().findById(feature_id);
       return feature;
     },
+    conference: async ({ conference_id }, data, { models: { Conference } }) => {
+      const conference = Conference.query().findById(conference_id);
+      return conference;
+    },
   },
 
   // query of permission
@@ -148,7 +152,7 @@ export default {
   Mutation: {
     updateStatusRoleOfUser: async (
       root,
-      { user_id, role_id, status },
+      { user_id, role_id, status, conference_id },
       {
         models: { Permission, User, DefaultPermission, Role },
         ValidationError,
@@ -158,9 +162,11 @@ export default {
         const checkRoleOfUser = await Permission.query().where({
           user_id,
           role_id,
+          conference_id,
         });
         let permissions = [];
         if (checkRoleOfUser.length <= 0) {
+          // console.log(conference_id);
           // get user with user_id
           const getUser = await User.query().findById(user_id);
 
@@ -182,7 +188,7 @@ export default {
               user_id,
               full_name: `${getUser.firstname} ${getUser.lastname}`,
               feature_id: defaultPermission.feature_id,
-              conference_id: getUser.current_conference_id,
+              conference_id,
             };
 
             // eslint-disable-next-line no-await-in-loop
