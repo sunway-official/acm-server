@@ -1,5 +1,6 @@
 const roles = require('./rolesData');
 const users = require('./userData');
+
 const {
   participant,
   speaker,
@@ -39,6 +40,8 @@ const moderatorsID = [16, 17];
 
 // user_id want to become a participant
 const participantsID = [4];
+
+const conferenceIDs = [1, 2, 3, 4, 5, 6];
 
 // get name of roles with id
 function getRoleName(id) {
@@ -136,7 +139,7 @@ function getUsersIDWithRoleID(role_id) {
 }
 
 // them cac features mac dinh theo role_id cho user
-// eslint-disable-next-line camelcase
+// eslint-disable-next-line camelcase, no-shadow
 function getPermissions(role_id, usersID, features) {
   const result = [];
   // eslint-disable-next-line camelcase, array-callback-return
@@ -144,6 +147,7 @@ function getPermissions(role_id, usersID, features) {
     // eslint-disable-next-line camelcase, array-callback-return
     features.map(feature => {
       const { feature_id } = feature;
+      // eslint-disable-next-line
       const temp = {
         role_id,
         role_name: getRoleName(role_id),
@@ -151,6 +155,7 @@ function getPermissions(role_id, usersID, features) {
         full_name: getUserName(user_id),
         feature_id,
         status: 'on',
+        conference_id: 1,
       };
       result.push(temp);
     });
@@ -160,6 +165,7 @@ function getPermissions(role_id, usersID, features) {
 }
 
 // get all permissions add into table
+// eslint-disable-next-line
 function getAllPermissions() {
   let result = [];
 
@@ -176,6 +182,6 @@ function getAllPermissions() {
   return result;
 }
 
-const permissions = getAllPermissions();
+const permissions = getAllPermissions(conferenceIDs);
 
 module.exports = permissions;
