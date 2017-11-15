@@ -22,6 +22,8 @@ import activity from './activity';
 // staff
 import staff from './staff';
 
+import participant from './participant';
+
 import topic from './topic';
 
 const rootResolvers = {
@@ -38,5 +40,6 @@ const resolvers = [
   ...activity,
   ...topic,
   staff,
+  participant,
 ];
 export default mergeResolvers(resolvers);

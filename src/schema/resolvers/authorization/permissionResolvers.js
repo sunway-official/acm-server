@@ -161,7 +161,7 @@ export default {
 
   //  mutation of permission
   Mutation: {
-    updateStatusRoleOfUser: async (
+    updateUserRoleStatus: async (
       root,
       { user_id, role_id, status, conference_id },
       {

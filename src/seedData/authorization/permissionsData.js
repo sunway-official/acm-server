@@ -40,6 +40,9 @@ const moderatorsID = [16, 17];
 
 // user_id want to become a participant
 const participantsID = [4];
+for (let i = 50; i < 100; i += 1) {
+  participantsID.push(i);
+}
 
 const conferenceIDs = [1, 2, 3, 4, 5, 6];
 

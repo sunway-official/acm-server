@@ -62,7 +62,7 @@ extend type Mutation {
   updateStatusOfPermission(id: ID!, status: Status!) : Permission!
 
   # Update status role of User
-  updateStatusRoleOfUser(role_id: ID!, user_id: ID!,conference_id: ID!, status: Status!) : [Permission!]!
+  updateUserRoleStatus(role_id: ID!, user_id: ID!,conference_id: ID!, status: Status!) : [Permission!]!
 
   # Delete Permission with permission id
   deletePermission(id: ID!) : [Permission!]!
