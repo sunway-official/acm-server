@@ -18,6 +18,10 @@ export default {
       const user = await User.query().findById(user_id);
       return user;
     },
+    rooms: async ({ id }, data, { models: { Room } }) => {
+      const rooms = await Room.query().where('conference_id', id);
+      return rooms;
+    },
     conferenceAttendees: async (
       { id },
       data,

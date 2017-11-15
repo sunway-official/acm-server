@@ -21,6 +21,10 @@ type Conference {
   # conference activities
   activities:[Activity!]!
 
+
+  # rooms
+  rooms: [Room!]!
+
   # topics
   topics: [Topic!]!
 

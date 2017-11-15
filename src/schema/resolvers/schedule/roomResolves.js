@@ -4,6 +4,10 @@ export default {
       const schedules = await Schedule.query().where('room_id', id);
       return schedules;
     },
+    conference: async ({ conference_id }, data, { models: { Conference } }) => {
+      const conference = await Conference.query().findById(conference_id);
+      return conference;
+    },
   },
   Query: {
     getAllRooms: async (root, data, { models: { Room }, ValidationError }) => {

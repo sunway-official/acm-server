@@ -14,11 +14,13 @@ export default class Room extends Model {
         enum: ['on', 'off'],
         default: 'on',
       },
+      conference_id: { type: 'integer' },
     },
   };
 
   async $beforeValidate(opt) {
     this.id = parseInt(opt.old.id, 10);
+    this.conference_id = parseInt(opt.old.conference_id, 10);
   }
 
   async $beforeInsert() {
