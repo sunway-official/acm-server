@@ -9,6 +9,7 @@ exports.up = function(knex, Promise) {
         .enu('status', ['on', 'off'])
         .defaultTo('on')
         .notNullable();
+      table.integer('conference_id');
     }),
   ]);
 };

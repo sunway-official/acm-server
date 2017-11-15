@@ -22,6 +22,9 @@ import globalTypes from './globalTypes';
 // staff
 import staff from './staff';
 
+// participant
+import participant from './participant';
+
 import topic from './topic';
 
 export default [
@@ -34,4 +37,5 @@ export default [
   ...topic,
   globalTypes,
   staff,
+  participant,
 ];
