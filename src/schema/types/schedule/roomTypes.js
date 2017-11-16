@@ -29,6 +29,10 @@ extend type Query {
 
   # Get Room with Status On
   getRoomsByStatus(status: Status!): [Room!]!
+
+  # get room by conference id
+  getRoomsByConferenceID(conference_id: ID!): [Room!]!
+
 }
 
 extend type Mutation {
