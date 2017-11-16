@@ -34,6 +34,20 @@ export default {
         throw new ValidationError(e);
       }
     },
+    getRoomsByConferenceID: async (
+      root,
+      { conference_id },
+      { models: { Room }, ValidationError },
+    ) => {
+      try {
+        const rooms = await Room.query().where('conference_id', conference_id);
+        return rooms;
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error(e);
+        throw new ValidationError(e);
+      }
+    },
     getRoomByID: async (
       root,
       { id },
