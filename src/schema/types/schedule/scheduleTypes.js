@@ -18,12 +18,6 @@ type Schedule {
   # conference
   conference: Conference!
 
-  # start
-  start: String!
-
-  # end
-  end: String!
-
   # room of activity in schedule
   room: Room!
 
@@ -44,8 +38,6 @@ type Schedule {
 
   # end time of Schedule
   end: Date!
-
-
 }
 
 extend type Query {

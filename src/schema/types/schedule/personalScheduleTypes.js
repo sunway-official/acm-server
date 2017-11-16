@@ -19,10 +19,10 @@ type PersonalSchedule {
   conference: Conference!
 
   # start
-  start: String!
+  start: Date!
 
   # end
-  end: String!
+  end: Date!
 
   # activity title
   activity_title: String!
@@ -44,8 +44,6 @@ type PersonalSchedule {
 
   # room status
   room_status: Status!
-
-
 }
 
 extend type Query {
