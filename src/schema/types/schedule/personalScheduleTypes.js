@@ -56,10 +56,10 @@ extend type Query {
 
 extend type Mutation {
   # Insert new PersonalSchedule
-  insertPersonalSchedule( user_id: ID!, schedule_id: ID! ): PersonalSchedule!
+  insertPersonalSchedule(schedule_id: ID! ): PersonalSchedule!
 
   # Update PersonalSchedule info by id
-  updatePersonalSchedule(id:ID!, user_id: ID, schedule_id: ID ): PersonalSchedule!
+  updatePersonalSchedule(id:ID!, schedule_id: ID ): PersonalSchedule!
 
   # Delete PersonalSchedule by id
   deletePersonalSchedule(id: ID!): PersonalSchedule!

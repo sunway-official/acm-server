@@ -31,7 +31,7 @@ type Schedule {
   room_status: Status!
 
   # personal schedule
-  personalSchedules: [PersonalSchedule!]!
+  personalSchedule: PersonalSchedule
 
   # start time of Schedule
   start: Date!
