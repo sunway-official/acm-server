@@ -12,15 +12,18 @@ export default {
       const conference = await Conference.query().findById(conference_id);
       return conference;
     },
-    personalSchedules: async (
+    personalSchedule: async (
       { id },
       data,
-      { models: { PersonalSchedule } },
+      { models: { PersonalSchedule }, ValidationError, user },
     ) => {
-      const personalSchedules = await PersonalSchedule.query().where(
-        'schedule_id',
-        id,
-      );
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
+      const personalSchedules = await PersonalSchedule.query()
+        .where('schedule_id', id)
+        .andWhere('user_id', user.id)
+        .first();
       return personalSchedules;
     },
   },
