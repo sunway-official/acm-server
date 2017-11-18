@@ -71,9 +71,16 @@ export default {
     insertSchedule: async (
       root,
       data,
-      { models: { Schedule }, ValidationError },
+      { models: { Schedule }, ValidationError, user },
     ) => {
       try {
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
+        // eslint-disable-next-line
+        const conference_id = user.current_conference_id;
+        // eslint-disable-next-line
+        data.conference_id = conference_id;
         const newSchedule = await Schedule.query().insert(data);
         return newSchedule;
       } catch (e) {

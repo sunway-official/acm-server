@@ -14,12 +14,14 @@ const getNewDate = data => {
   return newDate;
 };
 
-const schedules = [
+// eslint-disable-next-line
+const tempSchedules = (conference_id, activity_id) => [
   {
-    activity_id: 1,
+    // eslint-disable-next-line
+    activity_id,
     room_status: 'on',
     activity_status: 'on',
-    conference_id: 1,
+    conference_id,
     room_id: 1,
     start: getNewDate('2017-11-13T00:30:00.000Z'),
     end: getNewDate('2017-11-13T02:00:00.000Z'),
@@ -30,10 +32,11 @@ const schedules = [
     room_seats: 20,
   },
   {
-    activity_id: 2,
+    // eslint-disable-next-line
+    activity_id,
     room_status: 'on',
     activity_status: 'on',
-    conference_id: 1,
+    conference_id,
     room_id: 3,
     start: getNewDate('2017-11-13T02:30:00.000Z'),
     end: getNewDate('2017-11-13T04:00:00.000Z'),
@@ -44,10 +47,11 @@ const schedules = [
     room_seats: 30,
   },
   {
-    activity_id: 3,
+    // eslint-disable-next-line
+    activity_id,
     room_status: 'on',
     activity_status: 'on',
-    conference_id: 1,
+    conference_id,
     room_id: 3,
     start: getNewDate('2017-11-13T06:30:00.000Z'),
     end: getNewDate('2017-11-13T08:00:00.000Z'),
@@ -59,10 +63,11 @@ const schedules = [
     room_seats: 30,
   },
   {
-    activity_id: 4,
+    // eslint-disable-next-line
+    activity_id,
     room_status: 'on',
     activity_status: 'on',
-    conference_id: 1,
+    conference_id,
     room_id: 1,
     start: getNewDate('2017-11-13T08:30:00.000Z'),
     end: getNewDate('2017-11-13T10:00:00.000Z'),
@@ -73,10 +78,11 @@ const schedules = [
     room_seats: 20,
   },
   {
-    activity_id: 5,
+    // eslint-disable-next-line
+    activity_id,
     room_status: 'on',
     activity_status: 'on',
-    conference_id: 1,
+    conference_id,
     room_id: 3,
     start: addDays(getNewDate('2017-11-14T00:30:00.000Z'), 1),
     end: addDays(getNewDate('2017-11-14T02:00:00.000Z'), 1),
@@ -87,10 +93,11 @@ const schedules = [
     room_seats: 30,
   },
   {
-    activity_id: 6,
+    // eslint-disable-next-line
+    activity_id,
     room_status: 'on',
     activity_status: 'on',
-    conference_id: 1,
+    conference_id,
     room_id: 1,
     start: addDays(getNewDate('2017-11-14T02:30:00.000Z'), 1),
     end: addDays(getNewDate('2017-11-14T04:00:00.000Z'), 1),
@@ -101,10 +108,11 @@ const schedules = [
     room_seats: 20,
   },
   {
-    activity_id: 7,
+    // eslint-disable-next-line
+    activity_id,
     room_status: 'on',
     activity_status: 'on',
-    conference_id: 1,
+    conference_id,
     room_id: 1,
     start: addDays(getNewDate('2017-11-14T06:30:00.000Z'), 1),
     end: addDays(getNewDate('2017-11-14T08:00:00.000Z'), 1),
@@ -115,10 +123,11 @@ const schedules = [
     room_seats: 20,
   },
   {
-    activity_id: 8,
+    // eslint-disable-next-line
+    activity_id,
     room_status: 'on',
     activity_status: 'on',
-    conference_id: 1,
+    conference_id,
     room_id: 5,
     start: addDays(getNewDate('2017-11-13T04:30:00.000Z'), 0),
     end: addDays(getNewDate('2017-11-13T06:00:00.000Z'), 0),
@@ -128,10 +137,11 @@ const schedules = [
     room_seats: 30,
   },
   {
-    activity_id: 8,
+    // eslint-disable-next-line
+    activity_id,
     room_status: 'on',
     activity_status: 'on',
-    conference_id: 1,
+    conference_id,
     room_id: 5,
     start: addDays(getNewDate('2017-11-14T04:30:00.000Z'), 1),
     end: addDays(getNewDate('2017-11-14T06:00:00.000Z'), 1),
@@ -141,10 +151,11 @@ const schedules = [
     room_seats: 30,
   },
   {
-    activity_id: 8,
+    // eslint-disable-next-line
+    activity_id,
     room_status: 'on',
     activity_status: 'on',
-    conference_id: 1,
+    conference_id,
     room_id: 5,
     start: addDays(getNewDate('2017-11-15T04:30:00.000Z'), 2),
     end: addDays(getNewDate('2017-11-15T06:00:00.000Z'), 2),
@@ -154,10 +165,11 @@ const schedules = [
     room_seats: 30,
   },
   {
-    activity_id: 9,
+    // eslint-disable-next-line
+    activity_id,
     room_status: 'on',
     activity_status: 'on',
-    conference_id: 1,
+    conference_id,
     room_id: 3,
     start: addDays(getNewDate('2017-11-14T08:30:00.000Z'), 1),
     end: addDays(getNewDate('2017-11-14T10:00:00.000Z'), 1),
@@ -168,10 +180,11 @@ const schedules = [
     room_seats: 30,
   },
   {
-    activity_id: 10,
+    // eslint-disable-next-line
+    activity_id,
     room_status: 'on',
     activity_status: 'on',
-    conference_id: 1,
+    conference_id,
     room_id: 5,
     start: addDays(getNewDate('2017-11-13T10:30:00.000Z'), 0),
     end: addDays(getNewDate('2017-11-13T11:30:00.000Z'), 0),
@@ -181,10 +194,11 @@ const schedules = [
     room_seats: 30,
   },
   {
-    activity_id: 10,
+    // eslint-disable-next-line
+    activity_id,
     room_status: 'on',
     activity_status: 'on',
-    conference_id: 1,
+    conference_id,
     room_id: 5,
     start: addDays(getNewDate('2017-11-13T10:30:00.000Z'), 1),
     end: addDays(getNewDate('2017-11-13T11:30:00.000Z'), 1),
@@ -194,10 +208,11 @@ const schedules = [
     room_seats: 30,
   },
   {
-    activity_id: 11,
+    // eslint-disable-next-line
+    activity_id,
     room_status: 'on',
     activity_status: 'on',
-    conference_id: 1,
+    conference_id,
     room_id: 3,
     start: addDays(getNewDate('2017-11-13T00:30:00.000Z'), 0),
     end: addDays(getNewDate('2017-11-13T02:00:00.000Z'), 0),
@@ -208,10 +223,11 @@ const schedules = [
     room_seats: 30,
   },
   {
-    activity_id: 12,
+    // eslint-disable-next-line
+    activity_id,
     room_status: 'on',
     activity_status: 'on',
-    conference_id: 1,
+    conference_id,
     room_id: 3,
     start: addDays(getNewDate('2017-11-15T00:30:00.000Z'), 2),
     end: addDays(getNewDate('2017-11-15T02:00:00.000Z'), 2),
@@ -223,10 +239,11 @@ const schedules = [
     room_seats: 30,
   },
   {
-    activity_id: 13,
+    // eslint-disable-next-line
+    activity_id,
     room_status: 'on',
     activity_status: 'on',
-    conference_id: 1,
+    conference_id,
     room_id: 1,
     start: addDays(getNewDate('2017-11-15T02:30:00.000Z'), 2),
     end: addDays(getNewDate('2017-11-15T04:00:00.000Z'), 2),
@@ -237,5 +254,11 @@ const schedules = [
     room_seats: 20,
   },
 ];
+
+let schedules = [];
+
+for (let i = 1; i < 7; i += 1) {
+  schedules = schedules.concat(tempSchedules(i, i * 13 - 13 + 1));
+}
 
 module.exports = schedules;
