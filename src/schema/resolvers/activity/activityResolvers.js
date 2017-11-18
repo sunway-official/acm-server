@@ -62,10 +62,15 @@ export default {
 
     getActivitiesByConferenceID: async (
       root,
-      { conference_id },
-      { models: { Activity }, ValidationError },
+      data,
+      { models: { Activity }, ValidationError, user },
     ) => {
       try {
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
+        // eslint-disable-next-line
+        const conference_id = user.current_conference_id;
         const allActivitiesOfConference = await Activity.query().where(
           'conference_id',
           conference_id,
@@ -83,9 +88,17 @@ export default {
     insertActivity: async (
       root,
       data,
-      { models: { Activity }, ValidationError },
+      { models: { Activity }, ValidationError, user },
     ) => {
       try {
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
+        // eslint-disable-next-line
+        const conference_id = user.current_conference_id;
+        console.log(conference_id);
+        // eslint-disable-next-line
+        data.conference_id = conference_id;
         const newActivity = await Activity.query().insert(data);
         return newActivity;
       } catch (e) {

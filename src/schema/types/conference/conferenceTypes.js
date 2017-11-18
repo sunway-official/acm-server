@@ -57,6 +57,9 @@ extend type Query {
   # Get Conference by ID
   getConferenceByID(id: ID!): Conference!
 
+  # get current conference
+  getCurrentConference: Conference!
+
   # Get Conference by OrganizerDetail ID
   getConferenceByOrganizerDetailID( organizer_detail_id: ID!): [Conference!]!
 

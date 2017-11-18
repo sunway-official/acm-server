@@ -96,6 +96,28 @@ export default {
         throw new ValidationError(e);
       }
     },
+    getCurrentConference: async (
+      root,
+      data,
+      { models: { Conference }, ValidationError, user },
+    ) => {
+      try {
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
+        // eslint-disable-next-line
+        const conference_id = user.current_conference_id;
+        const conference = await Conference.query().findById(conference_id);
+        if (!conference) {
+          throw new ValidationError('conference-not-found');
+        }
+        return conference;
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error(e);
+        throw new ValidationError(e);
+      }
+    },
     getConferenceByOrganizerDetailID: async (
       root,
       { organizer_detail_id },

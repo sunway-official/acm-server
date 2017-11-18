@@ -68,9 +68,16 @@ export default {
     insertCoOrganizerDetail: async (
       root,
       data,
-      { models: { CoOrganizerDetail }, ValidationError },
+      { models: { CoOrganizerDetail }, ValidationError, user },
     ) => {
       try {
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
+        // eslint-disable-next-line
+        const conference_id = user.current_conference_id;
+        // eslint-disable-next-line
+        data.conference_id = conference_id;
         const newCoOrganizerDetail = await CoOrganizerDetail.query().insert(
           data,
         );
@@ -87,6 +94,8 @@ export default {
       { models: { CoOrganizerDetail }, ValidationError },
     ) => {
       try {
+        // eslint-disable-next-line
+        data.conference_id = conference_id;
         const updateCoOrganizerDetail = await CoOrganizerDetail.query().updateAndFetchById(
           data.id,
           data,
