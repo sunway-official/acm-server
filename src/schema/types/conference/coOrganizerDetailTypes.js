@@ -37,7 +37,6 @@ extend type Query {
 extend type Mutation {
   # Insert new CoOrganizerDetail
   insertCoOrganizerDetail(
-    conference_id: ID!,
     name: String!,
     address: String!,
     email: String!,
@@ -48,7 +47,6 @@ extend type Mutation {
   # Update CoOrganizerDetail info by id
   updateCoOrganizerDetail(
     id:ID!,
-    conference_id: ID,
     name: String,
     address: String,
     email: String,
