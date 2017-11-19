@@ -10,6 +10,10 @@ exports.up = function(knex, Promise) {
         .integer('user_id')
         .unsigned()
         .notNullable();
+      table
+        .integer('conference_id')
+        .unsigned()
+        .notNullable();
       table.string('title');
       table.text('description');
       table.timestamps();
@@ -19,5 +23,5 @@ exports.up = function(knex, Promise) {
 
 // eslint-disable-next-line func-names
 exports.down = function(knex, Promise) {
-  return Promise.all([knex.schema.dropTable('colors')]);
+  return Promise.all([knex.schema.dropTable('papers')]);
 };

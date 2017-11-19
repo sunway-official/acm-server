@@ -1,3 +1,3 @@
-import paper from './paper';
+import paperTypes from './paperTypes';
 
-export default [paper];
+export default [paperTypes];

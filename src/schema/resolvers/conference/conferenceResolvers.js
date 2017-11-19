@@ -60,6 +60,10 @@ export default {
       const landingPage = await LandingPage.query().where('conference_id', id);
       return landingPage;
     },
+    papers: async ({ id }, data, { models: { Paper } }) => {
+      const papers = await Paper.query().where('conference_id', id);
+      return papers;
+    },
   },
   Query: {
     getAllConferences: async (

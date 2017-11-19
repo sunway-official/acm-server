@@ -6,6 +6,9 @@ type Paper {
   # User ID
   user: User!
 
+  # conference
+  conference: Conference!
+
   # title
   title: String!
 
@@ -27,8 +30,11 @@ extend type Query {
   # Get Paper by ID
   getPaperByID( id: ID!): Paper!
 
+  # Get Paper by conference ID
+  getPapersByConferenceID( conference_id: ID): [Paper!]!
+
   # Get Paper by user ID
-  getPaperByUserID( user_id: ID! ): [Paper!]!
+  getPapersByUserID: [Paper!]!
 }
 
 extend type Mutation {
