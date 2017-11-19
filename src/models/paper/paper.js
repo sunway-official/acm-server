@@ -1,4 +1,5 @@
 import { Model } from 'objection';
+import PaperTopic from '../paper/paperTopic';
 
 export default class Paper extends Model {
   static tableName = 'papers';
@@ -25,5 +26,20 @@ export default class Paper extends Model {
   async $beforeValidate(opt) {
     this.id = parseInt(opt.old.id, 10);
     this.user_id = parseInt(opt.old.user_id, 10);
+  }
+
+  // delete all topic of paper with id
+  async deletePaperTopic() {
+    const paperTopic = await PaperTopic.query().where('paper_id', this.id);
+
+    if (paperTopic)
+      await PaperTopic.query()
+        .delete()
+        .where('paper_id', this.id);
+    return paperTopic;
+  }
+
+  async deleteAllRelationship() {
+    this.deletePaperTopic();
   }
 }

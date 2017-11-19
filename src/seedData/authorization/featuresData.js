@@ -27,23 +27,23 @@ const features = [
     id: 'deleteActivityFeedback',
   },
 
-  // query Activity topics
+  // query Papers topics
   {
-    id: 'getAllActivityTopics',
+    id: 'getAllPapersTopics',
   },
   {
-    id: 'getActivityTopicByID',
+    id: 'getTopicsByPaperID',
   },
 
-  // mutation Activity topics
+  // mutation Papers topics
   {
-    id: 'insertActivityTopic',
+    id: 'insertPaperTopic',
   },
   {
-    id: 'updateActivityTopic',
+    id: 'updateTopicOfPaper',
   },
   {
-    id: 'deleteActivityTopic',
+    id: 'deletePaperTopic',
   },
 
   // query Activity

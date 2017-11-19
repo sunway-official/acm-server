@@ -1,7 +1,6 @@
 import { Model } from 'objection';
 import Schedule from '../schedule/schedule';
 import ActivityFeedback from './activityFeedback';
-import ActivityTopic from './activityTopic';
 import Question from '../questionAndAnswer/question';
 
 export default class Activity extends Model {
@@ -59,20 +58,6 @@ export default class Activity extends Model {
     return activityFeedback;
   }
 
-  // delete all topic of activity with id
-  async deleteActivityTopic() {
-    const activityTopic = await ActivityTopic.query().where(
-      'activity_id',
-      this.id,
-    );
-
-    if (activityTopic)
-      await ActivityTopic.query()
-        .delete()
-        .where('activity_id', this.id);
-    return activityTopic;
-  }
-
   // delete all question of activity with id
   async deleteQuestion() {
     const questions = await Question.query().where('activity_id', this.id);
@@ -88,7 +73,6 @@ export default class Activity extends Model {
 
   async deleteAllRelationship() {
     this.deleteActivityFeedback();
-    this.deleteActivityTopic();
     this.deleteSchedule();
     this.deleteQuestion();
   }

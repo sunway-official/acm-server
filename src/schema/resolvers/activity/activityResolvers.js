@@ -5,9 +5,9 @@ export default {
       return conference;
     },
 
-    activityTopics: async ({ id }, data, { models: { ActivityTopic } }) => {
-      const activityTopic = ActivityTopic.query().where('activity_id', id);
-      return activityTopic;
+    paper: async ({ paper_id }, data, { models: { PaperTopic } }) => {
+      const paperTopic = PaperTopic.query().where('paper_id', paper_id);
+      return paperTopic;
     },
     schedules: async ({ id }, data, { models: { Schedule } }) => {
       const schedules = Schedule.query().where('activity_id', id);

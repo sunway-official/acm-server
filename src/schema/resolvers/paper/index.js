@@ -1,3 +1,4 @@
 import paperResolvers from './paperResolvers';
+import paperTopicResolvers from './paperTopicResolvers';
 
-export default [paperResolvers];
+export default [paperResolvers, paperTopicResolvers];

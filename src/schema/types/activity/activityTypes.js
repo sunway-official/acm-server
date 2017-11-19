@@ -7,8 +7,8 @@ type Activity {
   # conferen have this activity
   conference: Conference!
 
-  # all topics of activity
-  activityTopics: [ActivityTopic!]!
+  # paper
+  paper: Paper!
 
   # all feedback of activity
   activityFeedback: [ActivityFeedback!]!
