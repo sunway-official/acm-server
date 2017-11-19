@@ -30,7 +30,7 @@ extend type Query {
   getCoOrganizerDetailByID(id: ID!): CoOrganizerDetail!
 
   # Get CoOrganizerDetail by conference ID
-  getCoOrganizerDetailByConferenceID( conference_id: ID!): CoOrganizerDetail!
+  getCoOrganizerDetailByConferenceID( conference_id: ID): CoOrganizerDetail!
 
 }
 
