@@ -7,6 +7,8 @@ export default (fromAddress, toAddress, subject = undefined, token) => ({
   html: `
     <h1>Reset your password</h1>
     <p>Please click the link below to reset your password:</p>
-    <a href="${config.resetPasswordClientRoute}?token=${token}">${config.resetPasswordClientRoute}?token=${token}</a>
+    <a href="${config.resetPasswordClientRoute}?token=${token}">${
+    config.resetPasswordClientRoute
+  }?token=${token}</a>
   `,
 });

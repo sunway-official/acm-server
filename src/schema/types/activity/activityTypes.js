@@ -44,7 +44,7 @@ extend type Query {
   getActivityByID(id: ID!): Activity!
 
   # get all activities of one conference by conference_id
-  getActivitiesByConferenceID: [Activity!]!
+  getActivitiesByConferenceID( conference_id: ID): [Activity!]!
 }
 
 extend type Mutation {
