@@ -30,14 +30,17 @@ extend type Query {
   # Get Topic by ID
   getTopicByID(id: ID!): Topic!
 
+  # Get information about all Topic
+  getTopicsOfConference: [Topic!]!
+
 }
 
 extend type Mutation {
   # Insert new Topic
-  insertTopic( conference_id:ID!, name: String!, description: String!, color_id: ID!): Topic!
+  insertTopic( name: String!, description: String!, color_id: ID!): Topic!
 
   # Update Topic info by id
-  updateTopic(id:ID!, conference_id:ID, name: String, description: String, color_id: ID ): Topic!
+  updateTopic(id:ID! name: String, description: String, color_id: ID ): Topic!
 
   # Delete Topic by id
   deleteTopic(id: ID!): Topic!

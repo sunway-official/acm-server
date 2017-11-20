@@ -45,10 +45,41 @@ export default {
         throw new ValidationError(e);
       }
     },
+    getTopicsOfConference: async (
+      root,
+      data,
+      { models: { Topic }, ValidationError, user },
+    ) => {
+      try {
+        // eslint-disable-next-line
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
+        const topics = await Topic.query().where(
+          'conference_id',
+          user.current_conference_id,
+        );
+        return topics;
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error(e);
+        throw new ValidationError(e);
+      }
+    },
   },
   Mutation: {
-    insertTopic: async (root, data, { models: { Topic }, ValidationError }) => {
+    insertTopic: async (
+      root,
+      data,
+      { models: { Topic }, ValidationError, user },
+    ) => {
       try {
+        // eslint-disable-next-line
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
+        // eslint-disable-next-line
+        data.conference_id = user.current_conference_id;
         const newTopic = await Topic.query().insert(data);
         return newTopic;
       } catch (e) {
@@ -57,8 +88,18 @@ export default {
         throw new ValidationError(e);
       }
     },
-    updateTopic: async (root, data, { models: { Topic }, ValidationError }) => {
+    updateTopic: async (
+      root,
+      data,
+      { models: { Topic }, ValidationError, user },
+    ) => {
       try {
+        // eslint-disable-next-line
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
+        // eslint-disable-next-line
+        data.conference_id = user.current_conference_id;
         const updateTopic = await Topic.query().updateAndFetchById(
           data.id,
           data,
