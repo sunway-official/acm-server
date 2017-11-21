@@ -15,7 +15,9 @@ exports.up = function(knex, Promise) {
         .unsigned()
         .notNullable();
       table.string('title');
-      table.text('description');
+      table.string('keywords');
+      table.text('abstract');
+      table.text('file');
       table.timestamps();
     }),
   ]);
