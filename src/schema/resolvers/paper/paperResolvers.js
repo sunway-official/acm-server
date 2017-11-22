@@ -101,7 +101,11 @@ export default {
         // eslint-disable-next-line
         const conference_id = user.current_conference_id;
         // eslint-disable-next-line
+        const user_id = user.id;
+        // eslint-disable-next-line
         data.conference_id = conference_id;
+        // eslint-disable-next-line
+        data.user_id = user_id;
         const newPaper = await Paper.query().insert(data);
         return newPaper;
       } catch (e) {

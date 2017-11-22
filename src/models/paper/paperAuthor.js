@@ -11,9 +11,9 @@ export default class PaperAuthor extends Model {
       paper_id: { type: 'integer' },
       author_id: { type: 'integer' },
       corresponding: { type: 'integer' },
-      author_name: { type: 'text', maxLength: '100' },
-      author_email: { type: 'text', maxLength: '100' },
-      author_title: { type: 'text', maxLength: '100' },
+      author_name: { type: 'string', maxLength: '100' },
+      author_email: { type: 'string', maxLength: '100' },
+      author_title: { type: 'string', maxLength: '100' },
     },
   };
 
