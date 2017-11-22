@@ -2,20 +2,17 @@ import { Model } from 'objection';
 import Schedule from '../schedule/schedule';
 import ActivityFeedback from './activityFeedback';
 import Question from '../questionAndAnswer/question';
+import Paper from '../paper/paper';
 
 export default class Activity extends Model {
   static tableName = 'activities';
   static jsonSchema = {
     type: 'object',
-    required: ['conference_id', 'activity_type_id', 'title'],
     properties: {
       id: { type: 'integer' },
       conference_id: { type: 'integer' },
+      paper_id: { type: 'integer' },
       title: { type: 'string', maxLength: '300' },
-      status: {
-        enum: ['on', 'off'],
-        default: 'on',
-      },
       description: { type: 'text' },
     },
   };
@@ -23,11 +20,22 @@ export default class Activity extends Model {
   async $beforeValidate(opt) {
     this.id = parseInt(opt.old.id, 10);
     this.conference_id = parseInt(opt.old.conference_id, 10);
-    this.activity_type_id = parseInt(opt.old.activity_type_id, 10);
+    this.paper_id = parseInt(opt.old.paper_id, 10);
   }
 
   async $beforeInsert() {
-    if (!this.status) this.status = 'on';
+    const paper = await Paper.query().where('id', this.paper_id);
+    this.conference_id = paper[0].conference_id;
+    this.title = paper[0].title;
+    this.description = paper[0].abstract;
+    console.log(this.description);
+  }
+
+  async $beforeUpdate() {
+    const paper = await Paper.query().where('id', this.paper_id);
+    this.conference_id = paper[0].conference_id;
+    this.title = paper[0].title;
+    this.description = paper[0].abstract;
   }
 
   // delete all schedules of activity with id

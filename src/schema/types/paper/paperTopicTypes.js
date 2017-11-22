@@ -21,6 +21,7 @@ type PaperTopic {
 
 
 extend type Query {
+  # get all papers topics
   getAllPapersTopics: [PaperTopic!]!
 
   # all topics by paper id

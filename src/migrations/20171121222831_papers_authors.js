@@ -9,6 +9,9 @@ exports.up = function(knex, Promise) {
       table.integer('paper_id').unsigned();
       table.integer('author_id').unsigned();
       table.integer('corresponding').defaultTo(1);
+      table.string('author_name');
+      table.string('author_email');
+      table.string('author_title');
     }),
   ]);
 };

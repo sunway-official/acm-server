@@ -9,11 +9,24 @@ type Paper {
   # conference
   conference: Conference!
 
+  # paper topic
+  papersTopics: [PaperTopic!]!
+
+  # paper author
+  papersAuthors: [PaperAuthor!]!
+
   # title
   title: String!
 
-  # description
-  description: String!
+  # abstract
+  abstract: String!
+
+  # file
+  file: String!
+
+  # keywords
+  keywords: String!
+
 
   # Document created_at timestamp
   created_at: Date!
