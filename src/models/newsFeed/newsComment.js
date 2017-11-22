@@ -10,7 +10,7 @@ export default class NewsComment extends Model {
       id: { type: 'integer' },
       news_id: { type: 'integer' },
       user_id: { type: 'integer' },
-      content: { type: 'string', maxLength: '200' },
+      content: { type: 'text' },
     },
   };
 

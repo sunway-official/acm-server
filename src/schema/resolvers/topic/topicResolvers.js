@@ -1,9 +1,5 @@
 export default {
   Topic: {
-    activityTopics: async ({ id }, data, { models: { ActivityTopic } }) => {
-      const activityTopics = await ActivityTopic.query().where('topic_id', id);
-      return activityTopics;
-    },
     conference: async ({ conference_id }, data, { models: { Conference } }) => {
       const conference = await Conference.query().findById(conference_id);
       return conference;
@@ -118,8 +114,6 @@ export default {
     ) => {
       try {
         const topic = await Topic.query().findById(id);
-
-        // delete all activityTopics of topic with id
 
         if (topic) {
           await topic.deleteAllRelationship();

@@ -27,6 +27,8 @@ import participant from './participant';
 
 import topic from './topic';
 
+import paper from './paper';
+
 export default [
   ...authorization,
   ...activity,
@@ -35,6 +37,7 @@ export default [
   ...questionAndAnswer,
   ...schedule,
   ...topic,
+  ...paper,
   globalTypes,
   staff,
   participant,

@@ -26,6 +26,8 @@ import participant from './participant';
 
 import topic from './topic';
 
+import paper from './paper';
+
 const rootResolvers = {
   Date: GraphQLToolsTypes.Date({ name: 'Date' }),
 };
@@ -39,6 +41,7 @@ const resolvers = [
   ...questionAndAnswer,
   ...activity,
   ...topic,
+  ...paper,
   staff,
   participant,
 ];

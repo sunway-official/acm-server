@@ -92,6 +92,9 @@ type User {
 
   # answers
   answers: [Answer!]
+
+  # papers
+  papers: [Paper!]!
 }
 enum Gender {
   male

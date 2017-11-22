@@ -1,5 +1,5 @@
 import { Model } from 'objection';
-import ActivityTopic from '../activity/activityTopic';
+import PaperTopic from '../paper/paperTopic';
 import Color from './color';
 
 export default class Topic extends Model {
@@ -33,22 +33,19 @@ export default class Topic extends Model {
     this.color_code = color[0].code;
   }
 
-  // delete all activityTopics of topic with id
-  async deleteActivityTopic() {
-    const activityTopic = await ActivityTopic.query().where(
-      'topic_id',
-      this.id,
-    );
+  // delete all paperTopics of topic with id
+  async deletePaperTopic() {
+    const paperTopic = await PaperTopic.query().where('topic_id', this.id);
 
-    if (activityTopic) {
-      await ActivityTopic.query()
+    if (paperTopic) {
+      await PaperTopic.query()
         .delete()
         .where('topic_id', this.id);
     }
 
-    return activityTopic;
+    return paperTopic;
   }
   async deleteAllRelationship() {
-    this.deleteActivityTopic();
+    this.deletePaperTopic();
   }
 }

@@ -78,6 +78,10 @@ export default {
       const address = Address.query().findById(address_id);
       return address;
     },
+    papers: async ({ id }, data, { models: { Paper } }) => {
+      const papers = Paper.query().where('user_id', id);
+      return papers;
+    },
   },
   Subscription: {
     Me: {

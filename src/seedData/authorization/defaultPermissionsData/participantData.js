@@ -10,22 +10,6 @@ const featuresOfParticipant = [
     feature_id: 'deleteActivityFeedback',
   },
 
-  // query Activity topics
-  {
-    feature_id: 'getAllActivityTopics',
-  },
-  {
-    feature_id: 'getActivityTopicByID',
-  },
-
-  // query Activity topics
-  {
-    feature_id: 'getAllActivityTopics',
-  },
-  {
-    feature_id: 'getActivityTopicByID',
-  },
-
   // query Activity
   {
     feature_id: 'getAllActivities',
