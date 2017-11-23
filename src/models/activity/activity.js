@@ -28,7 +28,6 @@ export default class Activity extends Model {
     this.conference_id = paper[0].conference_id;
     this.title = paper[0].title;
     this.description = paper[0].abstract;
-    console.log(this.description);
   }
 
   async $beforeUpdate() {
