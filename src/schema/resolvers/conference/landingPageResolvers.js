@@ -9,7 +9,7 @@ export default {
     getLandingPageByConferenceId: async (
       root,
       { conference_id },
-      { models: { LandingPage }, ValidationError },
+      { models: { LandingPage }, ValidationError, user },
     ) => {
       try {
         // eslint-disable-next-line

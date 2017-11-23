@@ -1,3 +1,5 @@
+// const faker = require('faker');
+
 // eslint-disable-next-line no-extend-native
 const addDays = (date, days) => {
   date.setDate(date.getDate() + days);
@@ -15,10 +17,10 @@ const getNewDate = data => {
 };
 
 // eslint-disable-next-line
-const tempSchedules = (conference_id, activity_id) => [
+const tempSchedules = conference_id => [
   {
     // eslint-disable-next-line
-    activity_id,
+    activity_id: 1,
     room_status: 'on',
     activity_status: 'on',
     conference_id,
@@ -33,7 +35,7 @@ const tempSchedules = (conference_id, activity_id) => [
   },
   {
     // eslint-disable-next-line
-    activity_id,
+    activity_id: 2,
     room_status: 'on',
     activity_status: 'on',
     conference_id,
@@ -48,7 +50,7 @@ const tempSchedules = (conference_id, activity_id) => [
   },
   {
     // eslint-disable-next-line
-    activity_id,
+    activity_id: 3,
     room_status: 'on',
     activity_status: 'on',
     conference_id,
@@ -64,7 +66,7 @@ const tempSchedules = (conference_id, activity_id) => [
   },
   {
     // eslint-disable-next-line
-    activity_id,
+    activity_id: 4,
     room_status: 'on',
     activity_status: 'on',
     conference_id,
@@ -79,7 +81,7 @@ const tempSchedules = (conference_id, activity_id) => [
   },
   {
     // eslint-disable-next-line
-    activity_id,
+    activity_id: 5,
     room_status: 'on',
     activity_status: 'on',
     conference_id,
@@ -94,7 +96,7 @@ const tempSchedules = (conference_id, activity_id) => [
   },
   {
     // eslint-disable-next-line
-    activity_id,
+    activity_id: 6,
     room_status: 'on',
     activity_status: 'on',
     conference_id,
@@ -109,7 +111,7 @@ const tempSchedules = (conference_id, activity_id) => [
   },
   {
     // eslint-disable-next-line
-    activity_id,
+    activity_id: 7,
     room_status: 'on',
     activity_status: 'on',
     conference_id,
@@ -124,7 +126,7 @@ const tempSchedules = (conference_id, activity_id) => [
   },
   {
     // eslint-disable-next-line
-    activity_id,
+    activity_id: 8,
     room_status: 'on',
     activity_status: 'on',
     conference_id,
@@ -138,7 +140,7 @@ const tempSchedules = (conference_id, activity_id) => [
   },
   {
     // eslint-disable-next-line
-    activity_id,
+    activity_id: 9,
     room_status: 'on',
     activity_status: 'on',
     conference_id,
@@ -152,7 +154,7 @@ const tempSchedules = (conference_id, activity_id) => [
   },
   {
     // eslint-disable-next-line
-    activity_id,
+    activity_id: 10,
     room_status: 'on',
     activity_status: 'on',
     conference_id,
@@ -166,7 +168,7 @@ const tempSchedules = (conference_id, activity_id) => [
   },
   {
     // eslint-disable-next-line
-    activity_id,
+    activity_id: 11,
     room_status: 'on',
     activity_status: 'on',
     conference_id,
@@ -181,7 +183,7 @@ const tempSchedules = (conference_id, activity_id) => [
   },
   {
     // eslint-disable-next-line
-    activity_id,
+    activity_id: 12,
     room_status: 'on',
     activity_status: 'on',
     conference_id,
@@ -195,7 +197,7 @@ const tempSchedules = (conference_id, activity_id) => [
   },
   {
     // eslint-disable-next-line
-    activity_id,
+    activity_id: 13,
     room_status: 'on',
     activity_status: 'on',
     conference_id,
@@ -209,7 +211,7 @@ const tempSchedules = (conference_id, activity_id) => [
   },
   {
     // eslint-disable-next-line
-    activity_id,
+    activity_id: 14,
     room_status: 'on',
     activity_status: 'on',
     conference_id,
@@ -224,7 +226,7 @@ const tempSchedules = (conference_id, activity_id) => [
   },
   {
     // eslint-disable-next-line
-    activity_id,
+    activity_id: 15,
     room_status: 'on',
     activity_status: 'on',
     conference_id,
@@ -240,7 +242,7 @@ const tempSchedules = (conference_id, activity_id) => [
   },
   {
     // eslint-disable-next-line
-    activity_id,
+    activity_id: 16,
     room_status: 'on',
     activity_status: 'on',
     conference_id,
@@ -257,8 +259,5 @@ const tempSchedules = (conference_id, activity_id) => [
 
 let schedules = [];
 
-for (let i = 1; i < 7; i += 1) {
-  schedules = schedules.concat(tempSchedules(i, i * 13 - 13 + 1));
-}
-
+schedules = schedules.concat(tempSchedules(1));
 module.exports = schedules;
