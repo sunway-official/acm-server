@@ -12,6 +12,16 @@ export default {
       { models: { LandingPage }, ValidationError },
     ) => {
       try {
+        // eslint-disable-next-line
+        if (!user && !conference_id) {
+          throw new ValidationError('unauthorized');
+        }
+        // eslint-disable-next-line
+        if (!conference_id) {
+          // eslint-disable-next-line
+          conference_id = user.current_conference_id;
+        }
+        // eslint-disable-next-line
         const landingPage = await LandingPage.query().where(
           'conference_id',
           conference_id,
@@ -31,9 +41,16 @@ export default {
     insertLandingPage: async (
       root,
       data,
-      { models: { LandingPage }, ValidationError },
+      { models: { LandingPage }, ValidationError, user },
     ) => {
       try {
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
+        // eslint-disable-next-line
+        const conference_id = user.current_conference_id;
+        // eslint-disable-next-line
+        data.conference_id = conference_id;
         const newLandingPage = await LandingPage.query().insert(data);
         return newLandingPage;
       } catch (e) {
@@ -45,9 +62,12 @@ export default {
     updateLandingPage: async (
       root,
       data,
-      { models: { LandingPage }, ValidationError },
+      { models: { LandingPage }, ValidationError, user },
     ) => {
       try {
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
         const updateLandingPage = await LandingPage.query().updateAndFetchById(
           data.id,
           data,
@@ -62,9 +82,12 @@ export default {
     deleteLandingPage: async (
       root,
       { id },
-      { models: { LandingPage }, ValidationError },
+      { models: { LandingPage }, ValidationError, user },
     ) => {
       try {
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
         const landingPage = await LandingPage.query().findById(id);
         if (!landingPage) throw new ValidationError('Not found LandingPage');
         await LandingPage.query().deleteById(id);

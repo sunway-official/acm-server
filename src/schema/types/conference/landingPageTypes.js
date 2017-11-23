@@ -18,10 +18,10 @@ type LandingPage {
   # speaker description
   speaker_description: String!
 
-  # email 
+  # email
   email: String!
 
-  # phone number 
+  # phone number
   phone_number: String!
 
   # facebook_id
@@ -37,14 +37,13 @@ type LandingPage {
 extend type Query {
 
   # Get info landing page by confernce_id
-  getLandingPageByConferenceId(conference_id: ID!): [LandingPage!]
+  getLandingPageByConferenceId(conference_id: ID): [LandingPage!]
 
 }
 
 extend type Mutation {
   # Insert new Landing page
   insertLandingPage(
-    conference_id: ID!,
     slogan: String!,
     register_description: String!,
     call_paper_description: String!,
