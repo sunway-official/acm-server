@@ -31,7 +31,7 @@ extend type Query {
   getRoomsByStatus(status: Status!): [Room!]!
 
   # get room by conference id
-  getRoomsByConferenceID(conference_id: ID!): [Room!]!
+  getRoomsByConferenceID: [Room!]!
 
 }
 

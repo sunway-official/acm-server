@@ -51,7 +51,7 @@ for (let i = 1; i <= 50; i += 1) {
   const colorId = faker.random.number({ min: 1, max: 27 });
   topics.push({
     conference_id: faker.random.number({ min: 1, max: 6 }),
-    name: faker.lorem.sentence(),
+    name: faker.lorem.words(3),
     description: faker.lorem.sentences(5),
     color_id: colorId,
     color_code: colors[colorId - 1].code,

@@ -36,10 +36,16 @@ export default {
     },
     getRoomsByConferenceID: async (
       root,
-      { conference_id },
-      { models: { Room }, ValidationError },
+      data,
+      { models: { Room }, ValidationError, user },
     ) => {
       try {
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
+        // eslint-disable-next-line
+        const conference_id = user.current_conference_id;
+        // eslint-disable-next-line
         const rooms = await Room.query().where('conference_id', conference_id);
         return rooms;
       } catch (e) {
