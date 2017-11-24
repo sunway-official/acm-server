@@ -22,7 +22,6 @@ const tempSchedules = conference_id => [
     // eslint-disable-next-line
     activity_id: 1,
     room_status: 'on',
-    activity_status: 'on',
     conference_id,
     room_id: 1,
     start: getNewDate('2017-11-13T00:30:00.000Z'),
@@ -37,7 +36,6 @@ const tempSchedules = conference_id => [
     // eslint-disable-next-line
     activity_id: 2,
     room_status: 'on',
-    activity_status: 'on',
     conference_id,
     room_id: 3,
     start: getNewDate('2017-11-13T02:30:00.000Z'),
@@ -52,7 +50,6 @@ const tempSchedules = conference_id => [
     // eslint-disable-next-line
     activity_id: 3,
     room_status: 'on',
-    activity_status: 'on',
     conference_id,
     room_id: 3,
     start: getNewDate('2017-11-13T06:30:00.000Z'),
@@ -68,7 +65,6 @@ const tempSchedules = conference_id => [
     // eslint-disable-next-line
     activity_id: 4,
     room_status: 'on',
-    activity_status: 'on',
     conference_id,
     room_id: 1,
     start: getNewDate('2017-11-13T08:30:00.000Z'),
@@ -83,7 +79,6 @@ const tempSchedules = conference_id => [
     // eslint-disable-next-line
     activity_id: 5,
     room_status: 'on',
-    activity_status: 'on',
     conference_id,
     room_id: 3,
     start: addDays(getNewDate('2017-11-14T00:30:00.000Z'), 1),
@@ -98,7 +93,6 @@ const tempSchedules = conference_id => [
     // eslint-disable-next-line
     activity_id: 6,
     room_status: 'on',
-    activity_status: 'on',
     conference_id,
     room_id: 1,
     start: addDays(getNewDate('2017-11-14T02:30:00.000Z'), 1),
@@ -113,7 +107,6 @@ const tempSchedules = conference_id => [
     // eslint-disable-next-line
     activity_id: 7,
     room_status: 'on',
-    activity_status: 'on',
     conference_id,
     room_id: 1,
     start: addDays(getNewDate('2017-11-14T06:30:00.000Z'), 1),
@@ -128,7 +121,6 @@ const tempSchedules = conference_id => [
     // eslint-disable-next-line
     activity_id: 8,
     room_status: 'on',
-    activity_status: 'on',
     conference_id,
     room_id: 5,
     start: addDays(getNewDate('2017-11-13T04:30:00.000Z'), 0),
@@ -142,7 +134,6 @@ const tempSchedules = conference_id => [
     // eslint-disable-next-line
     activity_id: 9,
     room_status: 'on',
-    activity_status: 'on',
     conference_id,
     room_id: 5,
     start: addDays(getNewDate('2017-11-14T04:30:00.000Z'), 1),
@@ -156,7 +147,6 @@ const tempSchedules = conference_id => [
     // eslint-disable-next-line
     activity_id: 10,
     room_status: 'on',
-    activity_status: 'on',
     conference_id,
     room_id: 5,
     start: addDays(getNewDate('2017-11-15T04:30:00.000Z'), 2),
@@ -170,7 +160,6 @@ const tempSchedules = conference_id => [
     // eslint-disable-next-line
     activity_id: 11,
     room_status: 'on',
-    activity_status: 'on',
     conference_id,
     room_id: 3,
     start: addDays(getNewDate('2017-11-14T08:30:00.000Z'), 1),
@@ -185,7 +174,6 @@ const tempSchedules = conference_id => [
     // eslint-disable-next-line
     activity_id: 12,
     room_status: 'on',
-    activity_status: 'on',
     conference_id,
     room_id: 5,
     start: addDays(getNewDate('2017-11-13T10:30:00.000Z'), 0),
@@ -199,7 +187,6 @@ const tempSchedules = conference_id => [
     // eslint-disable-next-line
     activity_id: 13,
     room_status: 'on',
-    activity_status: 'on',
     conference_id,
     room_id: 5,
     start: addDays(getNewDate('2017-11-13T10:30:00.000Z'), 1),
@@ -213,7 +200,6 @@ const tempSchedules = conference_id => [
     // eslint-disable-next-line
     activity_id: 14,
     room_status: 'on',
-    activity_status: 'on',
     conference_id,
     room_id: 3,
     start: addDays(getNewDate('2017-11-13T00:30:00.000Z'), 0),
@@ -228,7 +214,6 @@ const tempSchedules = conference_id => [
     // eslint-disable-next-line
     activity_id: 15,
     room_status: 'on',
-    activity_status: 'on',
     conference_id,
     room_id: 3,
     start: addDays(getNewDate('2017-11-15T00:30:00.000Z'), 2),
@@ -244,7 +229,6 @@ const tempSchedules = conference_id => [
     // eslint-disable-next-line
     activity_id: 16,
     room_status: 'on',
-    activity_status: 'on',
     conference_id,
     room_id: 1,
     start: addDays(getNewDate('2017-11-15T02:30:00.000Z'), 2),
