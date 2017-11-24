@@ -9,5 +9,5 @@ network:
   instance_tag: websocket
 # [END network]
 beta_settings:
-  cloud_sql_instances: cem-server-production:asia-northeast1:cem-server-production
+  cloud_sql_instances: acm-server-187014:asia-east1:acm-prod-db
 # [END app_yaml]
