@@ -73,8 +73,11 @@ export default {
     getAllNews: async (
       root,
       { pageNumber, pageSize },
-      { models: { News }, ValidationError },
+      { models: { News }, ValidationError, user },
     ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
       try {
         const news = await News.query()
           .page(pageNumber || 0, pageSize || 10)
@@ -89,8 +92,11 @@ export default {
     getNewsByID: async (
       root,
       { id },
-      { models: { News }, ValidationError },
+      { models: { News }, ValidationError, user },
     ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
       try {
         const news = await News.query().findById(id);
         if (!news) {
@@ -100,17 +106,17 @@ export default {
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);
-        if (e.message === 'news-not-found') {
-          throw new ValidationError('news-not-found');
-        }
         throw new ValidationError('bad-request');
       }
     },
     getNewsByUserID: async (
       root,
       { user_id },
-      { models: { News }, ValidationError },
+      { models: { News }, ValidationError, user },
     ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
       try {
         const news = await News.query().where('user_id', user_id);
         if (!news) {
@@ -120,17 +126,17 @@ export default {
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);
-        if (e.message === 'news-not-found') {
-          throw new ValidationError('news-not-found');
-        }
         throw new ValidationError('bad-request');
       }
     },
     getNewsByConferenceID: async (
       root,
       { conference_id },
-      { models: { News }, ValidationError },
+      { models: { News }, ValidationError, user },
     ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
       try {
         const news = await News.query().where('conference_id', conference_id);
         if (!news) {
@@ -140,17 +146,25 @@ export default {
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);
-        if (e.message === 'news-not-found') {
-          throw new ValidationError('news-not-found');
-        }
         throw new ValidationError('bad-request');
       }
     },
   },
   Mutation: {
-    insertNews: async (root, data, { models: { News }, ValidationError }) => {
+    insertNews: async (
+      root,
+      data,
+      { models: { News }, ValidationError, user },
+    ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
       try {
-        const news = await News.query().insert(data);
+        const news = await News.query().insert({
+          ...data,
+          user_id: user.id,
+          conference_id: user.current_conference_id,
+        });
         return news;
       } catch (e) {
         // eslint-disable-next-line no-console
@@ -158,7 +172,14 @@ export default {
         throw new ValidationError('bad-request');
       }
     },
-    updateNews: async (root, data, { models: { News }, ValidationError }) => {
+    updateNews: async (
+      root,
+      data,
+      { models: { News }, ValidationError, user },
+    ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
       try {
         const updateNews = await News.query().updateAndFetchById(data.id, data);
         return updateNews;
@@ -168,7 +189,14 @@ export default {
         throw new ValidationError('bad-request');
       }
     },
-    deleteNews: async (root, { id }, { models: { News }, ValidationError }) => {
+    deleteNews: async (
+      root,
+      { id },
+      { models: { News }, ValidationError, user },
+    ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
       try {
         const news = await News.query().findById(id);
         // delete all NewsComment of news with id
@@ -176,7 +204,7 @@ export default {
         // delete all NewsPhoto of news with id
         await news.deleteAllRelationship();
 
-        if (!news) throw new ValidationError('Not found news');
+        if (!news) throw new ValidationError('news-not-found');
 
         await News.query().deleteById(id);
         return news;

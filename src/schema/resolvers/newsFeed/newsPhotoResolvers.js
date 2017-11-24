@@ -9,8 +9,11 @@ export default {
     getAllNewsPhotos: async (
       root,
       data,
-      { models: { NewsPhoto }, ValidationError },
+      { models: { NewsPhoto }, ValidationError, user },
     ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
       try {
         const newsPhoto = await NewsPhoto.query();
         return newsPhoto;
@@ -23,8 +26,11 @@ export default {
     getNewsPhotoByID: async (
       root,
       { id },
-      { models: { NewsPhoto }, ValidationError },
+      { models: { NewsPhoto }, ValidationError, user },
     ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
       try {
         const newsPhoto = await NewsPhoto.query().findById(id);
         if (!newsPhoto) {
@@ -34,17 +40,17 @@ export default {
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);
-        if (e.message === 'newsPhoto-not-found') {
-          throw new ValidationError('newsPhoto-not-found');
-        }
         throw new ValidationError('bad-request');
       }
     },
     getNewsPhotoByNewsID: async (
       root,
       { news_id },
-      { models: { NewsPhoto }, ValidationError },
+      { models: { NewsPhoto }, ValidationError, user },
     ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
       try {
         const newsPhoto = await NewsPhoto.query().where('news_id', news_id);
         if (!newsPhoto) {
@@ -54,9 +60,6 @@ export default {
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);
-        if (e.message === 'newsPhoto-not-found') {
-          throw new ValidationError('newsPhoto-not-found');
-        }
         throw new ValidationError('bad-request');
       }
     },
@@ -65,8 +68,11 @@ export default {
     insertNewsPhoto: async (
       root,
       data,
-      { models: { NewsPhoto }, ValidationError },
+      { models: { NewsPhoto }, ValidationError, user },
     ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
       try {
         const newsPhoto = await NewsPhoto.query().insert(data);
         return newsPhoto;
@@ -79,8 +85,11 @@ export default {
     updateNewsPhoto: async (
       root,
       data,
-      { models: { NewsPhoto }, ValidationError },
+      { models: { NewsPhoto }, ValidationError, user },
     ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
       try {
         const updateNewsPhoto = await NewsPhoto.query().updateAndFetchById(
           data.id,
@@ -96,8 +105,11 @@ export default {
     deleteNewsPhoto: async (
       root,
       { id },
-      { models: { NewsPhoto }, ValidationError },
+      { models: { NewsPhoto }, ValidationError, user },
     ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
       try {
         const newsPhoto = await NewsPhoto.query().findById(id);
         await NewsPhoto.query().deleteById(id);
