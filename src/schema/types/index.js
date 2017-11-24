@@ -22,7 +22,12 @@ import globalTypes from './globalTypes';
 // staff
 import staff from './staff';
 
+// participant
+import participant from './participant';
+
 import topic from './topic';
+
+import paper from './paper';
 
 export default [
   ...authorization,
@@ -32,6 +37,8 @@ export default [
   ...questionAndAnswer,
   ...schedule,
   ...topic,
+  ...paper,
   globalTypes,
   staff,
+  participant,
 ];

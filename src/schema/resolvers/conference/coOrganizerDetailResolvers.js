@@ -43,9 +43,21 @@ export default {
     getCoOrganizerDetailByConferenceID: async (
       root,
       { conference_id },
-      { models: { CoOrganizerDetail }, ValidationError },
+      { models: { CoOrganizerDetail }, ValidationError, user },
     ) => {
       try {
+        // eslint-disable-next-line
+        if (!user && !conference_id) {
+          throw new ValidationError('unauthorized');
+        }
+        // eslint-disable-next-line
+        if (!conference_id) {
+          // eslint-disable-next-line
+          conference_id = user.current_conference_id;
+        }
+        // eslint-disable-next-line
+
+        // eslint-disable-next-line
         const coOrganizerDetail = await CoOrganizerDetail.query().wher(
           'conference_id',
           conference_id,
@@ -57,9 +69,6 @@ export default {
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);
-        if (e.message === 'CoOrganizerDetail-not-found') {
-          throw new ValidationError('CoOrganizerDetail-not-found');
-        }
         throw new ValidationError(e);
       }
     },
@@ -68,9 +77,16 @@ export default {
     insertCoOrganizerDetail: async (
       root,
       data,
-      { models: { CoOrganizerDetail }, ValidationError },
+      { models: { CoOrganizerDetail }, ValidationError, user },
     ) => {
       try {
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
+        // eslint-disable-next-line
+        const conference_id = user.current_conference_id;
+        // eslint-disable-next-line
+        data.conference_id = conference_id;
         const newCoOrganizerDetail = await CoOrganizerDetail.query().insert(
           data,
         );
@@ -84,9 +100,15 @@ export default {
     updateCoOrganizerDetail: async (
       root,
       data,
-      { models: { CoOrganizerDetail }, ValidationError },
+      { models: { CoOrganizerDetail }, ValidationError, user },
     ) => {
       try {
+        // eslint-disable-next-line
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
+        // eslint-disable-next-line
+        data.conference_id = user.current_conference_id;
         const updateCoOrganizerDetail = await CoOrganizerDetail.query().updateAndFetchById(
           data.id,
           data,

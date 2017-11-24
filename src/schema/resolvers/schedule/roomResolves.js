@@ -4,11 +4,43 @@ export default {
       const schedules = await Schedule.query().where('room_id', id);
       return schedules;
     },
+    conference: async ({ conference_id }, data, { models: { Conference } }) => {
+      const conference = await Conference.query().findById(conference_id);
+      return conference;
+    },
   },
   Query: {
     getAllRooms: async (root, data, { models: { Room }, ValidationError }) => {
       try {
         const rooms = await Room.query();
+        return rooms;
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error(e);
+        throw new ValidationError(e);
+      }
+    },
+    getRoomsByStatus: async (
+      root,
+      { status },
+      { models: { Room }, ValidationError },
+    ) => {
+      try {
+        const rooms = await Room.query().where('status', status);
+        return rooms;
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error(e);
+        throw new ValidationError(e);
+      }
+    },
+    getRoomsByConferenceID: async (
+      root,
+      { conference_id },
+      { models: { Room }, ValidationError },
+    ) => {
+      try {
+        const rooms = await Room.query().where('conference_id', conference_id);
         return rooms;
       } catch (e) {
         // eslint-disable-next-line no-console

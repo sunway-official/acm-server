@@ -7,8 +7,8 @@ type Activity {
   # conferen have this activity
   conference: Conference!
 
-  # all topics of activity
-  activityTopics: [ActivityTopic!]!
+  # paper
+  paper: Paper!
 
   # all feedback of activity
   activityFeedback: [ActivityFeedback!]!
@@ -25,11 +25,6 @@ type Activity {
   # description of this activity
   description: String!
 
-  # status of this activity
-  # status 'on' or 'off'
-  status: Status!
-
- 
 
 }
 
@@ -44,15 +39,15 @@ extend type Query {
   getActivityByID(id: ID!): Activity!
 
   # get all activities of one conference by conference_id
-  getActivitiesByConferenceID(conference_id: ID!): [Activity!]!
+  getActivitiesByConferenceID( conference_id: ID): [Activity!]!
 }
 
 extend type Mutation {
-  # insert activity with conference_id, activity_type_id, title and status
-  insertActivity(conference_id: ID!, title: String!, description: String!, status:Status): Activity!
+  # insert activity with conference_id
+  insertActivity(paper_id: ID!): Activity!
 
-  # update activity with id, activity_type_id, title and status
-  updateActivity(id: ID!, title: String, description: String, status:Status, ): Activity!
+  # update activity with id
+  updateActivity(id: ID!, paper_id: ID! ): Activity!
 
   # delete activity with id
   deleteActivity(id: ID!): Activity!

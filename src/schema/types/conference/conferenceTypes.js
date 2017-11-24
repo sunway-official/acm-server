@@ -21,11 +21,20 @@ type Conference {
   # conference activities
   activities:[Activity!]!
 
+  # papers
+  papers: [Paper!]!
+
+  # rooms
+  rooms: [Room!]!
+
   # topics
   topics: [Topic!]!
 
   # CoOrganizerDetail
   coOrganizerDetails: [CoOrganizerDetail!]!
+
+  # landingPage
+  landingPage: LandingPage!
 
   # Conference title
   title: String!
@@ -49,6 +58,9 @@ extend type Query {
 
   # Get Conference by ID
   getConferenceByID(id: ID!): Conference!
+
+  # get current conference
+  getCurrentConference: Conference!
 
   # Get Conference by OrganizerDetail ID
   getConferenceByOrganizerDetailID( organizer_detail_id: ID!): [Conference!]!

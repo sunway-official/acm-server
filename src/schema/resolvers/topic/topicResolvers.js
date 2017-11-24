@@ -1,9 +1,5 @@
 export default {
   Topic: {
-    activityTopics: async ({ id }, data, { models: { ActivityTopic } }) => {
-      const activityTopics = await ActivityTopic.query().where('topic_id', id);
-      return activityTopics;
-    },
     conference: async ({ conference_id }, data, { models: { Conference } }) => {
       const conference = await Conference.query().findById(conference_id);
       return conference;
@@ -45,10 +41,41 @@ export default {
         throw new ValidationError(e);
       }
     },
+    getTopicsOfConference: async (
+      root,
+      data,
+      { models: { Topic }, ValidationError, user },
+    ) => {
+      try {
+        // eslint-disable-next-line
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
+        const topics = await Topic.query().where(
+          'conference_id',
+          user.current_conference_id,
+        );
+        return topics;
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error(e);
+        throw new ValidationError(e);
+      }
+    },
   },
   Mutation: {
-    insertTopic: async (root, data, { models: { Topic }, ValidationError }) => {
+    insertTopic: async (
+      root,
+      data,
+      { models: { Topic }, ValidationError, user },
+    ) => {
       try {
+        // eslint-disable-next-line
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
+        // eslint-disable-next-line
+        data.conference_id = user.current_conference_id;
         const newTopic = await Topic.query().insert(data);
         return newTopic;
       } catch (e) {
@@ -57,8 +84,18 @@ export default {
         throw new ValidationError(e);
       }
     },
-    updateTopic: async (root, data, { models: { Topic }, ValidationError }) => {
+    updateTopic: async (
+      root,
+      data,
+      { models: { Topic }, ValidationError, user },
+    ) => {
       try {
+        // eslint-disable-next-line
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
+        // eslint-disable-next-line
+        data.conference_id = user.current_conference_id;
         const updateTopic = await Topic.query().updateAndFetchById(
           data.id,
           data,
@@ -77,8 +114,6 @@ export default {
     ) => {
       try {
         const topic = await Topic.query().findById(id);
-
-        // delete all activityTopics of topic with id
 
         if (topic) {
           await topic.deleteAllRelationship();

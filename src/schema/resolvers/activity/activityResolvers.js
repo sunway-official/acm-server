@@ -4,17 +4,16 @@ export default {
       const conference = await Conference.query().findById(conference_id);
       return conference;
     },
-
-    activityTopics: async ({ id }, data, { models: { ActivityTopic } }) => {
-      const activityTopic = ActivityTopic.query().where('activity_id', id);
-      return activityTopic;
+    paper: async ({ paper_id }, data, { models: { Paper } }) => {
+      const paper = await Paper.query().findById(paper_id);
+      return paper;
     },
     schedules: async ({ id }, data, { models: { Schedule } }) => {
-      const schedules = Schedule.query().where('activity_id', id);
+      const schedules = await Schedule.query().where('activity_id', id);
       return schedules;
     },
     questions: async ({ id }, data, { models: { Question } }) => {
-      const questions = Question.query().where('activity_id', id);
+      const questions = await Question.query().where('activity_id', id);
       return questions;
     },
     activityFeedback: async (
@@ -63,9 +62,20 @@ export default {
     getActivitiesByConferenceID: async (
       root,
       { conference_id },
-      { models: { Activity }, ValidationError },
+      { models: { Activity }, ValidationError, user },
     ) => {
       try {
+        // eslint-disable-next-line
+        if (!user && !conference_id) {
+          throw new ValidationError('unauthorized');
+        }
+        // eslint-disable-next-line
+        if (!conference_id) {
+          // eslint-disable-next-line
+          conference_id = user.current_conference_id;
+        }
+        // eslint-disable-next-line
+
         const allActivitiesOfConference = await Activity.query().where(
           'conference_id',
           conference_id,
@@ -83,9 +93,13 @@ export default {
     insertActivity: async (
       root,
       data,
-      { models: { Activity }, ValidationError },
+      { models: { Activity }, ValidationError, user },
     ) => {
       try {
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
+        // eslint-disable-next-line
         const newActivity = await Activity.query().insert(data);
         return newActivity;
       } catch (e) {

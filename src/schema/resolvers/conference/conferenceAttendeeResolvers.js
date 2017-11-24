@@ -40,9 +40,6 @@ export default {
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);
-        if (e.message === 'conferenceAttendee-not-found') {
-          throw new ValidationError('conferenceAttendee-not-found');
-        }
         throw new ValidationError(e);
       }
     },

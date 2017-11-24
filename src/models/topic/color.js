@@ -17,8 +17,6 @@ export default class Color extends Model {
     this.id = parseInt(opt.old.id, 10);
   }
 
-  // delete all activityTopics of topic with id
-
   async deleteTopics() {
     const topics = await Topic.query().where('color_id', this.id);
 

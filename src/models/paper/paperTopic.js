@@ -1,15 +1,15 @@
 import { Model } from 'objection';
 import Topic from '../topic/topic';
 
-export default class ActivityTopic extends Model {
-  static tableName = 'activity_topics';
+export default class PaperTopic extends Model {
+  static tableName = 'papers_topics';
   static jsonSchema = {
     type: 'object',
-    description: 'All topics of activity',
-    required: ['activity_id', 'topic_id'],
+    description: 'All topics of paper',
+    required: ['paper_id', 'topic_id'],
     properties: {
       id: { type: 'integer' },
-      activity_id: { type: 'integer' },
+      paper_id: { type: 'integer' },
       topic_id: { type: 'integer' },
       topic_name: { type: 'string', maxLength: '100' },
       topic_description: { type: 'text', maxLength: '100' },
@@ -19,7 +19,7 @@ export default class ActivityTopic extends Model {
 
   async $beforeValidate(opt) {
     this.id = parseInt(opt.old.id, 10);
-    this.activity_id = parseInt(opt.old.activity_id, 10);
+    this.paper_id = parseInt(opt.old.paper_id, 10);
     this.topic_id = parseInt(opt.old.topic_id, 10);
   }
 

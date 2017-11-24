@@ -18,6 +18,10 @@ export default {
       const user = await User.query().findById(user_id);
       return user;
     },
+    rooms: async ({ id }, data, { models: { Room } }) => {
+      const rooms = await Room.query().where('conference_id', id);
+      return rooms;
+    },
     conferenceAttendees: async (
       { id },
       data,
@@ -52,6 +56,14 @@ export default {
       const activities = await Activity.query().where('conference_id', id);
       return activities;
     },
+    landingPage: async ({ id }, data, { models: { LandingPage } }) => {
+      const landingPage = await LandingPage.query().where('conference_id', id);
+      return landingPage;
+    },
+    papers: async ({ id }, data, { models: { Paper } }) => {
+      const papers = await Paper.query().where('conference_id', id);
+      return papers;
+    },
   },
   Query: {
     getAllConferences: async (
@@ -85,6 +97,28 @@ export default {
         if (e.message === 'conference-not-found') {
           throw new ValidationError('conference-not-found');
         }
+        throw new ValidationError(e);
+      }
+    },
+    getCurrentConference: async (
+      root,
+      data,
+      { models: { Conference }, ValidationError, user },
+    ) => {
+      try {
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
+        // eslint-disable-next-line
+        const conference_id = user.current_conference_id;
+        const conference = await Conference.query().findById(conference_id);
+        if (!conference) {
+          throw new ValidationError('conference-not-found');
+        }
+        return conference;
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error(e);
         throw new ValidationError(e);
       }
     },

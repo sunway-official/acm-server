@@ -7,11 +7,11 @@ exports.up = function(knex, Promise) {
         .integer('conference_id')
         .unsigned()
         .notNullable();
-      table.string('title');
       table
-        .enu('status', ['on', 'off'])
-        .defaultTo('on')
+        .integer('paper_id')
+        .unsigned()
         .notNullable();
+      table.string('title');
       table.text('description');
     }),
   ]);

@@ -17,6 +17,7 @@ export default {
       pass: process.env.MT_PASS,
     },
   },
-  resetPasswordClientRoute: `${process.env.CLIENT_ADDRESS}/${process.env
-    .RESET_PASSWORD_ROUTE}`,
+  resetPasswordClientRoute: `${process.env.CLIENT_ADDRESS}/${
+    process.env.RESET_PASSWORD_ROUTE
+  }`,
 };

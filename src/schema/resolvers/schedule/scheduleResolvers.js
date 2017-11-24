@@ -12,15 +12,18 @@ export default {
       const conference = await Conference.query().findById(conference_id);
       return conference;
     },
-    personalSchedules: async (
+    personalSchedule: async (
       { id },
       data,
-      { models: { PersonalSchedule } },
+      { models: { PersonalSchedule }, ValidationError, user },
     ) => {
-      const personalSchedules = await PersonalSchedule.query().where(
-        'schedule_id',
-        id,
-      );
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
+      const personalSchedules = await PersonalSchedule.query()
+        .where('schedule_id', id)
+        .andWhere('user_id', user.id)
+        .first();
       return personalSchedules;
     },
   },
@@ -68,9 +71,16 @@ export default {
     insertSchedule: async (
       root,
       data,
-      { models: { Schedule }, ValidationError },
+      { models: { Schedule }, ValidationError, user },
     ) => {
       try {
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
+        // eslint-disable-next-line
+        const conference_id = user.current_conference_id;
+        // eslint-disable-next-line
+        data.conference_id = conference_id;
         const newSchedule = await Schedule.query().insert(data);
         return newSchedule;
       } catch (e) {

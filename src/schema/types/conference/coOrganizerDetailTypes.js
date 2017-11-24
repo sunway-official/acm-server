@@ -30,14 +30,13 @@ extend type Query {
   getCoOrganizerDetailByID(id: ID!): CoOrganizerDetail!
 
   # Get CoOrganizerDetail by conference ID
-  getCoOrganizerDetailByConferenceID( conference_id: ID!): CoOrganizerDetail!
+  getCoOrganizerDetailByConferenceID( conference_id: ID): CoOrganizerDetail!
 
 }
 
 extend type Mutation {
   # Insert new CoOrganizerDetail
   insertCoOrganizerDetail(
-    conference_id: ID!,
     name: String!,
     address: String!,
     email: String!,
@@ -48,7 +47,6 @@ extend type Mutation {
   # Update CoOrganizerDetail info by id
   updateCoOrganizerDetail(
     id:ID!,
-    conference_id: ID,
     name: String,
     address: String,
     email: String,
