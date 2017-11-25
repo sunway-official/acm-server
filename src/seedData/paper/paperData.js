@@ -54,8 +54,9 @@ const tempPapers = (conference_id, user_id) => [
   {
     conference_id,
     user_id,
-    title: 'Have a lunch and take a break',
-    abstract: ' ',
+    title: 'What to know about cybercrime',
+    abstract:
+      "It's hard to protect yourself online if you don't know where to start. These insightful, info-packed talks offer a jumping off point.",
   },
   {
     conference_id,
@@ -67,8 +68,9 @@ const tempPapers = (conference_id, user_id) => [
   {
     conference_id,
     user_id,
-    title: 'Tea Break',
-    abstract: ' ',
+    title: 'What makes you happy?',
+    abstract:
+      'Everyone wants to be happy. But how, exactly, does one go about it? Here, psychologists, journalists, Buddhist monks and more gives answers that may surprise.',
   },
   {
     conference_id,
@@ -80,8 +82,7 @@ const tempPapers = (conference_id, user_id) => [
   {
     conference_id,
     user_id: 6,
-    title:
-      'A boat carrying 500 refugees sunk at sea. The story of two survivors',
+    title: 'A boat carrying 500 refugees sunk at sea.',
     abstract:
       "Aboard an overloaded ship carrying more than 500 refugees, a young woman becomes an unlikely hero. This single, powerful story, told by Melissa Fleming of the UN's refugee agency, gives a human face to the sheer numbers of human beings trying to escape to better lives ... as the refugee ships keep coming ...",
   },
