@@ -95,7 +95,11 @@ export default {
         // eslint-disable-next-line
         data.conference_id = conference_id;
         if (data.name) {
-          const room = await Room.query().where('name', data.name);
+          const room = await Room.query().where(builder => {
+            builder
+              .where('name', data.name)
+              .where('conference_id', conference_id);
+          });
           if (room) throw new ValidationError("Room's name is exists !");
         }
         const newRoom = await Room.query().insert(data);
@@ -119,7 +123,11 @@ export default {
         const conference_id = user.current_conference_id;
         // eslint-disable-next-line
         if (data.name) {
-          const room = await Room.query().where('name', data.name);
+          const room = await Room.query().where(builder => {
+            builder
+              .where('name', data.name)
+              .where('conference_id', conference_id);
+          });
           if (room) throw new ValidationError("Room's name is exists !");
         }
         const updateRoom = await Room.query()
