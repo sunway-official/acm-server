@@ -100,7 +100,8 @@ export default {
               .where('name', data.name)
               .where('conference_id', conference_id);
           });
-          if (room) throw new ValidationError("Room's name is exists !");
+          if (room.length > 0)
+            throw new ValidationError("Room's name is exists !");
         }
         const newRoom = await Room.query().insert(data);
         return newRoom;
@@ -128,7 +129,8 @@ export default {
               .where('name', data.name)
               .where('conference_id', conference_id);
           });
-          if (room) throw new ValidationError("Room's name is exists !");
+          if (room.length > 0)
+            throw new ValidationError("Room's name is exists !");
         }
         const updateRoom = await Room.query()
           .updateAndFetchById(data.id, data)
