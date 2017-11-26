@@ -114,7 +114,7 @@ export default {
     updateRoomInConference: async (
       root,
       data,
-      { models: { Room }, ValidationError, user },
+      { models: { Room, Schedule }, ValidationError, user },
     ) => {
       try {
         if (!user) {
@@ -122,7 +122,7 @@ export default {
         }
         // eslint-disable-next-line
         const conference_id = user.current_conference_id;
-        // eslint-disable-next-line
+        // check room's name exists
         if (data.name) {
           const room = await Room.query().where(builder => {
             builder
@@ -131,6 +131,13 @@ export default {
           });
           if (room.length > 0)
             throw new ValidationError("Room's name is exists !");
+        }
+        // check room is chosen
+        if (data.status) {
+          const schedules = await Schedule.query().where('room_id', data.id);
+          if (schedules.length > 0) {
+            throw new ValidationError('This room is chosen !');
+          }
         }
         const updateRoom = await Room.query()
           .updateAndFetchById(data.id, data)
