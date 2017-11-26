@@ -126,11 +126,18 @@ export default {
         // eslint-disable-next-line
         const conference_id = user.current_conference_id;
         // eslint-disable-next-line
-        data.conference_id = conference_id;
-        const updatePaper = await Paper.query().updateAndFetchById(
-          data.id,
-          data,
-        );
+        if (data.title) {
+          const paper = await Paper.query().where('title', data.title);
+          if (paper) throw new ValidationError("Paper's title is exists !");
+        }
+        const updatePaper = await Paper.query()
+          .updateAndFetchById(data.id, data)
+          .where(builder => {
+            builder.where('conference_id', conference_id);
+          });
+        if (!updatePaper) {
+          throw new ValidationError("Paper's not found in conference");
+        }
         return updatePaper;
       } catch (e) {
         // eslint-disable-next-line no-console

@@ -20,13 +20,21 @@ export default {
         throw new ValidationError(e);
       }
     },
-    getRoomsByStatus: async (
+    getRoomsByStatusInConference: async (
       root,
       { status },
-      { models: { Room }, ValidationError },
+      { models: { Room }, ValidationError, user },
     ) => {
       try {
-        const rooms = await Room.query().where('status', status);
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
+        // eslint-disable-next-line
+        const conference_id = user.current_conference_id;
+        // eslint-disable-next-line
+        const rooms = await Room.query().where(builder => {
+          builder.where('conference_id', conference_id).where('status', status);
+        });
         return rooms;
       } catch (e) {
         // eslint-disable-next-line no-console
@@ -73,8 +81,23 @@ export default {
     },
   },
   Mutation: {
-    insertRoom: async (root, data, { models: { Room }, ValidationError }) => {
+    insertRoomInConference: async (
+      root,
+      data,
+      { models: { Room }, ValidationError, user },
+    ) => {
       try {
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
+        // eslint-disable-next-line
+        const conference_id = user.current_conference_id;
+        // eslint-disable-next-line
+        data.conference_id = conference_id;
+        if (data.name) {
+          const room = await Room.query().where('name', data.name);
+          if (room) throw new ValidationError("Room's name is exists !");
+        }
         const newRoom = await Room.query().insert(data);
         return newRoom;
       } catch (e) {
@@ -83,9 +106,31 @@ export default {
         throw new ValidationError(e);
       }
     },
-    updateRoom: async (root, data, { models: { Room }, ValidationError }) => {
+    updateRoomInConference: async (
+      root,
+      data,
+      { models: { Room }, ValidationError, user },
+    ) => {
       try {
-        const updateRoom = await Room.query().updateAndFetchById(data.id, data);
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
+        // eslint-disable-next-line
+        const conference_id = user.current_conference_id;
+        // eslint-disable-next-line
+        if (data.name) {
+          const room = await Room.query().where('name', data.name);
+          if (room) throw new ValidationError("Room's name is exists !");
+        }
+        const updateRoom = await Room.query()
+          .updateAndFetchById(data.id, data)
+          .where(builder => {
+            builder.where('conference_id', conference_id);
+          });
+        if (!updateRoom) {
+          throw new ValidationError("Room's not found in conference");
+        }
+
         return updateRoom;
       } catch (e) {
         // eslint-disable-next-line no-console

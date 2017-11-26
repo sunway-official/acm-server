@@ -28,7 +28,7 @@ extend type Query {
   getRoomByID(id: ID!): Room!
 
   # Get Room with Status On
-  getRoomsByStatus(status: Status!): [Room!]!
+  getRoomsByStatusInConference(status: Status!): [Room!]!
 
   # get room by conference id
   getRoomsByConferenceID: [Room!]!
@@ -37,10 +37,10 @@ extend type Query {
 
 extend type Mutation {
   # Insert new Room
-  insertRoom(conference_id: ID!, name: String!, seats: Int! ,status: Status): Room!
+  insertRoomInConference(name: String!, seats: Int! ,status: Status): Room!
 
   # Update Room info by id
-  updateRoom(id:ID!, conference_id: ID!, name: String, seats: Int, status: Status ): Room!
+  updateRoomInConference(id:ID!, name: String, seats: Int, status: Status ): Room!
 
   # Delete Room by id
   deleteRoom(id: ID!): Room!
