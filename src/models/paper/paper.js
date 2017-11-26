@@ -1,5 +1,6 @@
 import { Model } from 'objection';
 import PaperTopic from '../paper/paperTopic';
+import User from '../authorization/user';
 
 export default class Paper extends Model {
   static tableName = 'papers';
@@ -10,6 +11,7 @@ export default class Paper extends Model {
       id: { type: 'integer' },
       user_id: { type: 'integer' },
       conference_id: { type: 'integer' },
+      speaker_name: { type: 'string' },
       title: { type: 'string' },
       abstract: { type: 'text' },
       keywords: { type: 'string' },
@@ -20,6 +22,8 @@ export default class Paper extends Model {
   async $beforeInsert() {
     this.created_at = new Date().toISOString();
     this.updated_at = new Date().toISOString();
+    const user = await User.query().where('id', this.user_id);
+    this.speaker_name = `${user[0].firstname} ${user[0].lastname}`;
   }
 
   async $beforeUpdate() {

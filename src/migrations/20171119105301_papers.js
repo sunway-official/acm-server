@@ -14,6 +14,7 @@ exports.up = function(knex, Promise) {
         .integer('conference_id')
         .unsigned()
         .notNullable();
+      table.string('speaker_name');
       table.string('title');
       table.string('keywords');
       table.text('abstract');
