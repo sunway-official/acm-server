@@ -6,6 +6,9 @@ type Schedule {
   # schedule of activity
   activity: Activity!
 
+  # activity id
+  activity_id: ID!
+
   # activity title
   activity_title: String!
 
