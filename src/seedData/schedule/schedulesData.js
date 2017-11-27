@@ -209,52 +209,6 @@ const tempSchedules = conference_id => [
     room_seats: 30,
     room_status: 'on',
   },
-  {
-    // eslint-disable-next-line
-    activity_id: 14,
-    conference_id,
-    room_id: 3,
-    start: addDays(getNewDate('2017-11-13T00:30:00.000Z'), 0),
-    end: addDays(getNewDate('2017-11-13T02:00:00.000Z'), 0),
-    activity_title: 'The refugee crisis is a test of our character',
-    activity_description:
-      "Sixty-five million people were displaced from their homes by conflict and disaster in 2016. It's not just a crisis; it's a test of who we are and what we stand for, says David Miliband -- and each of us has a personal responsibility to help solve it. In this must-watch talk, Miliband gives us specific, tangible ways to help refugees and turn empathy and altruism into action.",
-    activity_status: 'on',
-    room_name: 'P201',
-    room_seats: 30,
-    room_status: 'on',
-  },
-  {
-    // eslint-disable-next-line
-    activity_id: 15,
-    conference_id,
-    room_id: 3,
-    start: addDays(getNewDate('2017-11-15T00:30:00.000Z'), 2),
-    end: addDays(getNewDate('2017-11-15T02:00:00.000Z'), 2),
-    activity_title:
-      'A boat carrying 500 refugees sunk at sea. The story of two survivors',
-    activity_description:
-      "Aboard an overloaded ship carrying more than 500 refugees, a young woman becomes an unlikely hero. This single, powerful story, told by Melissa Fleming of the UN's refugee agency, gives a human face to the sheer numbers of human beings trying to escape to better lives ... as the refugee ships keep coming ...",
-    activity_status: 'on',
-    room_name: 'P201',
-    room_seats: 30,
-    room_status: 'on',
-  },
-  {
-    // eslint-disable-next-line
-    activity_id: 16,
-    conference_id,
-    room_id: 1,
-    start: addDays(getNewDate('2017-11-15T02:30:00.000Z'), 2),
-    end: addDays(getNewDate('2017-11-15T04:00:00.000Z'), 2),
-    activity_title: "Our refugee system is failing. Here's how we can fix it",
-    activity_description:
-      'A million refugees arrived in Europe this year, says Alexander Betts, and \\"our response, frankly, has been pathetic.\\" Betts studies forced migration, the impossible choice for families between the camps, urban poverty and dangerous illegal journeys to safety. In this insightful talk, he offers four ways to change the way we treat refugees, so they can make an immediate contribution to their new homes. \\"There\'s nothing inevitable about refugees being a cost,\\" Betts says. \\"They\'re human beings with skills, talents, aspirations, with the ability to make contributions -- if we let them.\\"',
-    activity_status: 'on',
-    room_name: 'P101',
-    room_seats: 20,
-    room_status: 'on',
-  },
 ];
 
 let schedules = [];
