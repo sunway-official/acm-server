@@ -113,7 +113,7 @@ export default {
     },
     updateRoomInConference: async (
       root,
-      data,
+      { id, name, seats, status },
       { models: { Room, Schedule }, ValidationError, user },
     ) => {
       try {
@@ -123,24 +123,25 @@ export default {
         // eslint-disable-next-line
         const conference_id = user.current_conference_id;
         // check room's name exists
-        if (data.name) {
+        if (name) {
           const room = await Room.query().where(builder => {
             builder
-              .where('name', data.name)
-              .where('conference_id', conference_id);
+              .where('name', name)
+              .where('conference_id', conference_id)
+              .whereNot('id', id);
           });
           if (room.length > 0)
             throw new ValidationError("Room's name is exists !");
         }
         // check room is chosen
-        if (data.status) {
-          const schedules = await Schedule.query().where('room_id', data.id);
+        if (status && status === 'off') {
+          const schedules = await Schedule.query().where('room_id', id);
           if (schedules.length > 0) {
             throw new ValidationError('This room is chosen !');
           }
         }
         const updateRoom = await Room.query()
-          .updateAndFetchById(data.id, data)
+          .updateAndFetchById(id, { name, seats, status })
           .where(builder => {
             builder.where('conference_id', conference_id);
           });
