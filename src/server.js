@@ -43,7 +43,7 @@ const authenticate = async (req, res, next) => {
             versionKey: user.version_key,
           };
           const newToken = jwt.sign(tokenPayload, config.jwtSecret, {
-            expiresIn: '15m',
+            expiresIn: '2d',
           });
           const newRefreshToken = jwt.sign(
             tokenPayload,

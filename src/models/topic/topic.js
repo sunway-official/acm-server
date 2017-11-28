@@ -29,8 +29,10 @@ export default class Topic extends Model {
   }
 
   async $beforeUpdate() {
-    const color = await Color.query().where('id', this.color_id);
-    this.color_code = color[0].code;
+    if (this.color_id) {
+      const color = await Color.query().where('id', this.color_id);
+      this.color_code = color[0].code;
+    }
   }
 
   // delete all paperTopics of topic with id

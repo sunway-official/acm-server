@@ -64,7 +64,7 @@ export default {
     },
   },
   Mutation: {
-    insertTopic: async (
+    insertTopicInConference: async (
       root,
       data,
       { models: { Topic }, ValidationError, user },
@@ -76,6 +76,16 @@ export default {
         }
         // eslint-disable-next-line
         data.conference_id = user.current_conference_id;
+        if (data.name) {
+          const topic = await Topic.query().where(builder => {
+            builder
+              .where('name', data.name)
+              .where('conference_id', data.conference_id);
+          });
+          if (topic.length > 0)
+            throw new ValidationError("Topic's name is exists !");
+        }
+
         const newTopic = await Topic.query().insert(data);
         return newTopic;
       } catch (e) {
@@ -84,22 +94,35 @@ export default {
         throw new ValidationError(e);
       }
     },
-    updateTopic: async (
+    updateTopicInConference: async (
       root,
-      data,
+      { id, name, description, color_id },
       { models: { Topic }, ValidationError, user },
     ) => {
       try {
-        // eslint-disable-next-line
         if (!user) {
           throw new ValidationError('unauthorized');
         }
         // eslint-disable-next-line
-        data.conference_id = user.current_conference_id;
-        const updateTopic = await Topic.query().updateAndFetchById(
-          data.id,
-          data,
-        );
+        const conference_id = user.current_conference_id;
+        // check topic's name exists
+        if (name) {
+          const topic = await Topic.query().where(builder => {
+            builder
+              .where('name', name)
+              .where('conference_id', 1)
+              .whereNot('id', id);
+          });
+          if (topic.length > 0)
+            throw new ValidationError("Topic's name is exists !");
+        }
+
+        const updateTopic = await Topic.query().updateAndFetchById(id, {
+          name,
+          description,
+          color_id,
+        });
+
         return updateTopic;
       } catch (e) {
         // eslint-disable-next-line no-console
