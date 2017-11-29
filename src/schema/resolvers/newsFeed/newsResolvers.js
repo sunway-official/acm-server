@@ -68,6 +68,20 @@ export default {
         throw new ValidationError('bad-request', 'newsComments');
       }
     },
+    commentsCount: async (
+      { id },
+      data,
+      { models: { NewsComment }, ValidationError },
+    ) => {
+      try {
+        const newsComments = await NewsComment.query().where('news_id', id);
+        return newsComments.length || 0;
+      } catch (e) {
+        // eslint-disable-next-line
+        console.error(e);
+        throw new ValidationError('bad-request', 'newsComments');
+      }
+    },
   },
   Query: {
     getAllNews: async (

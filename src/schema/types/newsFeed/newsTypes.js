@@ -26,6 +26,9 @@ type News {
 
   # news comments
   newsComments: [NewsComment!]!
+
+  # comments count
+  commentsCount: Int!
 }
 
 extend type Query {
