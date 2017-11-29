@@ -34,16 +34,14 @@ extend type Query {
     # Page Number
     pageNumber: Int,
     # Numers of news per page
-    pageSize: Int): [News!]!
+    pageSize: Int
+  ): [News!]!
 
   # Get News by ID
   getNewsByID(id: ID!): News!
 
   # Get News by user ID
   getNewsByUserID(user_id: ID!):[ News!]!
-
-  # Get News by conference ID
-  getNewsByConferenceID(conference_id: ID!): [News!]!
 }
 
 extend type Mutation {
