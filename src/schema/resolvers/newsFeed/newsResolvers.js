@@ -82,6 +82,36 @@ export default {
         throw new ValidationError('bad-request', 'newsComments');
       }
     },
+    likesCount: async (
+      { id },
+      data,
+      { models: { NewsLike }, ValidationError },
+    ) => {
+      try {
+        const NewsLikes = await NewsLike.query().where('news_id', id);
+        return NewsLikes.length || 0;
+      } catch (e) {
+        // eslint-disable-next-line
+        console.error(e);
+        throw new ValidationError('bad-request', 'NewsLikes');
+      }
+    },
+    isLiked: async (
+      { id },
+      data,
+      { models: { NewsLike }, ValidationError, user },
+    ) => {
+      try {
+        const NewsLikes = await NewsLike.query()
+          .where('news_id', id)
+          .andWhere('user_id', user.id);
+        return NewsLikes.length > 0;
+      } catch (e) {
+        // eslint-disable-next-line
+        console.error(e);
+        throw new ValidationError('bad-request', 'isLiked');
+      }
+    },
   },
   Query: {
     getAllNews: async (
@@ -180,7 +210,10 @@ export default {
         throw new ValidationError('unauthorized');
       }
       try {
-        const updateNews = await News.query().updateAndFetchById(data.id, data);
+        const updateNews = await News.query()
+          .where('user_id', user.id)
+          .andWhere('conference_id', user.current_conference_id)
+          .updateAndFetchById(data.id, data);
         return updateNews;
       } catch (e) {
         // eslint-disable-next-line no-console
@@ -197,7 +230,10 @@ export default {
         throw new ValidationError('unauthorized');
       }
       try {
-        const news = await News.query().findById(id);
+        const news = await News.query()
+          .where('user_id', user.id)
+          .andWhere('conference_id', user.current_conference_id)
+          .findById(id);
 
         if (!news) throw new ValidationError('news-not-found');
 

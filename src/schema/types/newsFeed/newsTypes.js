@@ -29,6 +29,11 @@ type News {
 
   # comments count
   commentsCount: Int!
+
+  #likes count
+  likesCount: Int!
+
+  isLiked: Boolean!
 }
 
 extend type Query {
@@ -50,16 +55,12 @@ extend type Query {
 extend type Mutation {
   # Insert new News
   insertNews(
-    user_id: ID!,
-    conference_id:ID!,
     content: String!
   ): News!
 
   # Update News info by id
   updateNews(
     id: ID!,
-    user_id: ID,
-    conference_id:ID,
     content: String
   ): News!
 

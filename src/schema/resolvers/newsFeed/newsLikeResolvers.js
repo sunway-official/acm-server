@@ -27,6 +27,23 @@ export default {
         throw new ValidationError('bad-request');
       }
     },
+    getNewsLikesByNewsID: async (
+      root,
+      { news_id },
+      { models: { NewsLike }, ValidationError, user },
+    ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
+      try {
+        const newsLike = await NewsLike.query().where('news_id', news_id);
+        return newsLike;
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error(e);
+        throw new ValidationError('bad-request');
+      }
+    },
     getNewsLikeByID: async (
       root,
       { id },
@@ -91,15 +108,21 @@ export default {
     },
     deleteNewsLike: async (
       root,
-      { id },
+      { news_id },
       { models: { NewsLike }, ValidationError, user },
     ) => {
       if (!user) {
         throw new ValidationError('unauthorized');
       }
       try {
-        const deleteNewsLike = await NewsLike.query().findById(id);
-        await NewsLike.query().deleteById(id);
+        const deleteNewsLike = await NewsLike.query()
+          .where('news_id', news_id)
+          .where('user_id', user.id)
+          .first();
+        await NewsLike.query()
+          .where('news_id', news_id)
+          .andWhere('user_id', user.id)
+          .delete();
         return deleteNewsLike;
       } catch (e) {
         // eslint-disable-next-line no-console
