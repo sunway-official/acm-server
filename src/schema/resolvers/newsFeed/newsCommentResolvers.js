@@ -58,9 +58,7 @@ export default {
         throw new ValidationError('unauthorized');
       }
       try {
-        const newsComment = await NewsComment.query()
-          .where('user_id', user.id)
-          .andWhere('news_id', news_id);
+        const newsComment = await NewsComment.query().where('news_id', news_id);
         if (!newsComment) {
           throw new ValidationError('newsComment-not-found');
         }
