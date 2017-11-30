@@ -18,9 +18,6 @@ type Topic {
   # color code of topic
   color_code: String!
 
-  # check room is chosen
-  is_chosen: Int!
-
 }
 
 extend type Query {
@@ -40,7 +37,7 @@ extend type Mutation {
   insertTopicInConference( name: String!, description: String!, color_id: ID!): Topic!
 
   # Update Topic info by id
-  updateTopicInConference(id:ID!, name: String, description: String, color_id: ID, is_chosen: Int): Topic!
+  updateTopicInConference(id:ID!, name: String, description: String, color_id: ID): Topic!
 
   # Delete Topic by id
   deleteTopic(id: ID!): [Topic!]!

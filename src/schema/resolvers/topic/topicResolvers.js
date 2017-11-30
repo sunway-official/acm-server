@@ -134,17 +134,19 @@ export default {
     deleteTopic: async (
       root,
       { id },
-      { models: { Topic }, ValidationError, user },
+      { models: { Topic, PaperTopic }, ValidationError, user },
     ) => {
       try {
         if (!user) {
           throw new ValidationError('unauthorized');
         }
-        const topic = await Topic.query().where(builder =>
-          builder.where('id', id).where('is_chosen', 0),
-        );
+        const topic = await Topic.query().where('id', id);
 
-        if (topic.length > 0) {
+        if (topic.length === 0) {
+          throw new ValidationError("This topic's not found !");
+        }
+        const papers = await PaperTopic.query().where('topic_id ', id);
+        if (papers.length === 0) {
           await topic[0].deleteAllRelationship();
           await Topic.query().deleteById(id);
           return topic;
