@@ -96,7 +96,7 @@ export default {
     },
     updateTopicInConference: async (
       root,
-      { id, name, description, color_id },
+      { id, name, description, color_id, is_chosen },
       { models: { Topic }, ValidationError, user },
     ) => {
       try {
@@ -110,7 +110,7 @@ export default {
           const topic = await Topic.query().where(builder => {
             builder
               .where('name', name)
-              .where('conference_id', 1)
+              .where('conference_id', conference_id)
               .whereNot('id', id);
           });
           if (topic.length > 0)
@@ -121,6 +121,7 @@ export default {
           name,
           description,
           color_id,
+          is_chosen,
         });
 
         return updateTopic;
@@ -133,18 +134,22 @@ export default {
     deleteTopic: async (
       root,
       { id },
-      { models: { Topic }, ValidationError },
+      { models: { Topic }, ValidationError, user },
     ) => {
       try {
-        const topic = await Topic.query().findById(id);
-
-        if (topic) {
-          await topic.deleteAllRelationship();
-          await Topic.query().deleteById(id);
-        } else {
-          throw new ValidationError('Not found topic');
+        if (!user) {
+          throw new ValidationError('unauthorized');
         }
-        return topic;
+        const topic = await Topic.query().where(builder =>
+          builder.where('id', id).where('is_chosen', 0),
+        );
+
+        if (topic.length > 0) {
+          await topic[0].deleteAllRelationship();
+          await Topic.query().deleteById(id);
+          return topic;
+        }
+        throw new ValidationError('This topic is chosen !');
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);

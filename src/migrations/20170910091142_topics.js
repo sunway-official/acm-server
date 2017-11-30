@@ -17,6 +17,7 @@ exports.up = function(knex, Promise) {
         .unsigned()
         .notNullable();
       table.string('color_code');
+      table.integer('is_chosen').defaultTo('0');
     }),
   ]);
 };

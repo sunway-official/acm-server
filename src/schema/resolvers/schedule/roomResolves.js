@@ -156,9 +156,19 @@ export default {
         throw new ValidationError(e);
       }
     },
-    deleteRoom: async (root, { id }, { models: { Room }, ValidationError }) => {
+    deleteRoom: async (
+      root,
+      { id },
+      { models: { Room, Schedule }, ValidationError },
+    ) => {
       try {
         const room = await Room.query().findById(id);
+
+        const schedules = await Schedule.query().where('room_id', id);
+
+        if (schedules.length > 0) {
+          throw new ValidationError('This room is chosen !');
+        }
 
         // delete Schedule By RoomID
         await room.deleteSchedule();
