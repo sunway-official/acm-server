@@ -68,6 +68,50 @@ export default {
         throw new ValidationError('bad-request', 'newsComments');
       }
     },
+    commentsCount: async (
+      { id },
+      data,
+      { models: { NewsComment }, ValidationError },
+    ) => {
+      try {
+        const newsComments = await NewsComment.query().where('news_id', id);
+        return newsComments.length || 0;
+      } catch (e) {
+        // eslint-disable-next-line
+        console.error(e);
+        throw new ValidationError('bad-request', 'newsComments');
+      }
+    },
+    likesCount: async (
+      { id },
+      data,
+      { models: { NewsLike }, ValidationError },
+    ) => {
+      try {
+        const NewsLikes = await NewsLike.query().where('news_id', id);
+        return NewsLikes.length || 0;
+      } catch (e) {
+        // eslint-disable-next-line
+        console.error(e);
+        throw new ValidationError('bad-request', 'NewsLikes');
+      }
+    },
+    isLiked: async (
+      { id },
+      data,
+      { models: { NewsLike }, ValidationError, user },
+    ) => {
+      try {
+        const NewsLikes = await NewsLike.query()
+          .where('news_id', id)
+          .andWhere('user_id', user.id);
+        return NewsLikes.length > 0;
+      } catch (e) {
+        // eslint-disable-next-line
+        console.error(e);
+        throw new ValidationError('bad-request', 'isLiked');
+      }
+    },
   },
   Query: {
     getAllNews: async (
@@ -80,6 +124,7 @@ export default {
       }
       try {
         const news = await News.query()
+          .where('conference_id', user.current_conference_id)
           .page(pageNumber || 0, pageSize || 10)
           .orderBy('created_at', 'DESC');
         return news.results;
@@ -98,7 +143,9 @@ export default {
         throw new ValidationError('unauthorized');
       }
       try {
-        const news = await News.query().findById(id);
+        const news = await News.query()
+          .where('conference_id', user.current_conference_id)
+          .findById(id);
         if (!news) {
           throw new ValidationError('news-not-found');
         }
@@ -118,27 +165,9 @@ export default {
         throw new ValidationError('unauthorized');
       }
       try {
-        const news = await News.query().where('user_id', user_id);
-        if (!news) {
-          throw new ValidationError('news-not-found');
-        }
-        return news;
-      } catch (e) {
-        // eslint-disable-next-line no-console
-        console.error(e);
-        throw new ValidationError('bad-request');
-      }
-    },
-    getNewsByConferenceID: async (
-      root,
-      { conference_id },
-      { models: { News }, ValidationError, user },
-    ) => {
-      if (!user) {
-        throw new ValidationError('unauthorized');
-      }
-      try {
-        const news = await News.query().where('conference_id', conference_id);
+        const news = await News.query()
+          .where('conference_id', user.current_conference_id)
+          .where('user_id', user_id);
         if (!news) {
           throw new ValidationError('news-not-found');
         }
@@ -181,7 +210,10 @@ export default {
         throw new ValidationError('unauthorized');
       }
       try {
-        const updateNews = await News.query().updateAndFetchById(data.id, data);
+        const updateNews = await News.query()
+          .where('user_id', user.id)
+          .andWhere('conference_id', user.current_conference_id)
+          .updateAndFetchById(data.id, data);
         return updateNews;
       } catch (e) {
         // eslint-disable-next-line no-console
@@ -198,13 +230,17 @@ export default {
         throw new ValidationError('unauthorized');
       }
       try {
-        const news = await News.query().findById(id);
+        const news = await News.query()
+          .where('user_id', user.id)
+          .andWhere('conference_id', user.current_conference_id)
+          .findById(id);
+
+        if (!news) throw new ValidationError('news-not-found');
+
         // delete all NewsComment of news with id
         // delete all NewsLike of news with id
         // delete all NewsPhoto of news with id
         await news.deleteAllRelationship();
-
-        if (!news) throw new ValidationError('news-not-found');
 
         await News.query().deleteById(id);
         return news;
