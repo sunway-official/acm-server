@@ -124,8 +124,6 @@ const tempPapers = conference_id => [
 
 let papers = [];
 
-for (let i = 1; i < 7; i += 1) {
-  papers = papers.concat(tempPapers(i));
-}
+papers = papers.concat(tempPapers(1));
 
 module.exports = papers;

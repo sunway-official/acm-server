@@ -127,7 +127,9 @@ export default {
         const conference_id = user.current_conference_id;
         // eslint-disable-next-line
         if (data.title) {
-          const paper = await Paper.query().where('title', data.title);
+          const paper = await Paper.query().where(builder =>
+            builder.where('title', data.title).whereNot('id', data.id),
+          );
           if (paper.length !== 0)
             throw new ValidationError("Paper's title is exists !");
         }
