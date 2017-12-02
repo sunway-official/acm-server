@@ -128,7 +128,8 @@ export default {
         // eslint-disable-next-line
         if (data.title) {
           const paper = await Paper.query().where('title', data.title);
-          if (paper) throw new ValidationError("Paper's title is exists !");
+          if (paper.length !== 0)
+            throw new ValidationError("Paper's title is exists !");
         }
         const updatePaper = await Paper.query()
           .updateAndFetchById(data.id, data)

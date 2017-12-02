@@ -78,15 +78,46 @@ export default {
     // get all roles by user id
     getAllRolesByUserID: async (
       root,
-      { user_id, conference_id },
-      { models: { Permission }, ValidationError },
+      { user_id },
+      { models: { Permission }, ValidationError, user },
     ) => {
       try {
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
+        // eslint-disable-next-line
+        const conference_id = user.current_conference_id;
         const permissions = await Permission.query()
           .where(builder => {
             builder
               .where('conference_id', conference_id)
               .where('user_id', user_id);
+          })
+          .distinct('role_id');
+        return permissions;
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error(e);
+        throw new ValidationError(e);
+      }
+    },
+    // Get all role of login in admin page
+    getAllRolesOfUser: async (
+      root,
+      data,
+      { models: { Permission }, ValidationError, user },
+    ) => {
+      try {
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
+        // eslint-disable-next-line
+        const conference_id = user.current_conference_id;
+        const permissions = await Permission.query()
+          .where(builder => {
+            builder
+              // .where('conference_id', conference_id)
+              .where('user_id', user.id);
           })
           .distinct('role_id');
         return permissions;
