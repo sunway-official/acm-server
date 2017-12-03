@@ -116,7 +116,7 @@ const usersData = [
     email: 'tranvanthuc365@gmail.com',
     gender: 'male',
     password,
-    current_conference_id: 0,
+    current_conference_id: 1,
     phone_number: faker.phone.phoneNumberFormat(),
     version_key: versionKey,
     organization,

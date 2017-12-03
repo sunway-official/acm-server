@@ -2,7 +2,6 @@ import { Model } from 'objection';
 import Schedule from '../schedule/schedule';
 import ActivityFeedback from './activityFeedback';
 import Question from '../questionAndAnswer/question';
-import Paper from '../paper/paper';
 
 export default class Activity extends Model {
   static tableName = 'activities';
@@ -23,20 +22,6 @@ export default class Activity extends Model {
     this.paper_id = parseInt(opt.old.paper_id, 10);
   }
 
-  async $beforeInsert() {
-    const paper = await Paper.query().where('id', this.paper_id);
-    this.conference_id = paper[0].conference_id;
-    this.title = paper[0].title;
-    this.description = paper[0].abstract;
-  }
-
-  async $beforeUpdate() {
-    const paper = await Paper.query().where('id', this.paper_id);
-    this.conference_id = paper[0].conference_id;
-    this.title = paper[0].title;
-    this.description = paper[0].abstract;
-  }
-
   // delete all schedules of activity with id
   async deleteSchedule() {
     const schedules = await Schedule.query().where('activity_id', this.id);
@@ -47,7 +32,6 @@ export default class Activity extends Model {
         .delete()
         .where('activity_id', this.id);
     }
-
     return schedules;
   }
 

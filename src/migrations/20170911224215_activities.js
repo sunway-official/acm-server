@@ -10,9 +10,9 @@ exports.up = function(knex, Promise) {
       table
         .integer('paper_id')
         .unsigned()
-        .notNullable();
+        .defaultTo(0);
       table.string('title');
-      table.text('description');
+      table.text('description').defaultTo(' ');
     }),
   ]);
 };
