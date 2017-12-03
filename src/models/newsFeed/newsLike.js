@@ -19,10 +19,10 @@ export default class Role extends Model {
     this.user_id = parseInt(opt.old.user_id, 10);
   }
   async $beforeInsert() {
-    this.created_at = new Date().toISOString();
-    this.updated_at = new Date().toISOString();
+    this.created_at = new Date();
+    this.updated_at = new Date();
   }
   async $beforeUpdate() {
-    this.updated_at = new Date().toISOString();
+    this.updated_at = new Date();
   }
 }

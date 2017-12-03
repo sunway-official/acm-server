@@ -20,14 +20,14 @@ export default class Paper extends Model {
   };
 
   async $beforeInsert() {
-    this.created_at = new Date().toISOString();
-    this.updated_at = new Date().toISOString();
+    this.created_at = new Date();
+    this.updated_at = new Date();
     const user = await User.query().where('id', this.user_id);
     this.speaker_name = `${user[0].firstname} ${user[0].lastname}`;
   }
 
   async $beforeUpdate() {
-    this.updated_at = new Date().toISOString();
+    this.updated_at = new Date();
   }
 
   async $beforeValidate(opt) {
