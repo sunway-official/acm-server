@@ -4,10 +4,6 @@ export default {
       const conference = await Conference.query().findById(conference_id);
       return conference;
     },
-    paper: async ({ paper_id }, data, { models: { Paper } }) => {
-      const paper = await Paper.query().findById(paper_id);
-      return paper;
-    },
     schedules: async ({ id }, data, { models: { Schedule } }) => {
       const schedules = await Schedule.query().where('activity_id', id);
       return schedules;

@@ -80,14 +80,20 @@ export default {
     },
     deletePaperTopic: async (
       root,
-      { id },
+      { topic_id, paper_id },
       { models: { PaperTopic }, ValidationError },
     ) => {
       try {
-        const paperTopic = await PaperTopic.query().findById(id);
+        const paperTopic = await PaperTopic.query().where(builder =>
+          builder.where('topic_id', topic_id).where('paper_id', paper_id),
+        );
         if (!paperTopic) throw new ValidationError('Not found PaperTopic');
-        await PaperTopic.query().deleteById(id);
-        return paperTopic;
+        await PaperTopic.query()
+          .delete()
+          .where(builder =>
+            builder.where('topic_id', topic_id).where('paper_id', paper_id),
+          );
+        return paperTopic[0];
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);

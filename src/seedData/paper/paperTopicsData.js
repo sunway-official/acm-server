@@ -5,7 +5,7 @@ const paperTopics = [];
 for (let i = 1; i <= 100; i += 1) {
   const topicId = faker.random.number({ min: 1, max: 50 }) - 1;
   paperTopics.push({
-    paper_id: faker.random.number({ min: 1, max: 25 }),
+    paper_id: faker.random.number({ min: 1, max: 13 }),
     topic_id: topicId + 1,
     topic_name: topics[topicId].name,
     topic_description: topics[topicId].description,

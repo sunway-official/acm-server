@@ -36,6 +36,6 @@ extend type Mutation {
   updateTopicOfPaper(paper_id: ID!, topic_id: ID!): PaperTopic!
 
   # delete paper topic
-  deletePaperTopic(id: ID!): PaperTopic!
+  deletePaperTopic(topic_id: ID!, paper_id: ID!): PaperTopic!
 }
 `;
