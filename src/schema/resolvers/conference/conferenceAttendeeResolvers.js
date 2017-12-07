@@ -43,6 +43,26 @@ export default {
         throw new ValidationError(e);
       }
     },
+    getAllConferencesByUserID: async (
+      root,
+      data,
+      { models: { ConferenceAttendee }, ValidationError, user },
+    ) => {
+      try {
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
+        const conferenceAttendee = await ConferenceAttendee.query().where(
+          'user_id',
+          user.id,
+        );
+        return conferenceAttendee;
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error(e);
+        throw new ValidationError(e);
+      }
+    },
   },
   Mutation: {
     insertConferenceAttendee: async (
