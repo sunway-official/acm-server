@@ -26,6 +26,9 @@ extend type Query {
 
   # all topics by paper id
   getTopicsByPaperID(paper_id: ID!): [PaperTopic!]!
+
+  # all papers by topc id
+  getAllPapersByTopicID(topic_id: ID!): [PaperTopic!]!
 }
 
 extend type Mutation {

@@ -42,6 +42,20 @@ export default {
         throw new ValidationError(e);
       }
     },
+    getAllPapersByTopicID: async (
+      root,
+      { topic_id },
+      { models: { PaperTopic }, ValidationError },
+    ) => {
+      try {
+        const papers = await PaperTopic.query().where('topic_id', topic_id);
+        return papers;
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error(e);
+        throw new ValidationError(e);
+      }
+    },
   },
 
   Mutation: {
