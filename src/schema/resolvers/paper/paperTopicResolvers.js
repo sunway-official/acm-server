@@ -66,12 +66,12 @@ export default {
       { models: { PaperTopic }, ValidationError },
     ) => {
       try {
-        const paper = await PaperTopic.query().where('paper_id', paper_id);
+        await PaperTopic.query()
+          .update({ topic_id })
+          .where('paper_id', paper_id);
 
-        const updateTopicOfPaper = await paper.$query().updateAndFetch({
-          topic_id,
-        });
-        return updateTopicOfPaper;
+        const paper = await PaperTopic.query().where('paper_id', paper_id);
+        return paper[0];
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);
