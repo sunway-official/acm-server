@@ -8,6 +8,10 @@ export default {
       const schedules = await Schedule.query().where('activity_id', id);
       return schedules;
     },
+    paper: async ({ paper_id }, data, { models: { Paper } }) => {
+      const paper = await Paper.query().findById(paper_id);
+      return paper;
+    },
     questions: async ({ id }, data, { models: { Question } }) => {
       const questions = await Question.query().where('activity_id', id);
       return questions;

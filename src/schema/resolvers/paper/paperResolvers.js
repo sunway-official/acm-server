@@ -8,6 +8,10 @@ export default {
       const conference = await Conference.query().findById(conference_id);
       return conference;
     },
+    papersTopic: async ({ id }, data, { models: { PaperTopic } }) => {
+      const paperTopic = await PaperTopic.query().where('paper_id', id);
+      return paperTopic;
+    },
   },
   Query: {
     getAllPapers: async (

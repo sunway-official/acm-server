@@ -7,8 +7,11 @@ type Activity {
   # conferen have this activity
   conference: Conference!
 
-  # paper
+  # paper id
   paper_id: ID!
+
+  # paper
+  paper: Paper!
 
   # all feedback of activity
   activityFeedback: [ActivityFeedback!]!

@@ -13,7 +13,7 @@ type Paper {
   conference: Conference!
 
   # paper topic
-  papersTopics: [PaperTopic!]!
+  papersTopic: [PaperTopic!]!
 
   # paper author
   papersAuthors: [PaperAuthor!]!
