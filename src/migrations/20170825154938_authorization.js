@@ -19,7 +19,7 @@ exports.up = function(knex, Promise) {
         .defaultTo('unknown')
         .notNullable();
       table.string('phone_number').nullable();
-      table.date('dob').nullable();
+      table.timestamp('dob').nullable();
       table.string('version_key').notNullable();
       table.string('bio').nullable();
       table.string('language').nullable();
