@@ -44,7 +44,7 @@ for (let i = 50; i < 100; i += 1) {
   participantsID.push(i);
 }
 
-const conferenceIDs = [1, 2, 3, 4, 5, 6];
+const conferenceIDs = [1, 2];
 
 // get name of roles with id
 function getRoleName(id) {
@@ -85,7 +85,7 @@ function getDefaultFeaturesWithRoleID(role_id) {
       break;
     case 5:
       // eslint-disable-next-line prefer-destructuring
-      features = participant.features;
+      features = author.features;
       break;
     case 6:
       // eslint-disable-next-line prefer-destructuring
@@ -97,7 +97,7 @@ function getDefaultFeaturesWithRoleID(role_id) {
       break;
     case 8:
       // eslint-disable-next-line prefer-destructuring
-      features = author.features;
+      features = participant.features;
       break;
     default:
       features = [];
@@ -124,7 +124,7 @@ function getUsersIDWithRoleID(role_id) {
       usersID = supportersID;
       break;
     case 5:
-      usersID = participantsID;
+      usersID = authorsID;
       break;
     case 6:
       usersID = ticketCheckersID;
@@ -133,7 +133,7 @@ function getUsersIDWithRoleID(role_id) {
       usersID = reviewersID;
       break;
     case 8:
-      usersID = authorsID;
+      usersID = participantsID;
       break;
     default:
       usersID = [];

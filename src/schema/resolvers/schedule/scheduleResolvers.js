@@ -115,13 +115,16 @@ export default {
         const schedule = await Schedule.query().findById(id);
 
         // delete all personanl schedule with scheduleID
-        await schedule.deletePersonalSchedule();
 
         // delete schedule
         if (schedule) {
+          await schedule.deletePersonalSchedule();
           await Schedule.query().deleteById(id);
+          return schedule;
         }
-        return schedule;
+        return {
+          id: 0,
+        };
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);

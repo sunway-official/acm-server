@@ -155,13 +155,19 @@ export default {
     deletePaper: async (
       root,
       { id },
-      { models: { Paper }, ValidationError },
+      { models: { Paper, Activity }, ValidationError },
     ) => {
       try {
         const paper = await Paper.query().findById(id);
 
+        const activities = await Activity.query().where('paper_id', id);
+
+        if (activities.length > 0) {
+          throw new ValidationError('This paper is chosen !');
+        }
+
         // delete Schedule By PaperID
-        // await paper.deleteSchedule();
+        await paper.deleteAllRelationship();
 
         // delete paper
         if (paper) {

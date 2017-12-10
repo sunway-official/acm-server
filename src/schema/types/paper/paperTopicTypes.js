@@ -9,6 +9,8 @@ type PaperTopic {
   # topic
   topic: Topic!
 
+  topic_id: ID!
+
   # topic name
   topic_name: String!
 
