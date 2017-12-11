@@ -85,15 +85,15 @@ function getDefaultFeaturesWithRoleID(role_id) {
       break;
     case 5:
       // eslint-disable-next-line prefer-destructuring
-      features = author.features;
+      features = ticketChecker.features;
       break;
     case 6:
       // eslint-disable-next-line prefer-destructuring
-      features = ticketChecker.features;
+      features = reviewer.features;
       break;
     case 7:
       // eslint-disable-next-line prefer-destructuring
-      features = reviewer.features;
+      features = author.features;
       break;
     case 8:
       // eslint-disable-next-line prefer-destructuring
@@ -124,13 +124,13 @@ function getUsersIDWithRoleID(role_id) {
       usersID = supportersID;
       break;
     case 5:
-      usersID = authorsID;
-      break;
-    case 6:
       usersID = ticketCheckersID;
       break;
-    case 7:
+    case 6:
       usersID = reviewersID;
+      break;
+    case 7:
+      usersID = authorsID;
       break;
     case 8:
       usersID = participantsID;

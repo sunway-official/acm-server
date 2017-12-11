@@ -29,7 +29,7 @@ export default {
         if (!landingPage) {
           throw new ValidationError('landingPage-not-found');
         }
-        return landingPage;
+        return landingPage[0];
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);

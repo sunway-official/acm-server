@@ -1,6 +1,6 @@
 const landingPages = [
   {
-    conference_id: '2',
+    conference_id: '1',
     slogan: 'Grow your Mind. Your Business. Your Profits.',
     register_description:
       'Prepare to abandon your comfort zone, discover some of the world’s most technologically advanced minds and explore the digital construction trends of tomorrow.',
@@ -11,6 +11,8 @@ const landingPages = [
     email: 'blockchain@gmail.com',
     phone_number: '123456789',
     facebook_id: 'facebook.com/blockchain',
+    twitter_id: 'twitter.com/blockchain',
+    linkedin_id: 'linkedin.com/blockchain',
   },
 ];
 

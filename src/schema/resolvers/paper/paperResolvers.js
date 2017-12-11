@@ -33,7 +33,7 @@ export default {
     },
     getPapersByConferenceID: async (
       root,
-      { conference_id },
+      { conference_id, isAuthor },
       { models: { Paper }, ValidationError, user },
     ) => {
       try {
@@ -46,10 +46,16 @@ export default {
           // eslint-disable-next-line
           conference_id = user.current_conference_id;
         }
-        const papers = await Paper.query().where(
-          'conference_id',
-          conference_id,
-        );
+        let papers;
+        if (isAuthor && isAuthor === 1) {
+          papers = await Paper.query().where(builder =>
+            builder
+              .where('conference_id', conference_id)
+              .where('user_id', user.id),
+          );
+        } else {
+          papers = await Paper.query().where('conference_id', conference_id);
+        }
         return papers;
       } catch (e) {
         // eslint-disable-next-line no-console
