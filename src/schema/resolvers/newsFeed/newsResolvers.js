@@ -167,7 +167,8 @@ export default {
       try {
         const news = await News.query()
           .where('conference_id', user.current_conference_id)
-          .where('user_id', user_id);
+          .where('user_id', user_id)
+          .orderBy('created_at', 'DESC');
         if (!news) {
           throw new ValidationError('news-not-found');
         }
