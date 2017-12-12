@@ -87,7 +87,7 @@ export default {
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);
-        throw new ValidationError('bad-request');
+        throw new ValidationError(e);
       }
     },
     updateOrganizerDetail: async (
@@ -110,7 +110,7 @@ export default {
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);
-        throw new ValidationError('bad-request');
+        throw new ValidationError(e);
       }
     },
     deleteOrganizerDetail: async (
@@ -131,7 +131,7 @@ export default {
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);
-        throw new ValidationError('bad-request');
+        throw new ValidationError(e);
       }
     },
   },
