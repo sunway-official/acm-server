@@ -108,7 +108,7 @@ export default {
             builder.where('topic_id', topic_id).where('paper_id', paper_id),
           );
         return {
-          id: 0,
+          topic_id: paperTopic[0].topic_id,
         };
       } catch (e) {
         // eslint-disable-next-line no-console
