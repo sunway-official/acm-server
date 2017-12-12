@@ -47,7 +47,10 @@ extend type Query {
   getPaperByID( id: ID!): Paper!
 
   # Get Paper by conference ID
-  getPapersByConferenceID( conference_id: ID, isAuthor: Int): [Paper!]!
+  getPapersByConferenceID( conference_id: ID): [Paper!]!
+
+  # Get Paper with author by conference ID
+  getPapersWithAuthorByConferenceID: [Paper!]!
 
   # Get Paper by user ID
   getPapersByUserID: [Paper!]!
@@ -61,6 +64,6 @@ extend type Mutation {
   updatePaper( id:ID!, title: String, abstract: String, keywords: String, file: String ): Paper!
 
   # Delete Paper by id
-  deletePaper( id: ID! ): Paper!
+  deletePaper( id: ID! ): Paper
 }
 `;

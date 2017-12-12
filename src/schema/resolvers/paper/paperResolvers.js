@@ -33,7 +33,7 @@ export default {
     },
     getPapersByConferenceID: async (
       root,
-      { conference_id, isAuthor },
+      { conference_id },
       { models: { Paper }, ValidationError, user },
     ) => {
       try {
@@ -46,16 +46,35 @@ export default {
           // eslint-disable-next-line
           conference_id = user.current_conference_id;
         }
-        let papers;
-        if (isAuthor && isAuthor === 1) {
-          papers = await Paper.query().where(builder =>
-            builder
-              .where('conference_id', conference_id)
-              .where('user_id', user.id),
-          );
-        } else {
-          papers = await Paper.query().where('conference_id', conference_id);
+        const papers = await Paper.query().where(
+          'conference_id',
+          conference_id,
+        );
+
+        return papers;
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error(e);
+        throw new ValidationError(e);
+      }
+    },
+    getPapersWithAuthorByConferenceID: async (
+      root,
+      data,
+      { models: { Paper }, ValidationError, user },
+    ) => {
+      try {
+        // eslint-disable-next-line
+        if (!user && !conference_id) {
+          throw new ValidationError('unauthorized');
         }
+        // eslint-disable-next-line
+        const conference_id = user.current_conference_id;
+        const papers = await Paper.query().where(builder =>
+          builder
+            .where('conference_id', conference_id)
+            .where('user_id', user.id),
+        );
         return papers;
       } catch (e) {
         // eslint-disable-next-line no-console
@@ -161,9 +180,12 @@ export default {
     deletePaper: async (
       root,
       { id },
-      { models: { Paper, Activity }, ValidationError },
+      { models: { Paper, Activity }, ValidationError, user },
     ) => {
       try {
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
         const paper = await Paper.query().findById(id);
 
         const activities = await Activity.query().where('paper_id', id);
@@ -173,7 +195,7 @@ export default {
         }
 
         // delete Schedule By PaperID
-        await paper.deleteAllRelationship();
+        // await paper.deleteAllRelationship();
 
         // delete paper
         if (paper) {

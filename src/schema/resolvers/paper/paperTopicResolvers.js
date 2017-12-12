@@ -107,7 +107,9 @@ export default {
           .where(builder =>
             builder.where('topic_id', topic_id).where('paper_id', paper_id),
           );
-        return paperTopic[0];
+        return {
+          id: 0,
+        };
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);

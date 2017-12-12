@@ -38,9 +38,9 @@ extend type Mutation {
   insertPaperTopic(paper_id: ID!, topic_id: ID!): PaperTopic!
 
   # update topic of paper
-  updateTopicOfPaper(paper_id: ID!, topic_id: ID!): PaperTopic!
+  updateTopicOfPaper(paper_id: ID!, topic_id: ID!): PaperTopic
 
   # delete paper topic
-  deletePaperTopic(topic_id: ID!, paper_id: ID!): PaperTopic!
+  deletePaperTopic(topic_id: ID!, paper_id: ID!): PaperTopic
 }
 `;

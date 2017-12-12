@@ -38,13 +38,11 @@ export default class Paper extends Model {
 
   // delete all topic of paper with id
   async deletePaperTopic() {
-    const paperTopic = await PaperTopic.query().where('paper_id', this.id);
+    await PaperTopic.query()
+      .delete()
+      .where('paper_id', this.id);
 
-    if (paperTopic)
-      await PaperTopic.query()
-        .delete()
-        .where('paper_id', this.id);
-    return paperTopic;
+    return true;
   }
 
   async deleteAllRelationship() {
