@@ -195,7 +195,7 @@ export default {
         }
 
         // delete Schedule By PaperID
-        // await paper.deleteAllRelationship();
+        await paper.deleteAllRelationship();
 
         // delete paper
         if (paper) {

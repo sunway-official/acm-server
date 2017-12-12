@@ -110,7 +110,7 @@ export default {
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);
-        throw new ValidationError(e);
+        throw new ValidationError("Email's exists!");
       }
     },
     deleteOrganizerDetail: async (
