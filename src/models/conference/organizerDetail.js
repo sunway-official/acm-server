@@ -13,7 +13,6 @@ export default class OrganizerDetail extends Model {
       name: { type: 'string', maxLength: '100' },
       email: {
         type: 'string',
-        format: 'email',
         minLength: '5',
         maxLength: '100',
       },
