@@ -60,7 +60,7 @@ const newsComments = [
   },
 ];
 
-for (let i = 0; i < 100; i += 1) {
+for (let i = 0; i < 50; i += 1) {
   newsComments.push({
     news_id: faker.random.number({
       min: 1,
