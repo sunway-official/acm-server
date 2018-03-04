@@ -1,3 +1,5 @@
+import Expo from 'expo-server-sdk';
+
 export default {
   Schedule: {
     room: async ({ room_id }, data, { models: { Room } }) => {
@@ -71,7 +73,7 @@ export default {
     insertSchedule: async (
       root,
       data,
-      { models: { Schedule }, ValidationError, user },
+      { models: { Schedule }, ValidationError, user, expo },
     ) => {
       try {
         if (!user) {
@@ -82,6 +84,17 @@ export default {
         // eslint-disable-next-line
         data.conference_id = conference_id;
         const newSchedule = await Schedule.query().insert(data);
+
+        // Test Expo Push notification!
+        if (Expo.isExpoPushToken(user.notification_key)) {
+          await expo.sendPushNotificationsAsync({
+            to: user.notification_key,
+            sound: 'default',
+            body: 'There is a new schedule for you',
+            data: { schedule: newSchedule },
+          });
+        }
+
         return newSchedule;
       } catch (e) {
         // eslint-disable-next-line no-console

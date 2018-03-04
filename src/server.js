@@ -9,6 +9,7 @@ import jwt from 'jsonwebtoken';
 import knex from 'knex';
 import { Model } from 'objection';
 import { SubscriptionServer } from 'subscriptions-transport-ws';
+import Expo from 'expo-server-sdk';
 
 import config from './config';
 import transporter from './email';
@@ -80,6 +81,9 @@ const start = async () => {
 
   app.use(authenticate);
 
+  // Create a new Expo SDK client
+  const expo = new Expo();
+
   app.use(
     '/graphql',
     bodyParser.json(),
@@ -91,6 +95,7 @@ const start = async () => {
         user: req.user,
         transporter,
         emailTemplates,
+        expo,
       },
       formatError,
       schema,

@@ -31,6 +31,7 @@ exports.up = function(knex, Promise) {
       table.string('linkedin_id').nullable();
       table.string('facebook_id').nullable();
       table.string('twitter_id').nullable();
+      table.string('notification_key').nullable();
       table.timestamps();
     }),
   ]);
