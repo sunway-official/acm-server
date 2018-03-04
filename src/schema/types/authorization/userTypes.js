@@ -192,6 +192,8 @@ extend type Mutation {
   switchCurrentConference(
     conference_id: ID!
   ): Conference!
+
+  addUserNotificationKey(key: String!): User!
 }
 
 type LoginResponse {
