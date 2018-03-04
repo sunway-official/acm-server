@@ -1,4 +1,5 @@
 import Expo from 'expo-server-sdk';
+import handlePushNofication from '../../../services/handlePushNofication';
 
 export default {
   Schedule: {
@@ -87,7 +88,7 @@ export default {
 
         // Test Expo Push notification!
         if (Expo.isExpoPushToken(user.notification_key)) {
-          await expo.sendPushNotificationsAsync({
+          await handlePushNofication(expo, {
             to: user.notification_key,
             sound: 'default',
             body: 'There is a new schedule for you',
