@@ -64,7 +64,7 @@ export default {
     },
   },
   Mutation: {
-    insertTopic: async (
+    insertTopicInConference: async (
       root,
       data,
       { models: { Topic }, ValidationError, user },
@@ -76,6 +76,16 @@ export default {
         }
         // eslint-disable-next-line
         data.conference_id = user.current_conference_id;
+        if (data.name) {
+          const topic = await Topic.query().where(builder => {
+            builder
+              .where('name', data.name)
+              .where('conference_id', data.conference_id);
+          });
+          if (topic.length > 0)
+            throw new ValidationError("Topic's name is exists !");
+        }
+
         const newTopic = await Topic.query().insert(data);
         return newTopic;
       } catch (e) {
@@ -84,22 +94,36 @@ export default {
         throw new ValidationError(e);
       }
     },
-    updateTopic: async (
+    updateTopicInConference: async (
       root,
-      data,
+      { id, name, description, color_id, is_chosen },
       { models: { Topic }, ValidationError, user },
     ) => {
       try {
-        // eslint-disable-next-line
         if (!user) {
           throw new ValidationError('unauthorized');
         }
         // eslint-disable-next-line
-        data.conference_id = user.current_conference_id;
-        const updateTopic = await Topic.query().updateAndFetchById(
-          data.id,
-          data,
-        );
+        const conference_id = user.current_conference_id;
+        // check topic's name exists
+        if (name) {
+          const topic = await Topic.query().where(builder => {
+            builder
+              .where('name', name)
+              .where('conference_id', conference_id)
+              .whereNot('id', id);
+          });
+          if (topic.length > 0)
+            throw new ValidationError("Topic's name is exists !");
+        }
+
+        const updateTopic = await Topic.query().updateAndFetchById(id, {
+          name,
+          description,
+          color_id,
+          is_chosen,
+        });
+
         return updateTopic;
       } catch (e) {
         // eslint-disable-next-line no-console
@@ -110,18 +134,24 @@ export default {
     deleteTopic: async (
       root,
       { id },
-      { models: { Topic }, ValidationError },
+      { models: { Topic, PaperTopic }, ValidationError, user },
     ) => {
       try {
-        const topic = await Topic.query().findById(id);
-
-        if (topic) {
-          await topic.deleteAllRelationship();
-          await Topic.query().deleteById(id);
-        } else {
-          throw new ValidationError('Not found topic');
+        if (!user) {
+          throw new ValidationError('unauthorized');
         }
-        return topic;
+        const topic = await Topic.query().where('id', id);
+
+        if (topic.length === 0) {
+          throw new ValidationError("This topic's not found !");
+        }
+        const papers = await PaperTopic.query().where('topic_id ', id);
+        if (papers.length === 0) {
+          await topic[0].deleteAllRelationship();
+          await Topic.query().deleteById(id);
+          return topic;
+        }
+        throw new ValidationError('This topic is chosen !');
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);

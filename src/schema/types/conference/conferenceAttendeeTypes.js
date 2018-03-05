@@ -14,6 +14,9 @@ extend type Query {
   # Get information about all ConferenceAttendee
   getAllConferenceAttendees: [ConferenceAttendee!]!
 
+  # Get information about all Conference
+  getAllConferencesByUserID: [ConferenceAttendee!]!
+
   # Get ConferenceAttendee by ID
   getConferenceAttendeeByID(id: ID!): ConferenceAttendee!
 

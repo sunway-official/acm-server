@@ -1,5 +1,4 @@
 {
-  "flow.enabled": true,
   "prettier.singleQuote": true,
   "prettier.trailingComma": "all",
   "prettier.eslintIntegration": true,

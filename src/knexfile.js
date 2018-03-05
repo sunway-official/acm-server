@@ -13,21 +13,8 @@ module.exports = {
       database: process.env.PG_DATABASE,
     },
   },
-  staged: {
-    client: 'pg',
-    connection: `pg://${process.env.PG_USER}:${process.env.PG_PASSWORD}@${
-      process.env.PG_IP_ADDRESS
-    }/${process.env.PG_DATABASE}?host=/cloudsql/${
-      process.env.PG_INSTANCE_NAME
-    }`,
-  },
   production: {
     client: 'pg',
-    connection: {
-      host: `/cloudsql/${process.env.PG_INSTANCE_NAME}`,
-      user: process.env.PG_USER,
-      password: process.env.PG_PASSWORD,
-      database: process.env.PG_DATABASE,
-    },
+    connection: `postgres://kdoeyycozvcevz:5d73ac8e8de388284d979a93a1be0250f82bd5fb78c0d5f175de53a389bbc623@ec2-107-20-249-48.compute-1.amazonaws.com:5432/d8f4lsn1lu6pa1`,
   },
 };

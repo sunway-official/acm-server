@@ -2,7 +2,7 @@ const authors = require('../paper/authorData');
 const faker = require('faker');
 
 const paperAuthors = [];
-for (let i = 1; i <= 100; i += 1) {
+for (let i = 1; i <= 50; i += 1) {
   const authorId = faker.random.number({ min: 1, max: 10 }) - 1;
   paperAuthors.push({
     paper_id: faker.random.number({ min: 1, max: 25 }),

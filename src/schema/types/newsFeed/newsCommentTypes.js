@@ -30,14 +30,11 @@ extend type Query {
 
   # Get NewsComment by news ID
   getNewsCommentByNewsID(news_id: ID!): [NewsComment!]!
-
-  # Get NewsComment by user ID
-  getNewsCommentByUserID(user_id: ID!): [NewsComment!]!
 }
 
 extend type Mutation {
   # Insert new NewsComment
-  insertNewsComment( news_id: ID!,user_id: ID!, content: String! ): NewsComment!
+  insertNewsComment( news_id: ID!, content: String! ): NewsComment!
 
   # Update NewsComment info by id
   updateNewsComment( id:ID!, content: String! ): NewsComment!

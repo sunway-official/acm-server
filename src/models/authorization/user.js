@@ -79,8 +79,8 @@ export default class User extends unique(Model) {
     return newJson;
   }
   async $beforeInsert() {
-    this.created_at = new Date().toISOString();
-    this.updated_at = new Date().toISOString();
+    this.created_at = new Date();
+    this.updated_at = new Date();
 
     this.password = await bcrypt.hash(this.password, config.saltFactor);
     this.version_key = await bcrypt.hash(
@@ -89,7 +89,7 @@ export default class User extends unique(Model) {
     );
   }
   async $beforeUpdate() {
-    this.updated_at = new Date().toISOString();
+    this.updated_at = new Date();
     if (this.password) {
       this.password = await bcrypt.hash(this.password, config.saltFactor);
       this.version_key = await bcrypt.hash(

@@ -1,3 +1,6 @@
+import Expo from 'expo-server-sdk';
+import handlePushNofication from '../../../services/handlePushNofication';
+
 export default {
   Schedule: {
     room: async ({ room_id }, data, { models: { Room } }) => {
@@ -71,7 +74,7 @@ export default {
     insertSchedule: async (
       root,
       data,
-      { models: { Schedule }, ValidationError, user },
+      { models: { Schedule }, ValidationError, user, expo },
     ) => {
       try {
         if (!user) {
@@ -82,6 +85,17 @@ export default {
         // eslint-disable-next-line
         data.conference_id = conference_id;
         const newSchedule = await Schedule.query().insert(data);
+
+        // Test Expo Push notification!
+        if (Expo.isExpoPushToken(user.notification_key)) {
+          await handlePushNofication(expo, {
+            to: user.notification_key,
+            sound: 'default',
+            body: 'There is a new schedule for you',
+            data: { schedule: newSchedule },
+          });
+        }
+
         return newSchedule;
       } catch (e) {
         // eslint-disable-next-line no-console
@@ -115,13 +129,16 @@ export default {
         const schedule = await Schedule.query().findById(id);
 
         // delete all personanl schedule with scheduleID
-        await schedule.deletePersonalSchedule();
 
         // delete schedule
         if (schedule) {
+          await schedule.deletePersonalSchedule();
           await Schedule.query().deleteById(id);
+          return schedule;
         }
-        return schedule;
+        return {
+          id: 0,
+        };
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);

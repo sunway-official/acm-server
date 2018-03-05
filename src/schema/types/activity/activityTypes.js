@@ -7,6 +7,9 @@ type Activity {
   # conferen have this activity
   conference: Conference!
 
+  # paper id
+  paper_id: ID!
+
   # paper
   paper: Paper!
 
@@ -43,11 +46,17 @@ extend type Query {
 }
 
 extend type Mutation {
-  # insert activity with conference_id
-  insertActivity(paper_id: ID!): Activity!
+  # insert activity with paper_id
+  insertActivityWithPaperID(paper_id: ID!): Activity!
 
-  # update activity with id
-  updateActivity(id: ID!, paper_id: ID! ): Activity!
+  # insert actitivy with title, description
+  insertActivity(title: String! , description: String): Activity!
+
+  # update activity with paper_id
+  updateActivityWithPaperID(id: ID!, paper_id: ID! ): Activity!
+
+  # update activity with title and description
+  updateActivity(id: ID!, title: String , description: String): Activity!
 
   # delete activity with id
   deleteActivity(id: ID!): Activity!

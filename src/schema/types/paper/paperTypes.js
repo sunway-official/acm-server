@@ -6,11 +6,14 @@ type Paper {
   # User ID
   user: User!
 
+  #speaker name
+  speaker_name: String!
+
   # conference
   conference: Conference!
 
   # paper topic
-  papersTopics: [PaperTopic!]!
+  papersTopic: [PaperTopic!]!
 
   # paper author
   papersAuthors: [PaperAuthor!]!
@@ -46,6 +49,9 @@ extend type Query {
   # Get Paper by conference ID
   getPapersByConferenceID( conference_id: ID): [Paper!]!
 
+  # Get Paper with author by conference ID
+  getPapersWithAuthorByConferenceID: [Paper!]!
+
   # Get Paper by user ID
   getPapersByUserID: [Paper!]!
 }
@@ -55,9 +61,9 @@ extend type Mutation {
   insertPaper( title: String!, abstract: String! , keywords: String, file: String): Paper!
 
   # Update Paper info by id
-  updatePaper( id:ID!, title: String, abstract: String ): Paper!
+  updatePaper( id:ID!, title: String, abstract: String, keywords: String, file: String ): Paper!
 
   # Delete Paper by id
-  deletePaper( id: ID! ): Paper!
+  deletePaper( id: ID! ): Paper
 }
 `;

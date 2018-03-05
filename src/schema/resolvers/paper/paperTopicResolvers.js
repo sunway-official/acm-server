@@ -42,6 +42,20 @@ export default {
         throw new ValidationError(e);
       }
     },
+    getAllPapersByTopicID: async (
+      root,
+      { topic_id },
+      { models: { PaperTopic }, ValidationError },
+    ) => {
+      try {
+        const papers = await PaperTopic.query().where('topic_id', topic_id);
+        return papers;
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error(e);
+        throw new ValidationError(e);
+      }
+    },
   },
 
   Mutation: {
@@ -66,12 +80,12 @@ export default {
       { models: { PaperTopic }, ValidationError },
     ) => {
       try {
-        const paper = await PaperTopic.query().where('paper_id', paper_id);
+        await PaperTopic.query()
+          .update({ topic_id })
+          .where('paper_id', paper_id);
 
-        const updateTopicOfPaper = await paper.$query().updateAndFetch({
-          topic_id,
-        });
-        return updateTopicOfPaper;
+        const paper = await PaperTopic.query().where('paper_id', paper_id);
+        return paper[0];
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);
@@ -80,14 +94,22 @@ export default {
     },
     deletePaperTopic: async (
       root,
-      { id },
+      { topic_id, paper_id },
       { models: { PaperTopic }, ValidationError },
     ) => {
       try {
-        const paperTopic = await PaperTopic.query().findById(id);
+        const paperTopic = await PaperTopic.query().where(builder =>
+          builder.where('topic_id', topic_id).where('paper_id', paper_id),
+        );
         if (!paperTopic) throw new ValidationError('Not found PaperTopic');
-        await PaperTopic.query().deleteById(id);
-        return paperTopic;
+        await PaperTopic.query()
+          .delete()
+          .where(builder =>
+            builder.where('topic_id', topic_id).where('paper_id', paper_id),
+          );
+        return {
+          topic_id: paperTopic[0].topic_id,
+        };
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);

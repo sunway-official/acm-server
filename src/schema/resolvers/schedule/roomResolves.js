@@ -20,13 +20,21 @@ export default {
         throw new ValidationError(e);
       }
     },
-    getRoomsByStatus: async (
+    getRoomsByStatusInConference: async (
       root,
       { status },
-      { models: { Room }, ValidationError },
+      { models: { Room }, ValidationError, user },
     ) => {
       try {
-        const rooms = await Room.query().where('status', status);
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
+        // eslint-disable-next-line
+        const conference_id = user.current_conference_id;
+        // eslint-disable-next-line
+        const rooms = await Room.query().where(builder => {
+          builder.where('conference_id', conference_id).where('status', status);
+        });
         return rooms;
       } catch (e) {
         // eslint-disable-next-line no-console
@@ -36,10 +44,16 @@ export default {
     },
     getRoomsByConferenceID: async (
       root,
-      { conference_id },
-      { models: { Room }, ValidationError },
+      data,
+      { models: { Room }, ValidationError, user },
     ) => {
       try {
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
+        // eslint-disable-next-line
+        const conference_id = user.current_conference_id;
+        // eslint-disable-next-line
         const rooms = await Room.query().where('conference_id', conference_id);
         return rooms;
       } catch (e) {
@@ -67,8 +81,28 @@ export default {
     },
   },
   Mutation: {
-    insertRoom: async (root, data, { models: { Room }, ValidationError }) => {
+    insertRoomInConference: async (
+      root,
+      data,
+      { models: { Room }, ValidationError, user },
+    ) => {
       try {
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
+        // eslint-disable-next-line
+        const conference_id = user.current_conference_id;
+        // eslint-disable-next-line
+        data.conference_id = conference_id;
+        if (data.name) {
+          const room = await Room.query().where(builder => {
+            builder
+              .where('name', data.name)
+              .where('conference_id', conference_id);
+          });
+          if (room.length > 0)
+            throw new ValidationError("Room's name is exists !");
+        }
         const newRoom = await Room.query().insert(data);
         return newRoom;
       } catch (e) {
@@ -77,9 +111,44 @@ export default {
         throw new ValidationError(e);
       }
     },
-    updateRoom: async (root, data, { models: { Room }, ValidationError }) => {
+    updateRoomInConference: async (
+      root,
+      { id, name, seats, status },
+      { models: { Room, Schedule }, ValidationError, user },
+    ) => {
       try {
-        const updateRoom = await Room.query().updateAndFetchById(data.id, data);
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
+        // eslint-disable-next-line
+        const conference_id = user.current_conference_id;
+        // check room's name exists
+        if (name) {
+          const room = await Room.query().where(builder => {
+            builder
+              .where('name', name)
+              .where('conference_id', conference_id)
+              .whereNot('id', id);
+          });
+          if (room.length > 0)
+            throw new ValidationError("Room's name is exists !");
+        }
+        // check room is chosen
+        if (status && status === 'off') {
+          const schedules = await Schedule.query().where('room_id', id);
+          if (schedules.length > 0) {
+            throw new ValidationError('This room is chosen !');
+          }
+        }
+        const updateRoom = await Room.query()
+          .updateAndFetchById(id, { name, seats, status })
+          .where(builder => {
+            builder.where('conference_id', conference_id);
+          });
+        if (!updateRoom) {
+          throw new ValidationError("Room's not found in conference");
+        }
+
         return updateRoom;
       } catch (e) {
         // eslint-disable-next-line no-console
@@ -87,9 +156,19 @@ export default {
         throw new ValidationError(e);
       }
     },
-    deleteRoom: async (root, { id }, { models: { Room }, ValidationError }) => {
+    deleteRoom: async (
+      root,
+      { id },
+      { models: { Room, Schedule }, ValidationError },
+    ) => {
       try {
         const room = await Room.query().findById(id);
+
+        const schedules = await Schedule.query().where('room_id', id);
+
+        if (schedules.length > 0) {
+          throw new ValidationError('This room is chosen !');
+        }
 
         // delete Schedule By RoomID
         await room.deleteSchedule();

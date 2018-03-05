@@ -15,12 +15,12 @@ export default class NewsComment extends Model {
   };
 
   async $beforeInsert() {
-    this.created_at = new Date().toISOString();
-    this.updated_at = new Date().toISOString();
+    this.created_at = new Date();
+    this.updated_at = new Date();
   }
 
   async $beforeUpdate() {
-    this.updated_at = new Date().toISOString();
+    this.updated_at = new Date();
   }
 
   async $beforeValidate(opt) {

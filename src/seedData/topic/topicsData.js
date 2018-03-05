@@ -1,61 +1,74 @@
 const colors = require('./colorsData');
 const faker = require('faker');
 
-// const topics = [
-//   {
-//     conference_id: '1',
-//     name: '5G: Mang tuy bien di dong doi voi viec khai thac bang thong rong',
-//     description:
-//       'Wireless Vehicular Networks in Emergencies: A Single Frequency Network Approach',
-//   },
-//   {
-//     conference_id: '1',
-//     name: 'Truyen dan tin hieu hop tac MIMO phan bo cho mang 5G',
-//     description:
-//       'Beamformer and Time Split Design for Wireless Powered Multi-antenna Cooperative Systems',
-//   },
-//   {
-//     conference_id: '2',
-//     name:
-//       'Cong nghe quang tu tien tien cho hinh anh va truyen thong khong day trong tuong lai',
-//     description:
-//       'Analysis of Millimeter Wave Cellular Networks with Simultaneous Wireless Information and Power Transfer',
-//   },
-//   {
-//     conference_id: '2',
-//     name:
-//       'He thong dien tu danh gia cac nawng luc cua nguoi hoc dap ung cac yeu cau kiem dinh',
-//     description:
-//       'Understanding the Impact of Planarized Proximity Graphs on Toxic Gas Boundary Area Detection',
-//   },
-//   {
-//     conference_id: '3',
-//     name: 'Passage to ASEAN: P2A Game',
-//     description:
-//       'The ASEAN Game is a fun way for anyone to start to experience ASEAN',
-//   },
-//   {
-//     conference_id: '3',
-//     name: 'Passage to ASEAN: P2A Journey',
-//     description: 'To truly experience and understand other countries',
-//   },
-//   {
-//     conference_id: '1',
-//     name: 'Passage to ASEAN:: certificate',
-//     description:
-//       'For those with the dedication to complete all three P2A programs, a P2A Certificate for ASEAN Readiness will be issued.',
-//   },
-// ];
-const topics = [];
-for (let i = 1; i <= 50; i += 1) {
-  const colorId = faker.random.number({ min: 1, max: 27 });
-  topics.push({
-    conference_id: faker.random.number({ min: 1, max: 6 }),
-    name: faker.lorem.sentence(),
-    description: faker.lorem.sentences(5),
-    color_id: colorId,
-    color_code: colors[colorId - 1].code,
-  });
+const getTopics = i => [
+  {
+    conference_id: i,
+    name: 'AI',
+    description: faker.lorem.sentences(2),
+    color_id: 1,
+    color_code: colors[1 - 1].code,
+  },
+  {
+    conference_id: i,
+    name: 'Algorithm',
+    description: faker.lorem.sentences(2),
+    color_id: 2,
+    color_code: colors[2 - 1].code,
+  },
+  {
+    conference_id: i,
+    name: 'Blockchain',
+    description: faker.lorem.sentences(2),
+    color_id: 3,
+    color_code: colors[3 - 1].code,
+  },
+  {
+    conference_id: i,
+    name: 'Cloud',
+    description: faker.lorem.sentences(2),
+    color_id: 4,
+    color_code: colors[4 - 1].code,
+  },
+  {
+    conference_id: i,
+    name: 'Internet',
+    description: faker.lorem.sentences(2),
+    color_id: 5,
+    color_code: colors[5 - 1].code,
+  },
+  {
+    conference_id: i,
+    name: 'Future',
+    description: faker.lorem.sentences(2),
+    color_id: 6,
+    color_code: colors[6 - 1].code,
+  },
+  {
+    conference_id: i,
+    name: 'Markets',
+    description: faker.lorem.sentences(2),
+    color_id: 7,
+    color_code: colors[7 - 1].code,
+  },
+  {
+    conference_id: i,
+    name: 'Marketing',
+    description: faker.lorem.sentences(2),
+    color_id: 8,
+    color_code: colors[8 - 1].code,
+  },
+  {
+    conference_id: i,
+    name: 'Online video',
+    description: faker.lorem.sentences(2),
+    color_id: 9,
+    color_code: colors[9 - 1].code,
+  },
+];
+let topics = [];
+for (let i = 1; i <= 6; i += 1) {
+  topics = topics.concat(getTopics(i));
 }
 
 module.exports = topics;

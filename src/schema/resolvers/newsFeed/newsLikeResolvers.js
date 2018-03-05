@@ -13,10 +13,30 @@ export default {
     getAllNewsLikes: async (
       root,
       data,
-      { models: { NewsLike }, ValidationError },
+      { models: { NewsLike }, ValidationError, user },
     ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
       try {
         const newsLike = await NewsLike.query();
+        return newsLike;
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error(e);
+        throw new ValidationError('bad-request');
+      }
+    },
+    getNewsLikesByNewsID: async (
+      root,
+      { news_id },
+      { models: { NewsLike }, ValidationError, user },
+    ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
+      try {
+        const newsLike = await NewsLike.query().where('news_id', news_id);
         return newsLike;
       } catch (e) {
         // eslint-disable-next-line no-console
@@ -27,8 +47,11 @@ export default {
     getNewsLikeByID: async (
       root,
       { id },
-      { models: { NewsLike }, ValidationError },
+      { models: { NewsLike }, ValidationError, user },
     ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
       try {
         const newsLike = await NewsLike.query().findById(id);
         if (!newsLike) {
@@ -38,9 +61,6 @@ export default {
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);
-        if (e.message === 'newsLike-not-found') {
-          throw new ValidationError('newsLike-not-found');
-        }
         throw new ValidationError('bad-request');
       }
     },
@@ -49,10 +69,16 @@ export default {
     insertNewsLike: async (
       root,
       data,
-      { models: { NewsLike }, ValidationError },
+      { models: { NewsLike }, ValidationError, user },
     ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
       try {
-        const newsLikeInsert = await NewsLike.query().insert(data);
+        const newsLikeInsert = await NewsLike.query().insert({
+          ...data,
+          user_id: user.id,
+        });
         return newsLikeInsert;
       } catch (e) {
         // eslint-disable-next-line no-console
@@ -63,8 +89,11 @@ export default {
     updateNewsLike: async (
       root,
       data,
-      { models: { NewsLike }, ValidationError },
+      { models: { NewsLike }, ValidationError, user },
     ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
       try {
         const updateNewsLike = await NewsLike.query().updateAndFetchById(
           data.id,
@@ -79,12 +108,21 @@ export default {
     },
     deleteNewsLike: async (
       root,
-      { id },
-      { models: { NewsLike }, ValidationError },
+      { news_id },
+      { models: { NewsLike }, ValidationError, user },
     ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
       try {
-        const deleteNewsLike = await NewsLike.query().findById(id);
-        await NewsLike.query().deleteById(id);
+        const deleteNewsLike = await NewsLike.query()
+          .where('news_id', news_id)
+          .where('user_id', user.id)
+          .first();
+        await NewsLike.query()
+          .where('news_id', news_id)
+          .andWhere('user_id', user.id)
+          .delete();
         return deleteNewsLike;
       } catch (e) {
         // eslint-disable-next-line no-console

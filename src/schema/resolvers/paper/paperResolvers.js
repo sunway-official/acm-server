@@ -8,6 +8,10 @@ export default {
       const conference = await Conference.query().findById(conference_id);
       return conference;
     },
+    papersTopic: async ({ id }, data, { models: { PaperTopic } }) => {
+      const paperTopic = await PaperTopic.query().where('paper_id', id);
+      return paperTopic;
+    },
   },
   Query: {
     getAllPapers: async (
@@ -45,6 +49,31 @@ export default {
         const papers = await Paper.query().where(
           'conference_id',
           conference_id,
+        );
+
+        return papers;
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error(e);
+        throw new ValidationError(e);
+      }
+    },
+    getPapersWithAuthorByConferenceID: async (
+      root,
+      data,
+      { models: { Paper }, ValidationError, user },
+    ) => {
+      try {
+        // eslint-disable-next-line
+        if (!user && !conference_id) {
+          throw new ValidationError('unauthorized');
+        }
+        // eslint-disable-next-line
+        const conference_id = user.current_conference_id;
+        const papers = await Paper.query().where(builder =>
+          builder
+            .where('conference_id', conference_id)
+            .where('user_id', user.id),
         );
         return papers;
       } catch (e) {
@@ -126,11 +155,21 @@ export default {
         // eslint-disable-next-line
         const conference_id = user.current_conference_id;
         // eslint-disable-next-line
-        data.conference_id = conference_id;
-        const updatePaper = await Paper.query().updateAndFetchById(
-          data.id,
-          data,
-        );
+        if (data.title) {
+          const paper = await Paper.query().where(builder =>
+            builder.where('title', data.title).whereNot('id', data.id),
+          );
+          if (paper.length !== 0)
+            throw new ValidationError("Paper's title is exists !");
+        }
+        const updatePaper = await Paper.query()
+          .updateAndFetchById(data.id, data)
+          .where(builder => {
+            builder.where('conference_id', conference_id);
+          });
+        if (!updatePaper) {
+          throw new ValidationError("Paper's not found in conference");
+        }
         return updatePaper;
       } catch (e) {
         // eslint-disable-next-line no-console
@@ -141,13 +180,22 @@ export default {
     deletePaper: async (
       root,
       { id },
-      { models: { Paper }, ValidationError },
+      { models: { Paper, Activity }, ValidationError, user },
     ) => {
       try {
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
         const paper = await Paper.query().findById(id);
 
+        const activities = await Activity.query().where('paper_id', id);
+
+        if (activities.length > 0) {
+          throw new ValidationError('This paper is chosen !');
+        }
+
         // delete Schedule By PaperID
-        // await paper.deleteSchedule();
+        await paper.deleteAllRelationship();
 
         // delete paper
         if (paper) {

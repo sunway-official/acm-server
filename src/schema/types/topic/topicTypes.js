@@ -34,12 +34,12 @@ extend type Query {
 
 extend type Mutation {
   # Insert new Topic
-  insertTopic( name: String!, description: String!, color_id: ID!): Topic!
+  insertTopicInConference( name: String!, description: String!, color_id: ID!): Topic!
 
   # Update Topic info by id
-  updateTopic(id:ID! name: String, description: String, color_id: ID ): Topic!
+  updateTopicInConference(id:ID!, name: String, description: String, color_id: ID): Topic!
 
   # Delete Topic by id
-  deleteTopic(id: ID!): Topic!
+  deleteTopic(id: ID!): [Topic!]!
 }
 `;

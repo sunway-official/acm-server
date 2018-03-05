@@ -13,10 +13,13 @@ export default {
     getAllNewsComments: async (
       root,
       data,
-      { models: { NewsComment }, ValidationError },
+      { models: { NewsComment }, ValidationError, user },
     ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
       try {
-        const newsComment = await NewsComment.query();
+        const newsComment = await NewsComment.query().where('user_id', user.id);
         return newsComment;
       } catch (e) {
         // eslint-disable-next-line no-console
@@ -27,10 +30,15 @@ export default {
     getNewsCommentByID: async (
       root,
       { id },
-      { models: { NewsComment }, ValidationError },
+      { models: { NewsComment }, ValidationError, user },
     ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
       try {
-        const newsComment = await NewsComment.query().findById(id);
+        const newsComment = await NewsComment.query()
+          .where('user_id', user.id)
+          .findById(id);
         if (!newsComment) {
           throw new ValidationError('newsComment-not-found');
         }
@@ -38,17 +46,17 @@ export default {
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);
-        if (e.message === 'newsComment-not-found') {
-          throw new ValidationError('newsComment-not-found');
-        }
         throw new ValidationError('bad-request');
       }
     },
     getNewsCommentByNewsID: async (
       root,
       { news_id },
-      { models: { NewsComment }, ValidationError },
+      { models: { NewsComment }, ValidationError, user },
     ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
       try {
         const newsComment = await NewsComment.query().where('news_id', news_id);
         if (!newsComment) {
@@ -58,29 +66,6 @@ export default {
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);
-        if (e.message === 'newsComment-not-found') {
-          throw new ValidationError('newsComment-not-found');
-        }
-        throw new ValidationError(e);
-      }
-    },
-    getNewsCommentByUserID: async (
-      root,
-      { user_id },
-      { models: { NewsComment }, ValidationError },
-    ) => {
-      try {
-        const newsComment = await NewsComment.query().where('user_id', user_id);
-        if (!newsComment) {
-          throw new ValidationError('newsComment-not-found');
-        }
-        return newsComment;
-      } catch (e) {
-        // eslint-disable-next-line no-console
-        console.error(e);
-        if (e.message === 'newsComment-not-found') {
-          throw new ValidationError('newsComment-not-found');
-        }
         throw new ValidationError('bad-request');
       }
     },
@@ -89,10 +74,16 @@ export default {
     insertNewsComment: async (
       root,
       data,
-      { models: { NewsComment }, ValidationError },
+      { models: { NewsComment }, ValidationError, user },
     ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
       try {
-        const newsCommentInsert = await NewsComment.query().insert(data);
+        const newsCommentInsert = await NewsComment.query().insert({
+          ...data,
+          user_id: user.id,
+        });
         return newsCommentInsert;
       } catch (e) {
         // eslint-disable-next-line no-console
@@ -103,13 +94,15 @@ export default {
     updateNewsComment: async (
       root,
       data,
-      { models: { NewsComment }, ValidationError },
+      { models: { NewsComment }, ValidationError, user },
     ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
       try {
-        const updateNewsComment = await NewsComment.query().updateAndFetchById(
-          data.id,
-          data,
-        );
+        const updateNewsComment = await NewsComment.query()
+          .where('user_id', user.id)
+          .updateAndFetchById(data.id, data);
         return updateNewsComment;
       } catch (e) {
         // eslint-disable-next-line no-console
@@ -120,10 +113,15 @@ export default {
     deleteNewsComment: async (
       root,
       { id },
-      { models: { NewsComment }, ValidationError },
+      { models: { NewsComment }, ValidationError, user },
     ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
       try {
-        const deleteNewsComment = await NewsComment.query().findById(id);
+        const deleteNewsComment = await NewsComment.query()
+          .where('user_id', user.id)
+          .findById(id);
         await NewsComment.query().deleteById(id);
         return deleteNewsComment;
       } catch (e) {

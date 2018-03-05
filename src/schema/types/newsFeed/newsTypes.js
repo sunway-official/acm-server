@@ -26,6 +26,14 @@ type News {
 
   # news comments
   newsComments: [NewsComment!]!
+
+  # comments count
+  commentsCount: Int!
+
+  #likes count
+  likesCount: Int!
+
+  isLiked: Boolean!
 }
 
 extend type Query {
@@ -34,31 +42,25 @@ extend type Query {
     # Page Number
     pageNumber: Int,
     # Numers of news per page
-    pageSize: Int): [News!]!
+    pageSize: Int
+  ): [News!]!
 
   # Get News by ID
   getNewsByID(id: ID!): News!
 
   # Get News by user ID
   getNewsByUserID(user_id: ID!):[ News!]!
-
-  # Get News by conference ID
-  getNewsByConferenceID(conference_id: ID!): [News!]!
 }
 
 extend type Mutation {
   # Insert new News
   insertNews(
-    user_id: ID!,
-    conference_id:ID!,
     content: String!
   ): News!
 
   # Update News info by id
   updateNews(
     id: ID!,
-    user_id: ID,
-    conference_id:ID,
     content: String
   ): News!
 

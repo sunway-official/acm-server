@@ -51,7 +51,7 @@ const newsLikes = [
   },
 ];
 
-for (let i = 0; i < 100; i += 1) {
+for (let i = 0; i < 50; i += 1) {
   newsLikes.push({
     user_id: faker.random.arrayElement([1, 2, 3, 4]),
     news_id: faker.random.number({

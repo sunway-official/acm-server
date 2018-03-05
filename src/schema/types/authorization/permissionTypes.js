@@ -46,12 +46,15 @@ extend type Query {
   getAllUsersByRoleID(role_id: ID!): [Permission!]!
 
   # Get all role of user by id
-  getAllRolesByUserID(user_id: ID!, conference_id: ID!): [Permission!]!
+  getAllRolesByUserID(user_id: ID!): [Permission!]!
+
+  # Get all role of login in admin page
+  getAllRolesOfUser: [Permission!]!
 
   # Get all permission by user_id
   getAllPermissionsByUserID(user_id: ID!, conference_id: ID!): [Permission!]!
 
-  # Get all roles active with user id 
+  # Get all roles active with user id
   getAllRolesActiveByUserID(user_id: ID!, conference_id: ID!): [Permission!]!
 
 }

@@ -59,7 +59,7 @@ const newsData = [
   },
 ];
 
-for (let i = 1; i < 111; i += 1) {
+for (let i = 1; i < 50; i += 1) {
   newsData.push({
     user_id: faker.random.arrayElement([1, 2, 3]),
     conference_id: 1,

@@ -4,13 +4,13 @@ export default {
       const conference = await Conference.query().findById(conference_id);
       return conference;
     },
-    paper: async ({ paper_id }, data, { models: { Paper } }) => {
-      const paper = await Paper.query().findById(paper_id);
-      return paper;
-    },
     schedules: async ({ id }, data, { models: { Schedule } }) => {
       const schedules = await Schedule.query().where('activity_id', id);
       return schedules;
+    },
+    paper: async ({ paper_id }, data, { models: { Paper } }) => {
+      const paper = await Paper.query().findById(paper_id);
+      return paper;
     },
     questions: async ({ id }, data, { models: { Question } }) => {
       const questions = await Question.query().where('activity_id', id);
@@ -90,6 +90,32 @@ export default {
   },
 
   Mutation: {
+    insertActivityWithPaperID: async (
+      root,
+      { paper_id },
+      { models: { Activity, Paper }, ValidationError, user },
+    ) => {
+      try {
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
+
+        const paper = await Paper.query().findById(paper_id);
+        const data = {
+          paper_id,
+          title: paper.title,
+          description: paper.abstract,
+          conference_id: user.current_conference_id,
+        };
+        const newActivity = await Activity.query().insert(data);
+        return newActivity;
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error(e);
+        throw new ValidationError(e);
+      }
+    },
+    // insert with title and description
     insertActivity: async (
       root,
       data,
@@ -100,6 +126,12 @@ export default {
           throw new ValidationError('unauthorized');
         }
         // eslint-disable-next-line
+        data.conference_id = user.current_conference_id;
+
+        if (!data.description) {
+          // eslint-disable-next-line
+          data.description = '';
+        }
         const newActivity = await Activity.query().insert(data);
         return newActivity;
       } catch (e) {
@@ -112,11 +144,40 @@ export default {
     updateActivity: async (
       root,
       data,
-      { models: { Activity }, ValidationError },
+      { models: { Activity }, ValidationError, user },
     ) => {
       try {
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
         const updateActivity = await Activity.query().updateAndFetchById(
           data.id,
+          data,
+        );
+        return updateActivity;
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error(e);
+        throw new ValidationError(e);
+      }
+    },
+    updateActivityWithPaperID: async (
+      root,
+      { id, paper_id },
+      { models: { Activity, Paper }, ValidationError, user },
+    ) => {
+      try {
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
+        const paper = await Paper.query().findById(paper_id);
+        const data = {
+          paper_id,
+          title: paper.title,
+          description: paper.abstract,
+        };
+        const updateActivity = await Activity.query().updateAndFetchById(
+          id,
           data,
         );
         return updateActivity;
