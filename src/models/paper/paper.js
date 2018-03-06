@@ -1,29 +1,26 @@
 import { Model } from 'objection';
 import PaperTopic from '../paper/paperTopic';
-import User from '../authorization/user';
 
 export default class Paper extends Model {
   static tableName = 'papers';
   static jsonSchema = {
     type: 'object',
-    required: ['user_id', 'title'],
+    required: ['title', 'conference_id', 'paper_status_id'],
     properties: {
       id: { type: 'integer' },
-      user_id: { type: 'integer' },
       conference_id: { type: 'integer' },
-      speaker_name: { type: 'string' },
+      paper_status_id: { type: 'integer' },
       title: { type: 'string' },
       abstract: { type: 'text' },
       keywords: { type: 'string' },
       file: { type: 'text' },
+      status: { type: 'string' },
     },
   };
 
   async $beforeInsert() {
     this.created_at = new Date();
     this.updated_at = new Date();
-    const user = await User.query().where('id', this.user_id);
-    this.speaker_name = `${user[0].firstname} ${user[0].lastname}`;
   }
 
   async $beforeUpdate() {
@@ -32,7 +29,6 @@ export default class Paper extends Model {
 
   async $beforeValidate(opt) {
     this.id = parseInt(opt.old.id, 10);
-    this.user_id = parseInt(opt.old.user_id, 10);
     this.conference_id = parseInt(opt.old.conference_id, 10);
   }
 

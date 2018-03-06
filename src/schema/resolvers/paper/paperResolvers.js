@@ -1,9 +1,5 @@
 export default {
   Paper: {
-    user: async ({ user_id }, data, { models: { User } }) => {
-      const user = await User.query().findById(user_id);
-      return user;
-    },
     conference: async ({ conference_id }, data, { models: { Conference } }) => {
       const conference = await Conference.query().findById(conference_id);
       return conference;

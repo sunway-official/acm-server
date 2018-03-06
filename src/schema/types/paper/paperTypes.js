@@ -3,12 +3,6 @@ type Paper {
   # The ID of Paper
   id: ID!
 
-  # User ID
-  user: User!
-
-  #speaker name
-  speaker_name: String!
-
   # conference
   conference: Conference!
 
