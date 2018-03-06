@@ -1,7 +1,7 @@
 import { Model } from 'objection';
 
 export default class Paper extends Model {
-  static tableName = 'papers_status';
+  static tableName = 'paper_status';
   static jsonSchema = {
     type: 'object',
     required: ['name'],

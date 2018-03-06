@@ -9,9 +9,7 @@ export default {
         if (!user) {
           throw new ValidationError('unauthorized');
         }
-        console.log(1);
         const status = await PaperStatus.query();
-        console.log(status);
         return status;
       } catch (e) {
         // eslint-disable-next-line no-console
