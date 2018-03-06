@@ -106,13 +106,24 @@ export default {
     updateSchedule: async (
       root,
       data,
-      { models: { Schedule }, ValidationError },
+      { models: { Schedule }, ValidationError, expo, user },
     ) => {
       try {
         const updateSchedule = await Schedule.query().updateAndFetchById(
           data.id,
           data,
         );
+
+        // Test Expo Push notification!
+        if (Expo.isExpoPushToken(user.notification_key)) {
+          await handlePushNofication(expo, {
+            to: user.notification_key,
+            sound: 'default',
+            body: 'Your schedule has been updated!',
+            data: { schedule: updateSchedule },
+          });
+        }
+
         return updateSchedule;
       } catch (e) {
         // eslint-disable-next-line no-console
