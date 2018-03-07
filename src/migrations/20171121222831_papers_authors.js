@@ -7,11 +7,14 @@ exports.up = function(knex, Promise) {
         .unsigned()
         .primary();
       table.integer('paper_id').unsigned();
-      table.integer('author_id').unsigned();
-      table.integer('corresponding').defaultTo(1);
+      table.integer('user_id').unsigned();
+      table.integer('corresponding').defaultTo(0);
       table.string('author_name');
       table.string('author_email');
       table.string('author_title');
+      table.string('author_organizer');
+      table.string('author_country');
+      table.string('paper_status');
     }),
   ]);
 };

@@ -1,4 +1,10 @@
 export default {
+  PaperStatus: {
+    papers: async ({ id }, data, { models: { Paper } }) => {
+      const papers = await Paper.query().where('paper_status_id', id);
+      return papers;
+    },
+  },
   Query: {
     getAllPaperStatus: async (
       root,

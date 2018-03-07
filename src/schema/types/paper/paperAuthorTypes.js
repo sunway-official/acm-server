@@ -6,9 +6,6 @@ type PaperAuthor {
   # paper
   paper: Paper!
 
-  # author
-  author: Author!
-
   # author name
   author_name: String!
 
@@ -17,6 +14,15 @@ type PaperAuthor {
 
   # author title
   author_title: String!
+
+  # author organizer
+  author_organizer: String!
+
+  # author country
+  author_country: String!
+
+  # paper status
+  paper_status: String!
 }
 
 
@@ -29,10 +35,10 @@ extend type Query {
 
 extend type Mutation {
   # insert Paper author
-  insertPaperAuthor(paper_id: ID!, author_id: ID!): PaperAuthor!
+  insertPaperAuthor(paper_id: ID!, user_id: ID): PaperAuthor!
 
   # update author of paper
-  updateAuthorOfPaper(paper_id: ID!, author_id: ID!): PaperAuthor!
+  updateAuthorOfPaper(paper_id: ID!, user_id: ID!): PaperAuthor!
 
   # delete paper author
   deletePaperAuthor(id: ID!): PaperAuthor!

@@ -1,5 +1,6 @@
 import { Model } from 'objection';
 import PaperTopic from '../paper/paperTopic';
+import PaperStatus from '../paper/paperStatus';
 
 export default class Paper extends Model {
   static tableName = 'papers';
@@ -21,10 +22,18 @@ export default class Paper extends Model {
   async $beforeInsert() {
     this.created_at = new Date();
     this.updated_at = new Date();
+    const paperStatus = await PaperStatus.query().findById(
+      this.paper_status_id,
+    );
+    this.status = paperStatus.name;
   }
 
   async $beforeUpdate() {
     this.updated_at = new Date();
+    const paperStatus = await PaperStatus.query().findById(
+      this.paper_status_id,
+    );
+    this.status = paperStatus.name;
   }
 
   async $beforeValidate(opt) {

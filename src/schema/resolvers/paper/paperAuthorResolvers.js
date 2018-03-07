@@ -4,10 +4,6 @@ export default {
       const paper = await Paper.query().findById(paper_id);
       return paper;
     },
-    author: async ({ author_id }, data, { models: { Author } }) => {
-      const author = await Author.query().findById(author_id);
-      return author;
-    },
   },
 
   Query: {
@@ -62,14 +58,14 @@ export default {
 
     updateAuthorOfPaper: async (
       root,
-      { paper_id, author_id },
+      { paper_id, user_id },
       { models: { PaperAuthor }, ValidationError },
     ) => {
       try {
         const paper = await PaperAuthor.query().where('paper_id', paper_id);
 
         const updateAuthorOfPaper = await paper.$query().updateAndFetch({
-          author_id,
+          user_id,
         });
         return updateAuthorOfPaper;
       } catch (e) {
