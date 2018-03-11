@@ -12,6 +12,9 @@ type User {
   # User email address
   email: String!
 
+  # User title
+  title: String!
+
   # User gender
   gender: Gender!
 
@@ -148,6 +151,8 @@ extend type Mutation {
     firstname: String,
     # User last name
     lastname: String,
+    # User title
+    title: String,
     # User birthdate
     dob: Date,
     # User gender

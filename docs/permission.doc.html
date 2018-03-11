@@ -35,6 +35,11 @@
                 Mutation
             </a>
         </li>
+        <li  title="Subscription">
+            <a href="subscription.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Subscription
+            </a>
+        </li>
     </ul>
 </div>
 <div class="slds-grid slds-grid--vertical slds-navigation-list--vertical">
@@ -110,11 +115,6 @@
                 ActivityFeedback
             </a>
         </li>
-        <li  title="ActivityTopic">
-            <a href="activitytopic.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
-                ActivityTopic
-            </a>
-        </li>
         <li  title="Address">
             <a href="address.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
                 Address
@@ -123,6 +123,16 @@
         <li  title="Answer">
             <a href="answer.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
                 Answer
+            </a>
+        </li>
+        <li  title="Author">
+            <a href="author.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Author
+            </a>
+        </li>
+        <li  title="Color">
+            <a href="color.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Color
             </a>
         </li>
         <li  title="Conference">
@@ -150,6 +160,11 @@
                 Feature
             </a>
         </li>
+        <li  title="LandingPage">
+            <a href="landingpage.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                LandingPage
+            </a>
+        </li>
         <li  title="LoginResponse">
             <a href="loginresponse.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
                 LoginResponse
@@ -175,9 +190,29 @@
                 NewsPhoto
             </a>
         </li>
+        <li  title="Notification">
+            <a href="notification.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Notification
+            </a>
+        </li>
         <li  title="OrganizerDetail">
             <a href="organizerdetail.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
                 OrganizerDetail
+            </a>
+        </li>
+        <li  title="Paper">
+            <a href="paper.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Paper
+            </a>
+        </li>
+        <li  title="PaperAuthor">
+            <a href="paperauthor.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                PaperAuthor
+            </a>
+        </li>
+        <li  title="PaperTopic">
+            <a href="papertopic.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                PaperTopic
             </a>
         </li>
         <li class="slds-is-active" title="Permission">
@@ -303,7 +338,7 @@
             </a>
             GraphQL Schema definition
         </h2>
-        <code class="highlight"><ul class="code" style="padding-left:42px"><li><span class="keyword operator ts">type</span> <span class="identifier">Permission</span> {</li><li></li><li><span class="tab"><span class="comment line">#   ID of permission</span></span></li><li><span class="tab"><span class="meta">id</span>: <a class="support type" href="id.doc.html">ID</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   role of permission</span></span></li><li><span class="tab"><span class="meta">role</span>: <a class="support type" href="role.doc.html">Role</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   user of permission</span></span></li><li><span class="tab"><span class="meta">user</span>: <a class="support type" href="user.doc.html">User</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   feature of user in perssion</span></span></li><li><span class="tab"><span class="meta">feature</span>: <a class="support type" href="feature.doc.html">Feature</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   status 'on' or 'off'</span></span></li><li><span class="tab"><span class="meta">status</span>: <a class="support type" href="status.doc.html">Status</a>! </span></li><li>}</li></ul></code>
+        <code class="highlight"><ul class="code" style="padding-left:42px"><li><span class="keyword operator ts">type</span> <span class="identifier">Permission</span> {</li><li></li><li><span class="tab"><span class="comment line">#   ID of permission</span></span></li><li><span class="tab"><span class="meta">id</span>: <a class="support type" href="id.doc.html">ID</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   role of permission</span></span></li><li><span class="tab"><span class="meta">role</span>: <a class="support type" href="role.doc.html">Role</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   role name</span></span></li><li><span class="tab"><span class="meta">role_name</span>: <a class="support type" href="string.doc.html">String</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   user of permission</span></span></li><li><span class="tab"><span class="meta">user</span>: <a class="support type" href="user.doc.html">User</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   conference</span></span></li><li><span class="tab"><span class="meta">conference</span>: <a class="support type" href="conference.doc.html">Conference</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   full name</span></span></li><li><span class="tab"><span class="meta">full_name</span>: <a class="support type" href="string.doc.html">String</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   feature of user in perssion</span></span></li><li><span class="tab"><span class="meta">feature</span>: <a class="support type" href="feature.doc.html">Feature</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   status 'on' or 'off'</span></span></li><li><span class="tab"><span class="meta">status</span>: <a class="support type" href="status.doc.html">Status</a>! </span></li><li>}</li></ul></code>
     </div>
 </section>
 <section>

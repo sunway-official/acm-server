@@ -1,9 +1,5 @@
 export default {
   Paper: {
-    user: async ({ user_id }, data, { models: { User } }) => {
-      const user = await User.query().findById(user_id);
-      return user;
-    },
     conference: async ({ conference_id }, data, { models: { Conference } }) => {
       const conference = await Conference.query().findById(conference_id);
       return conference;
@@ -65,16 +61,18 @@ export default {
     ) => {
       try {
         // eslint-disable-next-line
-        if (!user && !conference_id) {
+        if (!user) {
           throw new ValidationError('unauthorized');
         }
         // eslint-disable-next-line
         const conference_id = user.current_conference_id;
-        const papers = await Paper.query().where(builder =>
-          builder
-            .where('conference_id', conference_id)
-            .where('user_id', user.id),
-        );
+        const papers = await Paper.query()
+          .joinRelation('authors')
+          .where(builder =>
+            builder
+              .where('papers.conference_id', conference_id)
+              .where('authors.user_id', user.id),
+          );
         return papers;
       } catch (e) {
         // eslint-disable-next-line no-console
@@ -129,12 +127,10 @@ export default {
         }
         // eslint-disable-next-line
         const conference_id = user.current_conference_id;
-        // eslint-disable-next-line
-        const user_id = user.id;
+
         // eslint-disable-next-line
         data.conference_id = conference_id;
         // eslint-disable-next-line
-        data.user_id = user_id;
         const newPaper = await Paper.query().insert(data);
         return newPaper;
       } catch (e) {

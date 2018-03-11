@@ -3,12 +3,6 @@ type Paper {
   # The ID of Paper
   id: ID!
 
-  # User ID
-  user: User!
-
-  #speaker name
-  speaker_name: String!
-
   # conference
   conference: Conference!
 
@@ -17,6 +11,8 @@ type Paper {
 
   # paper author
   papersAuthors: [PaperAuthor!]!
+
+  status: String!
 
   # title
   title: String!
@@ -58,10 +54,10 @@ extend type Query {
 
 extend type Mutation {
   # Insert new Paper
-  insertPaper( title: String!, abstract: String! , keywords: String, file: String): Paper!
+  insertPaper(paper_status_id: ID!, title: String!, abstract: String! , keywords: String, file: String): Paper!
 
   # Update Paper info by id
-  updatePaper( id:ID!, title: String, abstract: String, keywords: String, file: String ): Paper!
+  updatePaper( id:ID!, paper_status_id: ID, title: String, abstract: String, keywords: String, file: String ): Paper!
 
   # Delete Paper by id
   deletePaper( id: ID! ): Paper
