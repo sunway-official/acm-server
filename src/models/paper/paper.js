@@ -1,4 +1,5 @@
 import { Model } from 'objection';
+import PaperAuthor from './paperAuthor';
 import PaperTopic from '../paper/paperTopic';
 import PaperStatus from '../paper/paperStatus';
 
@@ -16,6 +17,16 @@ export default class Paper extends Model {
       keywords: { type: 'string' },
       file: { type: 'text' },
       status: { type: 'string' },
+    },
+  };
+  static relationMappings = {
+    authors: {
+      relation: Model.HasManyRelation,
+      modelClass: PaperAuthor,
+      join: {
+        from: 'papers.id',
+        to: 'papers_authors.paper_id',
+      },
     },
   };
 

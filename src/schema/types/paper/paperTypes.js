@@ -55,7 +55,7 @@ extend type Query {
 extend type Mutation {
   # Insert new Paper
   insertPaper(paper_status_id: ID!, title: String!, abstract: String! , keywords: String, file: String): Paper!
-  
+
   # Update Paper info by id
   updatePaper( id:ID!, paper_status_id: ID, title: String, abstract: String, keywords: String, file: String ): Paper!
 

@@ -11,13 +11,4 @@ export default class ReviewQuestion extends Model {
       content: { type: 'text' },
     },
   };
-
-  async $beforeInsert() {
-    this.created_at = new Date();
-    this.updated_at = new Date();
-  }
-
-  async $beforeUpdate() {
-    this.updated_at = new Date();
-  }
 }

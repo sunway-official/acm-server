@@ -6,6 +6,8 @@ type PaperAuthor {
   # paper
   paper: Paper!
 
+  conference_id: ID!
+
   # author name
   author_name: String!
 

@@ -29,6 +29,8 @@ import topic from './topic';
 
 import paper from './paper';
 
+import review from './review';
+
 export default [
   ...authorization,
   ...activity,
@@ -38,6 +40,7 @@ export default [
   ...schedule,
   ...topic,
   ...paper,
+  ...review,
   globalTypes,
   staff,
   participant,
