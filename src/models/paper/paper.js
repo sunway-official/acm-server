@@ -2,6 +2,7 @@ import { Model } from 'objection';
 import PaperAuthor from './paperAuthor';
 import PaperTopic from '../paper/paperTopic';
 import PaperStatus from '../paper/paperStatus';
+import PaperReviewQuestionPoint from '../review/paperReviewQuestionPoint';
 
 export default class Paper extends Model {
   static tableName = 'papers';
@@ -26,6 +27,14 @@ export default class Paper extends Model {
       join: {
         from: 'papers.id',
         to: 'papers_authors.paper_id',
+      },
+    },
+    reviewers: {
+      relation: Model.HasManyRelation,
+      modelClass: PaperReviewQuestionPoint,
+      join: {
+        from: 'papers.id',
+        to: 'paper_review_questions_points.paper_id',
       },
     },
   };

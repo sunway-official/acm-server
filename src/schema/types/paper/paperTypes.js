@@ -48,8 +48,14 @@ extend type Query {
   # Get Paper with author by conference ID
   getPapersWithAuthorByConferenceID: [Paper!]!
 
+  # Get Paper of reviewer by conference ID
+  getPapersWithReviewerByConferenceID: [Paper!]!
+
   # Get Paper by user ID
   getPapersByUserID: [Paper!]!
+
+  # Get Paper by status
+  getPapersByStatusId(paper_status_id: ID!): [Paper!]!
 }
 
 extend type Mutation {

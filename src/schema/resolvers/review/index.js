@@ -1,3 +1,4 @@
 import reviewQuestionResolvers from './reviewQuestionResolvers';
+import paperReviewQuestionPointResolvers from './paperReviewQuestionPointResolvers';
 
-export default [reviewQuestionResolvers];
+export default [reviewQuestionResolvers, paperReviewQuestionPointResolvers];
