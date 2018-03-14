@@ -200,7 +200,7 @@ export default {
             title: data.title,
           },
         );
-        const checkSendMail = commonUtils.sendMail(user, template, transporter);
+        commonUtils.sendMail(user, template, transporter);
         return newPaper;
       } catch (e) {
         // eslint-disable-next-line no-console
