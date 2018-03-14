@@ -21,7 +21,6 @@ exports.up = function(knex, Promise) {
       table.string('phone_number').nullable();
       table.timestamp('dob').nullable();
       table.string('version_key').notNullable();
-      table.string('title').nullable();
       table.string('bio').nullable();
       table.string('language').nullable();
       table.string('avatar').nullable();
