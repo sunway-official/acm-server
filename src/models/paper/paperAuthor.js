@@ -6,7 +6,7 @@ export default class PaperAuthor extends Model {
   static tableName = 'papers_authors';
   static jsonSchema = {
     type: 'object',
-    required: ['paper_id', 'author_id'],
+    required: ['paper_id', 'user_id'],
     properties: {
       id: { type: 'integer' },
       paper_id: { type: 'integer' },

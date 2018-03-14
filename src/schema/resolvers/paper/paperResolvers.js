@@ -1,3 +1,5 @@
+import commonUtils from '../../../utils/common';
+
 export default {
   Paper: {
     conference: async ({ conference_id }, data, { models: { Conference } }) => {
@@ -169,7 +171,14 @@ export default {
     insertPaper: async (
       root,
       data,
-      { models: { Paper }, ValidationError, user },
+      {
+        models: { Paper },
+        ValidationError,
+        user,
+        emailTemplates,
+        transporter,
+        config,
+      },
     ) => {
       try {
         if (!user) {
@@ -182,6 +191,16 @@ export default {
         data.conference_id = conference_id;
         // eslint-disable-next-line
         const newPaper = await Paper.query().insert(data);
+        const subject = 'Submited paper';
+        const template = emailTemplates.submitPaper(
+          config.swEmail,
+          user.email,
+          subject,
+          {
+            title: data.title,
+          },
+        );
+        const checkSendMail = commonUtils.sendMail(user, template, transporter);
         return newPaper;
       } catch (e) {
         // eslint-disable-next-line no-console

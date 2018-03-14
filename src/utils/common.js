@@ -10,9 +10,19 @@ const passwordRegex = new RegExp(
   '^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{6,})',
 );
 
+const sendMail = (user, template, transporter) => {
+  transporter.sendMail(template);
+
+  return {
+    success: true,
+    message: 'email-sent',
+  };
+};
+
 const commonUtils = {
   randomStr,
   passwordRegex,
+  sendMail,
 };
 
 export default commonUtils;
