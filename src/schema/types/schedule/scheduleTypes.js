@@ -9,6 +9,9 @@ type Schedule {
   # activity id
   activity_id: ID!
 
+  # paper id
+  paper_id: ID!
+  
   # activity title
   activity_title: String!
 
@@ -41,7 +44,10 @@ type Schedule {
 
   # end time of Schedule
   end: Date!
-}
+  
+  # topics
+  topics: [PaperTopic!]!
+ }
 
 extend type Query {
   # Get information about all Schedule

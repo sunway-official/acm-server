@@ -11,6 +11,10 @@ export default {
       const activity = await Activity.query().findById(activity_id);
       return activity;
     },
+    topics: async ({ paper_id }, data, { models: { PaperTopic } }) => {
+      const topics = await PaperTopic.query().where('paper_id', paper_id);
+      return topics;
+    },
     conference: async ({ conference_id }, data, { models: { Conference } }) => {
       const conference = await Conference.query().findById(conference_id);
       return conference;
