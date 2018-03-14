@@ -1,4 +1,4 @@
-const roleStaff = [5];
+const roleStaff = [8];
 
 const getAllParticipantsInConference = async (
   // eslint-disable-next-line camelcase

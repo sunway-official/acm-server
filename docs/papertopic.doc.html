@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="./styles/graphdoc.css" />
-    <title>ActivityTopic</title>
+    <title>PaperTopic</title>
     <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700" rel="stylesheet"><link type="text/css" rel="stylesheet" href="./assets/code.css" /><link type="text/css" rel="stylesheet" href="./assets/require-by.css" />
 </head>
 <body class="slds-scrollable--y">
@@ -33,6 +33,11 @@
         <li  title="Mutation">
             <a href="mutation.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
                 Mutation
+            </a>
+        </li>
+        <li  title="Subscription">
+            <a href="subscription.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Subscription
             </a>
         </li>
     </ul>
@@ -110,11 +115,6 @@
                 ActivityFeedback
             </a>
         </li>
-        <li class="slds-is-active" title="ActivityTopic">
-            <a href="activitytopic.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
-                ActivityTopic
-            </a>
-        </li>
         <li  title="Address">
             <a href="address.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
                 Address
@@ -123,6 +123,16 @@
         <li  title="Answer">
             <a href="answer.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
                 Answer
+            </a>
+        </li>
+        <li  title="Author">
+            <a href="author.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Author
+            </a>
+        </li>
+        <li  title="Color">
+            <a href="color.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Color
             </a>
         </li>
         <li  title="Conference">
@@ -150,6 +160,11 @@
                 Feature
             </a>
         </li>
+        <li  title="LandingPage">
+            <a href="landingpage.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                LandingPage
+            </a>
+        </li>
         <li  title="LoginResponse">
             <a href="loginresponse.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
                 LoginResponse
@@ -175,9 +190,29 @@
                 NewsPhoto
             </a>
         </li>
+        <li  title="Notification">
+            <a href="notification.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Notification
+            </a>
+        </li>
         <li  title="OrganizerDetail">
             <a href="organizerdetail.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
                 OrganizerDetail
+            </a>
+        </li>
+        <li  title="Paper">
+            <a href="paper.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Paper
+            </a>
+        </li>
+        <li  title="PaperAuthor">
+            <a href="paperauthor.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                PaperAuthor
+            </a>
+        </li>
+        <li class="slds-is-active" title="PaperTopic">
+            <a href="papertopic.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                PaperTopic
             </a>
         </li>
         <li  title="Permission">
@@ -291,7 +326,7 @@
     </div>
     <div class="container">
         <p class="slds-text-title--caps slds-text-color--weak">OBJECT</p>
-        <h1 class="slds-text-heading--large">ActivityTopic</h1>
+        <h1 class="slds-text-heading--large">PaperTopic</h1>
         <div class="slds-text-body--regular"></div>
     </div>
 </section>
@@ -303,7 +338,7 @@
             </a>
             GraphQL Schema definition
         </h2>
-        <code class="highlight"><ul class="code" style="padding-left:42px"><li><span class="keyword operator ts">type</span> <span class="identifier">ActivityTopic</span> {</li><li></li><li><span class="tab"><span class="comment line">#   ID of activity topic</span></span></li><li><span class="tab"><span class="meta">id</span>: <a class="support type" href="id.doc.html">ID</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   activity</span></span></li><li><span class="tab"><span class="meta">activity</span>: <a class="support type" href="activity.doc.html">Activity</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   topic</span></span></li><li><span class="tab"><span class="meta">topic</span>: <a class="support type" href="topic.doc.html">Topic</a>! </span></li><li>}</li></ul></code>
+        <code class="highlight"><ul class="code" style="padding-left:42px"><li><span class="keyword operator ts">type</span> <span class="identifier">PaperTopic</span> {</li><li></li><li><span class="tab"><span class="comment line">#   ID of paper topic</span></span></li><li><span class="tab"><span class="meta">id</span>: <a class="support type" href="id.doc.html">ID</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   paper</span></span></li><li><span class="tab"><span class="meta">paper</span>: <a class="support type" href="paper.doc.html">Paper</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   topic</span></span></li><li><span class="tab"><span class="meta">topic</span>: <a class="support type" href="topic.doc.html">Topic</a>! </span></li><li></li><li><span class="tab"><span class="meta">topic_id</span>: <a class="support type" href="id.doc.html">ID</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   topic name</span></span></li><li><span class="tab"><span class="meta">topic_name</span>: <a class="support type" href="string.doc.html">String</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   topic description</span></span></li><li><span class="tab"><span class="meta">topic_description</span>: <a class="support type" href="string.doc.html">String</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   topic color code</span></span></li><li><span class="tab"><span class="meta">topic_color_code</span>: <a class="support type" href="string.doc.html">String</a>! </span></li><li>}</li></ul></code>
     </div>
 </section>
 <section>
@@ -314,7 +349,7 @@
             </a>
             Require by
         </h2>
-        <ul class="require-by"><li><a href="activity.doc.html" title="Activity - ">Activity<em></em></a><li><li><a href="mutation.doc.html" title="Mutation - ">Mutation<em></em></a><li><li><a href="query.doc.html" title="Query - ">Query<em></em></a><li><li><a href="topic.doc.html" title="Topic - ">Topic<em></em></a><li></ul>
+        <ul class="require-by"><li><a href="mutation.doc.html" title="Mutation - ">Mutation<em></em></a><li><li><a href="paper.doc.html" title="Paper - ">Paper<em></em></a><li><li><a href="query.doc.html" title="Query - ">Query<em></em></a><li></ul>
     </div>
 </section>
 <footer>

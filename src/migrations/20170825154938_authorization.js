@@ -19,8 +19,9 @@ exports.up = function(knex, Promise) {
         .defaultTo('unknown')
         .notNullable();
       table.string('phone_number').nullable();
-      table.date('dob').nullable();
+      table.timestamp('dob').nullable();
       table.string('version_key').notNullable();
+      table.string('title').nullable();
       table.string('bio').nullable();
       table.string('language').nullable();
       table.string('avatar').nullable();
@@ -31,6 +32,7 @@ exports.up = function(knex, Promise) {
       table.string('linkedin_id').nullable();
       table.string('facebook_id').nullable();
       table.string('twitter_id').nullable();
+      table.string('notification_key').nullable();
       table.timestamps();
     }),
   ]);

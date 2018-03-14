@@ -9,6 +9,8 @@ type PaperTopic {
   # topic
   topic: Topic!
 
+  topic_id: ID!
+
   # topic name
   topic_name: String!
 
@@ -26,6 +28,9 @@ extend type Query {
 
   # all topics by paper id
   getTopicsByPaperID(paper_id: ID!): [PaperTopic!]!
+
+  # all papers by topc id
+  getAllPapersByTopicID(topic_id: ID!): [PaperTopic!]!
 }
 
 extend type Mutation {
@@ -33,9 +38,9 @@ extend type Mutation {
   insertPaperTopic(paper_id: ID!, topic_id: ID!): PaperTopic!
 
   # update topic of paper
-  updateTopicOfPaper(paper_id: ID!, topic_id: ID!): PaperTopic!
+  updateTopicOfPaper(paper_id: ID!, topic_id: ID!): PaperTopic
 
   # delete paper topic
-  deletePaperTopic(topic_id: ID!, paper_id: ID!): PaperTopic!
+  deletePaperTopic(topic_id: ID!, paper_id: ID!): PaperTopic
 }
 `;

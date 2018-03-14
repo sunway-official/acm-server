@@ -453,7 +453,7 @@ const usersData = [
   },
 ];
 
-for (let i = 1; i < 111; i += 1) {
+for (let i = 1; i < 10; i += 1) {
   const firstname = faker.name.firstName();
   const lastname = faker.name.lastName();
   usersData.push({

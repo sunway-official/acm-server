@@ -3,6 +3,7 @@ import roleTypes from './roleTypes';
 import featureTypes from './featureTypes';
 import permissionTypes from './permissionTypes';
 import defaultPermissionTypes from './defaultPermissionTypes';
+import notificationTypes from './notificationTypes';
 
 export default [
   userTypes,
@@ -10,4 +11,5 @@ export default [
   featureTypes,
   permissionTypes,
   defaultPermissionTypes,
+  notificationTypes,
 ];

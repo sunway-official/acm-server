@@ -50,6 +50,10 @@ export default class User extends unique(Model) {
         type: ['string', 'null'],
         maxLength: '200',
       },
+      title: {
+        type: ['string', 'null'],
+        maxLength: '10',
+      },
       language: {
         type: ['string', 'null'],
         maxLength: '100',

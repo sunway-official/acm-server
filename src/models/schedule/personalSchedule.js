@@ -12,6 +12,7 @@ export default class PersonalSchedule extends Model {
       schedule_id: { type: 'integer' },
       conference_id: { type: 'integer' },
       activity_id: { type: 'integer' },
+      paper_id: { type: 'integer' },
       start: { type: ['string', 'null'] },
       end: { type: ['string', 'null'] },
       activity_title: { type: ['string', 'null'], maxLength: '100' },
@@ -35,12 +36,14 @@ export default class PersonalSchedule extends Model {
     this.schedule_id = parseInt(opt.old.schedule_id, 10);
     this.conference_id = parseInt(opt.old.conference_id, 10);
     this.activity_id = parseInt(opt.old.activity_id, 10);
+    this.paper_id = parseInt(opt.old.paper_id, 10);
   }
 
   async $beforeInsert() {
     const schedule = await Schedule.query().where('id', this.schedule_id);
     this.conference_id = schedule[0].conference_id;
     this.activity_id = schedule[0].activity_id;
+    this.paper_id = schedule[0].paper_id;
     this.start = schedule[0].start;
     this.end = schedule[0].end;
     this.activity_title = schedule[0].activity_title;
@@ -55,6 +58,7 @@ export default class PersonalSchedule extends Model {
     const schedule = await Schedule.query().where('id', this.schedule_id);
     this.conference_id = schedule[0].conference_id;
     this.activity_id = schedule[0].activity_id;
+    this.paper_id = schedule[0].paper_id;
     this.start = schedule[0].start;
     this.end = schedule[0].end;
     this.activity_title = schedule[0].activity_title;

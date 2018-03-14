@@ -9,13 +9,14 @@ exports.up = function(knex, Promise) {
       table
         .integer('role_id')
         .unsigned()
+        .defaultTo(8)
         .notNullable();
-      table.string('role_name').notNullable();
+      table.string('role_name');
       table
         .integer('user_id')
         .unsigned()
         .notNullable();
-      table.string('full_name').notNullable();
+      table.string('full_name');
       table
         .integer('conference_id')
         .unsigned()

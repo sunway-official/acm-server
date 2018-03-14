@@ -1,12 +1,12 @@
 export default {
   Paper: {
-    user: async ({ user_id }, data, { models: { User } }) => {
-      const user = await User.query().findById(user_id);
-      return user;
-    },
     conference: async ({ conference_id }, data, { models: { Conference } }) => {
       const conference = await Conference.query().findById(conference_id);
       return conference;
+    },
+    papersTopic: async ({ id }, data, { models: { PaperTopic } }) => {
+      const paperTopic = await PaperTopic.query().where('paper_id', id);
+      return paperTopic;
     },
   },
   Query: {
@@ -46,6 +46,33 @@ export default {
           'conference_id',
           conference_id,
         );
+
+        return papers;
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error(e);
+        throw new ValidationError(e);
+      }
+    },
+    getPapersWithAuthorByConferenceID: async (
+      root,
+      data,
+      { models: { Paper }, ValidationError, user },
+    ) => {
+      try {
+        // eslint-disable-next-line
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
+        // eslint-disable-next-line
+        const conference_id = user.current_conference_id;
+        const papers = await Paper.query()
+          .joinRelation('authors')
+          .where(builder =>
+            builder
+              .where('papers.conference_id', conference_id)
+              .where('authors.user_id', user.id),
+          );
         return papers;
       } catch (e) {
         // eslint-disable-next-line no-console
@@ -100,12 +127,10 @@ export default {
         }
         // eslint-disable-next-line
         const conference_id = user.current_conference_id;
-        // eslint-disable-next-line
-        const user_id = user.id;
+
         // eslint-disable-next-line
         data.conference_id = conference_id;
         // eslint-disable-next-line
-        data.user_id = user_id;
         const newPaper = await Paper.query().insert(data);
         return newPaper;
       } catch (e) {
@@ -151,13 +176,22 @@ export default {
     deletePaper: async (
       root,
       { id },
-      { models: { Paper }, ValidationError },
+      { models: { Paper, Activity }, ValidationError, user },
     ) => {
       try {
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
         const paper = await Paper.query().findById(id);
 
+        const activities = await Activity.query().where('paper_id', id);
+
+        if (activities.length > 0) {
+          throw new ValidationError('This paper is chosen !');
+        }
+
         // delete Schedule By PaperID
-        // await paper.deleteSchedule();
+        await paper.deleteAllRelationship();
 
         // delete paper
         if (paper) {

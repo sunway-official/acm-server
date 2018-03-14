@@ -1,50 +1,64 @@
 import { Model } from 'objection';
+import PaperAuthor from './paperAuthor';
 import PaperTopic from '../paper/paperTopic';
-import User from '../authorization/user';
+import PaperStatus from '../paper/paperStatus';
 
 export default class Paper extends Model {
   static tableName = 'papers';
   static jsonSchema = {
     type: 'object',
-    required: ['user_id', 'title'],
+    required: ['title', 'conference_id', 'paper_status_id'],
     properties: {
       id: { type: 'integer' },
-      user_id: { type: 'integer' },
       conference_id: { type: 'integer' },
-      speaker_name: { type: 'string' },
+      paper_status_id: { type: 'integer' },
       title: { type: 'string' },
       abstract: { type: 'text' },
       keywords: { type: 'string' },
       file: { type: 'text' },
+      status: { type: 'string' },
+    },
+  };
+  static relationMappings = {
+    authors: {
+      relation: Model.HasManyRelation,
+      modelClass: PaperAuthor,
+      join: {
+        from: 'papers.id',
+        to: 'papers_authors.paper_id',
+      },
     },
   };
 
   async $beforeInsert() {
     this.created_at = new Date();
     this.updated_at = new Date();
-    const user = await User.query().where('id', this.user_id);
-    this.speaker_name = `${user[0].firstname} ${user[0].lastname}`;
+    const paperStatus = await PaperStatus.query().findById(
+      this.paper_status_id,
+    );
+    this.status = paperStatus.name;
   }
 
   async $beforeUpdate() {
     this.updated_at = new Date();
+    const paperStatus = await PaperStatus.query().findById(
+      this.paper_status_id,
+    );
+    this.status = paperStatus.name;
   }
 
   async $beforeValidate(opt) {
     this.id = parseInt(opt.old.id, 10);
-    this.user_id = parseInt(opt.old.user_id, 10);
     this.conference_id = parseInt(opt.old.conference_id, 10);
   }
 
   // delete all topic of paper with id
   async deletePaperTopic() {
-    const paperTopic = await PaperTopic.query().where('paper_id', this.id);
+    await PaperTopic.query()
+      .delete()
+      .where('paper_id', this.id);
 
-    if (paperTopic)
-      await PaperTopic.query()
-        .delete()
-        .where('paper_id', this.id);
-    return paperTopic;
+    return true;
   }
 
   async deleteAllRelationship() {

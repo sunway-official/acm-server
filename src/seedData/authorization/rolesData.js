@@ -12,16 +12,16 @@ const roles = [
     name: 'Supporter', // 3
   },
   {
-    name: 'Participant', // 4
+    name: 'Ticket Checker', // 4
   },
   {
-    name: 'Ticket Checker', // 5
+    name: 'Reviewer', // 5
   },
   {
-    name: 'Reviewer', // 6
+    name: 'Author', // 6
   },
   {
-    name: 'Author', // 7
+    name: 'Participant', // 7
   },
 ];
 

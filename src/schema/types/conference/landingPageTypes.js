@@ -25,19 +25,19 @@ type LandingPage {
   phone_number: String!
 
   # facebook_id
-  facebook_id: String!
+  facebook_id: String
 
   # twitter_id
-  twitter_id: String!,
+  twitter_id: String,
 
   #linkedin_id
-  linkedin_id: String!,
+  linkedin_id: String,
 }
 
 extend type Query {
 
   # Get info landing page by confernce_id
-  getLandingPageByConferenceId(conference_id: ID): [LandingPage!]
+  getLandingPageByConferenceId(conference_id: ID): LandingPage
 
 }
 
@@ -50,9 +50,9 @@ extend type Mutation {
     speaker_description: String!,
     email: String!,
     phone_number: String!,
-    facebook_id: String!,
-    twitter_id: String!,
-    linkedin_id: String!,
+    facebook_id: String,
+    twitter_id: String,
+    linkedin_id: String,
   ): LandingPage!
 
   # Update CoOrganizerDetail info by id

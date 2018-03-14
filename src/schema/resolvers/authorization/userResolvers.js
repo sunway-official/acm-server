@@ -140,6 +140,23 @@ export default {
     },
   },
   Mutation: {
+    addUserNotificationKey: async (root, { key }, { user }) => {
+      if (!user) {
+        throw new Error('unauthorized');
+      }
+
+      try {
+        const updatedUser = await user
+          .$query()
+          .findById(user.id)
+          .patchAndFetch({
+            notification_key: key,
+          });
+        return updatedUser;
+      } catch (error) {
+        throw new Error('bad-request');
+      }
+    },
     register: async (
       root,
       data,

@@ -7,18 +7,18 @@ exports.up = function(knex, Promise) {
         .unsigned()
         .primary();
       table
-        .integer('user_id')
-        .unsigned()
-        .notNullable();
-      table
         .integer('conference_id')
         .unsigned()
         .notNullable();
-      table.string('speaker_name');
+      table
+        .integer('paper_status_id')
+        .unsigned()
+        .notNullable();
       table.string('title');
-      table.string('keywords');
       table.text('abstract');
+      table.string('keywords');
       table.text('file');
+      table.string('status');
       table.timestamps();
     }),
   ]);

@@ -19,7 +19,11 @@ import schedule from './schedule';
 // topic
 import topic from './topic';
 
+// paper
 import paper from './paper';
+
+// review
+import review from './review';
 
 const models = {
   ...activity,
@@ -30,6 +34,7 @@ const models = {
   ...schedule,
   ...topic,
   ...paper,
+  ...review,
 };
 
 export default models;
