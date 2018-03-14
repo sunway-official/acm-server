@@ -1,3 +1,5 @@
+import commonUtils from '../../../utils/common';
+
 export default {
   Paper: {
     conference: async ({ conference_id }, data, { models: { Conference } }) => {
@@ -80,6 +82,56 @@ export default {
         throw new ValidationError(e);
       }
     },
+    getPapersWithReviewerByConferenceID: async (
+      root,
+      data,
+      { models: { Paper }, ValidationError, user },
+    ) => {
+      try {
+        // eslint-disable-next-line
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
+        // eslint-disable-next-line
+        const conference_id = user.current_conference_id;
+        const papers = await Paper.query()
+          .joinRelation('reviewers')
+          .where(builder =>
+            builder
+              .where('papers.conference_id', conference_id)
+              .where('reviewers.user_id', user.id),
+          );
+        return papers;
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error(e);
+        throw new ValidationError(e);
+      }
+    },
+    getPapersByStatusId: async (
+      root,
+      { paper_status_id },
+      { models: { Paper }, ValidationError, user },
+    ) => {
+      try {
+        // eslint-disable-next-line
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
+        // eslint-disable-next-line
+        const conference_id = user.current_conference_id;
+        const papers = await Paper.query().where(builder =>
+          builder
+            .where('conference_id', conference_id)
+            .where('paper_status_id', paper_status_id),
+        );
+        return papers;
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error(e);
+        throw new ValidationError(e);
+      }
+    },
     getPapersByUserID: async (
       root,
       data,
@@ -119,7 +171,14 @@ export default {
     insertPaper: async (
       root,
       data,
-      { models: { Paper }, ValidationError, user },
+      {
+        models: { Paper },
+        ValidationError,
+        user,
+        emailTemplates,
+        transporter,
+        config,
+      },
     ) => {
       try {
         if (!user) {
@@ -132,6 +191,16 @@ export default {
         data.conference_id = conference_id;
         // eslint-disable-next-line
         const newPaper = await Paper.query().insert(data);
+        const subject = 'Submited paper';
+        const template = emailTemplates.submitPaper(
+          config.swEmail,
+          user.email,
+          subject,
+          {
+            title: data.title,
+          },
+        );
+        commonUtils.sendMail(user, template, transporter);
         return newPaper;
       } catch (e) {
         // eslint-disable-next-line no-console
