@@ -11,6 +11,7 @@ export default class Schedule extends Model {
     properties: {
       id: { type: 'integer' },
       activity_id: { type: 'integer' },
+      paper_id: { type: 'integer' },
       conference_id: { type: 'integer' },
       room_id: { type: 'integer' },
       start: { type: ['string', 'null'] },
@@ -41,6 +42,7 @@ export default class Schedule extends Model {
     const room = await Room.query().where('id', this.room_id);
     const activity = await Activity.query().where('id', this.activity_id);
     this.conference_id = activity[0].conference_id;
+    this.paper_id = activity[0].paper_id;
     this.activity_title = activity[0].title;
     this.activity_description = activity[0].description;
     this.activity_status = activity[0].status;
@@ -53,6 +55,7 @@ export default class Schedule extends Model {
     const room = await Room.query().where('id', this.room_id);
     const activity = await Activity.query().where('id', this.activity_id);
     this.conference_id = activity[0].conference_id;
+    this.paper_id = activity[0].paper_id;
     this.activity_title = activity[0].title;
     this.activity_description = activity[0].description;
     this.activity_status = activity[0].status;
