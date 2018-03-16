@@ -9,6 +9,12 @@ type PersonalSchedule {
   # schedule of personal
   schedule: Schedule!
 
+  # activity id
+  activity_id: ID!
+  
+  # paper id
+  paper_id: ID!
+
   # schedule_id
   schedule_id: ID!
 
@@ -52,6 +58,10 @@ extend type Query {
 
   # Get PersonalSchedule by ID
   getPersonalScheduleByID(id: ID!): PersonalSchedule!
+  
+  # Get personal agenda in current conference based on topics
+  # If there is no topics provided, the query will return all schedules
+  getMyAgenda(topics: [ID!]): [PersonalSchedule!]!
 }
 
 extend type Mutation {

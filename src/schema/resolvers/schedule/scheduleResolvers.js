@@ -73,6 +73,27 @@ export default {
         throw new ValidationError(e);
       }
     },
+    getAgenda: async (
+      root,
+      { topics = [] },
+      { models: { Schedule }, ValidationError },
+    ) => {
+      try {
+        const queryBuilder = Schedule.query().innerJoin(
+          'papers_topics',
+          'schedules.paper_id',
+          'papers_topics.paper_id',
+        );
+        topics.forEach(topic_id => {
+          queryBuilder.orWhere('topic_id', topic_id);
+        });
+        return queryBuilder;
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error(e);
+        throw new ValidationError(e);
+      }
+    },
   },
   Mutation: {
     insertSchedule: async (

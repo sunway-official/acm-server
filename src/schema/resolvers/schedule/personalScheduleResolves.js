@@ -66,6 +66,37 @@ export default {
         throw new ValidationError(e);
       }
     },
+    getMyAgenda: (
+      root,
+      { topics = [] },
+      { models: { PersonalSchedule }, ValidationError, user },
+    ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
+      if (user.current_conference_id === 0) {
+        throw new ValidationError('no-current-conference');
+      }
+      try {
+        const queryBuilder = PersonalSchedule.query()
+          .where('user_id', user.id)
+          .andWhere('conference_id', user.current_conference_id)
+          .innerJoin(
+            'papers_topics',
+            'personal_schedules.paper_id',
+            'papers_topics.paper_id',
+          );
+
+        topics.forEach(topic_id => {
+          queryBuilder.orWhere('topic_id', topic_id);
+        });
+
+        return queryBuilder;
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        throw new ValidationError(e);
+      }
+    },
   },
   Mutation: {
     insertPersonalSchedule: async (
