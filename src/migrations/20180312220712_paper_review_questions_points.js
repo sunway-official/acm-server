@@ -7,8 +7,12 @@ exports.up = function(knex, Promise) {
       table.integer('paper_id').unsigned();
       table.integer('review_question_id').unsigned();
       table.float('point');
-      table.text('content');
       table.text('comment');
+      table.string('paper_title');
+      table.string('reviewer_name');
+      table.text('content');
+      table.string('paper_status');
+      table.string('topic_name');
     }),
   ]);
 };

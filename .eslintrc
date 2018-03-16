@@ -24,6 +24,8 @@
     "func-names": ["error", "never"],
     "camelcase": 0,
     "no-console": 0,
-    "no-unused-vars": 1
+    "no-unused-vars": 1,
+    "array-callback-return": 0,
+    "eqeqeq": 0
   }
 }

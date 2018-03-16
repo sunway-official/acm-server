@@ -26,6 +26,11 @@ type Paper {
   # keywords
   keywords: String!
 
+  # reviewers
+  reviewers: [String]!
+
+  # authors
+  authors: [String]!
 
   # Document created_at timestamp
   created_at: Date!
@@ -33,23 +38,16 @@ type Paper {
   # Document updated_at timestamp
   updated_at: Date!
 
+  # topic name
+  topic_name: String!
 }
 
 extend type Query {
-  # Get information about all Papers
-  getAllPapers: [Paper!]!
-
   # Get Paper by ID
   getPaperByID( id: ID!): Paper!
 
-  # Get Paper by conference ID
-  getPapersByConferenceID( conference_id: ID): [Paper!]!
-
-  # Get Paper with author by conference ID
-  getPapersWithAuthorByConferenceID: [Paper!]!
-
-  # Get Paper of reviewer by conference ID
-  getPapersWithReviewerByConferenceID: [Paper!]!
+  # Get Paper by conference ID and role_id
+  getPapersByConferenceID(role_id: ID , conference_id: ID): [Paper]!
 
   # Get Paper by user ID
   getPapersByUserID: [Paper!]!
