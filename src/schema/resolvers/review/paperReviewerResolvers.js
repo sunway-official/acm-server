@@ -10,20 +10,7 @@ export default {
     },
   },
 
-  Query: {
-    getAllPapersWithReviewer: async (
-      root,
-      data,
-      { models: { PaperReviewer }, ValidationError, user },
-    ) => {
-      if (!user) {
-        throw new ValidationError('unauthorized');
-      }
-      const paperReview = await PaperReviewer.query();
-
-      return paperReview;
-    },
-  },
+  Query: {},
 
   Mutation: {
     insertPaperReviewer: async (

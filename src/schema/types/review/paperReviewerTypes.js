@@ -19,8 +19,6 @@ export default `
   }
 
   extend type Query {
-    getAllPapersWithReviewer: [PaperReviewer!]!
-
 
   }
 

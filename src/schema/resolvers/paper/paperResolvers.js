@@ -10,91 +10,103 @@ export default {
       const paperTopic = await PaperTopic.query().where('paper_id', id);
       return paperTopic;
     },
+    reviewers: async (
+      { id, conference_id },
+      data,
+      { models: { PaperReviewer } },
+    ) => {
+      const paperReviewers = await PaperReviewer.query()
+        .select('reviewer_name')
+        .where(builder =>
+          builder.where('conference_id', conference_id).where('paper_id', id),
+        );
+      let reviewers = [];
+      if (paperReviewers) {
+        reviewers = paperReviewers.map(
+          paperReviewer => paperReviewer.reviewer_name,
+        );
+      }
+      return reviewers;
+    },
+    topic_name: async ({ id }, data, { models: { PaperTopic } }) => {
+      const paperTopic = await PaperTopic.query().where('paper_id', id);
+      let topic_name = '';
+      if (paperTopic) {
+        // eslint-disable-next-line
+        topic_name = paperTopic[0].topic_name;
+      }
+      return topic_name;
+    },
+    authors: async (
+      { id, conference_id },
+      data,
+      { models: { PaperAuthor } },
+    ) => {
+      const paperAuthors = await PaperAuthor.query()
+        .select('author_name')
+        .where(builder =>
+          builder.where('conference_id', conference_id).where('paper_id', id),
+        );
+      let authors = [];
+      if (paperAuthors) {
+        authors = paperAuthors.map(paperAuthor => paperAuthor.author_name);
+      }
+      return authors;
+    },
   },
   Query: {
-    getAllPapers: async (
+    getPapersByConferenceID: async (
       root,
-      data,
+      { conference_id, role_id },
       { models: { Paper }, ValidationError, user },
     ) => {
       try {
-        if (!user) {
+        // eslint-disable-next-line
+        if (!user && !conference_id) {
           throw new ValidationError('unauthorized');
         }
-        const papers = await Paper.query();
-        return papers;
-      } catch (e) {
-        // eslint-disable-next-line no-console
-        console.error(e);
-        throw new ValidationError(e);
-      }
-    },
-    // getPapersByConferenceID: async (
-    //   root,
-    //   { conference_id, role_id },
-    //   { models: { Paper }, ValidationError, user },
-    // ) => {
-    //   try {
-    //     // eslint-disable-next-line
-    //     if (!user && !conference_id) {
-    //       throw new ValidationError('unauthorized');
-    //     }
-    //     // eslint-disable-next-line
-    //     if (!conference_id) {
-    //       // eslint-disable-next-line
-    //       conference_id = user.current_conference_id;
-    //     }
+        // eslint-disable-next-line
+        if (!conference_id) {
+          // eslint-disable-next-line
+          conference_id = user.current_conference_id;
+        }
+        const ROLE_REVIEWER = 6;
+        const ROLE_AUTHOR = 7;
+        let papers = [];
+        switch (parseInt(role_id, 10)) {
+          // ROLE_AUTHOR
+          case ROLE_AUTHOR: {
+            papers = await Paper.query()
+              .select('*', 'authors.paper_id as id')
+              .joinRelation('authors')
+              .where(builder =>
+                builder
+                  .where('authors.conference_id', conference_id)
+                  .where('authors.user_id', user.id),
+              );
+            break;
+          }
 
-    //     const papersReview = await Paper.query()
-    //       .select('reviewers.*')
-    //       .joinRelation('reviewers')
-    //       .where(builder =>
-    //         builder.where('papers.conference_id', conference_id),
-    //       );
-    //     // papersReview.map(paperReview)
-    //     // papersReview.map(paperReview => {
-    //     //   const userId = paperReview.user_id;
-    //     //   const paperId = paperReview.paper_id;
-    //     //   const reviewers = [];
-    //     //   papersReview.map(subPaperReview => {
-    //     //     if (
-    //     //       paperId == subPaperReview.paper_id &&
-    //     //       userId != subPaperReview.user_id
-    //     //     ) {
-    //     //       reviewers.push(subPaperReview.user_id);
-    //     //     }
-    //     //   });
-    //     //   console.log(reviewers);
-    //     // });
-    //     // papers.reviewers = reviewers;
+          // ROLE_REVIEWER
+          case ROLE_REVIEWER: {
+            papers = await Paper.query()
+              .select('*', 'reviewers.paper_id as id')
+              .joinRelation('reviewers')
+              .where(builder =>
+                builder
+                  .where('reviewers.conference_id', conference_id)
+                  .where('reviewers.user_id', user.id),
+              );
+            break;
+          }
+          default: {
+            papers = await Paper.query().where(builder =>
+              builder.where('conference_id', conference_id),
+            );
+            break;
+          }
+        }
 
-    //     console.log(papersReview);
-    //     return papersReview;
-    //   } catch (e) {
-    //     // eslint-disable-next-line no-console
-    //     console.error(e);
-    //     throw new ValidationError(e);
-    //   }
-    // },
-    getPapersWithAuthorByConferenceID: async (
-      root,
-      data,
-      { models: { Paper }, ValidationError, user },
-    ) => {
-      try {
-        // eslint-disable-next-line
-        if (!user) {
-          throw new ValidationError('unauthorized');
-        }
-        // eslint-disable-next-line
-        const conference_id = user.current_conference_id;
-        const papers = await Paper.query()
-          .joinRelation('authors')
-          .where(builder =>
-            builder
-              .where('papers.conference_id', conference_id)
-              .where('authors.user_id', user.id),
-          );
         return papers;
       } catch (e) {
         // eslint-disable-next-line no-console
@@ -102,32 +114,7 @@ export default {
         throw new ValidationError(e);
       }
     },
-    getPapersWithReviewerByConferenceID: async (
-      root,
-      data,
-      { models: { Paper }, ValidationError, user },
-    ) => {
-      try {
-        // eslint-disable-next-line
-        if (!user) {
-          throw new ValidationError('unauthorized');
-        }
-        // eslint-disable-next-line
-        const conference_id = user.current_conference_id;
-        const papers = await Paper.query()
-          .joinRelation('reviewers')
-          .where(builder =>
-            builder
-              .where('papers.conference_id', conference_id)
-              .where('reviewers.user_id', user.id),
-          );
-        return papers;
-      } catch (e) {
-        // eslint-disable-next-line no-console
-        console.error(e);
-        throw new ValidationError(e);
-      }
-    },
+
     getPapersByStatusId: async (
       root,
       { paper_status_id },
