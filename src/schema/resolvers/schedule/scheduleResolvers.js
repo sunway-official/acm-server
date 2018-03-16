@@ -1,4 +1,5 @@
 import Expo from 'expo-server-sdk';
+import { raw } from 'objection';
 import handlePushNofication from '../../../services/handlePushNofication';
 
 export default {
@@ -43,10 +44,10 @@ export default {
       if (!user) {
         throw new ValidationError('unauthorized');
       }
+      if (user.current_conference_id === 0) {
+        throw new ValidationError('no-current-conference');
+      }
       try {
-        if (user.current_conference_id === 0) {
-          throw new ValidationError('no-current-conference');
-        }
         const schedules = await Schedule.query()
           .where('conference_id', user.current_conference_id)
           .orderBy('start', 'desc');
@@ -76,17 +77,34 @@ export default {
     getAgenda: async (
       root,
       { topics = [] },
-      { models: { Schedule }, ValidationError },
+      { models: { Schedule }, ValidationError, user },
     ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
+      if (user.current_conference_id === 0) {
+        throw new ValidationError('no-current-conference');
+      }
       try {
-        const queryBuilder = Schedule.query().innerJoin(
-          'papers_topics',
-          'schedules.paper_id',
-          'papers_topics.paper_id',
-        );
-        topics.forEach(topic_id => {
-          queryBuilder.orWhere('topic_id', topic_id);
-        });
+        const queryBuilder = Schedule.query()
+          .where('conference_id', user.current_conference_id)
+          .orderBy('start', 'desc')
+          .innerJoin(
+            'papers_topics',
+            'schedules.paper_id',
+            'papers_topics.paper_id',
+          );
+        // if topics is valid
+        if (topics.length > 0) {
+          queryBuilder.andWhere(
+            raw(
+              `${topics
+                .reduce((query, id) => `${query} topic_id = ${id} or`, '(')
+                .slice(0, -2)})`,
+            ),
+            // Example output of this where condition: "(topic_id = 1, topic_id = 2)"
+          );
+        }
         return queryBuilder;
       } catch (e) {
         // eslint-disable-next-line no-console

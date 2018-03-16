@@ -50,6 +50,9 @@ type PersonalSchedule {
 
   # room status
   room_status: Status!
+  
+  # topics
+  topics: [PaperTopic!]!
 }
 
 extend type Query {
