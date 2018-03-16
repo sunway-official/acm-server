@@ -12,6 +12,14 @@ export default `
 
     point: Float!
 
+    paper_title: String!
+
+    paper_status: String!
+
+    topic_name: String!
+
+    reviewer_name: String!
+
     comment: String!
 
     content: String!
@@ -19,9 +27,11 @@ export default `
 
   extend type Query {
     getPaperReviewByUserIdPaperId(user_id: ID!, paper_id: ID!): [PaperReviewQuestionPoint!]!
+
+
   }
 
   extend type Mutation {
-    insertPaperReview(user_id: ID!, paper_id: ID!, review_question_id: ID!, point: Float!, comment: String): PaperReviewQuestionPoint!
+    insertPaperReviewQuestion(user_id: ID!, paper_id: ID!, review_question_id: ID!, point: Float!, comment: String): PaperReviewQuestionPoint!
   }
 `;

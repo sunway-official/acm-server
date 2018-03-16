@@ -16,7 +16,6 @@ export default {
       { user_id, paper_id },
       { models: { PaperReviewQuestionPoint }, ValidationError, user },
     ) => {
-      console.log(root);
       if (!user) {
         throw new ValidationError('unauthorized');
       }
@@ -33,7 +32,7 @@ export default {
   },
 
   Mutation: {
-    insertPaperReview: async (
+    insertPaperReviewQuestion: async (
       root,
       data,
       { models: { PaperReviewQuestionPoint }, ValidationError, user },
@@ -41,13 +40,7 @@ export default {
       if (!user) {
         throw new ValidationError('unauthorized');
       }
-      const newData = data;
-      console.log(newData);
-      newData.conference_id = user.current_conference_id;
-      const paperReview = await PaperReviewQuestionPoint.query().insert(
-        newData,
-      );
-      console.log(paperReview);
+      const paperReview = await PaperReviewQuestionPoint.query().insert(data);
       return paperReview;
     },
   },

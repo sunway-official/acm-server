@@ -29,33 +29,53 @@ export default {
         throw new ValidationError(e);
       }
     },
-    getPapersByConferenceID: async (
-      root,
-      { conference_id },
-      { models: { Paper }, ValidationError, user },
-    ) => {
-      try {
-        // eslint-disable-next-line
-        if (!user && !conference_id) {
-          throw new ValidationError('unauthorized');
-        }
-        // eslint-disable-next-line
-        if (!conference_id) {
-          // eslint-disable-next-line
-          conference_id = user.current_conference_id;
-        }
-        const papers = await Paper.query().where(
-          'conference_id',
-          conference_id,
-        );
+    // getPapersByConferenceID: async (
+    //   root,
+    //   { conference_id, role_id },
+    //   { models: { Paper }, ValidationError, user },
+    // ) => {
+    //   try {
+    //     // eslint-disable-next-line
+    //     if (!user && !conference_id) {
+    //       throw new ValidationError('unauthorized');
+    //     }
+    //     // eslint-disable-next-line
+    //     if (!conference_id) {
+    //       // eslint-disable-next-line
+    //       conference_id = user.current_conference_id;
+    //     }
 
-        return papers;
-      } catch (e) {
-        // eslint-disable-next-line no-console
-        console.error(e);
-        throw new ValidationError(e);
-      }
-    },
+    //     const papersReview = await Paper.query()
+    //       .select('reviewers.*')
+    //       .joinRelation('reviewers')
+    //       .where(builder =>
+    //         builder.where('papers.conference_id', conference_id),
+    //       );
+    //     // papersReview.map(paperReview)
+    //     // papersReview.map(paperReview => {
+    //     //   const userId = paperReview.user_id;
+    //     //   const paperId = paperReview.paper_id;
+    //     //   const reviewers = [];
+    //     //   papersReview.map(subPaperReview => {
+    //     //     if (
+    //     //       paperId == subPaperReview.paper_id &&
+    //     //       userId != subPaperReview.user_id
+    //     //     ) {
+    //     //       reviewers.push(subPaperReview.user_id);
+    //     //     }
+    //     //   });
+    //     //   console.log(reviewers);
+    //     // });
+    //     // papers.reviewers = reviewers;
+
+    //     console.log(papersReview);
+    //     return papersReview;
+    //   } catch (e) {
+    //     // eslint-disable-next-line no-console
+    //     console.error(e);
+    //     throw new ValidationError(e);
+    //   }
+    // },
     getPapersWithAuthorByConferenceID: async (
       root,
       data,

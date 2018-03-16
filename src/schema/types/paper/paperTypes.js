@@ -42,8 +42,8 @@ extend type Query {
   # Get Paper by ID
   getPaperByID( id: ID!): Paper!
 
-  # Get Paper by conference ID
-  getPapersByConferenceID( conference_id: ID): [Paper!]!
+  # Get Paper by conference ID and role_id
+  getPapersByConferenceID(role_id: ID! , conference_id: ID): [Paper]!
 
   # Get Paper with author by conference ID
   getPapersWithAuthorByConferenceID: [Paper!]!

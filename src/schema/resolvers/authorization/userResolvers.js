@@ -203,7 +203,7 @@ export default {
         versionKey: authUser.version_key,
       };
       const token = jwt.sign(tokenPayload, config.jwtSecret, {
-        expiresIn: '15m',
+        expiresIn: '15d',
       });
       const refreshToken = jwt.sign(tokenPayload, config.jwtRefreshSecret, {
         expiresIn: '7d',

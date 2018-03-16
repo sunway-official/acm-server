@@ -227,4 +227,4 @@ const tempSchedules = conference_id => [
 let schedules = [];
 
 schedules = schedules.concat(tempSchedules(1));
-module.exports = schedules;
+module.exports = [];
