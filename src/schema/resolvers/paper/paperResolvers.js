@@ -55,7 +55,6 @@ export default {
             .where('paper_id', id)
             .where('review_question_id', 1),
       );
-      console.log(paperReview);
       return paperReview;
     },
   },
