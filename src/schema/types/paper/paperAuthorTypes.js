@@ -14,6 +14,9 @@ type PaperAuthor {
   # author email
   author_email: String!
 
+  # coresponding
+  corresponding: Int!
+
   # author title
   author_title: String!
 

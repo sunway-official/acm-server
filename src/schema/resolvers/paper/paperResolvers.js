@@ -10,24 +10,6 @@ export default {
       const paperTopic = await PaperTopic.query().where('paper_id', id);
       return paperTopic;
     },
-    reviewers: async (
-      { id, conference_id },
-      data,
-      { models: { PaperReviewer } },
-    ) => {
-      const paperReviewers = await PaperReviewer.query()
-        .select('reviewer_name')
-        .where(builder =>
-          builder.where('conference_id', conference_id).where('paper_id', id),
-        );
-      let reviewers = [];
-      if (paperReviewers) {
-        reviewers = paperReviewers.map(
-          paperReviewer => paperReviewer.reviewer_name,
-        );
-      }
-      return reviewers;
-    },
     topic_name: async ({ id }, data, { models: { PaperTopic } }) => {
       const paperTopic = await PaperTopic.query().where('paper_id', id);
       let topic_name = '';
@@ -37,21 +19,43 @@ export default {
       }
       return topic_name;
     },
+    reviewers: async (
+      { id, conference_id },
+      data,
+      { models: { PaperReviewer } },
+    ) => {
+      const paperReviewers = await PaperReviewer.query()
+        .select('*')
+        .where(builder =>
+          builder.where('conference_id', conference_id).where('paper_id', id),
+        );
+      return paperReviewers;
+    },
     authors: async (
       { id, conference_id },
       data,
       { models: { PaperAuthor } },
     ) => {
       const paperAuthors = await PaperAuthor.query()
-        .select('author_name')
+        .select('*')
         .where(builder =>
           builder.where('conference_id', conference_id).where('paper_id', id),
         );
-      let authors = [];
-      if (paperAuthors) {
-        authors = paperAuthors.map(paperAuthor => paperAuthor.author_name);
-      }
-      return authors;
+      return paperAuthors;
+    },
+    comments: async (
+      { id, conference_id },
+      data,
+      { models: { PaperReviewQuestionPoint } },
+    ) => {
+      const paperReview = await PaperReviewQuestionPoint.query().where(
+        builder =>
+          builder
+            .where('conference_id', conference_id)
+            .where('paper_id', id)
+            .where('review_question_id', 1),
+      );
+      return paperReview;
     },
   },
   Query: {
@@ -77,12 +81,12 @@ export default {
           // ROLE_AUTHOR
           case ROLE_AUTHOR: {
             papers = await Paper.query()
-              .select('*', 'authors.paper_id as id')
-              .joinRelation('authors')
+              .select('*', 'rls_authors.paper_id as id')
+              .joinRelation('rls_authors')
               .where(builder =>
                 builder
-                  .where('authors.conference_id', conference_id)
-                  .where('authors.user_id', user.id),
+                  .where('rls_authors.conference_id', conference_id)
+                  .where('rls_authors.user_id', user.id),
               );
             break;
           }
@@ -90,12 +94,12 @@ export default {
           // ROLE_REVIEWER
           case ROLE_REVIEWER: {
             papers = await Paper.query()
-              .select('*', 'reviewers.paper_id as id')
-              .joinRelation('reviewers')
+              .select('*', 'rls_reviewers.paper_id as id')
+              .joinRelation('rls_reviewers')
               .where(builder =>
                 builder
-                  .where('reviewers.conference_id', conference_id)
-                  .where('reviewers.user_id', user.id),
+                  .where('rls_reviewers.conference_id', conference_id)
+                  .where('rls_reviewers.user_id', user.id),
               );
             break;
           }

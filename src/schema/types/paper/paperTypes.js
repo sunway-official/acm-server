@@ -27,10 +27,13 @@ type Paper {
   keywords: String!
 
   # reviewers
-  reviewers: [String]!
+  reviewers: [PaperReviewer]!
 
   # authors
-  authors: [String]!
+  authors: [PaperAuthor]!
+
+  # comments
+  comments: [PaperReviewQuestionPoint]!
 
   # Document created_at timestamp
   created_at: Date!

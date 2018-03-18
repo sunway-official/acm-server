@@ -21,6 +21,7 @@ export default class PaperReviewQuestionPoint extends Model {
       comment: { type: 'text' },
       paper_status: { type: 'string' },
       topic_name: { type: 'string' },
+      created_at: { type: ['string', 'null'] },
     },
   };
 
@@ -29,6 +30,7 @@ export default class PaperReviewQuestionPoint extends Model {
   }
 
   async $beforeInsert() {
+    this.created_at = new Date();
     // review question
     const reviewQuestion = await ReviewQuestion.query().findById(
       this.review_question_id,
