@@ -222,9 +222,57 @@ const tempSchedules = conference_id => [
     room_seats: 30,
     room_status: 'on',
   },
+  {
+    // eslint-disable-next-line
+    activity_id: 12,
+    conference_id,
+    room_id: 3,
+    start: addDays(getNewDate('2017-11-13T12:30:00.000Z'), 1),
+    end: addDays(getNewDate('2017-11-13T14:30:00.000Z'), 1),
+    paper_id: 12,
+    activity_title: 'Jailbreak',
+    activity_description: ' ',
+    activity_status: 'on',
+    room_name: 'P303',
+    room_seats: 100,
+    room_status: 'on',
+  },
+  {
+    // eslint-disable-next-line
+    activity_id: 11,
+    conference_id,
+    room_id: 2,
+    start: addDays(getNewDate('2017-11-13T13:30:00.000Z'), 1),
+    end: addDays(getNewDate('2017-11-13T15:30:00.000Z'), 1),
+    paper_id: 11,
+    activity_title: 'Pick someone up or down',
+    activity_description: ' ',
+    activity_status: 'on',
+    room_name: 'P304',
+    room_seats: 12,
+    room_status: 'on',
+  },
+  {
+    // eslint-disable-next-line
+    activity_id: 12,
+    conference_id,
+    room_id: 2,
+    start: addDays(getNewDate('2017-11-13T16:30:00.000Z'), 1),
+    end: addDays(getNewDate('2017-11-13T17:30:00.000Z'), 1),
+    paper_id: 12,
+    activity_title: 'Pick someone up or down',
+    activity_description: ' ',
+    activity_status: 'on',
+    room_name: 'P304',
+    room_seats: 12,
+    room_status: 'on',
+  },
 ];
 
 let schedules = [];
 
-schedules = schedules.concat(tempSchedules(1));
-module.exports = [];
+[1, 2, 3, 4, 5, 6].forEach(conference_id => {
+  schedules = [...schedules, ...tempSchedules(conference_id)];
+});
+
+module.exports = schedules;

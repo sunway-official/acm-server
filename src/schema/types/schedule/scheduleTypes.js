@@ -50,12 +50,15 @@ type Schedule {
  }
 
 extend type Query {
-  # Get information about all Schedule
+  # Get information of all Schedule in current conference
   getAllSchedules: [Schedule!]!
 
   # Get Schedule by ID
   getScheduleByID(id: ID!): Schedule!
 
+  # Get agenda in current conference based on topics
+  # If there is no topics provided, the query will return all schedules
+  getAgenda(topics: [ID!]): [Schedule!]!
 }
 
 extend type Mutation {

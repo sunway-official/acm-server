@@ -13,7 +13,7 @@ export default class Address extends Model {
       city: { type: 'string', maxLength: '100' },
       country: { type: 'string', maxLength: '100' },
       lat: { type: 'string', maxLength: '100' },
-      colonguntry: { type: 'string', maxLength: '100' },
+      long: { type: 'string', maxLength: '100' },
     },
   };
 

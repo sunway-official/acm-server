@@ -1,3 +1,5 @@
+import { raw } from 'objection';
+
 export default {
   PersonalSchedule: {
     schedule: async ({ schedule_id }, data, { models: { Schedule } }) => {
@@ -7,6 +9,10 @@ export default {
     activity: async ({ activity_id }, data, { models: { Activity } }) => {
       const activity = await Activity.query().findById(activity_id);
       return activity;
+    },
+    topics: async ({ paper_id }, data, { models: { PaperTopic } }) => {
+      const topics = await PaperTopic.query().where('paper_id', paper_id);
+      return topics;
     },
     conference: async ({ conference_id }, data, { models: { Conference } }) => {
       const conference = await Conference.query().findById(conference_id);
@@ -63,6 +69,47 @@ export default {
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);
+        throw new ValidationError(e);
+      }
+    },
+    getMyAgenda: (
+      root,
+      { topics = [] },
+      { models: { PersonalSchedule }, ValidationError, user },
+    ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
+      if (user.current_conference_id === 0) {
+        throw new ValidationError('no-current-conference');
+      }
+      try {
+        const queryBuilder = PersonalSchedule.query()
+          .where('user_id', user.id)
+          .orderBy('start', 'desc')
+          .andWhere('conference_id', user.current_conference_id)
+          .innerJoin(
+            'papers_topics',
+            'personal_schedules.paper_id',
+            'papers_topics.paper_id',
+          );
+
+        // if topics is valid
+        if (topics.length > 0) {
+          queryBuilder.andWhere(
+            raw(
+              `${topics
+                .reduce((query, id) => `${query} topic_id = ${id} or`, '(')
+                .slice(0, -2)})`,
+            ),
+            // Example output of this where condition: "(topic_id = 1, topic_id = 2)"
+          );
+        }
+
+        return queryBuilder;
+      } catch (e) {
+        console.log(e);
+        // eslint-disable-next-line no-console
         throw new ValidationError(e);
       }
     },
