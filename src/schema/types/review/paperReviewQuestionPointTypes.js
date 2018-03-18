@@ -23,6 +23,8 @@ export default `
     comment: String!
 
     content: String!
+
+    created_at: Date!
   }
 
   extend type Query {

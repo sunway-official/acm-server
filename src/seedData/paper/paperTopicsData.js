@@ -3,13 +3,14 @@ const faker = require('faker');
 
 const paperTopics = [];
 for (let i = 1; i < 14; i += 1) {
-  const topicId = faker.random.number({ min: 1, max: 9 });
+  const topicId = faker.random.number({ min: 1, max: 9 }) - 1;
+  const topic = topics[topicId];
   paperTopics.push({
     paper_id: i,
-    topic_id: topicId,
-    topic_name: topics[topicId - 1].name,
-    topic_description: topics[topicId - 1].description,
-    topic_color_code: topics[topicId - 1].color_code,
+    topic_id: topicId + 1,
+    topic_name: topic.name,
+    topic_description: topic.description,
+    topic_color_code: topic.color_code,
   });
 }
 

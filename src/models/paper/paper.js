@@ -21,7 +21,7 @@ export default class Paper extends Model {
     },
   };
   static relationMappings = {
-    authors: {
+    rls_authors: {
       relation: Model.HasManyRelation,
       modelClass: PaperAuthor,
       join: {
@@ -29,7 +29,7 @@ export default class Paper extends Model {
         to: 'papers_authors.paper_id',
       },
     },
-    reviewers: {
+    rls_reviewers: {
       relation: Model.HasManyRelation,
       modelClass: PaperReviewer,
       join: {
