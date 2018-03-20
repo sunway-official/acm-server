@@ -214,31 +214,14 @@ export default {
   Mutation: {
     insertConference: async (
       root,
-      {
-        organizer_detail_id,
-        address_id,
-        title,
-        description,
-        start_date,
-        end_date,
-        bg_image,
-      },
-      { models: { Conference, OrganizerDetail }, ValidationError },
+      data,
+      { models: { Conference }, ValidationError, user },
     ) => {
       try {
-        const { user_id } = await OrganizerDetail.query().findById(
-          organizer_detail_id,
-        );
-        const data = {
-          organizer_detail_id,
-          address_id,
-          user_id,
-          title,
-          description,
-          start_date,
-          end_date,
-          bg_image,
-        };
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
+
         const conference = await Conference.query().insert(data);
         return conference;
       } catch (e) {
@@ -250,23 +233,16 @@ export default {
     updateConference: async (
       root,
       data,
-      { models: { Conference, OrganizerDetail }, ValidationError },
+      { models: { Conference }, ValidationError, user },
     ) => {
       try {
-        const { organizer_detail_id } = data;
-
-        // eslint-disable-next-line camelcase
-        if (organizer_detail_id) {
-          const { user_id } = await OrganizerDetail.query().findById(
-            organizer_detail_id,
-          );
-          Object.assign(data, data, {
-            user_id,
-          });
+        if (!user) {
+          throw new ValidationError('unauthorized');
         }
+        const conference_id = data.id ? data.id : user.current_conference_id;
 
-        const updateConference = await Conference.query().updateAndFetchById(
-          data.id,
+        const updateConference = await Conference.query().patchAndFetchById(
+          conference_id,
           data,
         );
         return updateConference;
@@ -283,12 +259,6 @@ export default {
     ) => {
       try {
         const conference = await Conference.query().findById(id);
-
-        // delete all topics of conference with id
-        // // delete ConferenceAttendee with conference_id
-        // // delete News with conference_id
-        // // delete Activity with conference_id
-
         if (!conference) throw new ValidationError('Not found conference');
 
         await conference.deleteAllRelationship();

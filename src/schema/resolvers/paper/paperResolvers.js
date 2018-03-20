@@ -238,11 +238,10 @@ export default {
           if (paper.length !== 0)
             throw new ValidationError("Paper's title is exists !");
         }
+
         const updatePaper = await Paper.query()
-          .updateAndFetchById(data.id, data)
-          .where(builder => {
-            builder.where('conference_id', conference_id);
-          });
+          .patchAndFetchById(data.id, data)
+          .where('conference_id', conference_id);
         if (!updatePaper) {
           throw new ValidationError("Paper's not found in conference");
         }

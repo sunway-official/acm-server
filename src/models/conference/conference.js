@@ -4,6 +4,7 @@ import ConferenceAttendee from './conferenceAttendee';
 import News from '../newsFeed/news';
 import Activity from '../activity/activity';
 import CoOrganizerDetail from './coOrganizerDetail';
+import OrganizerDetail from './organizerDetail';
 
 export default class Conference extends Model {
   static tableName = 'conferences';
@@ -21,6 +22,19 @@ export default class Conference extends Model {
       bg_image: { type: 'string', maxLength: '300' },
       start_date: { type: ['string', 'null'] },
       end_date: { type: ['string', 'null'] },
+      dl_submit_abstract: { type: ['string', 'null'] },
+      dl_review_abstract: { type: ['string', 'null'] },
+      dl_release_abstract: { type: ['string', 'null'] },
+      dl_re_submit_abstract: { type: ['string', 'null'] },
+      dl_re_review_abstract: { type: ['string', 'null'] },
+      dl_release_final_abstract: { type: ['string', 'null'] },
+      dl_submit_paper: { type: ['string', 'null'] },
+      dl_review_paper: { type: ['string', 'null'] },
+      dl_release_paper: { type: ['string', 'null'] },
+      dl_re_submit_paper: { type: ['string', 'null'] },
+      dl_re_review_paper: { type: ['string', 'null'] },
+      dl_release_final_paper: { type: ['string', 'null'] },
+      dl_registration: { type: ['string', 'null'] },
     },
   };
 
@@ -29,6 +43,33 @@ export default class Conference extends Model {
     this.organizer_detail_id = parseInt(opt.old.organizer_detail_id, 10);
     this.address_id = parseInt(opt.old.address_id, 10);
     this.user_id = parseInt(opt.old.user_id, 10);
+  }
+
+  async $beforeInsert() {
+    this.created_at = new Date();
+    this.updated_at = new Date();
+    if (this.organizer_detail_id) {
+      const organizerDetail = await OrganizerDetail.query().findById(
+        this.organizer_detail_id,
+      );
+
+      if (organizerDetail) {
+        this.user_id = organizerDetail.user_id;
+      }
+    }
+  }
+
+  async $beforeUpdate() {
+    this.updated_at = new Date();
+    if (this.organizer_detail_id) {
+      const organizerDetail = await OrganizerDetail.query().findById(
+        this.organizer_detail_id,
+      );
+
+      if (organizerDetail) {
+        this.user_id = organizerDetail.user_id;
+      }
+    }
   }
 
   // delete all topics of conference with id
