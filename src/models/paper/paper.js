@@ -39,26 +39,32 @@ export default class Paper extends Model {
     },
   };
 
+  async $beforeValidate() {
+    this.id = parseInt(this.id, 10);
+    if (this.paper_status_id) {
+      this.paper_status_id = parseInt(this.paper_status_id, 10);
+    }
+  }
+
   async $beforeInsert() {
     this.created_at = new Date();
     this.updated_at = new Date();
-    const paperStatus = await PaperStatus.query().findById(
-      this.paper_status_id,
-    );
-    this.status = paperStatus.name;
+    if (this.paper_status_id) {
+      const paperStatus = await PaperStatus.query().findById(
+        this.paper_status_id,
+      );
+      this.status = paperStatus.name;
+    }
   }
 
   async $beforeUpdate() {
     this.updated_at = new Date();
-    const paperStatus = await PaperStatus.query().findById(
-      this.paper_status_id,
-    );
-    this.status = paperStatus.name;
-  }
-
-  async $beforeValidate(opt) {
-    this.id = parseInt(opt.old.id, 10);
-    this.conference_id = parseInt(opt.old.conference_id, 10);
+    if (this.paper_status_id) {
+      const paperStatus = await PaperStatus.query().findById(
+        this.paper_status_id,
+      );
+      this.status = paperStatus.name;
+    }
   }
 
   // delete all topic of paper with id
