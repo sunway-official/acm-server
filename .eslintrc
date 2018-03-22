@@ -26,6 +26,7 @@
     "no-console": 0,
     "no-unused-vars": 1,
     "array-callback-return": 0,
-    "eqeqeq": 0
+    "eqeqeq": 0,
+    "prefer-destructuring": 0
   }
 }

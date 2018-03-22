@@ -362,7 +362,7 @@ const usersData = [
     updated_at: new Date(),
   },
   {
-    firstname: 'Athor',
+    firstname: 'Author',
     lastname: 'Mr.',
     email: 'author@gmail.com',
     gender: 'male',

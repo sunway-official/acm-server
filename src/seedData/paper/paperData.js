@@ -1,10 +1,11 @@
 const faker = require('faker');
+const paperStatus = require('../paper/paperStatusData');
 
 // eslint-disable-next-line
 const tempPapers = conference_id => [
   {
     status: 'Accepted',
-    paper_status_id: 1,
+    paper_status_id: faker.random.number({ min: 1, max: 8 }),
     conference_id,
     title: "How we'll earn money in a future without jobs",
     keywords: faker.lorem.sentence(),
@@ -13,7 +14,7 @@ const tempPapers = conference_id => [
   },
   {
     status: 'Accepted',
-    paper_status_id: 1,
+    paper_status_id: faker.random.number({ min: 1, max: 8 }),
     conference_id,
     keywords: faker.lorem.sentence(),
     title: "Why jobs of the future won't feel like work",
@@ -22,7 +23,7 @@ const tempPapers = conference_id => [
   },
   {
     status: 'Accepted',
-    paper_status_id: 1,
+    paper_status_id: faker.random.number({ min: 1, max: 8 }),
     conference_id,
     keywords: faker.lorem.sentence(),
     title: 'Future tech will give you the benefits of city life anywhere',
@@ -31,7 +32,7 @@ const tempPapers = conference_id => [
   },
   {
     status: 'Accepted',
-    paper_status_id: 1,
+    paper_status_id: faker.random.number({ min: 1, max: 8 }),
     conference_id,
     keywords: faker.lorem.sentence(),
     title: 'Would you live in a floating city in the sky?',
@@ -40,16 +41,16 @@ const tempPapers = conference_id => [
   },
   {
     status: 'Accepted',
-    paper_status_id: 1,
+    paper_status_id: faker.random.number({ min: 1, max: 8 }),
     conference_id,
     keywords: faker.lorem.sentence(),
     title: "Don't fear intelligent machines. Work with them",
     abstract:
-      'We must face our fears if we want to get the most out of technology -- and we must conquer those fears if we want to get the best out of humanity, says Garry Kasparov. One of the greatest chess players in history, Kasparov lost a memorable match to IBM supercomputer Deep Blue in 1997. Now he shares his vision for a future where intelligent machines help us turn our grandest dreams into reality.',
+      'We must face our fears if we want to get the most out of technology -- and we must conquer those fears if we want to get the best out of humanity, says Garry Kasparov. One of the greatest chess players in history, Kasparov lost a memorable match to IBM supercomputer Deep Blue in faker.random.number({min:1, max:8})997. Now he shares his vision for a future where intelligent machines help us turn our grandest dreams into reality.',
   },
   {
     status: 'Accepted',
-    paper_status_id: 1,
+    paper_status_id: faker.random.number({ min: 1, max: 8 }),
     conference_id,
     keywords: faker.lorem.sentence(),
     title: 'How I built a jet suit',
@@ -58,7 +59,7 @@ const tempPapers = conference_id => [
   },
   {
     status: 'Accepted',
-    paper_status_id: 1,
+    paper_status_id: faker.random.number({ min: 1, max: 8 }),
     conference_id,
     keywords: faker.lorem.sentence(),
     title: 'Why the only future worth building includes everyone',
@@ -67,7 +68,7 @@ const tempPapers = conference_id => [
   },
   {
     status: 'Accepted',
-    paper_status_id: 1,
+    paper_status_id: faker.random.number({ min: 1, max: 8 }),
     conference_id,
     keywords: faker.lorem.sentence(),
     title: 'What to know about cybercrime',
@@ -76,16 +77,16 @@ const tempPapers = conference_id => [
   },
   {
     status: 'Accepted',
-    paper_status_id: 1,
+    paper_status_id: faker.random.number({ min: 1, max: 8 }),
     conference_id,
     keywords: faker.lorem.sentence(),
     title: "Let's help refugees thrive, not just survive",
     abstract:
-      "Today's refugee crisis is the biggest since World War II, and it's growing. When this talk was given, 50 million people had been forcefully displaced from their homes by conflict and war; now the number is 65.3 million. There were 3 million Syrian refugees in 2014; now there are 4.9 million. Inside this overwhelming crisis are the individual human stories -- of care, growth and family, in the face of lost education, lost home, lost future. Melissa Fleming of the UN's refugee agency tells the refugees' stories -- and asks us to help them rebuild their world.",
+      "Today's refugee crisis is the biggest since World War II, and it's growing. When this talk was given, 50 million people had been forcefully displaced from their homes by conflict and war; now the number is 65.3 million. There were 3 million Syrian refugees in 20faker.random.number({min:1, max:8})4; now there are 4.9 million. Inside this overwhelming crisis are the individual human stories -- of care, growth and family, in the face of lost education, lost home, lost future. Melissa Fleming of the UN's refugee agency tells the refugees' stories -- and asks us to help them rebuild their world.",
   },
   {
     status: 'Accepted',
-    paper_status_id: 1,
+    paper_status_id: faker.random.number({ min: 1, max: 8 }),
     conference_id,
     keywords: faker.lorem.sentence(),
     title: 'What makes you happy?',
@@ -94,16 +95,16 @@ const tempPapers = conference_id => [
   },
   {
     status: 'Accepted',
-    paper_status_id: 1,
+    paper_status_id: faker.random.number({ min: 1, max: 8 }),
     conference_id,
     keywords: faker.lorem.sentence(),
     title: 'The refugee crisis is a test of our character',
     abstract:
-      "Sixty-five million people were displaced from their homes by conflict and disaster in 2016. It's not just a crisis; it's a test of who we are and what we stand for, says David Miliband -- and each of us has a personal responsibility to help solve it. In this must-watch talk, Miliband gives us specific, tangible ways to help refugees and turn empathy and altruism into action.",
+      "Sixty-five million people were displaced from their homes by conflict and disaster in 20faker.random.number({min:1, max:8})6. It's not just a crisis; it's a test of who we are and what we stand for, says David Miliband -- and each of us has a personal responsibility to help solve it. In this must-watch talk, Miliband gives us specific, tangible ways to help refugees and turn empathy and altruism into action.",
   },
   {
     status: 'Accepted',
-    paper_status_id: 1,
+    paper_status_id: faker.random.number({ min: 1, max: 8 }),
     conference_id,
     keywords: faker.lorem.sentence(),
     title: 'A boat carrying 500 refugees sunk at sea.',
@@ -112,7 +113,7 @@ const tempPapers = conference_id => [
   },
   {
     status: 'Accepted',
-    paper_status_id: 1,
+    paper_status_id: faker.random.number({ min: 1, max: 8 }),
     conference_id,
     keywords: faker.lorem.sentence(),
     title: "Our refugee system is failing. Here's how we can fix it",
@@ -121,8 +122,19 @@ const tempPapers = conference_id => [
   },
 ];
 
-let papers = [];
+const papers = [];
 
-papers = papers.concat(tempPapers(1));
+for (let i = 1; i <= 30; i += 1) {
+  const conference_id = 1;
+  const paperStatusId = faker.random.number({ min: 1, max: 8 });
+  papers.push({
+    status: paperStatus[paperStatusId - 1].name,
+    paper_status_id: paperStatusId,
+    conference_id,
+    keywords: faker.lorem.sentence(),
+    title: faker.lorem.sentence(),
+    abstract: faker.lorem.sentences(),
+  });
+}
 
 module.exports = papers;
