@@ -7,7 +7,11 @@ exports.up = function(knex, Promise) {
       table.text('content');
       table.boolean('read').defaultTo(false);
       table
-        .integer('user_id')
+        .integer('sender_id')
+        .unsigned()
+        .notNullable();
+      table
+        .integer('receiver_id')
         .unsigned()
         .notNullable();
       table.timestamp('created_at').defaultTo(knex.fn.now());
