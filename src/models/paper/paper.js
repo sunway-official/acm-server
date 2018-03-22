@@ -40,7 +40,6 @@ export default class Paper extends Model {
   };
 
   async $beforeValidate() {
-    this.id = parseInt(this.id, 10);
     if (this.paper_status_id) {
       this.paper_status_id = parseInt(this.paper_status_id, 10);
     }

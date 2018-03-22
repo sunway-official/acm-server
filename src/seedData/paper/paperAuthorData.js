@@ -3,18 +3,18 @@ const users = require('../authorization/userData');
 const papers = require('../paper/paperData');
 
 const paperAuthors = [];
-for (let i = 1; i <= 20; i += 1) {
-  const authorId = faker.random.number({ min: 1, max: 10 }) - 1;
-  const paperId = faker.random.number({ min: 1, max: 10 }) - 1;
-  const author = users[authorId];
-  const paper = papers[paperId];
+for (let i = 1; i <= 30; i += 1) {
+  const authorId = faker.random.number({ min: 19, max: 21 });
+  const paperId = faker.random.number({ min: 1, max: 30 });
+  const author = users[authorId - 1];
+  const paper = papers[paperId - 1];
   paperAuthors.push({
-    paper_id: paperId + 1,
-    user_id: authorId + 1,
-    author_name: author.firstname + author.lastname,
+    paper_id: paperId,
+    user_id: authorId,
+    author_name: `${author.firstname} ${author.lastname}`,
     author_email: users[authorId].email,
     author_title: users[authorId].position,
-    corresponding: faker.random.arrayElement([1, 2, 3]),
+    corresponding: faker.random.arrayElement([1, 2]),
     conference_id: paper.conference_id,
     paper_status: paper.status,
   });

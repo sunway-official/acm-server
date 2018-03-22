@@ -183,7 +183,7 @@ export default {
       root,
       data,
       {
-        models: { Paper },
+        models: { Paper, Conference },
         ValidationError,
         user,
         emailTemplates,
@@ -197,21 +197,25 @@ export default {
         }
         // eslint-disable-next-line
         const conference_id = user.current_conference_id;
-
+        const conference = await Conference.query().findById(conference_id);
         // eslint-disable-next-line
         data.conference_id = conference_id;
         // eslint-disable-next-line
         const newPaper = await Paper.query().insert(data);
-        const subject = 'Submited paper';
+
+        // send email to author
+        const subject = `${conference.title} - Invitation`;
         const template = emailTemplates.submitPaper(
           config.swEmail,
           user.email,
           subject,
           {
-            title: data.title,
+            user,
+            conference,
           },
         );
         commonUtils.sendMail(user, template, transporter);
+
         return newPaper;
       } catch (e) {
         // eslint-disable-next-line no-console

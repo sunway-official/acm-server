@@ -17,6 +17,8 @@ export default class PaperAuthor extends Model {
       author_email: { type: 'string', maxLength: '100' },
       author_title: { type: 'string', maxLength: '100' },
       author_organization: { type: 'string', maxLength: '200' },
+      author_street: { type: 'string', maxLength: '100' },
+      author_city: { type: 'string', maxLength: '100' },
       author_country: { type: 'string', maxLength: '100' },
       paper_status: { type: 'string', maxLength: '20' },
     },

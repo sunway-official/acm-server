@@ -23,6 +23,12 @@ type PaperAuthor {
   # author organizer
   author_organizer: String!
 
+  # author street
+  author_street: String!
+
+  # author city
+  author_city: String!
+
   # author country
   author_country: String!
 
@@ -41,7 +47,8 @@ extend type Query {
 extend type Mutation {
   # insert Paper author
   insertPaperAuthor(paper_id: ID!, user_id: ID, corresponding: Int, author_name: String,
-    author_email: String, author_title: String, author_organizer: String, author_country: String,
+    author_email: String, author_title: String, author_organizer: String, author_street: String,
+    author_city: String,author_country: String,
     paper_status: String): PaperAuthor!
 
   # update author of paper
