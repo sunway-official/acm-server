@@ -8,7 +8,7 @@ for (let i = 0; i <= 10; i += 1) {
   notifications.push({
     sender_id: senderId,
     receiver_id: receiverId,
-    title: faker.random.title(10),
+    title: faker.random.words(10),
     content: faker.random.words(10),
     read: faker.random.boolean(),
   });

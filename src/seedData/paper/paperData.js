@@ -124,7 +124,7 @@ const tempPapers = conference_id => [
 
 const papers = [];
 
-for (let i = 1; i <= 30; i += 1) {
+for (let i = 1; i <= 13; i += 1) {
   const conference_id = 1;
   const paperStatusId = faker.random.number({ min: 1, max: 8 });
   papers.push({

@@ -3,9 +3,9 @@ const users = require('../authorization/userData');
 const papers = require('../paper/paperData');
 
 const paperReviewers = [];
-for (let i = 1; i <= 30; i += 1) {
+for (let i = 1; i <= 15; i += 1) {
   const reviewerId = faker.random.number({ min: 20, max: 22 });
-  const paperId = faker.random.number({ min: 1, max: 30 });
+  const paperId = faker.random.number({ min: 1, max: 13 });
   const reviewer = users[reviewerId - 1];
   const paper = papers[paperId - 1];
   paperReviewers.push({
