@@ -29,13 +29,13 @@ function getDefaultPermissions(role_id, features) {
 function getAllData() {
   let result = [];
   result = getDefaultPermissions(organizer.role_id, organizer.features)
-    .concat(getDefaultPermissions(speaker.role_id, speaker.features))
-    .concat(getDefaultPermissions(moderator.role_id, moderator.features))
-    .concat(getDefaultPermissions(supporter.role_id, supporter.features))
-    .concat(getDefaultPermissions(participant.role_id, participant.features))
-    .concat(
-      getDefaultPermissions(ticketChecker.role_id, ticketChecker.features),
-    )
+    // .concat(getDefaultPermissions(speaker.role_id, speaker.features))
+    // .concat(getDefaultPermissions(moderator.role_id, moderator.features))
+    // .concat(getDefaultPermissions(supporter.role_id, supporter.features))
+    // .concat(getDefaultPermissions(participant.role_id, participant.features))
+    .concat
+    // getDefaultPermissions(ticketChecker.role_id, ticketChecker.features),
+    ()
     .concat(getDefaultPermissions(reviewer.role_id, reviewer.features))
     .concat(getDefaultPermissions(author.role_id, author.features));
 

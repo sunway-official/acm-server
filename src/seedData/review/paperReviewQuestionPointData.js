@@ -3,10 +3,10 @@ const paperReviewers = require('../review/paperReviewerData');
 const reviewQuestions = require('../review/reviewQuestionData');
 
 const paperReview = [];
-for (let i = 1; i <= 20; i += 1) {
-  const paperReviewerId = faker.random.number({ min: 1, max: 20 }) - 1;
+for (let i = 1; i <= 15; i += 1) {
+  const paperReviewerId = faker.random.number({ min: 1, max: 10 }) - 1;
   const paperReviewer = paperReviewers[paperReviewerId];
-  const reviewerQuestionId = faker.random.number({ min: 1, max: 20 }) - 1;
+  const reviewerQuestionId = faker.random.number({ min: 1, max: 10 }) - 1;
   const reviewQuestion = reviewQuestions[reviewerQuestionId];
   const point = faker.random.number({ min: 1, max: 5 });
   const comment = faker.lorem.sentence();

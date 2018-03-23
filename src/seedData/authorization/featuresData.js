@@ -403,4 +403,10 @@
 //   },
 // ];
 
-// module.exports = features;
+const features = [
+  {
+    id: 'deleteCoOrganizerDetail',
+  },
+];
+
+module.exports = features;
