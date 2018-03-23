@@ -25,6 +25,8 @@ import paper from './paper';
 // review
 import review from './review';
 
+import notification from './notification';
+
 const models = {
   ...activity,
   ...authorization,
@@ -35,6 +37,7 @@ const models = {
   ...topic,
   ...paper,
   ...review,
+  ...notification,
 };
 
 export default models;
