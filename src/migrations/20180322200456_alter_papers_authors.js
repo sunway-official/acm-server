@@ -1,8 +1,8 @@
 exports.up = function(knex, Promise) {
   return Promise.all([
     knex.schema.alterTable('papers_authors', table => {
-      table.string('street');
-      table.string('city');
+      table.string('author_street');
+      table.string('author_city');
     }),
   ]);
 };
@@ -10,8 +10,8 @@ exports.up = function(knex, Promise) {
 exports.down = function(knex, Promise) {
   return Promise.all([
     knex.schema.alterTable('papers_authors', table => {
-      table.dropColumn('street');
-      table.dropColumn('city');
+      table.dropColumn('author_street');
+      table.dropColumn('author_city');
     }),
   ]);
 };
