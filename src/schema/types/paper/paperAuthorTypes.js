@@ -32,6 +32,9 @@ type PaperAuthor {
   # author country
   author_country: String!
 
+  # author zipcode
+  author_zipcode: String
+
   # paper status
   paper_status: String!
 }
@@ -48,7 +51,7 @@ extend type Mutation {
   # insert Paper author
   insertPaperAuthor(paper_id: ID!, user_id: ID, corresponding: Int, author_name: String,
     author_email: String, author_title: String, author_organization: String, author_street: String,
-    author_city: String,author_country: String): PaperAuthor!
+    author_city: String,author_country: String, author_zipcode: String): PaperAuthor!
 
   # update author of paper
   updateAuthorOfPaper(paper_id: ID!, user_id: ID!): PaperAuthor!
