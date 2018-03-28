@@ -13,6 +13,27 @@ export default {
       return user;
     },
   },
+  Query: {
+    getNotifications: async (
+      root,
+      data,
+      { models: { Notification }, ValidationError, user },
+    ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
+
+      try {
+        const notifications = await Notification.query().where(
+          'sender_id',
+          user.id,
+        );
+        return notifications;
+      } catch (error) {
+        throw new ValidationError(error);
+      }
+    },
+  },
   Mutation: {
     testNotification: async (
       root,
@@ -39,7 +60,7 @@ export default {
           Expo.isExpoPushToken(receiver.notification_key)
         ) {
           await handlePushNotification(expo, {
-            to: sender.notification_key,
+            to: receiver.notification_key,
             sound: 'default',
             body: content,
             data: { title, content },
@@ -47,6 +68,73 @@ export default {
         }
 
         return savedNotification;
+      } catch (error) {
+        throw new ValidationError(error);
+      }
+    },
+    insertNotification: async (
+      root,
+      { to, content, title },
+      { models: { Notification, User }, ValidationError, user, expo },
+    ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
+
+      try {
+        const destinationUser = await User.query().findOne({ email: to });
+
+        if (!destinationUser) {
+          throw new ValidationError('invalid-destination-user');
+        }
+
+        const notification = await Notification.query().insert({
+          sender_id: user.id,
+          receiver_id: destinationUser.id,
+          content,
+          title,
+        });
+
+        if (
+          destinationUser.notification_key &&
+          Expo.isExpoPushToken(destinationUser.notification_key)
+        ) {
+          await handlePushNotification(expo, {
+            to: destinationUser.notification_key,
+            sound: 'default',
+            body: content,
+            data: { title, content },
+          });
+        }
+
+        return notification;
+      } catch (error) {
+        throw new ValidationError(error);
+      }
+    },
+    setNotificationRead: async (
+      root,
+      { id },
+      { models: { Notification }, ValidationError, user },
+    ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
+
+      try {
+        const notification = await Notification.query().findById(id);
+
+        console.log(user.id, notification);
+
+        if (user.id !== notification.sender_id) {
+          throw new ValidationError('not-author');
+        }
+
+        const updatedNotification = await notification.$query().patchAndFetch({
+          read: true,
+        });
+
+        return updatedNotification;
       } catch (error) {
         throw new ValidationError(error);
       }

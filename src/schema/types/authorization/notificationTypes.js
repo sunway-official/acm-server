@@ -11,11 +11,12 @@ export default `
   }
 
   extend type Mutation {
-    setNotificationRead: Notification!
+    setNotificationRead(id: ID!): Notification!
     testNotification(from: String!, to: String!, title: String, content: String): Notification!
+    insertNotification(to: String!, title: String, content: String): Notification!
   }
 
   extend type Query {
-    getNotification: [Notification!]!
+    getNotifications: [Notification!]!
   }
 `;

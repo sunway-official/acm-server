@@ -73,8 +73,6 @@ const start = async () => {
   app.use(helmet());
   app.use(cors('*'));
 
-  console.log(process.env.NODE_ENV);
-
   const Knex =
     process.env.NODE_ENV === 'development'
       ? knex(knexConfig.development)
