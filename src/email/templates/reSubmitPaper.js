@@ -20,11 +20,13 @@ export default (fromAddress, toAddress, subject = '', variables = {}) => {
       Dear ${user.position} ${user.firstname},
       <br>
       <br>
-      I am writing this email to inform you that we recieved your paper(s). Your paper would be reviewed before ${
-        conference.dl_release_final_paper
-      } and we will let you know the result after that date.
+      I am writing this email to thanks for your submission to [Conference’s acronym name]. However, we regret to inform you that your paper could not be accepted for presentation after being reviewed since the justification: [the detail reason of Rejection | Comment of Reivewer].
       <br>
-      We believe that the articles you bring to the conference going to contribute to the success of the conference.
+      <br>
+      But we would suggest that you modify your paper with the requirements of the conference very well, and welcome to submit for Round 2 before ${
+        conference.dl_re_submit_paper
+      }.
+      <br>
       <br>
       We look forward to hearing from you soon and please feel free to contact us if we can be of further assistance.
       <br>

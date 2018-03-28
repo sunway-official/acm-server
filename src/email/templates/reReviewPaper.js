@@ -20,11 +20,17 @@ export default (fromAddress, toAddress, subject = '', variables = {}) => {
       Dear ${user.position} ${user.firstname},
       <br>
       <br>
-      I am writing this email to inform you that we recieved your paper(s). Your paper would be reviewed before ${
-        conference.dl_release_final_paper
-      } and we will let you know the result after that date.
+      I am writing to send the ${
+        conference.title
+      } conference's papers for your perusal. Attached is the papers of ${
+      conference.title
+    } conference which was submitted again . Hope you can arrange your schedule accordingly.
       <br>
-      We believe that the articles you bring to the conference going to contribute to the success of the conference.
+      <br>
+      For better preparing the conference, could you please review all of the paper(s) the following papers before ${
+        conference.dl_re_review_paper
+      }.
+      <br>
       <br>
       We look forward to hearing from you soon and please feel free to contact us if we can be of further assistance.
       <br>
