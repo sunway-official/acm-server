@@ -4,16 +4,19 @@ export default `
     title: String!
     content: String
     read: Boolean
-    user: User!
-    updatedAt: Date!
-    createdAt: Date!
+    sender: User!
+    receiver: User!
+    updated_at: Date!
+    created_at: Date!
   }
 
   extend type Mutation {
-    setNotificationRead: Notification!
+    setNotificationRead(id: ID!): Notification!
+    testNotification(from: String!, to: String!, title: String, content: String): Notification!
+    insertNotification(to: String!, title: String, content: String): Notification!
   }
 
   extend type Query {
-    getNotification: [Notification!]!
+    getNotifications: [Notification!]!
   }
 `;
