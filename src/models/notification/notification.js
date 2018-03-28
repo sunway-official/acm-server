@@ -15,13 +15,16 @@ export default class Notification extends Model {
       receiver_id: {
         type: 'number',
       },
+      created_at: { type: ['string', 'null'] },
+      updated_at: { type: ['string', 'null'] },
     },
   };
-  async $beforeInsert() {
+  $beforeInsert() {
+    this.read = false;
     this.created_at = new Date();
     this.updated_at = new Date();
   }
-  async $beforeUpdate() {
+  $beforeUpdate() {
     this.updated_at = new Date();
   }
 }

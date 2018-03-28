@@ -4,9 +4,10 @@ export default `
     title: String!
     content: String
     read: Boolean
-    user: User!
-    updatedAt: Date!
-    createdAt: Date!
+    sender: User!
+    receiver: User!
+    updated_at: Date!
+    created_at: Date!
   }
 
   extend type Mutation {

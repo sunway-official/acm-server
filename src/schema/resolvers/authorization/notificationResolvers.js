@@ -5,11 +5,11 @@ import handlePushNotification from '../../../services/handlePushNotification';
 export default {
   Notification: {
     sender: async ({ sender_id }, data, { models: { User } }) => {
-      const user = await User.query().where('id', sender_id);
+      const user = await User.query().findById(sender_id);
       return user;
     },
     receiver: async ({ receiver_id }, data, { models: { User } }) => {
-      const user = await User.query().where('id', receiver_id);
+      const user = await User.query().findById(receiver_id);
       return user;
     },
   },
@@ -20,16 +20,18 @@ export default {
       { models: { Notification, User }, ValidationError, expo },
     ) => {
       try {
-        const sender = await User.query().where('email', from);
-        const receiver = await User.query().where('email', to);
+        const sender = await User.query().findOne({ email: from });
+        const receiver = await User.query().findOne({ email: to });
 
         const data = {
           sender_id: sender.id,
           receiver_id: receiver.id,
           title,
           content,
-          read: false,
         };
+
+        console.log(data);
+
         const savedNotification = await Notification.query().insert(data);
 
         if (
