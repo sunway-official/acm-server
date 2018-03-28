@@ -11,6 +11,7 @@ export default `
 
   extend type Mutation {
     setNotificationRead: Notification!
+    testNotification(from: String!, to: String!, title: String, content: String): Notification!
   }
 
   extend type Query {
