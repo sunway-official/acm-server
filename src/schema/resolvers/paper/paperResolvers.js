@@ -143,16 +143,25 @@ export default {
         throw new ValidationError(e);
       }
     },
-    getPapersByUserID: async (
+    getCurrentPaper: async (
       root,
       data,
       { models: { Paper }, ValidationError, user },
     ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
+      if (user.current_conference_id === 0) {
+        throw new ValidationError('no-current-conference');
+      }
       try {
-        if (!user) {
-          throw new ValidationError('unauthorized');
+        const papers = await Paper.query()
+          .innerJoin('papers_authors', 'papers.id', 'papers_authors.paper_id')
+          .where('papers_authors.user_id', user.id)
+          .andWhere('papers.conference_id', user.current_conference_id);
+        if (!papers.length) {
+          throw new Error('no-current-paper');
         }
-        const papers = await Paper.query().where('user_id', user.id);
         return papers;
       } catch (e) {
         // eslint-disable-next-line no-console
