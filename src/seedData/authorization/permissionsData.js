@@ -27,7 +27,7 @@ const speakersID = [3, 24];
 const authorsID = [20, 21];
 
 // user_id want to become a reviewer
-const reviewersID = [22, 23];
+const reviewersID = [22, 23, 24, 25, 26, 27, 28, 29, 30];
 // user_id want to become a ticketChecker
 
 const ticketCheckersID = [18, 17, 19];
