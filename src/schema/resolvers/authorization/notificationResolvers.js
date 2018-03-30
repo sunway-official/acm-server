@@ -25,7 +25,7 @@ export default {
 
       try {
         const notifications = await Notification.query().where(
-          'sender_id',
+          'receiver_id',
           user.id,
         );
         return notifications;
