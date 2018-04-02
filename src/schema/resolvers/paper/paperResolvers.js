@@ -13,7 +13,7 @@ export default {
     topic_name: async ({ id }, data, { models: { PaperTopic } }) => {
       const paperTopic = await PaperTopic.query().where('paper_id', id);
       let topic_name = '';
-      if (paperTopic) {
+      if (paperTopic.length > 0) {
         // eslint-disable-next-line
         topic_name = paperTopic[0].topic_name;
       }
