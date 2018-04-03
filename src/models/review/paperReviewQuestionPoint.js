@@ -58,7 +58,7 @@ export default class PaperReviewQuestionPoint extends Model {
       'paper_id',
       this.paper_id,
     );
-    if (paperTopic) {
+    if (paperTopic.length > 0) {
       this.topic_name = paperTopic[0].topic_name;
     }
   }
@@ -90,7 +90,7 @@ export default class PaperReviewQuestionPoint extends Model {
       'paper_id',
       this.paper_id,
     );
-    if (paperTopic) {
+    if (paperTopic.length > 0) {
       this.topic_name = paperTopic[0].topic_name;
     }
   }
