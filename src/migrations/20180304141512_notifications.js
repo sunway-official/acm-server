@@ -6,6 +6,7 @@ exports.up = function(knex, Promise) {
       table.string('title').notNullable();
       table.text('content');
       table.boolean('read').defaultTo(false);
+      table.boolean('hide').defaultTo(false);
       table
         .integer('sender_id')
         .unsigned()

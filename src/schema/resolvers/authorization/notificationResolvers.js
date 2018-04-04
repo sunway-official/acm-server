@@ -1,4 +1,5 @@
 import Expo from 'expo-server-sdk';
+import { transaction } from 'objection';
 
 import handlePushNotification from '../../../services/handlePushNotification';
 
@@ -16,7 +17,7 @@ export default {
   Query: {
     getNotifications: async (
       root,
-      data,
+      { showHidden },
       { models: { Notification }, ValidationError, user },
     ) => {
       if (!user) {
@@ -24,10 +25,17 @@ export default {
       }
 
       try {
-        const notifications = await Notification.query().where(
-          'receiver_id',
-          user.id,
-        );
+        let notifications;
+        if (showHidden) {
+          notifications = await Notification.query().where(
+            'receiver_id',
+            user.id,
+          );
+        } else {
+          notifications = await Notification.query()
+            .where('receiver_id', user.id)
+            .andWhere('hide', false);
+        }
         return notifications;
       } catch (error) {
         throw new ValidationError(error);
@@ -68,6 +76,53 @@ export default {
         }
 
         return savedNotification;
+      } catch (error) {
+        throw new ValidationError(error);
+      }
+    },
+    hideNotification: async (
+      root,
+      { id },
+      { models: { Notification }, ValidationError, user, Knex },
+    ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
+
+      try {
+        const notification = await Notification.query().findById(id);
+
+        if (!notification || notification.receiver_id !== user.id) {
+          throw new ValidationError('not-owner');
+        }
+
+        const hiddenNotification = await notification
+          .$query()
+          .patchAndFetch({ hide: true });
+
+        return hiddenNotification;
+      } catch (error) {
+        throw new ValidationError(error);
+      }
+    },
+    markAllNotificationsAsRead: async (
+      root,
+      data,
+      { models: { Notification }, ValidationError, user, Knex },
+    ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
+
+      try {
+        const result = await transaction(Knex, async trx => {
+          const readNotifications = await Notification.query(trx)
+            .patch({ read: true })
+            .where('receiver_id', user.id)
+            .returning('*');
+          return readNotifications;
+        });
+        return result;
       } catch (error) {
         throw new ValidationError(error);
       }

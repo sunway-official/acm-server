@@ -11,6 +11,7 @@ for (let i = 0; i <= 500; i += 1) {
     title: faker.random.words(10),
     content: faker.random.words(10),
     read: faker.random.boolean(),
+    hide: faker.random.boolean(),
   });
 }
 
