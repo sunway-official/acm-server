@@ -36,7 +36,6 @@ export default class PaperReviewer extends Model {
     const user = await User.query().findById(this.user_id);
     if (user) {
       this.reviewer_name = `${user.firstname} ${user.lastname}`;
-      this.conference_id = user.current_conference_id;
     }
 
     // paper topic
@@ -60,7 +59,6 @@ export default class PaperReviewer extends Model {
     const user = await User.query().findById(this.user_id);
     if (user) {
       this.reviewer_name = `${user.firstname} ${user.lastname}`;
-      this.conference_id = user.current_conference_id;
     }
 
     // paper topic

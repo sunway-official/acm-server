@@ -40,7 +40,12 @@ export default {
       if (!user) {
         throw new ValidationError('unauthorized');
       }
-      const paperReview = await PaperReviewQuestionPoint.query().insert(data);
+      const conference_id = user.current_conference_id;
+      const paperReviewData = data;
+      paperReviewData.conference_id = conference_id;
+      const paperReview = await PaperReviewQuestionPoint.query().insert(
+        paperReviewData,
+      );
       return paperReview;
     },
   },

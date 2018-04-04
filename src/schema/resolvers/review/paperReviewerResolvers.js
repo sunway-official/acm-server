@@ -32,7 +32,11 @@ export default {
       }
       const conference_id = user.current_conference_id;
       const conference = await Conference.query().findById(conference_id);
-      const paperReviewer = await PaperReviewer.query().insert(data);
+      const paperReviewerData = data;
+      paperReviewerData.conference_id = conference_id;
+      const paperReviewer = await PaperReviewer.query().insert(
+        paperReviewerData,
+      );
 
       // send email to author
       const subject = `${conference.title}`;
