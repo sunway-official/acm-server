@@ -1,4 +1,4 @@
-export default async function handlePushNofication(expo, notification) {
+export default async function handlePushNotification(expo, notification) {
   const messages = [];
   messages.push(notification);
 

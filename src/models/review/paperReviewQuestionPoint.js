@@ -21,6 +21,7 @@ export default class PaperReviewQuestionPoint extends Model {
       comment: { type: 'text' },
       paper_status: { type: 'string' },
       topic_name: { type: 'string' },
+      created_at: { type: ['string', 'null'] },
     },
   };
 
@@ -29,6 +30,7 @@ export default class PaperReviewQuestionPoint extends Model {
   }
 
   async $beforeInsert() {
+    this.created_at = new Date();
     // review question
     const reviewQuestion = await ReviewQuestion.query().findById(
       this.review_question_id,
@@ -48,7 +50,6 @@ export default class PaperReviewQuestionPoint extends Model {
     const user = await User.query().findById(this.user_id);
     if (user) {
       this.reviewer_name = `${user.firstname} ${user.lastname}`;
-      this.conference_id = user.current_conference_id;
     }
 
     // paper topic
@@ -56,7 +57,7 @@ export default class PaperReviewQuestionPoint extends Model {
       'paper_id',
       this.paper_id,
     );
-    if (paperTopic) {
+    if (paperTopic.length > 0) {
       this.topic_name = paperTopic[0].topic_name;
     }
   }
@@ -80,7 +81,6 @@ export default class PaperReviewQuestionPoint extends Model {
     const user = await User.query().findById(this.user_id);
     if (user) {
       this.reviewer_name = `${user.firstname} ${user.lastname}`;
-      this.conference_id = user.current_conference_id;
     }
 
     // paper topic
@@ -88,7 +88,7 @@ export default class PaperReviewQuestionPoint extends Model {
       'paper_id',
       this.paper_id,
     );
-    if (paperTopic) {
+    if (paperTopic.length > 0) {
       this.topic_name = paperTopic[0].topic_name;
     }
   }

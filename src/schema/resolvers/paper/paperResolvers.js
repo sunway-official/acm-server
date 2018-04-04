@@ -10,32 +10,26 @@ export default {
       const paperTopic = await PaperTopic.query().where('paper_id', id);
       return paperTopic;
     },
+    topic_name: async ({ id }, data, { models: { PaperTopic } }) => {
+      const paperTopic = await PaperTopic.query().where('paper_id', id);
+      let topic_name = '';
+      if (paperTopic.length > 0) {
+        // eslint-disable-next-line
+        topic_name = paperTopic[0].topic_name;
+      }
+      return topic_name;
+    },
     reviewers: async (
       { id, conference_id },
       data,
       { models: { PaperReviewer } },
     ) => {
       const paperReviewers = await PaperReviewer.query()
-        .select('reviewer_name')
+        .select('*')
         .where(builder =>
           builder.where('conference_id', conference_id).where('paper_id', id),
         );
-      let reviewers = [];
-      if (paperReviewers) {
-        reviewers = paperReviewers.map(
-          paperReviewer => paperReviewer.reviewer_name,
-        );
-      }
-      return reviewers;
-    },
-    topic_name: async ({ id }, data, { models: { PaperTopic } }) => {
-      const paperTopic = await PaperTopic.query().where('paper_id', id);
-      let topic_name = '';
-      if (paperTopic) {
-        // eslint-disable-next-line
-        topic_name = paperTopic[0].topic_name;
-      }
-      return topic_name;
+      return paperReviewers;
     },
     authors: async (
       { id, conference_id },
@@ -43,15 +37,25 @@ export default {
       { models: { PaperAuthor } },
     ) => {
       const paperAuthors = await PaperAuthor.query()
-        .select('author_name')
+        .select('*')
         .where(builder =>
           builder.where('conference_id', conference_id).where('paper_id', id),
         );
-      let authors = [];
-      if (paperAuthors) {
-        authors = paperAuthors.map(paperAuthor => paperAuthor.author_name);
-      }
-      return authors;
+      return paperAuthors;
+    },
+    comments: async (
+      { id, conference_id },
+      data,
+      { models: { PaperReviewQuestionPoint } },
+    ) => {
+      const paperReview = await PaperReviewQuestionPoint.query().where(
+        builder =>
+          builder
+            .where('conference_id', conference_id)
+            .where('paper_id', id)
+            .where('review_question_id', 1),
+      );
+      return paperReview;
     },
   },
   Query: {
@@ -77,12 +81,12 @@ export default {
           // ROLE_AUTHOR
           case ROLE_AUTHOR: {
             papers = await Paper.query()
-              .select('*', 'authors.paper_id as id')
-              .joinRelation('authors')
+              .select('*', 'rls_authors.paper_id as id')
+              .joinRelation('rls_authors')
               .where(builder =>
                 builder
-                  .where('authors.conference_id', conference_id)
-                  .where('authors.user_id', user.id),
+                  .where('rls_authors.conference_id', conference_id)
+                  .where('rls_authors.user_id', user.id),
               );
             break;
           }
@@ -90,12 +94,12 @@ export default {
           // ROLE_REVIEWER
           case ROLE_REVIEWER: {
             papers = await Paper.query()
-              .select('*', 'reviewers.paper_id as id')
-              .joinRelation('reviewers')
+              .select('*', 'rls_reviewers.paper_id as id')
+              .joinRelation('rls_reviewers')
               .where(builder =>
                 builder
-                  .where('reviewers.conference_id', conference_id)
-                  .where('reviewers.user_id', user.id),
+                  .where('rls_reviewers.conference_id', conference_id)
+                  .where('rls_reviewers.user_id', user.id),
               );
             break;
           }
@@ -139,16 +143,25 @@ export default {
         throw new ValidationError(e);
       }
     },
-    getPapersByUserID: async (
+    getCurrentPaper: async (
       root,
       data,
       { models: { Paper }, ValidationError, user },
     ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
+      if (user.current_conference_id === 0) {
+        throw new ValidationError('no-current-conference');
+      }
       try {
-        if (!user) {
-          throw new ValidationError('unauthorized');
+        const papers = await Paper.query()
+          .innerJoin('papers_authors', 'papers.id', 'papers_authors.paper_id')
+          .where('papers_authors.user_id', user.id)
+          .andWhere('papers.conference_id', user.current_conference_id);
+        if (!papers.length) {
+          throw new Error('no-current-paper');
         }
-        const papers = await Paper.query().where('user_id', user.id);
         return papers;
       } catch (e) {
         // eslint-disable-next-line no-console
@@ -179,7 +192,7 @@ export default {
       root,
       data,
       {
-        models: { Paper },
+        models: { Paper, Conference },
         ValidationError,
         user,
         emailTemplates,
@@ -193,21 +206,25 @@ export default {
         }
         // eslint-disable-next-line
         const conference_id = user.current_conference_id;
-
+        const conference = await Conference.query().findById(conference_id);
         // eslint-disable-next-line
         data.conference_id = conference_id;
         // eslint-disable-next-line
         const newPaper = await Paper.query().insert(data);
-        const subject = 'Submited paper';
+
+        // send email to author
+        const subject = `${conference.title} - Invitation`;
         const template = emailTemplates.submitPaper(
           config.swEmail,
           user.email,
           subject,
           {
-            title: data.title,
+            user,
+            conference,
           },
         );
         commonUtils.sendMail(user, template, transporter);
+
         return newPaper;
       } catch (e) {
         // eslint-disable-next-line no-console
@@ -234,11 +251,10 @@ export default {
           if (paper.length !== 0)
             throw new ValidationError("Paper's title is exists !");
         }
+
         const updatePaper = await Paper.query()
-          .updateAndFetchById(data.id, data)
-          .where(builder => {
-            builder.where('conference_id', conference_id);
-          });
+          .patchAndFetchById(data.id, data)
+          .where('conference_id', conference_id);
         if (!updatePaper) {
           throw new ValidationError("Paper's not found in conference");
         }

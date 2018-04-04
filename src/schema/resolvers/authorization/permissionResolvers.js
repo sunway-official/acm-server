@@ -61,11 +61,18 @@ export default {
     getAllUsersByRoleID: async (
       root,
       { role_id },
-      { models: { Permission }, ValidationError },
+      { models: { Permission }, ValidationError, user },
     ) => {
       try {
+        if (!user) {
+          throw new ValidationError('Unauthorite!');
+        }
         const permissions = await Permission.query()
-          .where('role_id', role_id)
+          .where(builder =>
+            builder
+              .where('role_id', role_id)
+              .where('conference_id', user.current_conference_id),
+          )
           .distinct('user_id');
         return permissions;
       } catch (e) {

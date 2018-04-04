@@ -50,6 +50,46 @@ type Conference {
 
   # Conference image
   bg_image: String!
+
+  # deadline submit abstract
+  dl_submit_abstract: Date!
+
+  # deadline review abstract
+  dl_review_abstract: Date!
+
+  # deadline release abstract
+  dl_release_abstract: Date!
+
+  # deadline re-submit abstract
+  dl_re_submit_abstract: Date!
+
+  # deadline re-review abstract
+  dl_re_review_abstract: Date!
+
+  # deadline release final abstract
+  dl_release_final_abstract: Date!
+
+  # deadline submit paper
+  dl_submit_paper: Date!
+
+  # deadline review paper
+  dl_review_paper: Date!
+
+  # deadline release paper
+  dl_release_paper: Date!
+
+  # deadline re-submit paper
+  dl_re_submit_paper: Date!
+
+  # deadline re-review paper
+  dl_re_review_paper: Date!
+
+  # deadline release final paper
+  dl_release_final_paper: Date!
+
+  # deadline registration
+  dl_registration: Date!
+
 }
 
 extend type Query {
@@ -84,12 +124,26 @@ extend type Mutation {
     description: String!,
     start_date: Date!,
     end_date: Date!,
-    bg_image: String!,
+    bg_image: String,
+    dl_submit_abstract: Date!,
+    dl_review_abstract: Date!,
+    dl_release_abstract: Date!,
+    dl_re_submit_abstract: Date!,
+    dl_re_review_abstract: Date!,
+    dl_release_final_abstract: Date!,
+    dl_submit_paper: Date!,
+    dl_review_paper: Date!,
+    dl_release_paper: Date!,
+    dl_re_submit_paper: Date!,
+    dl_re_review_paper: Date!,
+    dl_release_final_paper: Date!,
+    dl_registration: Date!,
+
   ): Conference!
 
   # Update Conference info by id
   updateConference(
-    id: ID!,
+    id: ID,
     organizer_detail_id: ID,
     address_id: ID,
     title: String,
@@ -97,6 +151,19 @@ extend type Mutation {
     start_date: Date,
     end_date: Date,
     bg_image: String,
+    dl_submit_abstract: Date,
+    dl_review_abstract: Date,
+    dl_release_abstract: Date,
+    dl_re_submit_abstract: Date,
+    dl_re_review_abstract: Date,
+    dl_release_final_abstract: Date,
+    dl_submit_paper: Date,
+    dl_review_paper: Date,
+    dl_release_paper: Date,
+    dl_re_submit_paper: Date,
+    dl_re_review_paper: Date,
+    dl_release_final_paper: Date,
+    dl_registration: Date,
   ): Conference!
 
   # Delete Conference by id

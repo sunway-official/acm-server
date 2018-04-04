@@ -1,36 +1,10 @@
-const reviewQuestions = [
-  {
-    conference_id: 1,
-    content: 'Question 1',
-  },
-  {
-    conference_id: 1,
-    content: 'Question 2',
-  },
-  {
-    conference_id: 1,
-    content: 'Question 3',
-  },
-  {
-    conference_id: 1,
-    content: 'Question 4',
-  },
-  {
-    conference_id: 1,
-    content: 'Question 5',
-  },
-  {
-    conference_id: 1,
-    content: 'Question 6',
-  },
-  {
-    conference_id: 1,
-    content: 'Question 7',
-  },
-  {
-    conference_id: 1,
-    content: 'Question 8',
-  },
-];
+const faker = require('faker');
 
+const reviewQuestions = [];
+for (let i = 1; i <= 10; i += 1) {
+  reviewQuestions.push({
+    conference_id: 1,
+    content: faker.lorem.sentence(),
+  });
+}
 module.exports = reviewQuestions;

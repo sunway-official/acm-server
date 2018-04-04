@@ -1,4 +1,5 @@
 const faker = require('faker');
+const paperStatus = require('../paper/paperStatusData');
 
 // eslint-disable-next-line
 const tempPapers = conference_id => [
@@ -7,8 +8,7 @@ const tempPapers = conference_id => [
   // ******** Last update: April 03, 2018  *****************
   // *******************************************************
   {
-    // id 01
-    status: 'Accepted',
+    status: paperStatus[0].name,
     paper_status_id: 1,
     conference_id: 1,
     title: 'Information Technologies (ITs) in Medical Education',
@@ -20,9 +20,9 @@ const tempPapers = conference_id => [
 
   // id 02
   {
-    status: 'Accepted',
-    paper_status_id: 1,
-    conference_id: 1,
+    status: paperStatus[1].name,
+    paper_status_id: 2,
+    conference_id,
     title:
       'The value of plants used in traditional medicine for drug discovery',
     keywords:
@@ -33,9 +33,9 @@ const tempPapers = conference_id => [
 
   // id 03
   {
-    status: 'Accepted',
-    paper_status_id: 1,
-    conference_id: 1,
+    status: paperStatus[2].name,
+    paper_status_id: 3,
+    conference_id,
     title:
       'Mesenchymal stem cells: building blocks for molecular medicine in the 21st century',
     keywords:
@@ -78,8 +78,8 @@ const tempPapers = conference_id => [
   },
   /*
   {
-    status: 'Accepted',
-    paper_status_id: 1,
+    status: paperStatus[3].name,
+    paper_status_id: 4,
     conference_id,
     keywords: faker.lorem.sentence(),
     title: "Why jobs of the future won't feel like work",
@@ -88,8 +88,8 @@ const tempPapers = conference_id => [
   },
   
   {
-    status: 'Accepted',
-    paper_status_id: 1,
+    status: paperStatus[4].name,
+    paper_status_id: 5,
     conference_id,
     keywords: faker.lorem.sentence(),
     title: 'Would you live in a floating city in the sky?',
@@ -98,8 +98,8 @@ const tempPapers = conference_id => [
   },
  
   {
-    status: 'Accepted',
-    paper_status_id: 1,
+    status: paperStatus[5].name,
+    paper_status_id: 6,
     conference_id,
     keywords: faker.lorem.sentence(),
     title: 'How I built a jet suit',
@@ -107,8 +107,8 @@ const tempPapers = conference_id => [
       "We've all dreamed of flying -- but for Richard Browning, flight is an obsession. He's built an Iron Man-like suit that leans on an elegant collaboration of mind, body and technology, bringing science fiction dreams a little closer to reality. Learn more about the trial and error process behind his invention and take flight with Browning in an unforgettable demo.",
   },
   {
-    status: 'Accepted',
-    paper_status_id: 1,
+    status: paperStatus[6].name,
+    paper_status_id: 7,
     conference_id,
     keywords: faker.lorem.sentence(),
     title: 'Why the only future worth building includes everyone',
@@ -116,8 +116,8 @@ const tempPapers = conference_id => [
       'A single individual is enough for hope to exist, and that individual can be you, says His Holiness Pope Francis in this searing TED Talk delivered directly from Vatican City. In a hopeful message to people of all faiths, to those who have power as well as those who don\'t, the spiritual leader provides illuminating commentary on the world as we currently find it and calls for equality, solidarity and tenderness to prevail. \\"Let us help each other, all together, to remember that the \'other\' is not a statistic, or a number,\\" he says. \\"We all need each other.\\"',
   },
   {
-    status: 'Accepted',
-    paper_status_id: 1,
+    status: paperStatus[7].name,
+    paper_status_id: 8,
     conference_id,
     keywords: faker.lorem.sentence(),
     title: 'What to know about cybercrime',
@@ -125,17 +125,17 @@ const tempPapers = conference_id => [
       "It's hard to protect yourself online if you don't know where to start. These insightful, info-packed talks offer a jumping off point.",
   },
   {
-    status: 'Accepted',
+    status: paperStatus[0].name,
     paper_status_id: 1,
     conference_id,
     keywords: faker.lorem.sentence(),
     title: "Let's help refugees thrive, not just survive",
     abstract:
-      "Today's refugee crisis is the biggest since World War II, and it's growing. When this talk was given, 50 million people had been forcefully displaced from their homes by conflict and war; now the number is 65.3 million. There were 3 million Syrian refugees in 2014; now there are 4.9 million. Inside this overwhelming crisis are the individual human stories -- of care, growth and family, in the face of lost education, lost home, lost future. Melissa Fleming of the UN's refugee agency tells the refugees' stories -- and asks us to help them rebuild their world.",
+      "Today's refugee crisis is the biggest since World War II, and it's growing. When this talk was given, 50 million people had been forcefully displaced from their homes by conflict and war; now the number is 65.3 million. There were 3 million Syrian refugees in 20faker.random.number({min:1, max:8})4; now there are 4.9 million. Inside this overwhelming crisis are the individual human stories -- of care, growth and family, in the face of lost education, lost home, lost future. Melissa Fleming of the UN's refugee agency tells the refugees' stories -- and asks us to help them rebuild their world.",
   },
   {
-    status: 'Accepted',
-    paper_status_id: 1,
+    status: paperStatus[1].name,
+    paper_status_id: 2,
     conference_id,
     keywords: faker.lorem.sentence(),
     title: 'What makes you happy?',
@@ -143,17 +143,17 @@ const tempPapers = conference_id => [
       'Everyone wants to be happy. But how, exactly, does one go about it? Here, psychologists, journalists, Buddhist monks and more gives answers that may surprise.',
   },
   {
-    status: 'Accepted',
-    paper_status_id: 1,
+    status: paperStatus[2].name,
+    paper_status_id: 3,
     conference_id,
     keywords: faker.lorem.sentence(),
     title: 'The refugee crisis is a test of our character',
     abstract:
-      "Sixty-five million people were displaced from their homes by conflict and disaster in 2016. It's not just a crisis; it's a test of who we are and what we stand for, says David Miliband -- and each of us has a personal responsibility to help solve it. In this must-watch talk, Miliband gives us specific, tangible ways to help refugees and turn empathy and altruism into action.",
+      "Sixty-five million people were displaced from their homes by conflict and disaster in 20faker.random.number({min:1, max:8})6. It's not just a crisis; it's a test of who we are and what we stand for, says David Miliband -- and each of us has a personal responsibility to help solve it. In this must-watch talk, Miliband gives us specific, tangible ways to help refugees and turn empathy and altruism into action.",
   },
   {
-    status: 'Accepted',
-    paper_status_id: 1,
+    status: paperStatus[3].name,
+    paper_status_id: 4,
     conference_id,
     keywords: faker.lorem.sentence(),
     title: 'A boat carrying 500 refugees sunk at sea.',
@@ -161,8 +161,8 @@ const tempPapers = conference_id => [
       "Aboard an overloaded ship carrying more than 500 refugees, a young woman becomes an unlikely hero. This single, powerful story, told by Melissa Fleming of the UN's refugee agency, gives a human face to the sheer numbers of human beings trying to escape to better lives ... as the refugee ships keep coming ...",
   },
   {
-    status: 'Accepted',
-    paper_status_id: 1,
+    status: paperStatus[4].name,
+    paper_status_id: 5,
     conference_id,
     keywords: faker.lorem.sentence(),
     title: "Our refugee system is failing. Here's how we can fix it",
@@ -171,8 +171,19 @@ const tempPapers = conference_id => [
   }, */
 ];
 
-let papers = [];
+const papers = [];
 
-papers = papers.concat(tempPapers(1));
+for (let i = 1; i <= 20; i += 1) {
+  const conference_id = 1;
+  const paperStatusId = faker.random.number({ min: 1, max: 8 });
+  papers.push({
+    status: paperStatus[paperStatusId - 1].name,
+    paper_status_id: paperStatusId,
+    conference_id,
+    keywords: faker.lorem.sentence(),
+    title: faker.lorem.sentence(),
+    abstract: faker.lorem.sentences(),
+  });
+}
 
-module.exports = papers;
+module.exports = papers.concat(tempPapers(1));

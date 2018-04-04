@@ -1,3 +1,5 @@
+import commonUtils from '../../../utils/common';
+
 export default {
   PaperReviewer: {
     user: async ({ user_id }, data, { models: { User } }) => {
@@ -16,12 +18,39 @@ export default {
     insertPaperReviewer: async (
       root,
       data,
-      { models: { PaperReviewer }, ValidationError, user },
+      {
+        models: { PaperReviewer, Conference },
+        ValidationError,
+        user,
+        emailTemplates,
+        transporter,
+        config,
+      },
     ) => {
       if (!user) {
         throw new ValidationError('unauthorized');
       }
-      const paperReviewer = await PaperReviewer.query().insert(data);
+      const conference_id = user.current_conference_id;
+      const conference = await Conference.query().findById(conference_id);
+      const paperReviewerData = data;
+      paperReviewerData.conference_id = conference_id;
+      const paperReviewer = await PaperReviewer.query().insert(
+        paperReviewerData,
+      );
+
+      // send email to author
+      const subject = `${conference.title}`;
+      const template = emailTemplates.submitPaper(
+        config.swEmail,
+        user.email,
+        subject,
+        {
+          user,
+          conference,
+        },
+      );
+      commonUtils.sendMail(user, template, transporter);
+
       return paperReviewer;
     },
   },

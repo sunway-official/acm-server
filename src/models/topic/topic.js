@@ -39,7 +39,7 @@ export default class Topic extends Model {
   async deletePaperTopic() {
     const paperTopic = await PaperTopic.query().where('topic_id', this.id);
 
-    if (paperTopic) {
+    if (paperTopic.length > 0) {
       await PaperTopic.query()
         .delete()
         .where('topic_id', this.id);

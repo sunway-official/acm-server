@@ -27,10 +27,13 @@ type Paper {
   keywords: String!
 
   # reviewers
-  reviewers: [String]!
+  reviewers: [PaperReviewer]!
 
   # authors
-  authors: [String]!
+  authors: [PaperAuthor]!
+
+  # comments
+  comments: [PaperReviewQuestionPoint]!
 
   # Document created_at timestamp
   created_at: Date!
@@ -49,11 +52,11 @@ extend type Query {
   # Get Paper by conference ID and role_id
   getPapersByConferenceID(role_id: ID , conference_id: ID): [Paper]!
 
-  # Get Paper by user ID
-  getPapersByUserID: [Paper!]!
-
   # Get Paper by status
   getPapersByStatusId(paper_status_id: ID!): [Paper!]!
+
+  # Get current paper base on current user information
+  getCurrentPaper: [Paper!]!
 }
 
 extend type Mutation {
