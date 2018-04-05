@@ -57,9 +57,9 @@ export default {
           receiver_id: receiver.id,
           title,
           content,
+          read: false,
+          hide: false,
         };
-
-        console.log(data);
 
         const savedNotification = await Notification.query().insert(data);
 

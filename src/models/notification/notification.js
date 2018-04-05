@@ -11,6 +11,9 @@ export default class Notification extends Model {
       read: {
         type: 'boolean',
       },
+      hide: {
+        type: 'boolean',
+      },
       sender_id: { type: 'number' },
       receiver_id: {
         type: 'number',
