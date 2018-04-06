@@ -96,6 +96,7 @@ const start = async () => {
         transporter,
         emailTemplates,
         expo,
+        Knex,
       },
       formatError,
       schema,

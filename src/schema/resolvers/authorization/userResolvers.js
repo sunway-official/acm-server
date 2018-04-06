@@ -182,17 +182,25 @@ export default {
     },
     login: async (
       root,
-      { email, password },
+      { email, password, username },
       { models: { User }, ValidationError, user, config },
     ) => {
+      if (!username && !email) {
+        throw new ValidationError('need-email-or-password');
+      }
       if (user) {
         throw new ValidationError('still-logging-in');
       }
 
-      const authUser = await User.query().findOne({ email });
-      if (!authUser) {
+      const authUsers = await User.query()
+        .skipUndefined()
+        .where('email', email)
+        .orWhere('username', username);
+      if (!authUsers || authUsers.length <= 0) {
         throw new ValidationError('user-not-exists');
       }
+
+      const authUser = authUsers[0];
       const isPasswordMatch = await authUser.checkPassword(password);
       if (!isPasswordMatch) {
         throw new ValidationError('wrong-email-or-password');
