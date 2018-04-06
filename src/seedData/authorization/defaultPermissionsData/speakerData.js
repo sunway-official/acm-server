@@ -1,5 +1,9 @@
 const featuresOfParticipant = require('./participantData');
 
-const featuresOfSpeaker = [];
+const featuresOfSpeaker = [
+  {
+    feature_id: 'getAllConferences',
+  },
+];
 
 module.exports = featuresOfSpeaker.concat(featuresOfParticipant);
