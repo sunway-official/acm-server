@@ -1,5 +1,3 @@
-const faker = require('faker');
-
 const roomsTemplates = conference_id => [
   {
     name: 'P101', // 0
