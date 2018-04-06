@@ -215,7 +215,7 @@ export default {
     insertConference: async (
       root,
       data,
-      { models: { Conference }, ValidationError, user },
+      { models: { Conference, ConferenceAttendee }, ValidationError, user },
     ) => {
       try {
         if (!user) {
@@ -223,6 +223,10 @@ export default {
         }
 
         const conference = await Conference.query().insert(data);
+        await ConferenceAttendee.query().insert({
+          conference_id: conference.id,
+          user_id: user.id,
+        });
         return conference;
       } catch (e) {
         // eslint-disable-next-line no-console
