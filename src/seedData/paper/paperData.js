@@ -8,9 +8,10 @@ const tempPapers = conference_id => [
   // ******** Last update: April 03, 2018  *****************
   // *******************************************************
   {
+    // id 01
     status: paperStatus[0].name,
     paper_status_id: 1,
-    conference_id: 1,
+    conference_id,
     title: 'Information Technologies (ITs) in Medical Education',
     keywords:
       'medicine, education, information technologies, distance learning',
@@ -20,7 +21,7 @@ const tempPapers = conference_id => [
 
   // id 02
   {
-    status: paperStatus[1].name,
+    status: paperStatus[0].name,
     paper_status_id: 2,
     conference_id,
     title:
@@ -33,7 +34,7 @@ const tempPapers = conference_id => [
 
   // id 03
   {
-    status: paperStatus[2].name,
+    status: paperStatus[0].name,
     paper_status_id: 3,
     conference_id,
     title:
@@ -46,9 +47,9 @@ const tempPapers = conference_id => [
 
   // id 04
   {
-    status: 'Rejected',
+    status: paperStatus[1].name,
     paper_status_id: 1,
-    conference_id: 1,
+    conference_id,
     keywords: faker.lorem.sentence(),
     title: 'Intelligent machines in Medicine to improve your health',
     abstract:
@@ -57,9 +58,9 @@ const tempPapers = conference_id => [
 
   // id 05
   {
-    status: 'Accepted',
+    status: paperStatus[0].name,
     paper_status_id: 1,
-    conference_id: 4,
+    conference_id,
     title: 'Business Intelligence and Analytics: From Big Data to Big Impact',
     keywords: 'business, intelligence, analytics, BI&A, MIS',
     abstract:
@@ -68,9 +69,9 @@ const tempPapers = conference_id => [
 
   // id 06
   {
-    status: 'Rejected',
+    status: paperStatus[1].name,
     paper_status_id: 1,
-    conference_id: 4,
+    conference_id,
     keywords: 'technology, city, life, benefit',
     title: 'Future technology will give you the benefits of city life anywhere',
     abstract:
@@ -86,7 +87,7 @@ const tempPapers = conference_id => [
     abstract:
       'We\'ve all heard that robots are going to take our jobs -- but what can we do about it? Innovation expert David Lee says that we should start designing jobs that unlock our hidden talents and passions -- the things we spend our weekends doing -- to keep us relevant in the age of robotics. \\"Start asking people what problems they\'re inspired to solve and what talents they want to bring to work,\\" Lee says. \\"When you invite people to be more, they can amaze us with how much more they can be.\\"',
   },
-  
+
   {
     status: paperStatus[4].name,
     paper_status_id: 5,
@@ -96,7 +97,7 @@ const tempPapers = conference_id => [
     abstract:
       'In a mind-bending talk that blurs the line between science and art, Tomás Saraceno exhibits a series of air-inspired sculptures and installations designed to usher in a new era of sustainability, the \\"Aerocene.\\" From giant, cloud-like playgrounds suspended 22 meters in the air to a balloon sculpture that travels the world without burning a single drop of fossil fuel, Saraceno\'s work invites us to explore the bounds of our fragile human and terrestrial ecosystems. (In Spanish with English subtitles.)',
   },
- 
+
   {
     status: paperStatus[5].name,
     paper_status_id: 6,
