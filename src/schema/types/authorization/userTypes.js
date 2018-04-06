@@ -12,6 +12,8 @@ type User {
   # User email address
   email: String!
 
+  username: String!
+
   # User gender
   gender: Gender!
 
@@ -126,6 +128,9 @@ extend type Mutation {
     firstname: String!
     # User lastname
     lastname: String!
+    username: String!
+    bio: String
+    organization: String
     # User email address
     email: String!
     # User password
@@ -133,8 +138,9 @@ extend type Mutation {
   ): User!
   # Login to system, need to remove Authorization and RefreshToken headers
   login(
+    username: String
     # User email address
-    email: String!
+    email: String
     # User password
     password: String!
   ): LoginResponse

@@ -10,6 +10,7 @@ exports.up = function(knex, Promise) {
       table.string('firstname').notNullable();
       table.string('lastname').notNullable();
       table.string('password').notNullable();
+      table.string('username').notNullable();
       table
         .string('email')
         .notNullable()

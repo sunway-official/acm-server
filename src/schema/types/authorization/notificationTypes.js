@@ -3,7 +3,8 @@ export default `
     id: ID!
     title: String!
     content: String
-    read: Boolean
+    read: Boolean!
+    hide: Boolean!
     sender: User!
     receiver: User!
     updated_at: Date!
@@ -14,9 +15,11 @@ export default `
     setNotificationRead(id: ID!): Notification!
     testNotification(from: String!, to: String!, title: String, content: String): Notification!
     insertNotification(to: String!, title: String, content: String): Notification!
+    markAllNotificationsAsRead: [Notification!]!
+    hideNotification(id: ID!): Notification!
   }
 
   extend type Query {
-    getNotifications: [Notification!]!
+    getNotifications(showHidden: Boolean): [Notification!]!
   }
 `;
