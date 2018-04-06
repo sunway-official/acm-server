@@ -13,7 +13,7 @@ const {
 } = require('./defaultPermissionsData');
 
 // array role_id want to add into permission
-const rolesID = [1, 6, 7];
+const rolesID = [1, 2, 3, 4, 5, 6, 7, 8];
 
 // array role_id want to add into permission
 

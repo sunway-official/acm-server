@@ -1,12 +1,12 @@
 const {
-  speaker,
-  participant,
+  // speaker,
+  // participant,
   organizer,
   author,
-  moderator,
+  // moderator,
   reviewer,
-  supporter,
-  ticketChecker,
+  // supporter,
+  // ticketChecker,
 } = require('../seedData/authorization/defaultPermissionsData');
 
 // eslint-disable-next-line camelcase
