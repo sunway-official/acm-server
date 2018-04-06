@@ -10,7 +10,7 @@ const getNewDate = data => {
   const date = new Date(data);
   const hours = date.getHours();
   const minutes = date.getMinutes();
-  const newDate = new Date();
+  const newDate = addDays(new Date(), 85);
   newDate.setHours(hours);
   newDate.setMinutes(minutes);
   return newDate;
@@ -198,7 +198,7 @@ const tempSchedules = conference_id => [
     conference_id,
     room_id: 5,
     start: addDays(getNewDate('2017-11-13T10:30:00.000Z'), 0),
-    end: addDays(getNewDate('2017-11-13T11:30:00.000Z'), 0),
+    end: addDays(getNewDate('2017-11-13T12:30:00.000Z'), 0),
     paper_id: 12,
     activity_title: 'Tea Break',
     activity_description: ' ',
@@ -213,7 +213,7 @@ const tempSchedules = conference_id => [
     conference_id,
     room_id: 5,
     start: addDays(getNewDate('2017-11-13T10:30:00.000Z'), 1),
-    end: addDays(getNewDate('2017-11-13T11:30:00.000Z'), 1),
+    end: addDays(getNewDate('2017-11-13T12:30:00.000Z'), 1),
     paper_id: 13,
     activity_title: 'Tea Break',
     activity_description: ' ',
@@ -222,51 +222,51 @@ const tempSchedules = conference_id => [
     room_seats: 30,
     room_status: 'on',
   },
-  {
-    // eslint-disable-next-line
-    activity_id: 12,
-    conference_id,
-    room_id: 3,
-    start: addDays(getNewDate('2017-11-13T12:30:00.000Z'), 1),
-    end: addDays(getNewDate('2017-11-13T14:30:00.000Z'), 1),
-    paper_id: 12,
-    activity_title: 'Jailbreak',
-    activity_description: ' ',
-    activity_status: 'on',
-    room_name: 'P303',
-    room_seats: 100,
-    room_status: 'on',
-  },
-  {
-    // eslint-disable-next-line
-    activity_id: 11,
-    conference_id,
-    room_id: 2,
-    start: addDays(getNewDate('2017-11-13T13:30:00.000Z'), 1),
-    end: addDays(getNewDate('2017-11-13T15:30:00.000Z'), 1),
-    paper_id: 11,
-    activity_title: 'Pick someone up or down',
-    activity_description: ' ',
-    activity_status: 'on',
-    room_name: 'P304',
-    room_seats: 12,
-    room_status: 'on',
-  },
-  {
-    // eslint-disable-next-line
-    activity_id: 12,
-    conference_id,
-    room_id: 2,
-    start: addDays(getNewDate('2017-11-13T16:30:00.000Z'), 1),
-    end: addDays(getNewDate('2017-11-13T17:30:00.000Z'), 1),
-    paper_id: 12,
-    activity_title: 'Pick someone up or down',
-    activity_description: ' ',
-    activity_status: 'on',
-    room_name: 'P304',
-    room_seats: 12,
-    room_status: 'on',
-  },
+  // {
+  //   // eslint-disable-next-line
+  //   activity_id: 12,
+  //   conference_id,
+  //   room_id: 3,
+  //   start: addDays(getNewDate('2017-11-13T12:30:00.000Z'), 1),
+  //   end: addDays(getNewDate('2017-11-13T14:30:00.000Z'), 1),
+  //   paper_id: 12,
+  //   activity_title: 'Jailbreak',
+  //   activity_description: ' ',
+  //   activity_status: 'on',
+  //   room_name: 'P303',
+  //   room_seats: 100,
+  //   room_status: 'on',
+  // },
+  // {
+  //   // eslint-disable-next-line
+  //   activity_id: 11,
+  //   conference_id,
+  //   room_id: 2,
+  //   start: addDays(getNewDate('2017-11-13T13:30:00.000Z'), 1),
+  //   end: addDays(getNewDate('2017-11-13T15:30:00.000Z'), 1),
+  //   paper_id: 11,
+  //   activity_title: 'Pick someone up or down',
+  //   activity_description: ' ',
+  //   activity_status: 'on',
+  //   room_name: 'P304',
+  //   room_seats: 12,
+  //   room_status: 'on',
+  // },
+  // {
+  //   // eslint-disable-next-line
+  //   activity_id: 12,
+  //   conference_id,
+  //   room_id: 2,
+  //   start: addDays(getNewDate('2017-11-13T16:30:00.000Z'), 1),
+  //   end: addDays(getNewDate('2017-11-13T17:30:00.000Z'), 1),
+  //   paper_id: 12,
+  //   activity_title: 'Pick someone up or down',
+  //   activity_description: ' ',
+  //   activity_status: 'on',
+  //   room_name: 'P304',
+  //   room_seats: 12,
+  //   room_status: 'on',
+  // },
 ];
 
 let schedules = [];
