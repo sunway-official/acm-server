@@ -2,7 +2,7 @@ const topics = require('../topic/topicsData');
 const faker = require('faker');
 
 const paperTopics = [];
-for (let i = 1; i < 14; i += 1) {
+for (let i = 1; i <= 33; i += 1) {
   const topicId = faker.random.number({ min: 1, max: 9 }) - 1;
   const topic = topics[topicId];
   paperTopics.push({
