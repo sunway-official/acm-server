@@ -36,11 +36,10 @@ export default {
       data,
       { models: { PaperAuthor } },
     ) => {
-      const paperAuthors = await PaperAuthor.query()
-        .select('*')
-        .where(builder =>
-          builder.where('conference_id', conference_id).where('paper_id', id),
-        );
+      const paperAuthors = await PaperAuthor.query().where(builder =>
+        builder.where('conference_id', conference_id).where('paper_id', id),
+      );
+      console.log(paperAuthors);
       return paperAuthors;
     },
     comments: async (
