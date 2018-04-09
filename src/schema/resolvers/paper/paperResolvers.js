@@ -212,11 +212,9 @@ export default {
         const newPaper = await Paper.query().insert(data);
 
         // send email to author
-        const subject = `${conference.title} - Invitation`;
         const template = emailTemplates.submitPaper(
           config.swEmail,
           user.email,
-          subject,
           {
             user,
             conference,

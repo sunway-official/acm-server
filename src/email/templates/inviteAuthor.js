@@ -1,6 +1,7 @@
-export default (fromAddress, toAddress, subject = '', variables = {}) => {
-  const user = variables.user;
-  const conference = variables.conference;
+export default (fromAddress, toAddress, variables = {}) => {
+  const { insertUser, conference, password } = variables;
+  const user = insertUser;
+  const subject = `${conference.title} Invitation`;
   return {
     from: fromAddress,
     to: toAddress,
@@ -18,6 +19,15 @@ export default (fromAddress, toAddress, subject = '', variables = {}) => {
     <b>Submit your papers at : <a href="${
       process.env.CLIENT_ADDRESS
     }">Submit paper</a></b>
+    <br>
+    Your account (you can login with username or email)
+    <br>
+    <b>Email</b>: ${user.email}
+    <br>
+    <b>Username</b>: ${user.username}
+    <br>
+    <b>Password</b>: ${password}
+    <br>
     <br>
     We look forward to hearing from you soon and please feel free to contact us if we can be of further assistance.<br>
     <br>

@@ -200,6 +200,8 @@ extend type Mutation {
   ): Conference!
 
   addUserNotificationKey(key: String!): User!
+
+  inviteUser(role_id: ID!, email: String!, title: String!, firstname: String!, lastname: String!): User!
 }
 
 type LoginResponse {

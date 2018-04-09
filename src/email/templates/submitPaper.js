@@ -1,7 +1,7 @@
-export default (fromAddress, toAddress, subject = '', variables = {}) => {
+export default (fromAddress, toAddress, variables = {}) => {
   const user = variables.user;
   const conference = variables.conference;
-  // const paper = variables.paper;
+  const subject = `${conference.title} Notification`;
 
   return {
     from: fromAddress,
