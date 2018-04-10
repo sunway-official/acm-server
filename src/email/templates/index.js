@@ -6,6 +6,7 @@ import rejectPaper from './rejectPaper';
 import inviteAuthor from './inviteAuthor';
 import reReviewPaper from './reReviewPaper';
 import reSubmitPaper from './reSubmitPaper';
+import inviteReviewer from './inviteReviewer';
 
 export default {
   forgotPasswordTemplate,
@@ -16,4 +17,5 @@ export default {
   inviteAuthor,
   reReviewPaper,
   reSubmitPaper,
+  inviteReviewer,
 };

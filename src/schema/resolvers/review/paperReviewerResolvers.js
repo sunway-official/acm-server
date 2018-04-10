@@ -19,7 +19,7 @@ export default {
       root,
       data,
       {
-        models: { PaperReviewer, Conference },
+        models: { PaperReviewer, Conference, User },
         ValidationError,
         user,
         emailTemplates,
@@ -33,19 +33,18 @@ export default {
       const conference_id = user.current_conference_id;
       const conference = await Conference.query().findById(conference_id);
       const paperReviewerData = data;
+      const reviewer = await User.query().findById(data.user_id);
       paperReviewerData.conference_id = conference_id;
       const paperReviewer = await PaperReviewer.query().insert(
         paperReviewerData,
       );
 
       // send email to author
-      const subject = `${conference.title}`;
-      const template = emailTemplates.submitPaper(
+      const template = emailTemplates.assignPaper(
         config.swEmail,
-        user.email,
-        subject,
+        reviewer.email,
         {
-          user,
+          reviewer,
           conference,
         },
       );

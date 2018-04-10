@@ -9,17 +9,22 @@ export default (fromAddress, toAddress, variables = {}) => {
     html: `
     <b>Dear ${user.position} ${user.firstname}</b>,
     <br>
+
     <br>
-    ${conference.description}<br>
-    <br>
-    We are pleased to invite you to attend <b> ${
+    You are known as a reputed and experienced person in the field that is included in the forthcoming <b> ${
       conference.title
     }</b> conference.<br>
-    We believe that the articles you bring to the conference going to contribute to the success of the conference.<br>
-    <b>Submit your papers at : <a href="${
-      process.env.CLIENT_ADDRESS
-    }">Submit paper</a></b>
+    Therefore, we appreciate if you accept becoming a reviewer for upcoming <b> ${
+      conference.title
+    }</b> conference articles. We believe that your contribution is contributing to the success of the conference.<br>
     <br>
+    Please let us know if you have arranged your business to join with us.
+    <br>
+    Click on the link to get all informations you need: ${
+      process.env.CLIENT_ADDRESS
+    }
+    <br>
+    ${conference.description}<br>
     Your account (you can login with username or email)
     <br>
     <b>Email</b>: ${user.email}

@@ -1,51 +1,49 @@
-const faker = require('faker');
-
-const rooms = [
+const roomsTemplates = conference_id => [
   {
     name: 'P101', // 0
     seats: 20,
-    status: faker.random.arrayElement(['on', 'off']),
-    conference_id: faker.random.number({ min: 1, max: 3 }),
+    conference_id,
   },
   {
     name: 'P102', // 1
     seats: 40,
-    status: faker.random.arrayElement(['on', 'off']),
-    conference_id: faker.random.number({ min: 1, max: 2 }),
+    conference_id,
   },
   {
     name: 'P201', // 2
     seats: 30,
-    conference_id: faker.random.number({ min: 1, max: 2 }),
+    conference_id,
   },
   {
     name: 'P202', // 3
     seats: 30,
-    conference_id: faker.random.number({ min: 1, max: 2 }),
+    conference_id,
   },
   {
     name: 'P301', // 3
     seats: 30,
-    conference_id: faker.random.number({ min: 1, max: 2 }),
+    conference_id,
   },
   {
     name: 'P302', // 4
     seats: 40,
-    status: faker.random.arrayElement(['on', 'off']),
-    conference_id: faker.random.number({ min: 1, max: 2 }),
+    conference_id,
   },
   {
     name: 'P401', // 4
     seats: 40,
-    status: faker.random.arrayElement(['on', 'off']),
-    conference_id: faker.random.number({ min: 1, max: 2 }),
+    conference_id,
   },
   {
     name: 'P402', // 4
     seats: 40,
-    status: faker.random.arrayElement(['on', 'off']),
-    conference_id: faker.random.number({ min: 1, max: 2 }),
+    conference_id,
   },
 ];
 
-module.exports = rooms;
+let data = [];
+for (let i = 1; i < 3; i += 1) {
+  data = data.concat(roomsTemplates(i));
+}
+
+module.exports = data;

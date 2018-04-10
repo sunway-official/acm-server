@@ -83,7 +83,7 @@ export default {
     hideNotification: async (
       root,
       { id },
-      { models: { Notification }, ValidationError, user, Knex },
+      { models: { Notification }, ValidationError, user },
     ) => {
       if (!user) {
         throw new ValidationError('unauthorized');
