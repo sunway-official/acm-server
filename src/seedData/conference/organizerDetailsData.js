@@ -5,7 +5,7 @@ const organizerDetails = [
     email: 'kdtqt@dtu.edu.vn',
     address: '182 Nguyen Van Linh, Da Nang',
     website: 'kdtqt.edu.vn',
-    phone: '012435678954',
+    phone: '(+84) 236.3650403',
   },
   {
     user_id: '2',
@@ -13,7 +13,7 @@ const organizerDetails = [
     email: 'kdulich@dtu.edu.vn',
     address: '182 Nguyen Van Linh, Da Nang',
     website: 'kdulich.edu.vn',
-    phone: '01452789533',
+    phone: '(+84) 236.3650403',
   },
   {
     user_id: '3',
@@ -21,7 +21,7 @@ const organizerDetails = [
     email: 'kbaochi@dtu.edu.vn',
     address: '182 Nguyen Van Linh, Da Nang',
     website: 'kbaochi.edu.vn',
-    phone: '0124895763',
+    phone: '(+84) 236.3650403',
   },
   {
     user_id: '4',
@@ -29,7 +29,7 @@ const organizerDetails = [
     email: 'klyluanchinhtri@dtu.edu.vn',
     address: '182 Nguyen Van Linh, Da Nang',
     website: 'klyluanchinhtri.edu.vn',
-    phone: '0124895763',
+    phone: '(+84) 236.3650403',
   },
   {
     user_id: '5',
@@ -37,7 +37,7 @@ const organizerDetails = [
     email: 'kxaydung@dtu.edu.vn',
     address: '182 Nguyen Van Linh, Da Nang',
     website: 'kxaydung.edu.vn',
-    phone: '0124895763',
+    phone: '(+84) 236.3650403',
   },
   {
     user_id: '6',
@@ -45,7 +45,7 @@ const organizerDetails = [
     email: 'kkientruc@dtu.edu.vn',
     address: '182 Nguyen Van Linh, Da Nang',
     website: 'kkientruc.edu.vn',
-    phone: '0124895763',
+    phone: '(+84) 236.3650403',
   },
   {
     user_id: '7',
@@ -53,7 +53,7 @@ const organizerDetails = [
     email: 'kngoaingu@dtu.edu.vn',
     address: '182 Nguyen Van Linh, Da Nang',
     website: 'kngoaingu.edu.vn',
-    phone: '0124895763',
+    phone: '(+84) 236.3650403',
   },
   {
     user_id: '8',
@@ -61,7 +61,7 @@ const organizerDetails = [
     email: 'kquantrikinhdoanh@dtu.edu.vn',
     address: '182 Nguyen Van Linh, Da Nang',
     website: 'kquantrikinhdoanh.edu.vn',
-    phone: '0124895763',
+    phone: '(+84) 236.3650403',
   },
 ];
 
