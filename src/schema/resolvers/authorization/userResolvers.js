@@ -489,6 +489,17 @@ export default {
             break;
           }
           case reviewerRole: {
+            const template = emailTemplates.inviteReviewer(
+              config.swEmail,
+              email,
+              {
+                insertUser,
+                conference,
+                password,
+              },
+            );
+
+            commonUtils.sendMail(user, template, transporter);
             break;
           }
           default: {
