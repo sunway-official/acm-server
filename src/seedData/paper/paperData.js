@@ -8,6 +8,7 @@ const tempPapers = conference_id => [
     status: paperStatus[0].name,
     paper_status_id: 1,
     conference_id,
+    file: '72c891c0-39ae-11e8-af3f-0d8a8ca7032a.pdf',
     title: 'Information Technologies (ITs) in Medical Education',
     keywords:
       'medicine, education, information technologies, distance learning',
@@ -20,6 +21,7 @@ const tempPapers = conference_id => [
     status: paperStatus[0].name,
     paper_status_id: 2,
     conference_id,
+    file: '72c891c0-39ae-11e8-af3f-0d8a8ca7032a.pdf',
     title:
       'The value of plants used in traditional medicine for drug discovery',
     keywords:
@@ -33,6 +35,7 @@ const tempPapers = conference_id => [
     status: paperStatus[0].name,
     paper_status_id: 3,
     conference_id,
+    file: '72c891c0-39ae-11e8-af3f-0d8a8ca7032a.pdf',
     title:
       'Mesenchymal stem cells: building blocks for molecular medicine in the 21st century',
     keywords:
@@ -45,6 +48,7 @@ const tempPapers = conference_id => [
   {
     status: paperStatus[1].name,
     paper_status_id: 1,
+    file: '72c891c0-39ae-11e8-af3f-0d8a8ca7032a.pdf',
     conference_id,
     keywords: faker.lorem.sentence(),
     title: 'Intelligent machines in Medicine to improve your health',
@@ -56,6 +60,7 @@ const tempPapers = conference_id => [
   {
     status: paperStatus[0].name,
     paper_status_id: 1,
+    file: '72c891c0-39ae-11e8-af3f-0d8a8ca7032a.pdf',
     conference_id,
     title: 'Business Intelligence and Analytics: From Big Data to Big Impact',
     keywords: 'business, intelligence, analytics, BI&A, MIS',
@@ -67,6 +72,7 @@ const tempPapers = conference_id => [
   {
     status: paperStatus[1].name,
     paper_status_id: 1,
+    file: '72c891c0-39ae-11e8-af3f-0d8a8ca7032a.pdf',
     conference_id,
     keywords: 'technology, city, life, benefit',
     title: 'Future technology will give you the benefits of city life anywhere',
