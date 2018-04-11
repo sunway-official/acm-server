@@ -1,5 +1,7 @@
+import faker from 'faker';
 import jwt from 'jsonwebtoken';
 import pubsub from '../../pubsub';
+import commonUtils from '../../../utils/common';
 
 export default {
   User: {
@@ -430,6 +432,85 @@ export default {
         // eslint-disable-next-line no-console
         console.error(e);
         throw new ValidationError(e);
+      }
+    },
+    inviteUser: async (
+      root,
+      { role_id, email, title, firstname, lastname },
+      {
+        models: { User, Conference },
+        ValidationError,
+        user,
+        emailTemplates,
+        transporter,
+        config,
+      },
+    ) => {
+      const reviewerRole = '6';
+      const authorRole = '7';
+      const password = faker.random.alphaNumeric(7);
+      const username = email.substr(0, email.indexOf('@'));
+      const data = {
+        email,
+        password,
+        position: title,
+        firstname,
+        lastname,
+        username,
+      };
+
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
+      const conference_id = user.current_conference_id;
+      const conference = await Conference.query().findById(conference_id);
+      let insertUser;
+      try {
+        insertUser = await User.query().insert(data);
+      } catch (e) {
+        console.log(e);
+        throw new ValidationError('Email exist!');
+      }
+
+      try {
+        switch (role_id) {
+          case authorRole: {
+            const template = emailTemplates.inviteAuthor(
+              config.swEmail,
+              email,
+              {
+                insertUser,
+                conference,
+                password,
+              },
+            );
+
+            commonUtils.sendMail(user, template, transporter);
+            break;
+          }
+          case reviewerRole: {
+            const template = emailTemplates.inviteReviewer(
+              config.swEmail,
+              email,
+              {
+                insertUser,
+                conference,
+                password,
+              },
+            );
+
+            commonUtils.sendMail(user, template, transporter);
+            break;
+          }
+          default: {
+            console.log('Role Wrong!');
+            break;
+          }
+        }
+        return insertUser;
+      } catch (e) {
+        console.log(e);
+        throw new ValidationError('bad-request');
       }
     },
   },

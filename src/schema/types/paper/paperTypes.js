@@ -9,8 +9,6 @@ type Paper {
   # paper topic
   papersTopic: [PaperTopic!]!
 
-  # paper author
-  papersAuthors: [PaperAuthor!]!
 
   status: String!
 

@@ -3,10 +3,6 @@ const paperStatus = require('../paper/paperStatusData');
 
 // eslint-disable-next-line
 const tempPapers = conference_id => [
-  // *******************************************************
-  // ******** Edit data by Thong Nguyen    *****************
-  // ******** Last update: April 03, 2018  *****************
-  // *******************************************************
   {
     // id 01
     status: paperStatus[0].name,
@@ -82,6 +78,7 @@ const tempPapers = conference_id => [
     status: paperStatus[3].name,
     paper_status_id: 4,
     conference_id,
+    file: '72c891c0-39ae-11e8-af3f-0d8a8ca7032a.pdf',
     keywords: faker.lorem.sentence(),
     title: "Why jobs of the future won't feel like work",
     abstract:
@@ -92,6 +89,7 @@ const tempPapers = conference_id => [
     status: paperStatus[4].name,
     paper_status_id: 5,
     conference_id,
+    file: '72c891c0-39ae-11e8-af3f-0d8a8ca7032a.pdf',
     keywords: faker.lorem.sentence(),
     title: 'Would you live in a floating city in the sky?',
     abstract:
@@ -102,6 +100,7 @@ const tempPapers = conference_id => [
     status: paperStatus[5].name,
     paper_status_id: 6,
     conference_id,
+    file: '72c891c0-39ae-11e8-af3f-0d8a8ca7032a.pdf',
     keywords: faker.lorem.sentence(),
     title: 'How I built a jet suit',
     abstract:
@@ -111,6 +110,7 @@ const tempPapers = conference_id => [
     status: paperStatus[6].name,
     paper_status_id: 7,
     conference_id,
+    file: '72c891c0-39ae-11e8-af3f-0d8a8ca7032a.pdf',
     keywords: faker.lorem.sentence(),
     title: 'Why the only future worth building includes everyone',
     abstract:
@@ -120,6 +120,7 @@ const tempPapers = conference_id => [
     status: paperStatus[7].name,
     paper_status_id: 8,
     conference_id,
+    file: '72c891c0-39ae-11e8-af3f-0d8a8ca7032a.pdf',
     keywords: faker.lorem.sentence(),
     title: 'What to know about cybercrime',
     abstract:
@@ -129,6 +130,7 @@ const tempPapers = conference_id => [
     status: paperStatus[0].name,
     paper_status_id: 1,
     conference_id,
+    file: '72c891c0-39ae-11e8-af3f-0d8a8ca7032a.pdf',
     keywords: faker.lorem.sentence(),
     title: "Let's help refugees thrive, not just survive",
     abstract:
@@ -138,6 +140,7 @@ const tempPapers = conference_id => [
     status: paperStatus[1].name,
     paper_status_id: 2,
     conference_id,
+    file: '72c891c0-39ae-11e8-af3f-0d8a8ca7032a.pdf',
     keywords: faker.lorem.sentence(),
     title: 'What makes you happy?',
     abstract:
@@ -147,6 +150,7 @@ const tempPapers = conference_id => [
     status: paperStatus[2].name,
     paper_status_id: 3,
     conference_id,
+    file: '72c891c0-39ae-11e8-af3f-0d8a8ca7032a.pdf',
     keywords: faker.lorem.sentence(),
     title: 'The refugee crisis is a test of our character',
     abstract:
@@ -156,6 +160,7 @@ const tempPapers = conference_id => [
     status: paperStatus[3].name,
     paper_status_id: 4,
     conference_id,
+    file: '72c891c0-39ae-11e8-af3f-0d8a8ca7032a.pdf',
     keywords: faker.lorem.sentence(),
     title: 'A boat carrying 500 refugees sunk at sea.',
     abstract:
@@ -165,6 +170,7 @@ const tempPapers = conference_id => [
     status: paperStatus[4].name,
     paper_status_id: 5,
     conference_id,
+    file: '72c891c0-39ae-11e8-af3f-0d8a8ca7032a.pdf',
     keywords: faker.lorem.sentence(),
     title: "Our refugee system is failing. Here's how we can fix it",
     abstract:
@@ -181,6 +187,7 @@ for (let i = 1; i <= 20; i += 1) {
     status: paperStatus[paperStatusId - 1].name,
     paper_status_id: paperStatusId,
     conference_id,
+    file: 'dc15d070-39ae-11e8-8761-89ca331f67a1.pdf',
     keywords: faker.lorem.sentence(),
     title: faker.lorem.sentence(),
     abstract: faker.lorem.sentences(),

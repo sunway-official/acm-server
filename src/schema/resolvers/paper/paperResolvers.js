@@ -36,11 +36,10 @@ export default {
       data,
       { models: { PaperAuthor } },
     ) => {
-      const paperAuthors = await PaperAuthor.query()
-        .select('*')
-        .where(builder =>
-          builder.where('conference_id', conference_id).where('paper_id', id),
-        );
+      const paperAuthors = await PaperAuthor.query().where(builder =>
+        builder.where('conference_id', conference_id).where('paper_id', id),
+      );
+      console.log(paperAuthors);
       return paperAuthors;
     },
     comments: async (
@@ -213,11 +212,9 @@ export default {
         const newPaper = await Paper.query().insert(data);
 
         // send email to author
-        const subject = `${conference.title} - Invitation`;
         const template = emailTemplates.submitPaper(
           config.swEmail,
           user.email,
-          subject,
           {
             user,
             conference,

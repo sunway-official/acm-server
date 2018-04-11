@@ -4,8 +4,14 @@ export default {
       const conference = await Conference.query().findById(conference_id);
       return conference;
     },
-    schedules: async ({ id }, data, { models: { Schedule } }) => {
-      const schedules = await Schedule.query().where('activity_id', id);
+    schedules: async (
+      { id, conference_id },
+      data,
+      { models: { Schedule } },
+    ) => {
+      const schedules = await Schedule.query().where(builder =>
+        builder.where('activity_id', id).where('conference_id', conference_id),
+      );
       return schedules;
     },
     paper: async ({ paper_id }, data, { models: { Paper } }) => {

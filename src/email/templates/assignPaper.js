@@ -1,12 +1,7 @@
-export default (
-  fromAddress,
-  toAddress,
-  subject = '',
-  variables = {},
-  abstract = true,
-) => {
-  const user = variables.user;
-  const conference = variables.conference;
+export default (fromAddress, toAddress, variables = {}, abstract = true) => {
+  const { conference, reviewer } = variables;
+  const user = reviewer;
+  const subject = `${conference.title} REVIEW the Papers`;
   const dl_review = abstract
     ? conference.dl_review_abstract
     : conference.dl_review_paper;

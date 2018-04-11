@@ -27,7 +27,7 @@ const updated_at = today;
 
 const conferences = [
   {
-    title: 'Hoi nghi quoc te SigTelCom 2017',
+    title: 'International Conference on Recent Advances',
     description:
       'International Conference on Recent Advances on Signal Processing, Telecommunications & Computing',
     dl_submit_abstract,
