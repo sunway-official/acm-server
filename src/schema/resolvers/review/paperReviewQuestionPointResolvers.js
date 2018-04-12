@@ -42,6 +42,7 @@ export default {
       }
       const conference_id = user.current_conference_id;
       const paperReviewData = data;
+      paperReviewData.user_id = user.id;
       paperReviewData.conference_id = conference_id;
       const paperReview = await PaperReviewQuestionPoint.query().insert(
         paperReviewData,

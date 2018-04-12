@@ -39,7 +39,6 @@ export default {
       const paperAuthors = await PaperAuthor.query().where(builder =>
         builder.where('conference_id', conference_id).where('paper_id', id),
       );
-      console.log(paperAuthors);
       return paperAuthors;
     },
     comments: async (
