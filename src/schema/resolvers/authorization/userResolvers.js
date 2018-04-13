@@ -456,6 +456,7 @@ export default {
       const authorRole = '7';
       const password = faker.random.alphaNumeric(7);
       const username = email.substr(0, email.indexOf('@'));
+      let isExist = false;
       const data = {
         email,
         password,
@@ -472,10 +473,16 @@ export default {
       const conference = await Conference.query().findById(conference_id);
       let insertUser;
       try {
-        insertUser = await User.query().insert(data);
+        insertUser = await User.query()
+          .where('email', email)
+          .first();
+        if (!insertUser) {
+          insertUser = await User.query().insert(data);
+        } else {
+          isExist = true;
+        }
       } catch (e) {
         console.log(e);
-        throw new ValidationError('Email exist!');
       }
 
       try {
@@ -488,6 +495,7 @@ export default {
                 insertUser,
                 conference,
                 password,
+                isExist,
               },
             );
 
@@ -502,6 +510,7 @@ export default {
                 insertUser,
                 conference,
                 password,
+                isExist,
               },
             );
 

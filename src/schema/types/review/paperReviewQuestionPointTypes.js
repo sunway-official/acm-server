@@ -34,6 +34,6 @@ export default `
   }
 
   extend type Mutation {
-    insertPaperReviewQuestion(user_id: ID!, paper_id: ID!, review_question_id: ID!, point: Float!, comment: String): PaperReviewQuestionPoint!
+    insertPaperReviewQuestion(paper_id: ID!, review_question_id: ID!, point: Float!, comment: String): PaperReviewQuestionPoint!
   }
 `;
