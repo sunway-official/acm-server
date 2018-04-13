@@ -32,7 +32,7 @@ const tempPapers = conference_id => [
 
   // id 03
   {
-    status: paperStatus[0].name,
+    status: paperStatus[1].name,
     paper_status_id: 3,
     conference_id,
     file: '72c891c0-39ae-11e8-af3f-0d8a8ca7032a.pdf',
@@ -58,7 +58,7 @@ const tempPapers = conference_id => [
 
   // id 05
   {
-    status: paperStatus[0].name,
+    status: paperStatus[2].name,
     paper_status_id: 1,
     file: '72c891c0-39ae-11e8-af3f-0d8a8ca7032a.pdf',
     conference_id,
@@ -70,7 +70,7 @@ const tempPapers = conference_id => [
 
   // id 06
   {
-    status: paperStatus[1].name,
+    status: paperStatus[2].name,
     paper_status_id: 1,
     file: '72c891c0-39ae-11e8-af3f-0d8a8ca7032a.pdf',
     conference_id,
@@ -93,7 +93,7 @@ const tempPapers = conference_id => [
   },
   // id 08
   {
-    status: paperStatus[4].name,
+    status: paperStatus[3].name,
     paper_status_id: 5,
     conference_id,
     file: '72c891c0-39ae-11e8-af3f-0d8a8ca7032a.pdf',
@@ -104,7 +104,7 @@ const tempPapers = conference_id => [
   },
   // id 09
   {
-    status: paperStatus[5].name,
+    status: paperStatus[4].name,
     paper_status_id: 6,
     conference_id,
     file: '72c891c0-39ae-11e8-af3f-0d8a8ca7032a.pdf',
@@ -115,7 +115,7 @@ const tempPapers = conference_id => [
   },
   // id 10
   {
-    status: paperStatus[6].name,
+    status: paperStatus[4].name,
     paper_status_id: 7,
     conference_id,
     file: '72c891c0-39ae-11e8-af3f-0d8a8ca7032a.pdf',
@@ -126,7 +126,7 @@ const tempPapers = conference_id => [
   },
   // id 11
   {
-    status: paperStatus[7].name,
+    status: paperStatus[5].name,
     paper_status_id: 8,
     conference_id,
     file: '72c891c0-39ae-11e8-af3f-0d8a8ca7032a.pdf',
@@ -137,7 +137,7 @@ const tempPapers = conference_id => [
   },
   // id 12
   {
-    status: paperStatus[0].name,
+    status: paperStatus[7].name,
     paper_status_id: 1,
     conference_id,
     file: '72c891c0-39ae-11e8-af3f-0d8a8ca7032a.pdf',
@@ -148,7 +148,7 @@ const tempPapers = conference_id => [
   },
   // id 13
   {
-    status: paperStatus[1].name,
+    status: paperStatus[6].name,
     paper_status_id: 2,
     conference_id,
     file: '72c891c0-39ae-11e8-af3f-0d8a8ca7032a.pdf',

@@ -1,5 +1,5 @@
 export default (fromAddress, toAddress, variables = {}) => {
-  const { insertUser, conference, password } = variables;
+  const { insertUser, conference, password, isExist } = variables;
   const user = insertUser;
   const subject = `${conference.title} Invitation`;
   return {
@@ -25,7 +25,12 @@ export default (fromAddress, toAddress, variables = {}) => {
     }
     <br>
     ${conference.description}<br>
-    Your account (you can login with username or email)
+     ${
+       isExist
+         ? `You had an account on my system and you can log in with <b>${
+             user.email
+           }</b>`
+         : `Your account (you can login with username or email)
     <br>
     <b>Email</b>: ${user.email}
     <br>
@@ -33,7 +38,9 @@ export default (fromAddress, toAddress, variables = {}) => {
     <br>
     <b>Password</b>: ${password}
     <br>
-    <br>
+    <br>`
+     }
+
     We look forward to hearing from you soon and please feel free to contact us if we can be of further assistance.<br>
     <br>
 
