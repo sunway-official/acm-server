@@ -19,7 +19,7 @@ const tempPapers = conference_id => [
   // id 02
   {
     status: paperStatus[0].name,
-    paper_status_id: 2,
+    paper_status_id: 1,
     conference_id,
     file: '72c891c0-39ae-11e8-af3f-0d8a8ca7032a.pdf',
     title:
@@ -33,7 +33,7 @@ const tempPapers = conference_id => [
   // id 03
   {
     status: paperStatus[1].name,
-    paper_status_id: 3,
+    paper_status_id: 2,
     conference_id,
     file: '72c891c0-39ae-11e8-af3f-0d8a8ca7032a.pdf',
     title:
@@ -47,7 +47,7 @@ const tempPapers = conference_id => [
   // id 04
   {
     status: paperStatus[1].name,
-    paper_status_id: 1,
+    paper_status_id: 2,
     file: '72c891c0-39ae-11e8-af3f-0d8a8ca7032a.pdf',
     conference_id,
     keywords: faker.lorem.sentence(),
@@ -59,7 +59,7 @@ const tempPapers = conference_id => [
   // id 05
   {
     status: paperStatus[2].name,
-    paper_status_id: 1,
+    paper_status_id: 3,
     file: '72c891c0-39ae-11e8-af3f-0d8a8ca7032a.pdf',
     conference_id,
     title: 'Business Intelligence and Analytics: From Big Data to Big Impact',
@@ -71,7 +71,7 @@ const tempPapers = conference_id => [
   // id 06
   {
     status: paperStatus[2].name,
-    paper_status_id: 1,
+    paper_status_id: 3,
     file: '72c891c0-39ae-11e8-af3f-0d8a8ca7032a.pdf',
     conference_id,
     keywords: 'technology, city, life, benefit',
@@ -94,7 +94,7 @@ const tempPapers = conference_id => [
   // id 08
   {
     status: paperStatus[3].name,
-    paper_status_id: 5,
+    paper_status_id: 4,
     conference_id,
     file: '72c891c0-39ae-11e8-af3f-0d8a8ca7032a.pdf',
     keywords: faker.lorem.sentence(),
@@ -105,7 +105,7 @@ const tempPapers = conference_id => [
   // id 09
   {
     status: paperStatus[4].name,
-    paper_status_id: 6,
+    paper_status_id: 5,
     conference_id,
     file: '72c891c0-39ae-11e8-af3f-0d8a8ca7032a.pdf',
     keywords: faker.lorem.sentence(),
@@ -116,7 +116,7 @@ const tempPapers = conference_id => [
   // id 10
   {
     status: paperStatus[4].name,
-    paper_status_id: 7,
+    paper_status_id: 5,
     conference_id,
     file: '72c891c0-39ae-11e8-af3f-0d8a8ca7032a.pdf',
     keywords: faker.lorem.sentence(),
@@ -127,7 +127,7 @@ const tempPapers = conference_id => [
   // id 11
   {
     status: paperStatus[5].name,
-    paper_status_id: 8,
+    paper_status_id: 6,
     conference_id,
     file: '72c891c0-39ae-11e8-af3f-0d8a8ca7032a.pdf',
     keywords: faker.lorem.sentence(),
@@ -138,7 +138,7 @@ const tempPapers = conference_id => [
   // id 12
   {
     status: paperStatus[7].name,
-    paper_status_id: 1,
+    paper_status_id: 8,
     conference_id,
     file: '72c891c0-39ae-11e8-af3f-0d8a8ca7032a.pdf',
     keywords: faker.lorem.sentence(),
@@ -149,7 +149,7 @@ const tempPapers = conference_id => [
   // id 13
   {
     status: paperStatus[6].name,
-    paper_status_id: 2,
+    paper_status_id: 7,
     conference_id,
     file: '72c891c0-39ae-11e8-af3f-0d8a8ca7032a.pdf',
     keywords: faker.lorem.sentence(),
