@@ -25,6 +25,7 @@ import paper from './paper';
 // review
 import review from './review';
 
+// notification
 import notification from './notification';
 
 const models = {

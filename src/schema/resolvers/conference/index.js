@@ -4,6 +4,7 @@ import addressResolvers from './addressResolvers';
 import conferenceAttendeeResolvers from './conferenceAttendeeResolvers';
 import coOrganizerDetailResolvers from './coOrganizerDetailResolvers';
 import landingPageResolvers from './landingPageResolvers';
+import categoryResolvers from './categoryResolvers';
 
 export default [
   organizerDetailResolvers,
@@ -12,4 +13,5 @@ export default [
   conferenceAttendeeResolvers,
   coOrganizerDetailResolvers,
   landingPageResolvers,
+  categoryResolvers,
 ];
