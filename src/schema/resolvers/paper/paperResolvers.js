@@ -46,7 +46,6 @@ export default {
       data,
       { models: { PaperReviewQuestionPoint }, user },
     ) => {
-      console.log(user);
       const paperReview = await PaperReviewQuestionPoint.query().where(
         builder =>
           builder
@@ -187,6 +186,90 @@ export default {
     },
   },
   Mutation: {
+    updateAllStatusPapers: async (
+      root,
+      { current_date },
+      { models: { Paper, Conference }, ValidationError, user },
+    ) => {
+      try {
+        if (!user) {
+          throw new ValidationError('unauthorized');
+        }
+        // eslint-disable-next-line
+        const conference_id = user.current_conference_id;
+        const conference = await Conference.query().findById(conference_id);
+        const paperStatus = commonUtils.allStatus();
+        console.log(conference.dl_submit_paper.toDateString());
+
+        switch (true) {
+          // paper
+          case current_date.getTime() >=
+            conference.dl_re_submit_paper.getTime(): {
+            await Paper.query()
+              .update({ paper_status_id: paperStatus['Re-reviewing'] })
+              .where(builder =>
+                builder
+                  .where('conference_id', conference_id)
+                  .where('paper_status_id', 7),
+              );
+            break;
+          }
+          case current_date.getTime() >= conference.dl_review_paper.getTime() ||
+            current_date.getTime() >= conference.dl_re_review_paper.getTime(): {
+            await Paper.query()
+              .update({ paper_status_id: paperStatus.Reviewed })
+              .where('conference_id', conference_id);
+            break;
+          }
+          case current_date.getTime() >= conference.dl_submit_paper.getTime(): {
+            await Paper.query()
+              .update({ paper_status_id: paperStatus.Assigning })
+              .where('conference_id', conference_id);
+            break;
+          }
+          // abstract
+          case current_date.getTime() >=
+            conference.dl_re_submit_abstract.getTime(): {
+            await Paper.query()
+              .update({ paper_status_id: paperStatus['Re-reviewing'] })
+              .where(builder =>
+                builder
+                  .where('conference_id', conference_id)
+                  .where('paper_status_id', 7),
+              );
+            break;
+          }
+          case current_date.getTime() >=
+            conference.dl_review_abstract.getTime() ||
+            current_date.getTime() >=
+              conference.dl_re_review_abstract.getTime(): {
+            await Paper.query()
+              .update({ paper_status_id: paperStatus.Reviewed })
+              .where('conference_id', conference_id);
+            break;
+          }
+          case current_date.getTime() >=
+            conference.dl_submit_abstract.getTime(): {
+            await Paper.query()
+              .update({ paper_status_id: paperStatus.Assigning })
+              .where('conference_id', conference_id);
+            break;
+          }
+
+          default: {
+            break;
+          }
+        }
+
+        return {
+          status: 1,
+        };
+      } catch (e) {
+        console.error(e);
+        throw new ValidationError(e);
+      }
+    },
+
     insertPaper: async (
       root,
       data,
