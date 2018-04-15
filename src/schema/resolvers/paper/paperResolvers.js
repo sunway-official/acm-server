@@ -44,14 +44,15 @@ export default {
     comments: async (
       { id, conference_id },
       data,
-      { models: { PaperReviewQuestionPoint } },
+      { models: { PaperReviewQuestionPoint }, user },
     ) => {
+      console.log(user);
       const paperReview = await PaperReviewQuestionPoint.query().where(
         builder =>
           builder
             .where('conference_id', conference_id)
             .where('paper_id', id)
-            .where('review_question_id', 1),
+            .where('user_id', user.id),
       );
       return paperReview;
     },
