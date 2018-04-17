@@ -83,7 +83,7 @@ const conferences = [
     bg_image: 'abc.png',
     organizer_detail_id: '2',
     address_id: '2',
-    user_id: '2',
+    user_id: 6,
   },
   {
     category_id: 3,
@@ -214,7 +214,7 @@ const conferences = [
       'http://dev.duytan.edu.vn:8045/ndJK184IUkdfn23df675/coms/images/citam2018-636560275482809088.jpg',
     organizer_detail_id: '1',
     address_id: '1',
-    user_id: '1',
+    user_id: 6,
     dl_submit_abstract,
     dl_review_abstract,
     dl_release_abstract,
@@ -237,7 +237,7 @@ const conferences = [
   // id 02
 
   {
-    category_id: 1,
+    category_id: 4,
     category_name: categories[0].name,
     title: 'INTERNATIONAL FOOD TOURISM FORUM',
     description:
@@ -246,7 +246,7 @@ const conferences = [
       'http://dev.duytan.edu.vn:8045/ndJK184IUkdfn23df675/coms/images/food_2018_banner_confs-636558437244524661.jpg',
     organizer_detail_id: '1',
     address_id: '1',
-    user_id: '1',
+    user_id: 6,
     dl_submit_abstract,
     dl_review_abstract,
     dl_release_abstract,
@@ -277,7 +277,7 @@ const conferences = [
       'http://dev.duytan.edu.vn:8045/ndJK184IUkdfn23df675/coms/images/slide-banner-1-636493993928319645.jpg',
     organizer_detail_id: '1',
     address_id: '1',
-    user_id: '1',
+    user_id: '6',
     dl_submit_abstract,
     dl_review_abstract,
     dl_release_abstract,
@@ -308,7 +308,7 @@ const conferences = [
     bg_image: '',
     organizer_detail_id: '1',
     address_id: '1',
-    user_id: '1',
+    user_id: '6',
     dl_submit_abstract,
     dl_review_abstract,
     dl_release_abstract,
@@ -330,7 +330,7 @@ const conferences = [
 
   // id 05
   {
-    category_id: 1,
+    category_id: 2,
     category_name: categories[0].name,
     title:
       'ICERE 2018: 2018 4th International Conference on Environment and Renewable Energy',
@@ -339,7 +339,7 @@ const conferences = [
     bg_image: '',
     organizer_detail_id: '1',
     address_id: '1',
-    user_id: '1',
+    user_id: '6',
     dl_submit_abstract,
     dl_review_abstract,
     dl_release_abstract,
@@ -361,7 +361,7 @@ const conferences = [
 
   // id 06
   {
-    category_id: 1,
+    category_id: 2,
     category_name: categories[0].name,
     title:
       'The 6th International Conference on Matrix Analysis and Applications (ICMAA 2017)',
@@ -370,7 +370,7 @@ const conferences = [
     bg_image: '',
     organizer_detail_id: '1',
     address_id: '1',
-    user_id: '1',
+    user_id: '6',
     dl_submit_abstract,
     dl_review_abstract,
     dl_release_abstract,
@@ -392,7 +392,7 @@ const conferences = [
 
   // id 07
   {
-    category_id: 1,
+    category_id: 3,
     category_name: categories[0].name,
     title:
       '2017 International Conference on Recent Advances on  Signal Processing, Telecommunications & Computing (SigTelCom)',
@@ -401,7 +401,7 @@ const conferences = [
     bg_image: '',
     organizer_detail_id: '1',
     address_id: '1',
-    user_id: '1',
+    user_id: '6',
     dl_submit_abstract,
     dl_review_abstract,
     dl_release_abstract,

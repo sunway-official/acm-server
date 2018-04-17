@@ -195,12 +195,15 @@ export default {
         if (!user) {
           throw new ValidationError('unauthorized');
         }
+
         // eslint-disable-next-line
         const conference_id = user.current_conference_id;
         const conference = await Conference.query().findById(conference_id);
         const paperStatus = commonUtils.allStatus();
-        console.log(conference.dl_submit_paper.toDateString());
-
+        console.log(
+          'current_date',
+          current_date.getTime() >= conference.dl_re_submit_paper.getTime(),
+        );
         switch (true) {
           // paper
           case current_date.getTime() >=
@@ -210,8 +213,9 @@ export default {
               .where(builder =>
                 builder
                   .where('conference_id', conference_id)
-                  .where('paper_status_id', 7),
+                  .where('paper_status_id', paperStatus['Re-submitting']),
               );
+            console.log(conference_id);
             break;
           }
           case current_date.getTime() >= conference.dl_review_paper.getTime() ||
@@ -223,7 +227,7 @@ export default {
           }
           case current_date.getTime() >= conference.dl_submit_paper.getTime(): {
             await Paper.query()
-              .update({ paper_status_id: paperStatus.Assigning })
+              .update({ paper_status_id: paperStatus.Reviewing })
               .where('conference_id', conference_id);
             break;
           }
@@ -235,7 +239,7 @@ export default {
               .where(builder =>
                 builder
                   .where('conference_id', conference_id)
-                  .where('paper_status_id', 7),
+                  .where('paper_status_id', paperStatus['Re-submitting']),
               );
             break;
           }

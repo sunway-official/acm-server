@@ -58,8 +58,14 @@ extend type Query {
   getAllRolesActiveByUserID(user_id: ID!, conference_id: ID!): [Permission!]!
 
 }
+type Result {
+  status: Int!
+}
 
 extend type Mutation {
+
+  # Insert users role in conference
+  insertRoleForUser(user_id: ID!, role_id: ID!): Result!
 
   # Update status permission
   updateStatusOfPermission(id: ID!, status: Status!) : Permission!
