@@ -40,6 +40,16 @@ export default class Conference extends Model {
       dl_registration: { type: ['string', 'null'] },
     },
   };
+  static relationMappings = {
+    rls_conf_att: {
+      relation: Model.HasManyRelation,
+      modelClass: ConferenceAttendee,
+      join: {
+        from: 'conferences.id',
+        to: 'conferences_attendees.conference_id',
+      },
+    },
+  };
 
   async $beforeValidate(opt) {
     this.id = parseInt(opt.old.id, 10);

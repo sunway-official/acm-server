@@ -1,7 +1,14 @@
 export default {
   Category: {
-    conferences: async ({ id }, data, { models: { Conference } }) => {
-      const conferences = await Conference.query().where('category_id', id);
+    conferences: async ({ id }, data, { models: { Conference }, user }) => {
+      let conferences;
+      if (user) {
+        conferences = await Conference.query()
+          .select('conferences.*')
+          .joinRelation('rls_conf_att')
+          .where('category_id', id)
+          .where('rls_conf_att.user_id', user.id);
+      }
       return conferences;
     },
   },

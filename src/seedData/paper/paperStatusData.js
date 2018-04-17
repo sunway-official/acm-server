@@ -1,27 +1,27 @@
 const paperStatus = [
   {
-    name: 'Accepted',
+    name: 'Accepted', // 1
   },
   {
-    name: 'Rejected',
+    name: 'Rejected', // 2
   },
   {
-    name: 'Submitting',
+    name: 'Submitting', // 3
   },
   {
-    name: 'Assigning',
+    name: 'Assigning', // 4
   },
   {
-    name: 'Reviewing',
+    name: 'Reviewing', // 5
   },
   {
-    name: 'Reviewed',
+    name: 'Reviewed', // 6
   },
   {
-    name: 'Re-submitting',
+    name: 'Re-submitting', // 7
   },
   {
-    name: 'Re-reviewing',
+    name: 'Re-reviewing', // 8
   },
 ];
 

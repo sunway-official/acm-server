@@ -444,7 +444,7 @@ export default {
       root,
       { role_id, email, title, firstname, lastname },
       {
-        models: { User, Conference },
+        models: { User, Conference, ConferenceAttendee, Permission, Role },
         ValidationError,
         user,
         emailTemplates,
@@ -485,6 +485,23 @@ export default {
         console.log(e);
       }
 
+      await ConferenceAttendee.query().insert({
+        conference_id,
+        user_id: insertUser.id,
+      });
+      const role = await Role.query().findById(role_id);
+      const permission = {
+        role_id: role.id,
+        role_name: role.name,
+        user_id: insertUser.id,
+        full_name: `${insertUser.firstname} ${insertUser.lastname}`,
+        feature_id: 1,
+        conference_id,
+      };
+
+      // eslint-disable-next-line no-await-in-loop
+      await Permission.query().insert(permission);
+
       try {
         switch (role_id) {
           case authorRole: {
@@ -522,6 +539,7 @@ export default {
             break;
           }
         }
+
         return insertUser;
       } catch (e) {
         console.log(e);
