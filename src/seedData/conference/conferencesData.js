@@ -401,7 +401,7 @@ const conferences = [
     bg_image: '',
     organizer_detail_id: '1',
     address_id: '1',
-    user_id: '6',
+    user_id: 1,
     dl_submit_abstract,
     dl_review_abstract,
     dl_release_abstract,
