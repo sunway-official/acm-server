@@ -100,24 +100,29 @@ export default class User extends unique(Model) {
         config.saltFactor,
       );
     }
+  }
 
+  async $afterUpdate() {
     await Promise.all([
       ConferenceUserRelationship.query()
         .where('follower_id', this.id)
         .update({
-          followers_firstname: this.firstname,
-          followers_lastname: this.lastname,
-          followers_avatar: this.avatar,
-        }),
+          follower_firstname: this.firstname,
+          follower_lastname: this.lastname,
+          follower_avatar: this.avatar,
+        })
+        .skipUndefined(),
       ConferenceUserRelationship.query()
         .where('following_id', this.id)
         .update({
-          followings_firstname: this.firstname,
-          followings_lastname: this.lastname,
-          followings_avatar: this.avatar,
-        }),
+          following_firstname: this.firstname,
+          following_lastname: this.lastname,
+          following_avatar: this.avatar,
+        })
+        .skipUndefined(),
     ]);
   }
+
   async checkPassword(password) {
     const passwordMatch = await bcrypt.compare(password, this.password);
     return passwordMatch;

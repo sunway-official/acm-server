@@ -3,7 +3,7 @@ const usersData = require('../authorization/userData');
 
 const user_relationships_in_conferences = [];
 
-for (let i = 1; i <= 1024; i += 1) {
+for (let i = 1; i <= 512; i += 1) {
   const follower = faker.random.arrayElement(usersData);
   const following = faker.random.arrayElement(usersData);
 
@@ -35,6 +35,17 @@ usersData.forEach(user => {
   });
   user.followers_count = followers_count; // eslint-disable-line
   user.followings_count = followings_count; // eslint-disable-line
+});
+
+user_relationships_in_conferences.forEach(relation => {
+  usersData.forEach(user => {
+    if (relation.follower_id === user.id) {
+      relation.follower_followers_count = user.followers_count; // eslint-disable-line
+    }
+    if (relation.following_id === user.id) {
+      relation.following_followers_count = user.followings_count; // eslint-disable-line
+    }
+  });
 });
 
 module.exports = user_relationships_in_conferences;

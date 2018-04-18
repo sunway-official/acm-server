@@ -4,6 +4,8 @@ import conferenceAttendeeTypes from './conferenceAttendeeTypes';
 import organizerDetailTypes from './organizerDetailTypes';
 import coOrganizerDetailTypes from './coOrganizerDetailTypes';
 import landingPageTypes from './landingPageTypes';
+import followerTypes from './followerTypes';
+import followingTypes from './followingTypes';
 
 export default [
   conferenceTypes,
@@ -12,4 +14,6 @@ export default [
   organizerDetailTypes,
   coOrganizerDetailTypes,
   landingPageTypes,
+  followerTypes,
+  followingTypes,
 ];

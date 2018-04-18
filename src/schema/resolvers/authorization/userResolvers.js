@@ -407,6 +407,7 @@ export default {
         const conference = await Conference.query().findById(conference_id);
         return conference;
       } catch (err) {
+        console.log(err);
         throw new ValidationError('bad-request');
       }
     },
