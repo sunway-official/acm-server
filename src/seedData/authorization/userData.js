@@ -18,14 +18,7 @@ const versionKey = bcrypt.hashSync(
   parseInt(process.env.SALT_FACTOR, 10),
 );
 
-const organizationArr = [
-  'Duy Tan University',
-  'Da Nang University of Technology',
-  'Da Nang University of Economy',
-  'Da Nang University of Architecture',
-  'FPT University',
-  'The American University of Vietnam',
-];
+const organizationArr = ['DTU', 'DUT', 'DUE', 'DUA', 'FPT'];
 const positionArr = ['Teacher', 'Student', 'Dean', 'Vice Dean', 'Professor'];
 const interestedInArr = [
   'Math',
