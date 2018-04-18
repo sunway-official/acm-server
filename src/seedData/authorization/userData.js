@@ -503,4 +503,8 @@ for (let i = 1; i < 10; i += 1) {
   });
 }
 
+usersData.forEach((user, index) => {
+  user.id = index + 1; // eslint-disable-line
+});
+
 module.exports = usersData;

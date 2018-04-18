@@ -5,6 +5,7 @@ import config from '../../config';
 import commonUtils from '../../utils/common';
 import ActivityFeedback from '../activity/activityFeedback';
 import ConferenceAttendee from '../conference/conferenceAttendee';
+import ConferenceUserRelationship from '../conference/conferenceUserRelationship';
 import OrganizerDetail from '../conference/organizerDetail';
 import News from '../newsFeed/news';
 import NewsComment from '../newsFeed/newsComment';
@@ -27,8 +28,8 @@ export default class User extends unique(Model) {
     properties: {
       id: { type: 'number' },
       current_conference_id: { type: 'number' },
-      firstname: { type: 'string', maxLength: '100' },
-      lastname: { type: 'string', maxLength: '255' },
+      firstname: { type: 'string', maxLength: '50' },
+      lastname: { type: 'string', maxLength: '50' },
       email: {
         type: 'string',
         format: 'email',
@@ -66,8 +67,9 @@ export default class User extends unique(Model) {
       twitter_id: {
         type: ['string', 'null'],
       },
-
       version_key: { type: 'string' },
+      followers_count: { type: 'integer' },
+      followings_count: { type: 'integer' },
     },
   };
   // eslint-disable-next-line class-methods-use-this
@@ -88,6 +90,7 @@ export default class User extends unique(Model) {
       config.saltFactor,
     );
   }
+
   async $beforeUpdate() {
     this.updated_at = new Date();
     if (this.password) {
@@ -98,6 +101,28 @@ export default class User extends unique(Model) {
       );
     }
   }
+
+  async $afterUpdate() {
+    await Promise.all([
+      ConferenceUserRelationship.query()
+        .where('follower_id', this.id)
+        .update({
+          follower_firstname: this.firstname,
+          follower_lastname: this.lastname,
+          follower_avatar: this.avatar,
+        })
+        .skipUndefined(),
+      ConferenceUserRelationship.query()
+        .where('following_id', this.id)
+        .update({
+          following_firstname: this.firstname,
+          following_lastname: this.lastname,
+          following_avatar: this.avatar,
+        })
+        .skipUndefined(),
+    ]);
+  }
+
   async checkPassword(password) {
     const passwordMatch = await bcrypt.compare(password, this.password);
     return passwordMatch;
