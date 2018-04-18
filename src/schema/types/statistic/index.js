@@ -14,5 +14,7 @@ type Statistic {
 extend type Query {
 
   getAttendeesStatistic: [Statistic!]!
+  
+  getTopicsStatistic: [Statistic!]!
 }
 `;
