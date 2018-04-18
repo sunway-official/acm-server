@@ -19,10 +19,22 @@ const sendMail = (user, template, transporter) => {
   };
 };
 
+const allStatus = () => ({
+  Accepted: 1,
+  Rejected: 2,
+  Submitting: 3,
+  Assigning: 4,
+  Reviewing: 5,
+  Reviewed: 6,
+  'Re-submitting': 7,
+  'Re-reviewing': 8,
+});
+
 const commonUtils = {
   randomStr,
   passwordRegex,
   sendMail,
+  allStatus,
 };
 
 export default commonUtils;

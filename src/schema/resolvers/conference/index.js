@@ -6,6 +6,7 @@ import coOrganizerDetailResolvers from './coOrganizerDetailResolvers';
 import landingPageResolvers from './landingPageResolvers';
 import followerResolvers from './followerResolvers';
 import followingResolvers from './followingResolvers';
+import categoryResolvers from './categoryResolvers';
 
 export default [
   organizerDetailResolvers,
@@ -16,4 +17,5 @@ export default [
   landingPageResolvers,
   followerResolvers,
   followingResolvers,
+  categoryResolvers,
 ];
