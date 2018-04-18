@@ -31,6 +31,8 @@ import paper from './paper';
 
 import review from './review';
 
+import statistic from './statistic';
+
 export default [
   ...authorization,
   ...activity,
@@ -44,4 +46,5 @@ export default [
   globalTypes,
   staff,
   participant,
+  statistic,
 ];

@@ -30,6 +30,8 @@ import paper from './paper';
 
 import review from './review';
 
+import statistic from './statistic';
+
 const rootResolvers = {
   Date: GraphQLToolsTypes.Date({ name: 'Date' }),
 };
@@ -47,5 +49,6 @@ const resolvers = [
   ...review,
   staff,
   participant,
+  statistic,
 ];
 export default mergeResolvers(resolvers);
