@@ -55,6 +55,20 @@ export default {
       );
       return paperReview;
     },
+    is_reviewed: async (
+      { id },
+      data,
+      { models: { PaperReviewQuestionPoint }, user },
+    ) => {
+      const conference_id = user.current_conference_id;
+      const isReviewed = await PaperReviewQuestionPoint.query().where(builder =>
+        builder
+          .where('conference_id', conference_id)
+          .where('user_id', user.id)
+          .where('paper_id', id),
+      );
+      return isReviewed.length ? 1 : 0;
+    },
   },
   Query: {
     getPapersByConferenceID: async (
@@ -215,7 +229,6 @@ export default {
                   .where('conference_id', conference_id)
                   .where('paper_status_id', paperStatus['Re-submitting']),
               );
-            console.log(conference_id);
             break;
           }
           case current_date.getTime() >= conference.dl_review_paper.getTime() ||
