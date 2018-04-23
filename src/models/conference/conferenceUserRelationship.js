@@ -28,8 +28,12 @@ export default class ConferenceUserRelationship extends Model {
   }
 
   async $beforeInsert() {
-    const follower = await User.query().where('id', this.follower_id);
-    const following = await User.query().where('id', this.following_id);
+    const follower = await User.query()
+      .where('id', this.follower_id)
+      .first();
+    const following = await User.query()
+      .where('id', this.following_id)
+      .first();
     this.follower_followers_count = follower.followers_count;
     this.follower_firstname = follower.firstname;
     this.follower_lastname = follower.lastname;
@@ -46,10 +50,18 @@ export default class ConferenceUserRelationship extends Model {
       ConferenceUserRelationship.getFollowingCount(this.following_id),
     ]);
 
-    await User.query().update({
-      followers_count,
-      followings_count,
-    });
+    await Promise.all([
+      User.query()
+        .where('id', this.follower_id)
+        .update({
+          followings_count,
+        }),
+      User.query()
+        .where('id', this.following_id)
+        .update({
+          followers_count,
+        }),
+    ]);
   }
 
   static async getFollowersCount(follower_id) {

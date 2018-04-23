@@ -103,24 +103,26 @@ export default class User extends unique(Model) {
   }
 
   async $afterUpdate() {
-    await Promise.all([
-      ConferenceUserRelationship.query()
-        .where('follower_id', this.id)
-        .update({
-          follower_firstname: this.firstname,
-          follower_lastname: this.lastname,
-          follower_avatar: this.avatar,
-        })
-        .skipUndefined(),
-      ConferenceUserRelationship.query()
-        .where('following_id', this.id)
-        .update({
-          following_firstname: this.firstname,
-          following_lastname: this.lastname,
-          following_avatar: this.avatar,
-        })
-        .skipUndefined(),
-    ]);
+    if (this.id) {
+      await Promise.all([
+        ConferenceUserRelationship.query()
+          .where('follower_id', this.id)
+          .update({
+            follower_firstname: this.firstname,
+            follower_lastname: this.lastname,
+            follower_avatar: this.avatar,
+          })
+          .skipUndefined(),
+        ConferenceUserRelationship.query()
+          .where('following_id', this.id)
+          .update({
+            following_firstname: this.firstname,
+            following_lastname: this.lastname,
+            following_avatar: this.avatar,
+          })
+          .skipUndefined(),
+      ]);
+    }
   }
 
   async checkPassword(password) {

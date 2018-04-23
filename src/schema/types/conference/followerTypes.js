@@ -24,6 +24,8 @@ type Follower {
 
   followers_count: Int!
 
+  is_following: Boolean!
+
 }
 
 extend type Query {
@@ -31,6 +33,8 @@ extend type Query {
 }
 
 extend type Mutation {
+  followUser(user_id: ID!): Following!
 
+  unfollowUser(user_id: ID!): RequestResult!
 }
 `;
