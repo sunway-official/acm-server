@@ -13,10 +13,14 @@ type Statistic {
 
 extend type Query {
 
-  getAttendeesStatisticByOrganization: [Statistic!]!
+  getAttendeesStatisticByOrganization(minimumValue: Float): [Statistic!]!
 
-  getAttendeesStatisticByPosition: [Statistic!]!
+  getAttendeesStatisticByPosition(minimumValue: Float): [Statistic!]!
 
-  getTopicsStatistic: [Statistic!]!
+  getAttendeesStatisticByLanguage(minimumValue: Float): [Statistic!]!
+
+  getAttendeesStatisticByTheirInteresting(minimumValue: Float): [Statistic!]!
+
+  getTopicsStatistic(minimumValue: Float): [Statistic!]!
 }
 `;

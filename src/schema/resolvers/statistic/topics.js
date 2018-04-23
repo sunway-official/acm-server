@@ -1,9 +1,9 @@
-import { roundPercentageValue } from '.';
+import { roundPercentageValue, mergeSmallStatisticItem } from '.';
 
 export default {
   getTopicsStatistic: async (
     root,
-    data,
+    { minimumValue },
     { models: { Paper }, ValidationError, user },
   ) => {
     if (!user) {
@@ -25,12 +25,15 @@ export default {
         0,
       );
 
-      return result.map(({ topic_name, count }, index) => ({
-        key: index + 1,
-        value: count,
-        label: topic_name,
-        percentage: roundPercentageValue(count / sum),
-      }));
+      return mergeSmallStatisticItem(
+        result.map(({ topic_name, count }, index) => ({
+          key: index + 1,
+          value: count,
+          label: topic_name,
+          percentage: roundPercentageValue(count / sum),
+        })),
+        minimumValue,
+      );
     } catch (e) {
       // eslint-disable-next-line no-console
       console.error(e);
