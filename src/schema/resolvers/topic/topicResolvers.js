@@ -12,7 +12,8 @@ export default {
       const papers = await Paper.query()
         .select('*')
         .joinRelation('rls_topic')
-        .where('rls_topic.topic_id', id);
+        .where('rls_topic.topic_id', id)
+        .where('paper_status_id', 1);
       return papers;
     },
   },
