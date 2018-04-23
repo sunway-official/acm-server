@@ -3,7 +3,7 @@ const usersData = require('../authorization/userData');
 
 const user_relationships_in_conferences = [];
 
-for (let i = 1; i <= 128; i += 1) {
+for (let i = 1; i <= 512; i += 1) {
   const follower = faker.random.arrayElement(usersData);
   const following = faker.random.arrayElement(usersData);
 
