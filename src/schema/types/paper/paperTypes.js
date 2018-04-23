@@ -41,6 +41,12 @@ type Paper {
 
   # topic name
   topic_name: String!
+
+  is_reviewed: Int!
+}
+
+type UpdateStatus {
+  status: Int!
 }
 
 extend type Query {
@@ -63,6 +69,9 @@ extend type Mutation {
 
   # Update Paper info by id
   updatePaper( id:ID!, paper_status_id: ID, title: String, abstract: String, keywords: String, file: String ): Paper!
+
+  # update all paper status follow by deadline
+  updateAllStatusPapers(current_date: Date!): UpdateStatus!
 
   # Delete Paper by id
   deletePaper( id: ID! ): Paper

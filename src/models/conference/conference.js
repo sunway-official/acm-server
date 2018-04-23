@@ -5,6 +5,7 @@ import News from '../newsFeed/news';
 import Activity from '../activity/activity';
 import CoOrganizerDetail from './coOrganizerDetail';
 import OrganizerDetail from './organizerDetail';
+import Category from './category';
 
 export default class Conference extends Model {
   static tableName = 'conferences';
@@ -15,6 +16,8 @@ export default class Conference extends Model {
     properties: {
       id: { type: 'integer' },
       organizer_detail_id: { type: 'integer' },
+      category_id: { type: 'integer' },
+      category_name: { type: 'string', maxLength: '100' },
       address_id: { type: 'integer' },
       user_id: { type: 'integer' },
       title: { type: 'string', maxLength: '100' },
@@ -37,12 +40,23 @@ export default class Conference extends Model {
       dl_registration: { type: ['string', 'null'] },
     },
   };
+  static relationMappings = {
+    rls_conf_att: {
+      relation: Model.HasManyRelation,
+      modelClass: ConferenceAttendee,
+      join: {
+        from: 'conferences.id',
+        to: 'conferences_attendees.conference_id',
+      },
+    },
+  };
 
   async $beforeValidate(opt) {
     this.id = parseInt(opt.old.id, 10);
     this.organizer_detail_id = parseInt(opt.old.organizer_detail_id, 10);
     this.address_id = parseInt(opt.old.address_id, 10);
     this.user_id = parseInt(opt.old.user_id, 10);
+    this.category_id = parseInt(opt.old.category_id, 10);
   }
 
   async $beforeInsert() {
@@ -57,6 +71,14 @@ export default class Conference extends Model {
         this.user_id = organizerDetail.user_id;
       }
     }
+
+    if (this.category_id) {
+      const category = await Category.query().findById(this.category_id);
+
+      if (category) {
+        this.category_name = category.name;
+      }
+    }
   }
 
   async $beforeUpdate() {
@@ -68,6 +90,14 @@ export default class Conference extends Model {
 
       if (organizerDetail) {
         this.user_id = organizerDetail.user_id;
+      }
+    }
+
+    if (this.category_id) {
+      const category = await Category.query().findById(this.category_id);
+
+      if (category) {
+        this.category_name = category.name;
       }
     }
   }

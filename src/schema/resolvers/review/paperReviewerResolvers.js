@@ -19,7 +19,7 @@ export default {
       root,
       data,
       {
-        models: { PaperReviewer, Conference, User },
+        models: { PaperReviewer, Conference, User, Paper },
         ValidationError,
         user,
         emailTemplates,
@@ -34,6 +34,10 @@ export default {
       const conference = await Conference.query().findById(conference_id);
       const paperReviewerData = data;
       const reviewer = await User.query().findById(data.user_id);
+      const paperStatus = commonUtils.allStatus();
+
+      // update status
+      await Paper.query().update({ paper_status_id: paperStatus.Reviewing });
       paperReviewerData.conference_id = conference_id;
       const paperReviewer = await PaperReviewer.query().insert(
         paperReviewerData,

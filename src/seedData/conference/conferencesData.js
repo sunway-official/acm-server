@@ -1,4 +1,7 @@
 // eslint-disable-next-line no-extend-native
+const categories = require('./categoriesData');
+
+// eslint-disable-next-line
 Date.prototype.addDays = days => {
   const date = new Date();
   date.setDate(date.getDate() + days);
@@ -27,6 +30,8 @@ const updated_at = today;
 
 const conferences = [
   {
+    category_id: 1,
+    category_name: categories[0].name,
     title: 'International Conference on Recent Advances',
     description:
       'International Conference on Recent Advances on Signal Processing, Telecommunications & Computing',
@@ -53,6 +58,8 @@ const conferences = [
     user_id: '6',
   },
   {
+    category_id: 2,
+    category_name: categories[1].name,
     title: 'Block Chain for Big Coin',
     description:
       'The practical consequence […is…] for the first time, a way for one Internet user to transfer a unique piece of digital property to another Internet user, such that the transfer is guaranteed to be safe and secure, everyone knows that the transfer has taken place, and nobody can challenge the legitimacy of the transfer. The consequences of this breakthrough are hard to overstate.',
@@ -76,9 +83,11 @@ const conferences = [
     bg_image: 'abc.png',
     organizer_detail_id: '2',
     address_id: '2',
-    user_id: '2',
+    user_id: 6,
   },
   {
+    category_id: 3,
+    category_name: categories[2].name,
     title: 'P2A 2018 - ASEAN INTEGRATION',
     description: 'P2A – Passage to ASEAN ',
     dl_submit_abstract,
@@ -104,6 +113,8 @@ const conferences = [
     user_id: '6',
   },
   {
+    category_id: 1,
+    category_name: categories[0].name,
     title: 'DTU Partnerships with the Business Community',
     description:
       'Development cooperation between DTU relations with the business community',
@@ -127,9 +138,11 @@ const conferences = [
     bg_image: 'abc.png',
     organizer_detail_id: '4',
     address_id: '4',
-    user_id: '4',
+    user_id: '6',
   },
   {
+    category_id: 7,
+    category_name: categories[6].name,
     title: 'Duy Tan Student Scientific Research Conference',
     description:
       'Encourage more students to dedicate themselves to scientific research. If we succeed in doing this, a new era will open up for us in the 21st century',
@@ -153,9 +166,11 @@ const conferences = [
     bg_image: 'abc.png',
     organizer_detail_id: '5',
     address_id: '5',
-    user_id: '5',
+    user_id: '6',
   },
   {
+    category_id: 8,
+    category_name: categories[7].name,
     title: 'Non-public universities conference',
     description:
       'Purpose: To find solutions to develop the non-public education system in a sustainable manner',
@@ -189,6 +204,8 @@ const conferences = [
 
   // id 01
   {
+    category_id: 9,
+    category_name: categories[8].name,
     title:
       'The Second International Conference on Information Technology Applications in Medicine',
     description:
@@ -197,7 +214,7 @@ const conferences = [
       'http://dev.duytan.edu.vn:8045/ndJK184IUkdfn23df675/coms/images/citam2018-636560275482809088.jpg',
     organizer_detail_id: '1',
     address_id: '1',
-    user_id: '1',
+    user_id: 6,
     dl_submit_abstract,
     dl_review_abstract,
     dl_release_abstract,
@@ -220,6 +237,8 @@ const conferences = [
   // id 02
 
   {
+    category_id: 4,
+    category_name: categories[0].name,
     title: 'INTERNATIONAL FOOD TOURISM FORUM',
     description:
       'As a part of the 3 rd Annual Hoi An International Food Festival to be held in Hoi An, Vietnam from March 11 to 17, 2018, Duy Tan University in collaboration with Hoi An Culinary Events and the Danang Department of Tourism will hold the International Food Tourism Forum. With “Taste the World” as its theme, the International Food Tourism Forum provides opportunities for local Vietnamese food-related businesses to meet and exchange information with famous international counterparts and connects tourism training units with tourism companies to improve tourism development of Danang city and promote Danang’s cultural and tourism image to the world. Participants include Mr. Thomas Gugler, President of the World Association of Chefs Societies, 12 renowned chefs from Switzerland, France, South Africa, Japan, China, Spain, The Netherlands, Cook Islands, Turkey, Norway, Ecuador and Italy, and many well-known speakers such as Dr. Wantanee joint Editor-in-Chief of the journal “Tourism, Culture & Communication” from the School of Hotel and Tourism Management, The Hong Kong Polytechnic University, Mr. Edward Koh, Excutive Director, South East Asia, Singapore Tourism Board and others. The International Food Tourism Forum takes place at Duy Tan University, 03 Quang Trung Street, Hall 713, on March 15, 2018.',
@@ -227,7 +246,7 @@ const conferences = [
       'http://dev.duytan.edu.vn:8045/ndJK184IUkdfn23df675/coms/images/food_2018_banner_confs-636558437244524661.jpg',
     organizer_detail_id: '1',
     address_id: '1',
-    user_id: '1',
+    user_id: 6,
     dl_submit_abstract,
     dl_review_abstract,
     dl_release_abstract,
@@ -249,6 +268,8 @@ const conferences = [
 
   // id 03
   {
+    category_id: 1,
+    category_name: categories[0].name,
     title: 'CDIO REGIONAL MEETING - ASIA-PACIFIC',
     description:
       'The CDIO™ INITIATIVE is an innovative educational framework for producing the next generation of engineers. The framework provides students with an education stressing engineering fundamentals set in the context of Conceiving - Designing - Implementing - Operating (CDIO) real-world systems and products. Throughout the world, CDIO Initiative collaborators have adopted CDIO as the framework of their curricular planning and outcome-based assessment. CDIO collaborators recognize that an engineering education is acquired over a long period and in a variety of institutions, and that educators in all parts of this spectrum can learn from practice elsewhere. The CDIO network therefore welcomes members in a diverse range of institutions ranging from research-led internationally acclaimed universities to local colleges dedicated to providing students with their initial grounding in engineering.',
@@ -256,7 +277,7 @@ const conferences = [
       'http://dev.duytan.edu.vn:8045/ndJK184IUkdfn23df675/coms/images/slide-banner-1-636493993928319645.jpg',
     organizer_detail_id: '1',
     address_id: '1',
-    user_id: '1',
+    user_id: '6',
     dl_submit_abstract,
     dl_review_abstract,
     dl_release_abstract,
@@ -278,6 +299,8 @@ const conferences = [
 
   // id 04
   {
+    category_id: 1,
+    category_name: categories[0].name,
     title:
       '4TH INTERNATIONAL CONFERENCE ON INFORMATION SYSTEM DESIGN AND INTELLIGENT APPLICATIONS',
     description:
@@ -285,7 +308,7 @@ const conferences = [
     bg_image: '',
     organizer_detail_id: '1',
     address_id: '1',
-    user_id: '1',
+    user_id: '6',
     dl_submit_abstract,
     dl_review_abstract,
     dl_release_abstract,
@@ -307,6 +330,8 @@ const conferences = [
 
   // id 05
   {
+    category_id: 2,
+    category_name: categories[0].name,
     title:
       'ICERE 2018: 2018 4th International Conference on Environment and Renewable Energy',
     description:
@@ -314,7 +339,7 @@ const conferences = [
     bg_image: '',
     organizer_detail_id: '1',
     address_id: '1',
-    user_id: '1',
+    user_id: '6',
     dl_submit_abstract,
     dl_review_abstract,
     dl_release_abstract,
@@ -336,6 +361,8 @@ const conferences = [
 
   // id 06
   {
+    category_id: 2,
+    category_name: categories[0].name,
     title:
       'The 6th International Conference on Matrix Analysis and Applications (ICMAA 2017)',
     description:
@@ -343,7 +370,7 @@ const conferences = [
     bg_image: '',
     organizer_detail_id: '1',
     address_id: '1',
-    user_id: '1',
+    user_id: '6',
     dl_submit_abstract,
     dl_review_abstract,
     dl_release_abstract,
@@ -365,6 +392,8 @@ const conferences = [
 
   // id 07
   {
+    category_id: 3,
+    category_name: categories[0].name,
     title:
       '2017 International Conference on Recent Advances on  Signal Processing, Telecommunications & Computing (SigTelCom)',
     description:
@@ -372,7 +401,7 @@ const conferences = [
     bg_image: '',
     organizer_detail_id: '1',
     address_id: '1',
-    user_id: '1',
+    user_id: 1,
     dl_submit_abstract,
     dl_review_abstract,
     dl_release_abstract,

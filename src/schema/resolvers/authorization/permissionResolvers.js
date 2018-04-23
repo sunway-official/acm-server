@@ -199,6 +199,38 @@ export default {
 
   //  mutation of permission
   Mutation: {
+    insertRoleForUser: async (
+      root,
+      { user_id, role_id },
+      { models: { Permission, User, Role }, ValidationError, user },
+    ) => {
+      try {
+        if (!user) {
+          throw new ValidationError('Unauthorite!');
+        }
+        const conference = user.current_conference_id;
+        const role = await Role.query().findById(role_id);
+        const getUser = await User.query().findById(user_id);
+        const permission = {
+          role_id: role.id,
+          role_name: role.name,
+          user_id,
+          full_name: `${getUser.firstname} ${getUser.lastname}`,
+          feature_id: 1,
+          conference_id: conference.id,
+        };
+
+        // eslint-disable-next-line no-await-in-loop
+        await Permission.query().insert(permission);
+        return {
+          status: 1,
+        };
+      } catch (e) {
+        console.log(e);
+        throw new ValidationError('Bad-request');
+      }
+    },
+
     updateUserRoleStatus: async (
       root,
       { user_id, role_id, status, conference_id },
