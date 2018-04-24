@@ -41,8 +41,6 @@ type Paper {
 
   # topic name
   topic_name: String!
-
-  is_reviewed: Int!
 }
 
 type UpdateStatus {
