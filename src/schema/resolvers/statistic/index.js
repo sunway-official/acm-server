@@ -31,8 +31,9 @@ export const mergeSmallStatisticItem = (statistics, minimumValue = 3) => {
   }, []);
 
   const otherItem = result.filter(({ key }) => key === SUM_KEY)[0];
-
-  otherItem.percentage = Math.round(otherItem.percentage * 100) / 100;
+  if (otherItem) {
+    otherItem.percentage = Math.round(otherItem.percentage * 100) / 100;
+  }
 
   // Move others to the last of array
   return result.sort(statistic => {
