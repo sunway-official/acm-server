@@ -1,7 +1,7 @@
 {
-  "name": "cem-server",
+  "name": "acm-server",
   "version": "1.0.0",
-  "description": "Backend project for CEM",
+  "description": "Backend project for ACM",
   "main": "src/index.js",
   "engines": {
     "node": ">=8.0"
