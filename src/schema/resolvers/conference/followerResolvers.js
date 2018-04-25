@@ -16,6 +16,26 @@ export default {
     lastname: ({ follower_lastname }) => follower_lastname,
     avatar: ({ follower_avatar }) => follower_avatar,
     followers_count: ({ follower_followers_count }) => follower_followers_count,
+    is_following: async (
+      { follower_id },
+      data,
+      { models: { ConferenceUserRelationship }, ValidationError, user },
+    ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
+
+      if (!user.current_conference_id === 0) {
+        throw new ValidationError('no-current-conference');
+      }
+
+      const result = await ConferenceUserRelationship.query().where({
+        conference_id: user.current_conference_id,
+        following_id: user.id,
+        follower_id,
+      });
+      return !!result;
+    },
   },
 
   Query: {
@@ -31,13 +51,72 @@ export default {
       if (!user.current_conference_id === 0) {
         throw new ValidationError('no-current-conference');
       }
+
       try {
-        console.log('user.current_conference_id', user.current_conference_id);
         const followers = await ConferenceUserRelationship.query().where({
           conference_id: user.current_conference_id,
           following_id: user.id,
         });
         return followers;
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error(e);
+        throw new ValidationError(e);
+      }
+    },
+  },
+  Mutation: {
+    followUser: async (
+      root,
+      { user_id: following_user_id },
+      { models: { ConferenceUserRelationship }, ValidationError, user },
+    ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
+
+      if (!user.current_conference_id === 0) {
+        throw new ValidationError('no-current-conference');
+      }
+
+      try {
+        const followingUser = await ConferenceUserRelationship.query().insert({
+          follower_id: user.id,
+          following_id: following_user_id,
+          conference_id: user.current_conference_id,
+        });
+        return followingUser;
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error(e);
+        throw new ValidationError(e);
+      }
+    },
+    unfollowUser: async (
+      root,
+      { user_id: unfollowing_user_id },
+      { models: { ConferenceUserRelationship }, ValidationError, user },
+    ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
+
+      if (!user.current_conference_id === 0) {
+        throw new ValidationError('no-current-conference');
+      }
+
+      try {
+        const result = await ConferenceUserRelationship.query()
+          .where({
+            follower_id: user.id,
+            following_id: unfollowing_user_id,
+            conference_id: user.current_conference_id,
+          })
+          .delete();
+        return {
+          success: !!result,
+          message: 'Delete successfully.',
+        };
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);
