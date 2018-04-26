@@ -74,6 +74,29 @@ export default {
         throw new ValidationError(e);
       }
     },
+
+    updatePaperAuthor: async (
+      root,
+      data,
+      { models: { PaperAuthor }, ValidationError, user },
+    ) => {
+      try {
+        if (!user) {
+          throw new ValidationError('Unauthorite!');
+        }
+        const conference_id = user.current_conference_id;
+        const updatePaper = await PaperAuthor.query()
+          .patchAndFetchById(data.id, data)
+          .where('conference_id', conference_id);
+
+        return updatePaper;
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error(e);
+        throw new ValidationError(e);
+      }
+    },
+
     deletePaperAuthor: async (
       root,
       { id },

@@ -56,6 +56,10 @@ extend type Mutation {
   # update author of paper
   updateAuthorOfPaper(paper_id: ID!, user_id: ID!): PaperAuthor!
 
+  updatePaperAuthor(id: ID!, corresponding: Int, author_name: String,
+    author_email: String, author_title: String, author_organization: String, author_street: String,
+    author_city: String,author_country: String, author_zipcode: String): PaperAuthor!
+
   # delete paper author
   deletePaperAuthor(id: ID!): PaperAuthor!
 }

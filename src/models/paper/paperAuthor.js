@@ -33,16 +33,18 @@ export default class PaperAuthor extends Model {
   }
 
   async $beforeInsert() {
-    if (this.user_id) {
+    if (this.user_id != undefined) {
       const author = await User.query().findById(this.user_id);
       this.author_name = `${author.firstname} ${author.lastname}`;
       this.author_email = author.email;
       this.author_title = author.position;
     }
-    const paper = await Paper.query().findById(this.paper_id);
-    if (paper) {
-      this.paper_status = paper.status;
-      this.conference_id = paper.conference_id;
+    if (this.paper_id) {
+      const paper = await Paper.query().findById(this.paper_id);
+      if (paper) {
+        this.paper_status = paper.status;
+        this.conference_id = paper.conference_id;
+      }
     }
   }
   async $beforeUpdate() {
@@ -52,10 +54,12 @@ export default class PaperAuthor extends Model {
       this.author_email = author.email;
       this.author_title = author.position;
     }
-    const paper = await Paper.query().findById(this.paper_id);
-    if (paper) {
-      this.paper_status = paper.status;
-      this.conference_id = paper.conference_id;
+    if (this.paper_id) {
+      const paper = await Paper.query().findById(this.paper_id);
+      if (paper) {
+        this.paper_status = paper.status;
+        this.conference_id = paper.conference_id;
+      }
     }
   }
 }
