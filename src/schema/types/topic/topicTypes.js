@@ -18,6 +18,8 @@ type Topic {
   # color code of topic
   color_code: String!
 
+  papers: [Paper!]!
+
 }
 
 extend type Query {

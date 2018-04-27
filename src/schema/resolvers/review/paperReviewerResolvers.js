@@ -37,7 +37,10 @@ export default {
       const paperStatus = commonUtils.allStatus();
 
       // update status
-      await Paper.query().update({ paper_status_id: paperStatus.Reviewing });
+      await Paper.query().update({
+        paper_status_id: paperStatus.Reviewing,
+        id: data.paper_id,
+      });
       paperReviewerData.conference_id = conference_id;
       const paperReviewer = await PaperReviewer.query().insert(
         paperReviewerData,
