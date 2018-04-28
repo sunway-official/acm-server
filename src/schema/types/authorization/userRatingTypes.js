@@ -8,7 +8,7 @@ export default `
   }
 
   extend type Query {
-    getUserRating: UserRating
+    getUserRating(user_id: ID): UserRating
   }
 
  extend type Mutation {
