@@ -18,15 +18,15 @@ export default {
       }
 
       try {
-        const [userRating] = await ConferenceUserRating.query()
+        const userRating = await ConferenceUserRating.query()
           .where({
             conference_id: user.current_conference_id,
             user_id: user_id || user.id,
           })
-          .avg('rating');
+          .first();
         return {
           id: Math.round(Math.random() * 1000),
-          rating: roundRatingValue(userRating ? userRating.avg : 0),
+          rating: roundRatingValue(userRating ? userRating.rating : 0),
         };
       } catch (e) {
         // eslint-disable-next-line no-console

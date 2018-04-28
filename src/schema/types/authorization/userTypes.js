@@ -97,6 +97,9 @@ type User {
 
   # papers
   papers: [Paper!]!
+
+  # rating
+  rating: Float!
 }
 enum Gender {
   male

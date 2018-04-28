@@ -84,6 +84,29 @@ export default {
       const papers = Paper.query().where('user_id', id);
       return papers;
     },
+    rating: async (
+      { id, current_conference_id },
+      data,
+      { models: { ConferenceUserRating }, ValidationError },
+    ) => {
+      if (!current_conference_id === 0) {
+        throw new ValidationError('no-current-conference');
+      }
+
+      try {
+        const [userRating] = await ConferenceUserRating.query()
+          .where({
+            conference_id: current_conference_id,
+            user_id: id,
+          })
+          .avg('rating');
+        return Math.round(userRating ? userRating.avg : 0 * 2) / 2;
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error(e);
+        throw new ValidationError(e);
+      }
+    },
   },
   Subscription: {
     Me: {
