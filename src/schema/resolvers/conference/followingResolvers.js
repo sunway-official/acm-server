@@ -22,7 +22,7 @@ export default {
   Query: {
     getFollowings: async (
       root,
-      data,
+      { user_id },
       { models: { ConferenceUserRelationship }, ValidationError, user },
     ) => {
       if (!user) {
@@ -35,7 +35,7 @@ export default {
       try {
         const followings = await ConferenceUserRelationship.query().where({
           conference_id: user.current_conference_id,
-          follower_id: user.id,
+          follower_id: user_id || user.id,
         });
         return followings;
       } catch (e) {

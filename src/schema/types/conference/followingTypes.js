@@ -28,7 +28,8 @@ type Following {
 
 extend type Query {
 
-  getFollowings: [Following!]!
+  getFollowings(user_id: ID): [Following!]!
+
 }
 
 extend type Mutation {

@@ -29,7 +29,9 @@ type Follower {
 }
 
 extend type Query {
-  getFollowers: [Follower!]!
+
+  getFollowers(user_id: ID): [Follower!]!
+
 }
 
 extend type Mutation {
