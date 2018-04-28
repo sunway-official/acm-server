@@ -12,6 +12,6 @@ export default `
   }
 
  extend type Mutation {
-    rateUser(user_id: ID!, rating: Int!): UserRating
+    rateUser(user_id: ID!, rating: Float!): UserRating
   }
 `;

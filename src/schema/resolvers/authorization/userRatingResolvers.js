@@ -50,21 +50,25 @@ export default {
       }
 
       try {
-        await ConferenceUserRating.query().insert({
+        // Delete old user rating data
+        await ConferenceUserRating.query()
+          .where({
+            conference_id: user.current_conference_id,
+            rater_id: user.id,
+            user_id,
+          })
+          .delete();
+        // Then add a refreshed one
+        const userRating = await ConferenceUserRating.query().insert({
           conference_id: user.current_conference_id,
           rater_id: user.id,
           user_id,
           rating,
         });
-        const [userRating] = await ConferenceUserRating.query()
-          .where({
-            conference_id: user.current_conference_id,
-            user_id,
-          })
-          .avg('rating');
+
         return {
           id: Math.round(Math.random() * 1000),
-          rating: roundRatingValue(userRating ? userRating.avg : 0),
+          rating: roundRatingValue(userRating ? userRating.rating : 0),
         };
       } catch (e) {
         // eslint-disable-next-line no-console
