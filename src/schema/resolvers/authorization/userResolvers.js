@@ -114,8 +114,35 @@ export default {
     },
   },
   Query: {
+    getTopUploadPhotosUsers: async (
+      root,
+      { limit },
+      { Knex, ValidationError },
+    ) => {
+      try {
+        const users = await Knex.raw(
+          `select * from users order by (Select Count(distinct news_photos.id) from news_photos join news on news_photos.news_id = news.id join users on news.user_id = users.id) DESC LIMIT ${limit};`,
+        );
+        return users.rows;
+      } catch (error) {
+        console.log(error);
+        throw new ValidationError('bad-request');
+      }
+    },
+    getTopCommentUsers: async (root, { limit }, { Knex, ValidationError }) => {
+      try {
+        const users = await Knex.raw(
+          `select * from "users" order by (Select Count(distinct "news_comments".id) from "news_comments" where "news_comments".user_id = "users".id) DESC LIMIT ${limit};`,
+        );
+        return users.rows;
+      } catch (error) {
+        console.log(error);
+        throw new ValidationError('bad-request');
+      }
+    },
     getAllUsers: async (root, data, { models: { User }, ValidationError }) => {
       try {
+        console.log(User.query().toString());
         const users = await User.query();
         return users;
       } catch (e) {

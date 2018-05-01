@@ -122,6 +122,9 @@ extend type Query {
   me: User!
   # Get current conference session of user
   getCurrentConference: Conference!
+
+  getTopCommentUsers(limit: Int = 10): [User!]!
+  getTopUploadPhotosUsers(limit: Int = 10): [User!]!
 }
 
 extend type Mutation {
