@@ -37,6 +37,14 @@ export default class Paper extends Model {
         to: 'papers_reviewers.paper_id',
       },
     },
+    rls_topic: {
+      relation: Model.HasOneRelation,
+      modelClass: PaperTopic,
+      join: {
+        from: 'papers.id',
+        to: 'papers_topics.paper_id',
+      },
+    },
   };
 
   async $beforeValidate() {

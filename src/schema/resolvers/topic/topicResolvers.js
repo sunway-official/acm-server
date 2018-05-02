@@ -8,6 +8,14 @@ export default {
       const color = await Color.query().findById(color_id);
       return color;
     },
+    papers: async ({ id }, data, { models: { Paper } }) => {
+      const papers = await Paper.query()
+        .select('*')
+        .joinRelation('rls_topic')
+        .where('rls_topic.topic_id', id)
+        .where('paper_status_id', 1);
+      return papers;
+    },
   },
   Query: {
     getAllTopics: async (
