@@ -30,7 +30,7 @@ export default `
   extend type Query {
     getPaperReviewByUserIdPaperId(user_id: ID!, paper_id: ID!): [PaperReviewQuestionPoint!]!
 
-
+    getTopPapers: [PaperReviewQuestionPoint!]!
   }
 
   extend type Mutation {

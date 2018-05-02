@@ -2,17 +2,17 @@ export default `
 type Following {
   # The ID of relationship
   id: ID!
-  
+
   follower_id: ID!
-  
+
   follower: User!
-  
+
   following_id: ID!
-  
+
   user: User!
 
   conference_id: ID!
-  
+
   # Conference
   conference: Conference!
 
@@ -24,16 +24,15 @@ type Following {
 
   followers_count: Int!
 
-  followings_count: Int!
-  
 }
 
 extend type Query {
 
-  getFollowings: [Following!]!
+  getFollowings(user_id: ID): [Following!]!
+
 }
 
 extend type Mutation {
-  
+
 }
 `;

@@ -6,6 +6,7 @@ import CoOrganizerDetail from './coOrganizerDetail';
 import LandingPage from './landingPage';
 import ConferenceUserRelationship from './conferenceUserRelationship';
 import Category from './category';
+import ConferenceUserRating from './conferenceUserRating';
 
 export default {
   OrganizerDetail,
@@ -15,5 +16,6 @@ export default {
   CoOrganizerDetail,
   LandingPage,
   ConferenceUserRelationship,
+  ConferenceUserRating,
   Category,
 };

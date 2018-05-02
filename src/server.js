@@ -8,6 +8,7 @@ import { createServer } from 'http';
 import jwt from 'jsonwebtoken';
 import knex from 'knex';
 import { Model } from 'objection';
+import path from 'path';
 import { SubscriptionServer } from 'subscriptions-transport-ws';
 import Expo from 'expo-server-sdk';
 
@@ -112,6 +113,11 @@ const start = async () => {
       subscriptionsEndpoint: `ws://127.0.0.1:65080/subscriptions`,
     }),
   );
+
+  /**
+   *  Serve API documentations
+   */
+  app.use(express.static(path.join(__dirname, '..', 'docs')));
 
   // Create WebSocket listener server
   const websocketServer = createServer((_request, response) => {

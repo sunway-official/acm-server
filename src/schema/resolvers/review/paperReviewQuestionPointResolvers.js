@@ -29,6 +29,22 @@ export default {
 
       return paperReview;
     },
+    getTopPapers: async (
+      root,
+      data,
+      { models: { PaperReviewQuestionPoint }, ValidationError },
+    ) => {
+      try {
+        const paperBuilder = await PaperReviewQuestionPoint.query().orderBy(
+          'point',
+          'desc',
+        );
+
+        return paperBuilder;
+      } catch (error) {
+        throw new ValidationError(error);
+      }
+    },
   },
 
   Mutation: {

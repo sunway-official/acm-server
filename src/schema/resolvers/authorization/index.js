@@ -4,6 +4,7 @@ import permissionResolvers from './permissionResolvers';
 import roleResolvers from './roleResolvers';
 import featureResolvers from './featureResolvers';
 import notificationResolvers from './notificationResolvers';
+import userRatingResolvers from './userRatingResolvers';
 
 export default [
   defaultPermissionResolvers,
@@ -12,4 +13,5 @@ export default [
   roleResolvers,
   featureResolvers,
   notificationResolvers,
+  userRatingResolvers,
 ];

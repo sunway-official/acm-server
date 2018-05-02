@@ -84,6 +84,29 @@ export default {
       const papers = Paper.query().where('user_id', id);
       return papers;
     },
+    rating: async (
+      { id, current_conference_id },
+      data,
+      { models: { ConferenceUserRating }, ValidationError },
+    ) => {
+      if (!current_conference_id === 0) {
+        throw new ValidationError('no-current-conference');
+      }
+
+      try {
+        const [userRating] = await ConferenceUserRating.query()
+          .where({
+            conference_id: current_conference_id,
+            user_id: id,
+          })
+          .avg('rating');
+        return Math.round(userRating ? userRating.avg : 0 * 2) / 2;
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error(e);
+        throw new ValidationError(e);
+      }
+    },
   },
   Subscription: {
     Me: {
@@ -91,8 +114,35 @@ export default {
     },
   },
   Query: {
+    getTopUploadPhotosUsers: async (
+      root,
+      { limit },
+      { Knex, ValidationError },
+    ) => {
+      try {
+        const users = await Knex.raw(
+          `select * from users order by (Select Count(distinct news_photos.id) from news_photos join news on news_photos.news_id = news.id join users on news.user_id = users.id) DESC LIMIT ${limit};`,
+        );
+        return users.rows;
+      } catch (error) {
+        console.log(error);
+        throw new ValidationError('bad-request');
+      }
+    },
+    getTopCommentUsers: async (root, { limit }, { Knex, ValidationError }) => {
+      try {
+        const users = await Knex.raw(
+          `select * from "users" order by (Select Count(distinct "news_comments".id) from "news_comments" where "news_comments".user_id = "users".id) DESC LIMIT ${limit};`,
+        );
+        return users.rows;
+      } catch (error) {
+        console.log(error);
+        throw new ValidationError('bad-request');
+      }
+    },
     getAllUsers: async (root, data, { models: { User }, ValidationError }) => {
       try {
+        console.log(User.query().toString());
         const users = await User.query();
         return users;
       } catch (e) {
