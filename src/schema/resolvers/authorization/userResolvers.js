@@ -87,14 +87,8 @@ export default {
     rating: async (
       { id },
       data,
-      { models: { ConferenceUserRating }, user: currentUser, ValidationError },
+      { models: { ConferenceUserRating }, user: currentUser },
     ) => {
-      if (!currentUser) {
-        throw new ValidationError('unauthorized');
-      }
-      if (currentUser.current_conference_id === 0) {
-        throw new ValidationError('no-current-conference');
-      }
       try {
         const [userRating] = await ConferenceUserRating.query()
           .where({
@@ -106,7 +100,8 @@ export default {
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);
-        throw new ValidationError(e);
+        // throw new ValidationError(e);
+        return 0;
       }
     },
   },
@@ -156,8 +151,11 @@ export default {
     getUserByID: async (
       root,
       { userId },
-      { models: { User }, ValidationError },
+      { models: { User }, user: currentUser, ValidationError },
     ) => {
+      if (currentUser.current_conference_id === 0) {
+        throw new ValidationError('no-current-conference');
+      }
       try {
         const user = await User.query().findById(userId);
         if (!user) {
