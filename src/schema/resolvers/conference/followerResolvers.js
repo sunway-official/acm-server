@@ -81,8 +81,8 @@ export default {
 
       try {
         const followingUser = await ConferenceUserRelationship.query().insert({
-          follower_id: following_user_id,
-          following_id: user.id,
+          follower_id: user.id,
+          following_id: following_user_id,
           conference_id: user.current_conference_id,
         });
         return followingUser;
@@ -109,8 +109,8 @@ export default {
         const result = await ConferenceUserRelationship.query()
           .delete()
           .where({
-            follower_id: unfollowing_user_id,
-            following_id: user.id,
+            follower_id: user.id,
+            following_id: unfollowing_user_id,
             conference_id: user.current_conference_id,
           });
         return {
