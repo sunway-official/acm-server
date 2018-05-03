@@ -4,7 +4,7 @@ type Statistic {
 
   key: Int!
 
-  value: Int!
+  value: Float!
 
   percentage: Float!
 
@@ -28,5 +28,7 @@ extend type Query {
   getAttendeesStatisticByTotalComments(minimumValue: Float = 0): [Statistic!]!
 
   getPaperStatisticByReviews(minimumValue: Float = 0): [Statistic!]!
+
+  getAttendeesStatisticByRating(minimumValue: Float = 0): [Statistic!]!
 }
 `;
