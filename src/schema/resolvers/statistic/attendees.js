@@ -14,10 +14,10 @@ export default {
     }
     try {
       const result = await Knex.raw(
-        `Select news_photos.name as photo_name, Count(news_photos.id) from news_photos join news on news.id = news_photos.news_id join users on users.current_conference_id = news.conference_id where users.current_conference_id = ${
-          user.current_conference_id
-        } group by news_photos.name;;`,
+        `Select users.username as user_name, Count(news_photos.id) from news_photos join news on news.id = news_photos.news_id join users on users.id = news.user_id group by users.username;`,
       );
+
+      console.log(result);
 
       const sum = result.rows.reduce(
         (currentSum, { count }) => currentSum + Number(count),
@@ -25,10 +25,10 @@ export default {
       );
 
       return mergeSmallStatisticItem(
-        result.rows.map(({ photo_name, count }, index) => ({
+        result.rows.map(({ user_name, count }, index) => ({
           key: index + 1,
           value: count,
-          label: photo_name,
+          label: user_name,
           percentage: roundPercentageValue(count / sum),
         })),
         minimumValue,

@@ -59,9 +59,9 @@ const newsData = [
   },
 ];
 
-for (let i = 1; i < 50; i += 1) {
+for (let i = 1; i < 70; i += 1) {
   newsData.push({
-    user_id: faker.random.arrayElement([1, 2, 3]),
+    user_id: faker.random.arrayElement([1, 6, 12]),
     conference_id: 1,
     content: faker.lorem.sentence(),
     created_at: new Date(),

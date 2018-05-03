@@ -260,7 +260,7 @@ const usersData = [
     username: 'lednhatkhanh',
     gender: 'male',
     password,
-    current_conference_id: 0,
+    current_conference_id: 1,
     phone_number: faker.phone.phoneNumberFormat(),
     version_key: versionKey,
     organization: faker.random.arrayElement(organizationArr),
