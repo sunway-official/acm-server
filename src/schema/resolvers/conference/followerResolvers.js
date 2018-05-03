@@ -32,8 +32,8 @@ export default {
       const result = await ConferenceUserRelationship.query()
         .where({
           conference_id: user.current_conference_id,
-          following_id: follower_id,
-          follower_id: user.id,
+          following_id: user.id,
+          follower_id,
         })
         .first();
       return !!result;
