@@ -23,7 +23,9 @@ extend type Query {
 
   getTopicsStatistic(minimumValue: Float): [Statistic!]!
 
-  getUserStatisticByTotalPhotos(minimumValue: Float): [Statistic!]!
+  getAttendeesStatisticByTotalPhotos(minimumValue: Float): [Statistic!]!
+
+  getAttendeesStatisticByTotalComments(minimumValue: Float = 0): [Statistic!]!
 
   getPaperStatisticByReviews(minimumValue: Float = 0): [Statistic!]!
 }

@@ -1,7 +1,42 @@
 import { roundPercentageValue, mergeSmallStatisticItem } from '.';
 
 export default {
-  getUserStatisticByTotalPhotos: async (
+  getAttendeesStatisticByTotalComments: async (
+    root,
+    { minimumValue = 0 },
+    { Knex, ValidationError, user },
+  ) => {
+    if (!user) {
+      throw new ValidationError('unauthorized');
+    }
+    if (user.current_conference_id === 0) {
+      throw new ValidationError('no-current-conference');
+    }
+    try {
+      const result = await Knex.raw(`select u.username, count(nc.id) as total_comments from users as u join news as n on n.user_id = u.id join news_comments as nc on nc.news_id = n.id
+      where n.conference_id = '${
+        user.current_conference_id
+      }' group by u.username order by total_comments DESC;`);
+
+      const sum = result.rows.reduce(
+        (currentSum, { total_comments }) => currentSum + Number(total_comments),
+        0,
+      );
+
+      return mergeSmallStatisticItem(
+        result.rows.map(({ username, total_comments }, index) => ({
+          key: index + 1,
+          value: total_comments,
+          label: username,
+          percentage: roundPercentageValue(total_comments / sum),
+        })),
+        minimumValue,
+      );
+    } catch (error) {
+      throw new ValidationError(error);
+    }
+  },
+  getAttendeesStatisticByTotalPhotos: async (
     root,
     { minimumValue = 0 },
     { Knex, ValidationError, user },
@@ -15,7 +50,7 @@ export default {
     try {
       const result = await Knex.raw(
         `Select users.username as user_name, Count(news_photos.id) as total_photos from news_photos join news on news.id = news_photos.news_id join users on users.id = news.user_id
-        where users.current_conference_id = '${
+        where news.conference_id = '${
           user.current_conference_id
         }' group by users.username order by total_photos DESC;`,
       );
