@@ -1,5 +1,6 @@
 import attendeesStatistic from './attendees';
 import topicsStatistic from './topics';
+import paperStatistic from './paper';
 
 export const roundPercentageValue = value => Math.round(value * 10000) / 100;
 
@@ -50,5 +51,6 @@ export default {
   Query: {
     ...attendeesStatistic,
     ...topicsStatistic,
+    ...paperStatistic,
   },
 };

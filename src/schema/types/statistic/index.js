@@ -24,5 +24,7 @@ extend type Query {
   getTopicsStatistic(minimumValue: Float): [Statistic!]!
 
   getUserStatisticByTotalPhotos(minimumValue: Float): [Statistic!]!
+
+  getPaperStatisticByReviews(minimumValue: Float = 0): [Statistic!]!
 }
 `;
