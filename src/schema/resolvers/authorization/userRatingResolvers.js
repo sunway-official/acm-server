@@ -7,27 +7,25 @@ export default {
     getUserRating: async (
       root,
       { user_id },
-      { models: { ConferenceUserRating }, user, ValidationError },
+      { models: { ConferenceUserRating }, user: currentUser, ValidationError },
     ) => {
-      if (!user) {
+      if (!currentUser) {
         throw new ValidationError('unauthorized');
       }
 
-      if (!user.current_conference_id === 0) {
+      if (!currentUser.current_conference_id === 0) {
         throw new ValidationError('no-current-conference');
       }
 
       try {
         const userRating = await ConferenceUserRating.query()
           .where({
-            conference_id: user.current_conference_id,
-            user_id: user_id || user.id,
+            conference_id: currentUser.current_conference_id,
+            rater_id: currentUser.id,
+            user_id,
           })
           .first();
-        return {
-          id: Math.round(Math.random() * 1000),
-          rating: roundRatingValue(userRating ? userRating.rating : 0),
-        };
+        return userRating;
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);
@@ -50,7 +48,7 @@ export default {
       }
 
       try {
-        // Delete old user rating data
+        // Delete old user rating data of current user to target user
         await ConferenceUserRating.query()
           .where({
             conference_id: user.current_conference_id,
@@ -66,10 +64,7 @@ export default {
           rating,
         });
 
-        return {
-          id: Math.round(Math.random() * 1000),
-          rating: roundRatingValue(userRating ? userRating.rating : 0),
-        };
+        return userRating;
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e);

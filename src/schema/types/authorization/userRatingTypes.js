@@ -2,6 +2,10 @@ export default `
   type UserRating {
     # The ID of role
     id: ID!
+    
+    rater_id: ID!
+    
+    user_id: ID!
 
     rating: Float!
 

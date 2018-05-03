@@ -16,6 +16,8 @@ export default class ConferenceUserRating extends Model {
   };
 
   async $beforeValidate(opt) {
-    this.id = parseInt(opt.old.id, 10);
+    if (opt.old) {
+      this.id = parseInt(opt.old.id, 10);
+    }
   }
 }

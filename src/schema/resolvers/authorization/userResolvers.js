@@ -85,18 +85,20 @@ export default {
       return papers;
     },
     rating: async (
-      { id, current_conference_id },
+      { id },
       data,
-      { models: { ConferenceUserRating }, ValidationError },
+      { models: { ConferenceUserRating }, user: currentUser, ValidationError },
     ) => {
-      if (!current_conference_id === 0) {
+      if (!currentUser) {
+        throw new ValidationError('unauthorized');
+      }
+      if (currentUser.current_conference_id === 0) {
         throw new ValidationError('no-current-conference');
       }
-
       try {
         const [userRating] = await ConferenceUserRating.query()
           .where({
-            conference_id: current_conference_id,
+            conference_id: currentUser.current_conference_id,
             user_id: id,
           })
           .avg('rating');
