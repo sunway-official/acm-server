@@ -56,9 +56,18 @@ export default {
       const news = await News.query().where('user_id', id);
       return news;
     },
-    newsPhotos: async ({ id }, data, { models: { NewsPhoto } }) => {
-      const newsPhotos = await NewsPhoto.query().where('user_id', id);
-      return newsPhotos;
+    newsPhotos: async ({ id }, data, { Knex }) => {
+      const result = await Knex.raw(
+        `select news_photos.* from news_photos join news on news_photos.news_id = news.id join users on users.id = news.user_id where users.id = ${id};`,
+      );
+      return result.rows;
+    },
+    totalPhotos: async ({ id }, data, { Knex }) => {
+      const result = await Knex.raw(
+        `select Count(news_photos.*) from news_photos join news on news_photos.news_id = news.id join users on users.id = news.user_id where users.id = ${id};`,
+      );
+      console.log(result);
+      return result.rows[0].count;
     },
     newsLikes: async ({ id }, data, { models: { NewsLike } }) => {
       const newsLikes = await NewsLike.query().where('user_id', id);

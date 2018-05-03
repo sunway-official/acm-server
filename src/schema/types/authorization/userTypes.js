@@ -83,6 +83,9 @@ type User {
   # news photos
   newsPhotos: [NewsPhoto!]
 
+  # number of photos
+  totalPhotos: Int!
+
   # news likes
   newsLikes: [NewsLike!]
 
