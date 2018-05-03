@@ -3,7 +3,7 @@ import { roundPercentageValue, mergeSmallStatisticItem } from '.';
 export default {
   getUserStatisticByTotalPhotos: async (
     root,
-    { minimumValue },
+    { minimumValue = 0 },
     { Knex, ValidationError, user },
   ) => {
     if (!user) {
@@ -16,8 +16,6 @@ export default {
       const result = await Knex.raw(
         `Select users.username as user_name, Count(news_photos.id) from news_photos join news on news.id = news_photos.news_id join users on users.id = news.user_id group by users.username;`,
       );
-
-      console.log(result);
 
       const sum = result.rows.reduce(
         (currentSum, { count }) => currentSum + Number(count),
