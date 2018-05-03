@@ -22,5 +22,7 @@ extend type Query {
   getAttendeesStatisticByTheirInteresting(minimumValue: Float): [Statistic!]!
 
   getTopicsStatistic(minimumValue: Float): [Statistic!]!
+
+  getUserStatisticByTotalPhotos(minimumValue: Float): [Statistic!]!
 }
 `;

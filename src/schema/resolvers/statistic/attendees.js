@@ -1,6 +1,42 @@
 import { roundPercentageValue, mergeSmallStatisticItem } from '.';
 
 export default {
+  getUserStatisticByTotalPhotos: async (
+    root,
+    { minimumValue },
+    { Knex, ValidationError, user },
+  ) => {
+    if (!user) {
+      throw new ValidationError('unauthorized');
+    }
+    if (user.current_conference_id === 0) {
+      throw new ValidationError('no-current-conference');
+    }
+    try {
+      const result = await Knex.raw(
+        `Select news_photos.name as photo_name, Count(news_photos.id) from news_photos join news on news.id = news_photos.news_id join users on users.current_conference_id = news.conference_id where users.current_conference_id = ${
+          user.current_conference_id
+        } group by news_photos.name;;`,
+      );
+
+      const sum = result.rows.reduce(
+        (currentSum, { count }) => currentSum + Number(count),
+        0,
+      );
+
+      return mergeSmallStatisticItem(
+        result.rows.map(({ photo_name, count }, index) => ({
+          key: index + 1,
+          value: count,
+          label: photo_name,
+          percentage: roundPercentageValue(count / sum),
+        })),
+        minimumValue,
+      );
+    } catch (error) {
+      throw new ValidationError(error);
+    }
+  },
   getAttendeesStatisticByOrganization: async (
     root,
     { minimumValue },
