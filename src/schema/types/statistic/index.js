@@ -30,5 +30,7 @@ extend type Query {
   getPaperStatisticByReviews(minimumValue: Float = 0): [Statistic!]!
 
   getAttendeesStatisticByRating(minimumValue: Float = 0): [Statistic!]!
+
+  getAttendeesStatisticByLikes(minimumValue: Float = 0): [Statistic!]!
 }
 `;

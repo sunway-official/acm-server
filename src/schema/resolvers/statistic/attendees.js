@@ -1,6 +1,43 @@
 import { roundPercentageValue, mergeSmallStatisticItem } from '.';
 
 export default {
+  getAttendeesStatisticByLikes: async (
+    root,
+    { minimumValue = 0 },
+    { Knex, ValidationError, user },
+  ) => {
+    if (!user) {
+      throw new ValidationError('unauthorized');
+    }
+    if (user.current_conference_id === 0) {
+      throw new ValidationError('no-current-conference');
+    }
+    try {
+      const result = await Knex.raw(
+        `select count(nl.id) as total_likes, u.username from news_likes as nl join news as n on n.id = nl.news_id join users as u on u.id = n.user_id where n.conference_id = '${
+          user.current_conference_id
+        }'
+        group by u.username order by total_likes DESC;`,
+      );
+
+      const sum = result.rows.reduce(
+        (currentSum, { total_likes }) => currentSum + Number(total_likes),
+        0,
+      );
+
+      return mergeSmallStatisticItem(
+        result.rows.map(({ username, total_likes }, index) => ({
+          key: index + 1,
+          value: total_likes,
+          label: username,
+          percentage: roundPercentageValue(total_likes / sum),
+        })),
+        minimumValue,
+      );
+    } catch (error) {
+      throw new ValidationError(error);
+    }
+  },
   getAttendeesStatisticByRating: async (
     root,
     { minimumValue = 0 },
