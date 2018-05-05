@@ -128,6 +128,21 @@ extend type Query {
 
   getTopCommentUsers(limit: Int = 10): [User!]!
   getTopUploadPhotosUsers(limit: Int = 10): [User!]!
+
+  searchUsers(options: UserSearchOptions, pagination: UserSearchPagination): [User!]!
+}
+
+input UserSearchOptions {
+  id: ID
+  username: String
+  email: String
+  firstName: String
+  lastName: String
+}
+
+input UserSearchPagination {
+  limit: Int!
+  offset: Int!
 }
 
 extend type Mutation {

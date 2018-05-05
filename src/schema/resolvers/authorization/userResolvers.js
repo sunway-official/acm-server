@@ -120,11 +120,37 @@ export default {
     },
   },
   Query: {
-    getTopUploadPhotosUsers: async (
+    searchUsers: async (
       root,
-      { limit },
-      { Knex, ValidationError },
+      { options = { email: '' }, pagination = { limit: 10, offset: 0 } },
+      { models: { User }, ValidationError, user },
     ) => {
+      if (!user) {
+        throw new ValidationError('unauthorized');
+      }
+
+      try {
+        const query = User.query();
+        Object.keys(options).forEach(property => {
+          if (options[property]) {
+            query.where(property, options[property]);
+          }
+        });
+
+        // exclude current logged-in user
+        query.whereNot('id', user.id);
+
+        const { limit, offset } = pagination;
+        query.limit(limit).offset(offset);
+
+        const result = await Promise.resolve(query);
+
+        return result;
+      } catch (error) {
+        throw new ValidationError(error);
+      }
+    },
+    getTopUploadPhotosUsers: async ({ limit }, { Knex, ValidationError }) => {
       try {
         const users = await Knex.raw(
           `select * from users order by (Select Count(distinct news_photos.id) from news_photos join news on news_photos.news_id = news.id join users on news.user_id = users.id) DESC LIMIT ${limit};`,
