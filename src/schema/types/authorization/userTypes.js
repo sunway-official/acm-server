@@ -127,7 +127,6 @@ extend type Query {
   getCurrentConference: Conference!
 
   getTopCommentUsers(limit: Int = 10): [User!]!
-  getTopUploadPhotosUsers(limit: Int = 10): [User!]!
 
   searchUsers(options: UserSearchOptions, pagination: UserSearchPagination): [User!]!
 }

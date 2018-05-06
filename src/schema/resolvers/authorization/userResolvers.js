@@ -150,17 +150,6 @@ export default {
         throw new ValidationError(error);
       }
     },
-    getTopUploadPhotosUsers: async ({ limit }, { Knex, ValidationError }) => {
-      try {
-        const users = await Knex.raw(
-          `select * from users order by (Select Count(distinct news_photos.id) from news_photos join news on news_photos.news_id = news.id join users on news.user_id = users.id) DESC LIMIT ${limit};`,
-        );
-        return users.rows;
-      } catch (error) {
-        console.log(error);
-        throw new ValidationError('bad-request');
-      }
-    },
     getTopCommentUsers: async (root, { limit }, { Knex, ValidationError }) => {
       try {
         const users = await Knex.raw(
