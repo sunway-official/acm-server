@@ -133,11 +133,10 @@ extend type Query {
 }
 
 input UserSearchOptions {
-  id: ID
   username: String
   email: String
-  firstName: String
-  lastName: String
+  firstname: String
+  lastname: String
 }
 
 input UserSearchPagination {

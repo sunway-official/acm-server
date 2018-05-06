@@ -133,7 +133,7 @@ export default {
         const query = User.query();
         Object.keys(options).forEach(property => {
           if (options[property]) {
-            query.where(property, options[property]);
+            query.where(property, 'ilike', `%${options[property]}%`);
           }
         });
 
