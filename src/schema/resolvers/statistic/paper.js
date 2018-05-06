@@ -52,7 +52,7 @@ export default {
       const result = await Knex.raw(`Select p.title, pr.point from papers as p join paper_review_questions_points as pr on pr.paper_id = p.id join conferences as c
       on c.id = p.conference_id where c.id = '${
         user.current_conference_id
-      }' order by pr.point DESC;`);
+      }' group by p.title, pr.point order by pr.point DESC;`);
 
       const sum = result.rows.reduce(
         (currentSum, { point }) => currentSum + Number(point),
