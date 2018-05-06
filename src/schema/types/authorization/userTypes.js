@@ -128,14 +128,7 @@ extend type Query {
 
   getTopCommentUsers(limit: Int = 10): [User!]!
 
-  searchUsers(options: UserSearchOptions, pagination: UserSearchPagination): [User!]!
-}
-
-input UserSearchOptions {
-  username: String
-  email: String
-  firstname: String
-  lastname: String
+  searchUsers(params: String!, pagination: UserSearchPagination): [User!]!
 }
 
 input UserSearchPagination {

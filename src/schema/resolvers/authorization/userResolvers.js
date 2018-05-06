@@ -122,26 +122,41 @@ export default {
   Query: {
     searchUsers: async (
       root,
-      { options = { email: '' }, pagination = { limit: 10, offset: 0 } },
+      { params = '', pagination = { limit: 10, offset: 0 } },
       { models: { User }, ValidationError, user },
     ) => {
       if (!user) {
         throw new ValidationError('unauthorized');
       }
 
+      if (user.current_conference_id === 0) {
+        return [];
+      }
+      if (params.length === 0) {
+        return [];
+      }
+
       try {
-        const query = User.query();
-        Object.keys(options).forEach(property => {
-          if (options[property]) {
-            query.where(property, 'ilike', `%${options[property]}%`);
-          }
-        });
-
-        // exclude current logged-in user
-        query.whereNot('id', user.id);
-
-        const { limit, offset } = pagination;
-        query.limit(limit).offset(offset);
+        const query = User.query()
+          .innerJoin(
+            'conferences_attendees',
+            'users.id',
+            'conferences_attendees.user_id',
+          )
+          .where(
+            'conferences_attendees.conference_id',
+            user.current_conference_id,
+          )
+          .whereNot('users.id', user.id)
+          .andWhere(function() {
+            this.where('users.username', 'ilike', `%${params}%`)
+              .orWhere('users.email', 'ilike', `%${params}%`)
+              .orWhere('users.organization', 'ilike', `%${params}%`)
+              .orWhere('users.firstname', 'ilike', `%${params}%`)
+              .orWhere('users.lastname', 'ilike', `%${params}%`);
+          })
+          .limit(pagination.limit)
+          .offset(pagination.offset);
 
         const result = await Promise.resolve(query);
 
