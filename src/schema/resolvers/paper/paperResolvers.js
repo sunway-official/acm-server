@@ -343,7 +343,10 @@ export default {
         // eslint-disable-next-line
         if (data.title) {
           const paper = await Paper.query().where(builder =>
-            builder.where('title', data.title).whereNot('id', data.id),
+            builder
+              .where('conference_id', conference_id)
+              .where('title', data.title)
+              .whereNot('id', data.id),
           );
           if (paper.length !== 0)
             throw new ValidationError("Paper's title is exists !");
