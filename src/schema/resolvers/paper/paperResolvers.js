@@ -235,13 +235,21 @@ export default {
             current_date.getTime() >= conference.dl_re_review_paper.getTime(): {
             await Paper.query()
               .update({ paper_status_id: paperStatus.Reviewed })
-              .where('conference_id', conference_id);
+              .where(builder =>
+                builder
+                  .where('conference_id', conference_id)
+                  .where('paper_status_id', paperStatus.Reviewing),
+              );
             break;
           }
           case current_date.getTime() >= conference.dl_submit_paper.getTime(): {
             await Paper.query()
               .update({ paper_status_id: paperStatus.Reviewing })
-              .where('conference_id', conference_id);
+              .where(builder =>
+                builder
+                  .where('conference_id', conference_id)
+                  .where('paper_status_id', paperStatus.Assigning),
+              );
             break;
           }
           // abstract
@@ -262,14 +270,22 @@ export default {
               conference.dl_re_review_abstract.getTime(): {
             await Paper.query()
               .update({ paper_status_id: paperStatus.Reviewed })
-              .where('conference_id', conference_id);
+              .where(builder =>
+                builder
+                  .where('conference_id', conference_id)
+                  .where('paper_status_id', paperStatus.Reviewing),
+              );
             break;
           }
           case current_date.getTime() >=
             conference.dl_submit_abstract.getTime(): {
             await Paper.query()
               .update({ paper_status_id: paperStatus.Assigning })
-              .where('conference_id', conference_id);
+              .where(builder =>
+                builder
+                  .where('conference_id', conference_id)
+                  .where('paper_status_id', paperStatus.Submitting),
+              );
             break;
           }
 

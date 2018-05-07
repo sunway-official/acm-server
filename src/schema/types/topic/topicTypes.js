@@ -18,13 +18,8 @@ type Topic {
   # color code of topic
   color_code: String!
 
-<<<<<<< HEAD
   # papers of topic
   papers: [Paper!]!
-=======
-  papers: [Paper!]!
-
->>>>>>> origin/deploy
 }
 
 extend type Query {
