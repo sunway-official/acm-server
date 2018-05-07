@@ -117,12 +117,17 @@ export default {
     insertSchedule: async (
       root,
       data,
-      { models: { Schedule }, ValidationError, user, expo },
+      { models: { Schedule, User }, ValidationError, user, expo },
     ) => {
       try {
         if (!user) {
           throw new ValidationError('unauthorized');
         }
+
+        if (!user.current_conference_id) {
+          throw new ValidationError('no-current-conference');
+        }
+
         // eslint-disable-next-line
         const conference_id = user.current_conference_id;
         // eslint-disable-next-line
@@ -130,14 +135,32 @@ export default {
         const newSchedule = await Schedule.query().insert(data);
 
         // Test Expo Push notification!
-        if (Expo.isExpoPushToken(user.notification_key)) {
-          await handlePushNotification(expo, {
-            to: user.notification_key,
-            sound: 'default',
-            body: 'There is a new schedule for you',
-            data: { schedule: newSchedule },
-          });
-        }
+        const promises = [];
+        const users = await User.query()
+          .select('email')
+          .innerJoin(
+            'schedules',
+            'users.current_conference_id',
+            'schedules.conference_id',
+          )
+          .where('schedules.conference_id', user.current_conference_id)
+          .groupBy('users.email');
+        users.forEach(u => {
+          if (u.notification_key && Expo.isExpoPushToken(u.notification_key)) {
+            promises.push(
+              handlePushNotification(expo, {
+                to: u.notification_key,
+                sound: 'default',
+                body: `Activity ${newSchedule.activity_title} will start at ${
+                  newSchedule.start
+                } at room ${newSchedule.room_name}`,
+                data: { schedule: newSchedule },
+              }),
+            );
+          }
+        });
+
+        await Promise.all(promises);
 
         return newSchedule;
       } catch (e) {
@@ -149,7 +172,7 @@ export default {
     updateSchedule: async (
       root,
       data,
-      { models: { Schedule }, ValidationError, expo, user },
+      { models: { Schedule, User }, ValidationError, expo, user },
     ) => {
       try {
         const updateSchedule = await Schedule.query().updateAndFetchById(
@@ -158,14 +181,34 @@ export default {
         );
 
         // Test Expo Push notification!
-        if (Expo.isExpoPushToken(user.notification_key)) {
-          await handlePushNotification(expo, {
-            to: user.notification_key,
-            sound: 'default',
-            body: 'Your schedule has been updated!',
-            data: { schedule: updateSchedule },
-          });
-        }
+        const promises = [];
+        const users = await User.query()
+          .select('email')
+          .innerJoin(
+            'schedules',
+            'users.current_conference_id',
+            'schedules.conference_id',
+          )
+          .where('schedules.conference_id', user.current_conference_id)
+          .groupBy('users.email');
+        users.forEach(u => {
+          if (u.notification_key && Expo.isExpoPushToken(u.notification_key)) {
+            promises.push(
+              handlePushNotification(expo, {
+                to: u.notification_key,
+                sound: 'default',
+                body: `Activity ${
+                  updateSchedule.activity_title
+                } will start at ${updateSchedule.start} at room ${
+                  updateSchedule.room_name
+                }`,
+                data: { schedule: updateSchedule },
+              }),
+            );
+          }
+        });
+
+        await Promise.all(promises);
 
         return updateSchedule;
       } catch (e) {
