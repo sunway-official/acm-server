@@ -135,32 +135,28 @@ export default {
         const newSchedule = await Schedule.query().insert(data);
 
         // Test Expo Push notification!
-        const promises = [];
         const users = await User.query()
-          .select('email')
+          .select(['email', 'notification_key'])
           .innerJoin(
             'schedules',
             'users.current_conference_id',
             'schedules.conference_id',
           )
           .where('schedules.conference_id', user.current_conference_id)
-          .groupBy('users.email');
-        users.forEach(u => {
+          .groupBy(['users.email', 'users.notification_key']);
+
+        users.forEach(async u => {
           if (u.notification_key && Expo.isExpoPushToken(u.notification_key)) {
-            promises.push(
-              handlePushNotification(expo, {
-                to: u.notification_key,
-                sound: 'default',
-                body: `Activity ${newSchedule.activity_title} will start at ${
-                  newSchedule.start
-                } at room ${newSchedule.room_name}`,
-                data: { schedule: newSchedule },
-              }),
-            );
+            await handlePushNotification(expo, {
+              to: u.notification_key,
+              sound: 'default',
+              body: `Activity ${newSchedule.activity_title} will start at ${
+                newSchedule.start
+              } at room ${newSchedule.room_name}`,
+              data: { schedule: newSchedule },
+            });
           }
         });
-
-        await Promise.all(promises);
 
         return newSchedule;
       } catch (e) {
@@ -181,34 +177,28 @@ export default {
         );
 
         // Test Expo Push notification!
-        const promises = [];
         const users = await User.query()
-          .select('email')
+          .select(['email', 'notification_key'])
           .innerJoin(
             'schedules',
             'users.current_conference_id',
             'schedules.conference_id',
           )
           .where('schedules.conference_id', user.current_conference_id)
-          .groupBy('users.email');
-        users.forEach(u => {
+          .groupBy(['users.email', 'users.notification_key']);
+
+        users.forEach(async u => {
           if (u.notification_key && Expo.isExpoPushToken(u.notification_key)) {
-            promises.push(
-              handlePushNotification(expo, {
-                to: u.notification_key,
-                sound: 'default',
-                body: `Activity ${
-                  updateSchedule.activity_title
-                } will start at ${updateSchedule.start} at room ${
-                  updateSchedule.room_name
-                }`,
-                data: { schedule: updateSchedule },
-              }),
-            );
+            await handlePushNotification(expo, {
+              to: u.notification_key,
+              sound: 'default',
+              body: `Activity ${updateSchedule.activity_title} will start at ${
+                updateSchedule.start
+              } at room ${updateSchedule.room_name}`,
+              data: { schedule: updateSchedule },
+            });
           }
         });
-
-        await Promise.all(promises);
 
         return updateSchedule;
       } catch (e) {
