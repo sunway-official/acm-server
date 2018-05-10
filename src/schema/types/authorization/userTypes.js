@@ -103,6 +103,12 @@ type User {
 
   # rating
   rating: Float!
+
+  # followers count
+  followers_count: Int!
+
+  # folowings count
+  followings_count: Int!
 }
 enum Gender {
   male
