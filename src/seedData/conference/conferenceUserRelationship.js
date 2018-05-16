@@ -33,8 +33,8 @@ usersData.forEach(user => {
       followings_count++; // eslint-disable-line
     }
   });
-  user.followers_count = followers_count; // eslint-disable-line
-  user.followings_count = followings_count; // eslint-disable-line
+  user.followers_count = followings_count; // eslint-disable-line
+  user.followings_count = followers_count; // eslint-disable-line
 });
 
 user_relationships_in_conferences.forEach(relation => {
