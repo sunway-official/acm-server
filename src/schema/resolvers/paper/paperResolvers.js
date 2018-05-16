@@ -214,10 +214,7 @@ export default {
         const conference_id = user.current_conference_id;
         const conference = await Conference.query().findById(conference_id);
         const paperStatus = commonUtils.allStatus();
-        console.log(
-          'current_date',
-          current_date.getTime() >= conference.dl_re_submit_paper.getTime(),
-        );
+
         switch (true) {
           // paper
           case current_date.getTime() >=
