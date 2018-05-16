@@ -23,7 +23,7 @@ export default {
         if (!user) {
           throw new ValidationError('Unauthorite');
         }
-        const categories = await Category.query();
+        const categories = await Category.query().orderBy('name');
         return categories;
       } catch (e) {
         // eslint-disable-next-line no-console
