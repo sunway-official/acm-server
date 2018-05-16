@@ -214,50 +214,67 @@ export default {
         const conference_id = user.current_conference_id;
         const conference = await Conference.query().findById(conference_id);
         const paperStatus = commonUtils.allStatus();
+        let status = 1;
 
         switch (true) {
           // paper
           case current_date.getTime() >=
             conference.dl_re_submit_paper.getTime(): {
+            status = 2;
             await Paper.query()
               .update({ paper_status_id: paperStatus['Re-reviewing'] })
               .where(builder =>
                 builder
                   .where('conference_id', conference_id)
-                  .where('paper_status_id', paperStatus['Re-submitting']),
+                  .whereNotIn('paper_status_id', [
+                    paperStatus.Accepted,
+                    paperStatus.Rejected,
+                  ]),
               );
             break;
           }
           case current_date.getTime() >= conference.dl_review_paper.getTime() ||
             current_date.getTime() >= conference.dl_re_review_paper.getTime(): {
+            status = 3;
             await Paper.query()
               .update({ paper_status_id: paperStatus.Reviewed })
               .where(builder =>
                 builder
                   .where('conference_id', conference_id)
-                  .where('paper_status_id', paperStatus.Reviewing),
+                  .whereNotIn('paper_status_id', [
+                    paperStatus.Accepted,
+                    paperStatus.Rejected,
+                  ]),
               );
             break;
           }
           case current_date.getTime() >= conference.dl_submit_paper.getTime(): {
+            status = 4;
             await Paper.query()
               .update({ paper_status_id: paperStatus.Reviewing })
               .where(builder =>
                 builder
                   .where('conference_id', conference_id)
-                  .where('paper_status_id', paperStatus.Assigning),
+                  .whereNotIn('paper_status_id', [
+                    paperStatus.Accepted,
+                    paperStatus.Rejected,
+                  ]),
               );
             break;
           }
           // abstract
           case current_date.getTime() >=
             conference.dl_re_submit_abstract.getTime(): {
+            status = 5;
             await Paper.query()
               .update({ paper_status_id: paperStatus['Re-reviewing'] })
               .where(builder =>
                 builder
                   .where('conference_id', conference_id)
-                  .where('paper_status_id', paperStatus['Re-submitting']),
+                  .whereNotIn('paper_status_id', [
+                    paperStatus.Accepted,
+                    paperStatus.Rejected,
+                  ]),
               );
             break;
           }
@@ -265,23 +282,31 @@ export default {
             conference.dl_review_abstract.getTime() ||
             current_date.getTime() >=
               conference.dl_re_review_abstract.getTime(): {
+            status = 6;
             await Paper.query()
               .update({ paper_status_id: paperStatus.Reviewed })
               .where(builder =>
                 builder
                   .where('conference_id', conference_id)
-                  .where('paper_status_id', paperStatus.Reviewing),
+                  .whereNotIn('paper_status_id', [
+                    paperStatus.Accepted,
+                    paperStatus.Rejected,
+                  ]),
               );
             break;
           }
           case current_date.getTime() >=
             conference.dl_submit_abstract.getTime(): {
+            status = 7;
             await Paper.query()
               .update({ paper_status_id: paperStatus.Assigning })
               .where(builder =>
                 builder
                   .where('conference_id', conference_id)
-                  .where('paper_status_id', paperStatus.Submitting),
+                  .whereNotIn('paper_status_id', [
+                    paperStatus.Accepted,
+                    paperStatus.Rejected,
+                  ]),
               );
             break;
           }
@@ -292,7 +317,7 @@ export default {
         }
 
         return {
-          status: 1,
+          status,
         };
       } catch (e) {
         console.error(e);
