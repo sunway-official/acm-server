@@ -311,6 +311,22 @@ export default {
             break;
           }
 
+          case current_date.getTime() <
+            conference.dl_submit_abstract.getTime(): {
+            status = 8;
+            await Paper.query()
+              .update({ paper_status_id: paperStatus.Submitting })
+              .where(builder =>
+                builder
+                  .where('conference_id', conference_id)
+                  .whereNotIn('paper_status_id', [
+                    paperStatus.Accepted,
+                    paperStatus.Rejected,
+                  ]),
+              );
+            break;
+          }
+
           default: {
             break;
           }
