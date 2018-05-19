@@ -201,7 +201,7 @@ extend type Mutation {
 
   addUserNotificationKey(key: String!): User!
 
-  inviteUser(role_id: ID!, email: String!, title: String!, firstname: String!, lastname: String!): User!
+  inviteUser(role_id: ID!, email: String!, title: String!, firstname: String!, lastname: String!, organization: String!): User!
 }
 
 type LoginResponse {

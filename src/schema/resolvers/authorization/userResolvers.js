@@ -442,7 +442,7 @@ export default {
     },
     inviteUser: async (
       root,
-      { role_id, email, title, firstname, lastname },
+      { role_id, email, title, firstname, lastname, organization },
       {
         models: { User, Conference, ConferenceAttendee, Permission, Role },
         ValidationError,
@@ -461,6 +461,7 @@ export default {
         email,
         password,
         position: title,
+        organization,
         firstname,
         lastname,
         username,
