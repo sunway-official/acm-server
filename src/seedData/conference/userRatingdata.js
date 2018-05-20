@@ -3,12 +3,12 @@ const usersData = require('../authorization/userData');
 
 const user_ratings = [];
 
-for (let i = 1; i <= 512; i += 1) {
+for (let i = 1; i <= 128; i += 1) {
   const rater = faker.random.arrayElement(usersData);
   const user = faker.random.arrayElement(usersData);
   const rating = faker.random.number({
-    min: 0,
-    max: 5,
+    min: 1.5,
+    max: 3.5,
     precision: 0.5,
   });
 
