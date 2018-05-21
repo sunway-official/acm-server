@@ -173,11 +173,11 @@ export default {
       try {
         const newUser = await User.query().insert(data);
         // Insert user into the first conference for demontration
-        const user_id = newUser.id;
-        await ConferenceAttendee.query().insert({
-          conference_id: 1,
-          user_id,
-        });
+        // const user_id = newUser.id;
+        // await ConferenceAttendee.query().insert({
+        //   conference_id: 1,
+        //   user_id,
+        // });
         return newUser;
       } catch (e) {
         // eslint-disable-next-line no-console
