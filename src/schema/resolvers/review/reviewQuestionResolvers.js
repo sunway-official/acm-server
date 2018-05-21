@@ -15,10 +15,7 @@ export default {
       if (!user) {
         throw new ValidationError('unauthorized');
       }
-      const reviewQuestions = await ReviewQuestion.query().where(
-        'conference_id',
-        user.current_conference_id,
-      );
+      const reviewQuestions = await ReviewQuestion.query();
       return reviewQuestions;
     },
   },
