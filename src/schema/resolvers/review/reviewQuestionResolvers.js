@@ -15,7 +15,7 @@ export default {
       if (!user) {
         throw new ValidationError('unauthorized');
       }
-      const reviewQuestions = await ReviewQuestion.query();
+      const reviewQuestions = await ReviewQuestion.query().orderBy('id');
       return reviewQuestions;
     },
   },
