@@ -169,7 +169,16 @@ export default {
       try {
         const papers = await Paper.query()
           .innerJoin('papers_authors', 'papers.id', 'papers_authors.paper_id')
-          .where('papers_authors.user_id', user.id)
+          .innerJoin(
+            'papers_reviewers',
+            'papers.id',
+            'papers_reviewers.paper_id',
+          )
+          .whereRaw(
+            `papers_authors.user_id = ${user.id}` +
+              ' OR ' +
+              `papers_reviewers.user_id = ${user.id}`,
+          )
           .andWhere('papers.conference_id', user.current_conference_id);
         if (!papers.length) {
           throw new Error('no-current-paper');
@@ -223,7 +232,9 @@ export default {
           case current_date.getTime() >=
             conference.dl_re_submit_paper.getTime(): {
             await Paper.query()
-              .update({ paper_status_id: paperStatus['Re-reviewing'] })
+              .update({
+                paper_status_id: paperStatus['Re-reviewing'],
+              })
               .where(builder =>
                 builder
                   .where('conference_id', conference_id)
@@ -234,13 +245,17 @@ export default {
           case current_date.getTime() >= conference.dl_review_paper.getTime() ||
             current_date.getTime() >= conference.dl_re_review_paper.getTime(): {
             await Paper.query()
-              .update({ paper_status_id: paperStatus.Reviewed })
+              .update({
+                paper_status_id: paperStatus.Reviewed,
+              })
               .where('conference_id', conference_id);
             break;
           }
           case current_date.getTime() >= conference.dl_submit_paper.getTime(): {
             await Paper.query()
-              .update({ paper_status_id: paperStatus.Reviewing })
+              .update({
+                paper_status_id: paperStatus.Reviewing,
+              })
               .where('conference_id', conference_id);
             break;
           }
@@ -248,7 +263,9 @@ export default {
           case current_date.getTime() >=
             conference.dl_re_submit_abstract.getTime(): {
             await Paper.query()
-              .update({ paper_status_id: paperStatus['Re-reviewing'] })
+              .update({
+                paper_status_id: paperStatus['Re-reviewing'],
+              })
               .where(builder =>
                 builder
                   .where('conference_id', conference_id)
@@ -261,14 +278,18 @@ export default {
             current_date.getTime() >=
               conference.dl_re_review_abstract.getTime(): {
             await Paper.query()
-              .update({ paper_status_id: paperStatus.Reviewed })
+              .update({
+                paper_status_id: paperStatus.Reviewed,
+              })
               .where('conference_id', conference_id);
             break;
           }
           case current_date.getTime() >=
             conference.dl_submit_abstract.getTime(): {
             await Paper.query()
-              .update({ paper_status_id: paperStatus.Assigning })
+              .update({
+                paper_status_id: paperStatus.Assigning,
+              })
               .where('conference_id', conference_id);
             break;
           }
