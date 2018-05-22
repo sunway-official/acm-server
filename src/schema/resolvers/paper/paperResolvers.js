@@ -226,10 +226,7 @@ export default {
               .where(builder =>
                 builder
                   .where('conference_id', conference_id)
-                  .whereNotIn('paper_status_id', [
-                    paperStatus.Accepted,
-                    paperStatus.Rejected,
-                  ]),
+                  .where('paper_status_id', paperStatus['Re-submitting']),
               );
             break;
           }
@@ -241,10 +238,7 @@ export default {
               .where(builder =>
                 builder
                   .where('conference_id', conference_id)
-                  .whereNotIn('paper_status_id', [
-                    paperStatus.Accepted,
-                    paperStatus.Rejected,
-                  ]),
+                  .where('paper_status_id', paperStatus.Reviewing),
               );
             break;
           }
@@ -255,10 +249,7 @@ export default {
               .where(builder =>
                 builder
                   .where('conference_id', conference_id)
-                  .whereNotIn('paper_status_id', [
-                    paperStatus.Accepted,
-                    paperStatus.Rejected,
-                  ]),
+                  .where('paper_status_id', paperStatus.Assigning),
               );
             break;
           }
@@ -271,10 +262,7 @@ export default {
               .where(builder =>
                 builder
                   .where('conference_id', conference_id)
-                  .whereNotIn('paper_status_id', [
-                    paperStatus.Accepted,
-                    paperStatus.Rejected,
-                  ]),
+                  .where('paper_status_id', paperStatus['Re-submitting']),
               );
             break;
           }
@@ -288,10 +276,7 @@ export default {
               .where(builder =>
                 builder
                   .where('conference_id', conference_id)
-                  .whereNotIn('paper_status_id', [
-                    paperStatus.Accepted,
-                    paperStatus.Rejected,
-                  ]),
+                  .where('paper_status_id', paperStatus.Reviewing),
               );
             break;
           }
@@ -303,10 +288,7 @@ export default {
               .where(builder =>
                 builder
                   .where('conference_id', conference_id)
-                  .whereNotIn('paper_status_id', [
-                    paperStatus.Accepted,
-                    paperStatus.Rejected,
-                  ]),
+                  .where('paper_status_id', paperStatus.Submitting),
               );
             break;
           }
@@ -316,14 +298,7 @@ export default {
             status = 8;
             await Paper.query()
               .update({ paper_status_id: paperStatus.Submitting })
-              .where(builder =>
-                builder
-                  .where('conference_id', conference_id)
-                  .whereNotIn('paper_status_id', [
-                    paperStatus.Accepted,
-                    paperStatus.Rejected,
-                  ]),
-              );
+              .where(builder => builder.where('conference_id', conference_id));
             break;
           }
 

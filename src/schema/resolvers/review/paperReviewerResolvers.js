@@ -37,25 +37,30 @@ export default {
       const paperStatus = commonUtils.allStatus();
 
       // update status
-      await Paper.query().update({
-        paper_status_id: paperStatus.Reviewing,
-        id: data.paper_id,
-      });
+      await Paper.query()
+        .update({
+          paper_status_id: paperStatus.Reviewing,
+        })
+        .where('id', data.paper_id);
       paperReviewerData.conference_id = conference_id;
       const paperReviewer = await PaperReviewer.query().insert(
         paperReviewerData,
       );
 
-      // send email to author
-      const template = emailTemplates.assignPaper(
-        config.swEmail,
-        reviewer.email,
-        {
-          reviewer,
-          conference,
-        },
-      );
-      commonUtils.sendMail(user, template, transporter);
+      try {
+        // send email to author
+        const template = emailTemplates.assignPaper(
+          config.swEmail,
+          reviewer.email,
+          {
+            reviewer,
+            conference,
+          },
+        );
+        commonUtils.sendMail(user, template, transporter);
+      } catch (e) {
+        console.log('Cant send email');
+      }
 
       return paperReviewer;
     },
